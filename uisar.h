@@ -21,9 +21,11 @@
 #include <QDateTime>
 #include <QSslSocket>
 #include <QtMath>
+#include <QtEndian>
 
 #include "remote/remoteBase.h"
 
+#define JPEG_HEADER_SIZE 20
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class uiSAR; }

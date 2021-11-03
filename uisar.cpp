@@ -2,25 +2,6 @@
 #include "ui_uisar.h"
 
 
-template <typename T>
-T swap_endian(T u)
-{
-    static_assert (CHAR_BIT == 8, "CHAR_BIT != 8");
-
-    union
-    {
-        T u;
-        unsigned char u8[sizeof(T)];
-    } source, dest;
-
-    source.u = u;
-
-    for (size_t k = 0; k < sizeof(T); k++)
-        dest.u8[k] = source.u8[sizeof(T) - k - 1];
-
-    return dest.u;
-}
-
 void uiSAR::ReadTelemetry(QByteArray data){
 
     // Тут приходят данные телеметрии
@@ -112,87 +93,36 @@ uiSAR::JPGFields uiSAR::readField()
     _field.filename = reader;
     return _field;
 }
-
 uiSAR::JPGFields uiSAR::decode_jpgs(QString path)
 {
+
     JPGFields _field = { 0,0,0,0,0,0,0, "empty filename" };
     QFile jpg;
     QString _fileCounter = QString::number(fileCounter);
     jpg.setFileName(path + "/" + _fileCounter + ".jpg");
-    if(jpg.open(QIODevice::ReadOnly))
-    {
+
+    if(jpg.open(QIODevice::ReadOnly)){
         QByteArray rawData = jpg.readAll();
-        statusBar()->showMessage(tr("Сформирован массив байтов из изображения"), 1000);
-        if (rawData.at(20) == (char)0xFF && rawData.at(21) == (char)0xE1)
-        {
-            statusBar()->showMessage(tr("Совпадение заголовка JPEG"), 1000);
-            unsigned char buf16[2];
-            buf16[0] = rawData[22];
-            buf16[1] = rawData[23];
-            short meta_sizeLittleEndian;
-            memcpy(&meta_sizeLittleEndian, &buf16, sizeof(buf16));
-            short meta_size = swap_endian<uint16_t>(meta_sizeLittleEndian)-2;
-            if(meta_size >= 36)
-            {
-                unsigned char buf64[8];
-                for (int i = 0; i <= 7; i++)
-                {
-                    buf64[i] = rawData[24 + i];
-                }
-                double lat_LE;
-                memcpy(&lat_LE, &buf64, sizeof(buf64));
-                _field.latitude = lat_LE;
-                for (int i = 0; i <= 7; i++)
-                {
-                    buf64[i] = rawData[24 + 8 + i];
-                }
-                double lon_LE;
-                memcpy(&lon_LE, &buf64, sizeof(buf64));
-                _field.longitude = lon_LE;
-                unsigned char buf32[4];
-                for (int i = 0; i <= 7-4; i++)
-                {
-                    buf32[i] = rawData[24 + 8 + 8 + i];
-                }
-                float dx;
-                memcpy(&dx, &buf32, sizeof(buf32));
-                _field.dx = dx;
-                for (int i = 0; i <= 7 - 4; i++)
-                {
-                    buf32[i] = rawData[24 + 8 + 8 + 4 + i];
-                }
-                float dy;
-                memcpy(&dy, &buf32, sizeof(buf32));
-                _field.dy = dy;
-                for (int i = 0; i <= 7 - 4; i++)
-                {
-                    buf32[i] = rawData[24 + 8 + 8 + 4 + 4 + i];
-                }
-                float x0;
-                memcpy(&x0, &buf32, sizeof(buf32));
-                _field.x0 = x0;
-                for (int i = 0; i <= 7 - 4; i++)
-                {
-                    buf32[i] = rawData[24 + 8 + 8 + 4 + 4 + 4 + i];
-                }
-                float y0;
-                memcpy(&y0, &buf32, sizeof(buf32));
-                _field.y0 = y0;
-                for (int i = 0; i <= 7 - 4; i++)
-                {
-                    buf32[i] = rawData[24 + 8 + 8 + 4 + 4 + 4 + 4 + i];
-                }
-                float angle;
-                memcpy(&angle, &buf32, sizeof(buf32));
-                qDebug() << _field.latitude << _field.longitude << _field.dx << _field.dy << _field.x0 << _field.y0 << _field.angle;
-                statusBar()->showMessage(tr("Декодирование метаданных успешно произведено"), 15000);
-                QFileInfo fi(jpg.fileName());
-                _field.filename = fi.fileName();
-                update_jpgblocklabels_from_field(_field);
-            }
+        char *data = rawData.data();
+        uint16_t *metaMarker = reinterpret_cast<uint16_t *>(data + JPEG_HEADER_SIZE);
+
+        if(*metaMarker == 0xE1FF){
+
+            uint16_t *metaSize = reinterpret_cast<uint16_t *>(data + JPEG_HEADER_SIZE + 2);
+            *metaSize = qToBigEndian(*metaSize) - 2;
+
+            memcpy(&_field, (data + JPEG_HEADER_SIZE + 4), *metaSize);
         }
+
+        QFileInfo fi(jpg.fileName());
+        _field.filename = fi.fileName();
+
+        statusBar()->showMessage(tr("Декодирование метаданных успешно произведено"), 15000);
+        update_jpgblocklabels_from_field(_field);
     }
+
     return _field;
+
 }
 
 void uiSAR::on_DecodeJPG_clicked()
