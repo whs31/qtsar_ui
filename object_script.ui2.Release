@@ -1,0 +1,14 @@
+release/main.o
+release/remoteBase.o
+release/remoteTCP.o
+release/remoteUDP.o
+release/uisar.o
+release/map_qml.o
+release/qmlcache_loader.o
+release/qrc_img.o
+release/qrc_lstyle.o
+release/qrc_style.o
+release/moc_remote.o
+release/moc_remoteTCP.o
+release/moc_remoteUDP.o
+release/moc_uisar.o

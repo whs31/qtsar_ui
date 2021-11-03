@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>tabIcons/about.png</file>
+        <file>tabIcons/connect.png</file>
+        <file>tabIcons/jpg.png</file>
+        <file>tabIcons/map.png</file>
+        <file>tabIcons/settings.png</file>
+        <file>img/add_marker.png</file>
+        <file>img/close.png</file>
+        <file>img/jpg_pan.png</file>
+        <file>img/load.png</file>
+        <file>img/mapMarker.png</file>
+        <file>img/nav_pan.png</file>
+        <file>img/refresh.png</file>
+        <file>img/save.png</file>
+        <file>img/take_coords.png</file>
+        <file>img/toggle_overlay.png</file>
+        <file>img/ui.png</file>
+        <file>img/ui_ico.ico</file>
+        <file>img/follow.png</file>
+        <file>img/radar.png</file>
+        <file>img/route.png</file>
+    </qresource>
+</RCC>
