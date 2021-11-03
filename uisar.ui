@@ -111,6 +111,11 @@
       <property name="resizeMode">
        <enum>QQuickWidget::SizeRootObjectToView</enum>
       </property>
+      <property name="source">
+       <url>
+        <string>qrc:/map.qml</string>
+       </url>
+      </property>
      </widget>
     </item>
     <item row="0" column="0">

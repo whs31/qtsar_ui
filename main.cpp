@@ -4,6 +4,7 @@
 #include <qqml.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "qmlinvoker.h"
 
 /*
 CSS colors:
@@ -44,9 +45,9 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &, const QString 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-     qInstallMessageHandler(myMessageHandler); // Install the handler
+     //qInstallMessageHandler(myMessageHandler); // Install the handler
 
-    //qmlRegisterType<fromGPSJPG>("ui.gps.jpg.backend", 1, 0, "FromGPSJPG");
+
     QFile LstyleSheetFile(":qdarkstyle/light/style.qss");
     QFile DstyleSheetFile(":qdarkstyle/dark/style.qss");
     if (!DstyleSheetFile.exists())   {
@@ -58,7 +59,9 @@ int main(int argc, char *argv[])
     //QString styleSheet = QLatin1String(styleSheetFile.readAll());
         qApp->setStyleSheet(ts.readAll());
     }
+    qmlRegisterType<qmlInvoker>("cpp.invoker", 1, 0, "Invoker");
     uiSAR w;
+
     //w.setWindowState(Qt::WindowMaximized);
     w.show();
     return app.exec();

@@ -13094,3 +13094,49 @@ Debug: Новый маркер
 
 Debug: 51.66085055263577 39.196748941757164 Новый маркер
 
+Info: Logging data...
+
+Info: ------------Session time:  QDateTime(2021-11-03 21:58:57.587 RTZ 2 (зима) Qt::LocalTime) --------------------------
+
+Warning: true "OpenSSL 1.1.1d  10 Sep 2019" "OpenSSL 1.1.1l  24 Aug 2021"
+
+Debug: Displaying image from C:/Users/0/Desktop/Portable Python/sar_ctrl/images/1.jpg
+
+Debug: panned
+
+Debug: Displaying image from C:/Users/0/Desktop/Portable Python/sar_ctrl/images/2.jpg
+
+Debug: panned
+
+Debug: Displaying image from C:/Users/0/Desktop/Portable Python/sar_ctrl/images/3.jpg
+
+Debug: panned
+
+Debug: Новый маркер
+
+Debug: 59.83895179486427 31.54642581937992 Новый маркер
+
+Info: Logging data...
+
+Info: ------------Session time:  QDateTime(2021-11-03 22:04:39.619 RTZ 2 (зима) Qt::LocalTime) --------------------------
+
+Warning: true "OpenSSL 1.1.1d  10 Sep 2019" "OpenSSL 1.1.1l  24 Aug 2021"
+
+Debug: Новый маркер
+
+Debug: 51.66142290131156 39.18797275387283 Новый маркер
+
+Debug: Новый маркер
+
+Debug: 51.65886724200394 39.20260688627718 Новый маркер
+
+Info: Logging data...
+
+Info: ------------Session time:  QDateTime(2021-11-03 22:06:49.164 RTZ 2 (зима) Qt::LocalTime) --------------------------
+
+Warning: true "OpenSSL 1.1.1d  10 Sep 2019" "OpenSSL 1.1.1l  24 Aug 2021"
+
+Debug: Новый маркер
+
+Debug: 51.66142290131156 39.197199552887355 Новый маркер
+

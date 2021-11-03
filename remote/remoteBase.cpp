@@ -13,7 +13,7 @@ Remote* RemoteAuto(QString type){
         r = new RemoteTCP();
         break;
     default:
-        qDebug() << "Не верный тип связи с удаленным хостом:" << type;
+        qDebug() << "Неверный тип связи с удаленным хостом:" << type;
         break;
     }
     return r;

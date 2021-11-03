@@ -1,4 +1,6 @@
 debug/main.o
+debug/qmlinvoker.o
+debug/qmlmarkerdialog.o
 debug/remoteBase.o
 debug/remoteTCP.o
 debug/remoteUDP.o
@@ -8,6 +10,8 @@ debug/qmlcache_loader.o
 debug/qrc_img.o
 debug/qrc_lstyle.o
 debug/qrc_style.o
+debug/moc_qmlinvoker.o
+debug/moc_qmlmarkerdialog.o
 debug/moc_remote.o
 debug/moc_remoteTCP.o
 debug/moc_remoteUDP.o

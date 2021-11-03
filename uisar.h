@@ -38,6 +38,7 @@ class uiSAR : public QMainWindow
 public:
     uiSAR(QWidget *parent = nullptr);
     ~uiSAR();
+    static uiSAR * getMainWinPtr();
     struct JPGFields {
         double latitude;
         double longitude;
@@ -62,6 +63,8 @@ public:
 
 signals:
     //void toQMLpanButton(float latitude, float longitude, float dx, float dy, float x0, float y0, float angle, QString filename);
+public slots:
+    void qmlDialogSlot(float markerLat, float markerLon);
 private slots:
     //JPG slots
     void on_DecodeJPG_clicked();
@@ -88,10 +91,10 @@ private slots:
     void on_nav_displayroute_stateChanged(int arg1);
 
     void on_clearTrack_clicked();
-
     void ReadTelemetry(QByteArray data);
 
 private:
+    static uiSAR * pMainWindow;
 
     QString jpg_path;
     int fileCounter;
@@ -107,6 +110,7 @@ private:
     TelemetryData_t *TelemetryData;
 
     void updateTelemetry();
+    //TelemetryData_t parseTelemetry(const QByteArray & src);
     void initUI();
     void update_jpgblocklabels_from_field(JPGFields _field);
     bool eventFilter(QObject *watched, QEvent *event);

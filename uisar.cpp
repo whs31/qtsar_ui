@@ -1,18 +1,18 @@
 #include "uisar.h"
 #include "ui_uisar.h"
-
+#include "qmlmarkerdialog.h"
 
 void uiSAR::ReadTelemetry(QByteArray data){
 
     // Тут приходят данные телеметрии
     TelemetryData = reinterpret_cast<TelemetryData_t*>(data.data());
     qDebug() << data;
-
     updateTelemetry();
 
 }
 
 
+uiSAR * uiSAR::pMainWindow;
 uiSAR::uiSAR(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::uiSAR)
@@ -22,7 +22,7 @@ uiSAR::uiSAR(QWidget *parent)
     qInfo() << "Logging data...";
     qInfo() << "------------Session time: " << local << "--------------------------";
     qWarning() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
-
+    pMainWindow = this;
     initUI();
 
     /* Интерфейс для получения телеметрии */
@@ -37,6 +37,11 @@ uiSAR::uiSAR(QWidget *parent)
 uiSAR::~uiSAR()
 {
     delete ui;
+}
+
+uiSAR *uiSAR::getMainWinPtr()
+{
+    return pMainWindow;
 }
 
 void uiSAR::update_jpgblocklabels_from_field(JPGFields _field)
@@ -433,7 +438,7 @@ void uiSAR::initUI(){
 
     ui->setupUi(this);
 
-    ui->osmMap->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
+    //ui->osmMap->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
     ui->osmMap->show();
 
     QFont bold8pxfont = ui->nav_latdisp->font();
@@ -461,17 +466,23 @@ void uiSAR::updateTelemetry(){
     char* endHtml = "</font><br>";
 
     QString tmp;
-    tmp.sprintf("%s%0.1f</font><br>", markupHtml, TelemetryData->lat);
-    ui->nav_latdisp->setText(tmp);
+    //double t = TelemetryData->lat;
+    //tmp = QString::number(t);
+    tmp.sprintf("%0.1f", TelemetryData->lat);
+    ui->nav_latdisp->setText(markupHtml+tmp+endHtml);
+    //t = TelemetryData->lon;
+    //tmp = QString::number(t);
+    tmp.sprintf("%0.1f", TelemetryData->lon);
+    ui->nav_londisp->setText(markupHtml+tmp+endHtml);
+    //t = TelemetryData->speed;
+    //tmp = QString::number(t);
 
-    tmp.sprintf("%s%0.1f</font><br>", markupHtml, TelemetryData->lon);
-    ui->nav_londisp->setText(tmp);
-
-    tmp.sprintf("%s%0.1f км/ч</font><br>", markupHtml, TelemetryData->speed);
-    ui->nav_accdisp->setText(tmp);
-
-    tmp.sprintf("%s%0.1f м</font><br>", markupHtml, TelemetryData->ele);
-    ui->nav_altdisp->setText(tmp);
+    tmp.sprintf("%0.1f", TelemetryData->speed);
+    ui->nav_accdisp->setText(markup2Html+tmp+endHtml+infoHtml+" км/ч"+endHtml);
+    //t = TelemetryData->ele;
+    //tmp = QString::number(t);
+    tmp.sprintf("%0.1f", TelemetryData->ele);
+    ui->nav_altdisp->setText(markup2Html+tmp+endHtml+infoHtml+" м"+endHtml);
 
     if(TelemetryData->lat != 0.0 && TelemetryData->lon != 0){
         auto qml = ui->osmMap->rootObject();
@@ -483,5 +494,23 @@ void uiSAR::updateTelemetry(){
             on_panGPS_clicked();
         }
     }
+}
 
+void uiSAR::qmlDialogSlot(float markerLat, float markerLon)
+{
+    QString markerName = "Новый маркер";
+    QColor markerColor = "white";
+    qmlMarkerDialog md(this);
+    if(md.exec() == QDialog::Accepted)
+        {
+            markerName = md.lineEdit1Text();
+            markerColor = md.color();
+            qDebug()<<"Marker placed at " << markerLat << ";  " << markerLon << ", NAME: " << markerName;
+            auto qml = ui->osmMap->rootObject();
+            QMetaObject::invokeMethod(qml, "addMarker",
+                    Q_ARG(QVariant, markerLat),
+                    Q_ARG(QVariant, markerLon),
+                    Q_ARG(QVariant, markerName),
+                    Q_ARG(QVariant, markerColor));
+        }
 }

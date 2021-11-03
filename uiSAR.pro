@@ -19,12 +19,16 @@ INCLUDEPATH += "C:\Program Files\OpenSSL-Win64\include"
 #LIBS += -L"C:\Program Files\OpenSSL-Win64\lib" -llibcrypto -llibssl
 SOURCES += \
     main.cpp \
+    qmlinvoker.cpp \
+    qmlmarkerdialog.cpp \
     remote/remoteBase.cpp \
     remote/remoteTCP.cpp \
     remote/remoteUDP.cpp \
     uisar.cpp
 
 HEADERS += \
+    qmlinvoker.h \
+    qmlmarkerdialog.h \
     remote/remote.h \
     remote/remoteBase.h \
     remote/remoteTCP.h \
@@ -32,6 +36,7 @@ HEADERS += \
     uisar.h
 
 FORMS += \
+    qmlmarkerdialog.ui \
     uisar.ui
 
 TRANSLATIONS += \

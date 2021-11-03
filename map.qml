@@ -234,17 +234,13 @@ Item {
             onPositionChanged: {
                 changeTooltipPosition();
             }
-            //onPressed: clearTooltip();
-            //onReleased: drawTooltip();
             onClicked:
             {
                 //coordToMarker = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
                 if(enableMarkerPlacement===true)
                 {
                     var markerCoord = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
-                    //dialogNameMarker.open();
                     markerDialog.qmlDialogMarker(markerCoord.latitude, markerCoord.longitude);
-                    //console.log(markerName);
                 }
             }
 
