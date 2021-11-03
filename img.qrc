@@ -20,5 +20,9 @@
         <file>img/follow.png</file>
         <file>img/radar.png</file>
         <file>img/route.png</file>
+        <file>tabIcons/connectTcp.png</file>
+        <file>tabIcons/connectUdp.png</file>
+        <file>img/planeIco.png</file>
+        <file>img/planeSmall.png</file>
     </qresource>
 </RCC>

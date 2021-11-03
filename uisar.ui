@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
-    <height>735</height>
+    <width>1417</width>
+    <height>734</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -38,8 +38,8 @@
    <string>Графический интерфейс РЛС</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/Desktop/Portable Python/sar_ctrl/img/ui.png</normaloff>:/Desktop/Portable Python/sar_ctrl/img/ui.png</iconset>
+   <iconset resource="img.qrc">
+    <normaloff>:/img/ui.png</normaloff>:/img/ui.png</iconset>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -145,7 +145,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -177,7 +177,7 @@
         <item row="5" column="2">
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="spacing">
-           <number>0</number>
+           <number>3</number>
           </property>
           <item>
            <spacer name="verticalSpacer_9">
@@ -185,12 +185,12 @@
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
+             <enum>QSizePolicy::Maximum</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>5</height>
+              <height>25</height>
              </size>
             </property>
            </spacer>
@@ -198,7 +198,7 @@
           <item>
            <widget class="QPushButton" name="panGPS">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -212,7 +212,7 @@
             <property name="maximumSize">
              <size>
               <width>999999</width>
-              <height>999999</height>
+              <height>27</height>
              </size>
             </property>
             <property name="cursor">
@@ -235,6 +235,33 @@
           </item>
           <item>
            <widget class="QPushButton" name="clearTrack">
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: rgb(150, 0, 0);
+  color: #E0E1E3;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+  border: none;
+}
+
+QPushButton:disabled {
+  background-color: rgb(131, 79, 79);
+  color: #9DA9B5;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+QPushButton:hover {
+  background-color: rgb(191, 118, 118);
+  color: #E0E1E3;
+}
+
+QPushButton:pressed {
+  background-color: rgb(223, 223, 223);
+}
+</string>
+            </property>
             <property name="text">
              <string>Очистить трек</string>
             </property>
@@ -246,12 +273,12 @@
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
+             <enum>QSizePolicy::Maximum</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>5</height>
+              <height>25</height>
              </size>
             </property>
            </spacer>
@@ -498,23 +525,6 @@
           <property name="verticalSpacing">
            <number>4</number>
           </property>
-          <item row="3" column="1">
-           <widget class="QCheckBox" name="nav_displaytriangle">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Диаграмма направленности</string>
-            </property>
-            <property name="icon">
-             <iconset resource="img.qrc">
-              <normaloff>:/img/radar.png</normaloff>:/img/radar.png</iconset>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QCheckBox" name="nav_follow">
             <property name="text">
@@ -543,7 +553,24 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="3" column="1">
+           <widget class="QCheckBox" name="nav_displaytriangle">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Диаграмма направленности</string>
+            </property>
+            <property name="icon">
+             <iconset resource="img.qrc">
+              <normaloff>:/img/radar.png</normaloff>:/img/radar.png</iconset>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
            <widget class="QCheckBox" name="showCoordsBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -563,6 +590,23 @@
             <property name="icon">
              <iconset resource="img.qrc">
               <normaloff>:/img/take_coords.png</normaloff>:/img/take_coords.png</iconset>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="planeCheckbox">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Местоположение борта</string>
+            </property>
+            <property name="icon">
+             <iconset resource="img.qrc">
+              <normaloff>:/img/planeSmall.png</normaloff>:/img/planeSmall.png</iconset>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -598,7 +642,7 @@
       <widget class="QWidget" name="link_tab">
        <attribute name="icon">
         <iconset resource="img.qrc">
-         <normaloff>:/tabIcons/connect.png</normaloff>:/tabIcons/connect.png</iconset>
+         <normaloff>:/tabIcons/connectUdp.png</normaloff>:/tabIcons/connectUdp.png</iconset>
        </attribute>
        <attribute name="title">
         <string/>
@@ -845,7 +889,7 @@ p, li { white-space: pre-wrap; }
       <widget class="QWidget" name="tcp_tab">
        <attribute name="icon">
         <iconset resource="img.qrc">
-         <normaloff>:/tabIcons/connect.png</normaloff>:/tabIcons/connect.png</iconset>
+         <normaloff>:/tabIcons/connectTcp.png</normaloff>:/tabIcons/connectTcp.png</iconset>
        </attribute>
        <attribute name="title">
         <string/>
@@ -1644,7 +1688,7 @@ p, li { white-space: pre-wrap; }
         <item row="1" column="0">
          <widget class="QLabel" name="infoLabel">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/img/ui.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;Версия программы: &lt;span style=&quot; font-weight:600; font-style:italic; color:#8f8fff;&quot;&gt;inDev&lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic; color:#bbb8ff;&quot;&gt;1102&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Собрано &lt;span style=&quot; font-weight:600;&quot;&gt;02.11.2021&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#aaffff;&quot;&gt;github.com/whs31/qtsar_ui&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/img/ui.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;Версия программы: &lt;span style=&quot; font-weight:600; font-style:italic; color:#8f8fff;&quot;&gt;inDev&lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic; color:#bbb8ff;&quot;&gt;1103&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Собрано &lt;span style=&quot; font-weight:600;&quot;&gt;03.11.2021&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#aaffff;&quot;&gt;github.com/whs31/qtsar_ui&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -1703,7 +1747,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1300</width>
+     <width>1417</width>
      <height>20</height>
     </rect>
    </property>
@@ -1744,8 +1788,8 @@ p, li { white-space: pre-wrap; }
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="qdarkstyle/dark/style.qrc"/>
   <include location="img.qrc"/>
+  <include location="qdarkstyle/dark/style.qrc"/>
  </resources>
  <connections/>
 </ui>

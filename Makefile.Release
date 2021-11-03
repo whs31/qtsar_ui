@@ -1209,6 +1209,9 @@ release/moc_uisar.cpp: uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QFlags \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QtMath \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qmath.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QtEndian \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qendian.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qfloat16.h \
 		remote/remoteBase.h \
 		remote/remote.h \
 		remote/remoteUDP.h \
@@ -1418,6 +1421,9 @@ release/main.o: main.cpp uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QFlags \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QtMath \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qmath.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QtEndian \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qendian.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qfloat16.h \
 		remote/remoteBase.h \
 		remote/remote.h \
 		remote/remoteUDP.h \
@@ -1837,6 +1843,9 @@ release/uisar.o: uisar.cpp uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QFlags \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QtMath \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qmath.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QtEndian \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qendian.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qfloat16.h \
 		remote/remoteBase.h \
 		remote/remote.h \
 		remote/remoteUDP.h \
@@ -1844,90 +1853,7 @@ release/uisar.o: uisar.cpp uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtNetwork/qudpsocket.h \
 		remote/remoteTCP.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtNetwork/QTcpSocket \
-		ui_uisar.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVariant \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QIcon \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtQuickWidgets/QQuickWidget \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtQuickWidgets/qquickwidget.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtQuick/qquickwindow.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtQuick/qsgrendererinterface.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtQuick/qsgnode.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtQuick/qsggeometry.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qopengl.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qt_windows.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtANGLE/GLES3/gl3.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtANGLE/GLES3/gl3platform.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtANGLE/KHR/khrplatform.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtANGLE/GLES2/gl2.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtANGLE/GLES2/gl2platform.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qopengles2ext.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qopenglext.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QRectF \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QMatrix4x4 \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qmatrix4x4.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qvector3d.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qvector4d.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qquaternion.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qgenericmatrix.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qwindow.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QEvent \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QMargins \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QRect \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qsurface.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qsurfaceformat.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtQuickWidgets/qtquickwidgetsglobal.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QAction \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qaction.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qactiongroup.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QFormLayout \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qformlayout.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QLayout \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QFrame \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QGridLayout \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QGroupBox \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qgroupbox.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QLabel \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qpen.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QMenuBar \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qmenubar.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QSlider \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qslider.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qabstractslider.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QStatusBar \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qstatusbar.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QTabWidget \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QTextEdit \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qtextedit.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qtextdocument.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QToolButton \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qtoolbutton.h \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QWidget
+		ui_uisar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\uisar.o uisar.cpp
 
 release/map_qml.o: release/map_qml.cpp 

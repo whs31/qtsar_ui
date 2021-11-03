@@ -4,20 +4,29 @@ import QtPositioning 5.12
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.12
+import QtGraphicalEffects 1.0
+
+import cpp.invoker 1.0
+
+
 
 Rectangle {
     id:rect
     objectName: "mapLoaded"
     property var imageArray: []
     property var coordinate: QtPositioning.coordinate(0,0);
-    property var coordToMarker: QtPositioning.coordinate(0,0);
+    //property var coordToMarker: QtPositioning.coordinate(0,0); //comm
     property var panToCurrentlocation: QtPositioning.coordinate(51.660784, 39.200268);
 
     property var enableTooltip: true;
     property var enableMarkerPlacement: false;
     property var enableRoute: true;
-    property var markerName: "Новый маркер";
+    property var enablePlane: true;
+    //property var markerName: "Новый маркер"; //comm
 
+    Invoker {
+        id: markerDialog
+    }
 
     function clearRoute()
     {
@@ -49,7 +58,21 @@ Rectangle {
     {
         if(enableRoute) {
             mapPolyline.addCoordinate(QtPositioning.coordinate(lat,lon));
+            var dx = lat - panToCurrentlocation.latitude;
+            var dy = lon - panToCurrentlocation.longitude;
+            var angle = 0.0;
+            if(dx!==0&&dy!==0)
+            {
+                angle = Math.atan(dy/dx);
+                angle = (angle * 180) / Math.PI;
+                planeMapItem.transform[0].angle = angle-13;
+                //console.log(angle);
+            }
+
             panToCurrentlocation = QtPositioning.coordinate(lat,lon);
+        }
+        if(enablePlane) {
+            planeMapItem.coordinate = QtPositioning.coordinate(lat, lon);
         }
     }
 
@@ -57,14 +80,39 @@ Rectangle {
     {
         enableMarkerPlacement = true;
     }
-    function addMarker(lat: float, lon: float)
+    function addMarker(lat: float, lon: float, name: QString, mcolor: QColor)
     {
-        console.log(lat, lon, markerName);
-        var marker = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; MapQuickItem{}', mapView, "dynamic");
+        //console.log(lat, lon, markerName);
+        var marker = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; import QtGraphicalEffects 1.0; MapQuickItem{}', mapView, "dynamic");
         marker.anchorPoint.x = 64;
         marker.anchorPoint.y = 64+32;
         marker.coordinate = QtPositioning.coordinate(lat, lon);
-        marker.sourceItem = Qt.createQmlObject('import QtQuick 2.0; Item { Text {anchors.horizontalCenter : markerSource.horizontalCenter; anchors.bottom : markerSource.bottom; anchors.bottomMargin: 30; font.weight: Font.Thin; horizontalAlignment: Text.AlignHCenter; verticalAlignment : Text.AlignBottom; text: "'+markerName+'"; color: "white"} Image{ id: markerSource; scale: 0.35; source: "qrc:/img/mapMarker.png" }}', mapView, "dynamic");
+        marker.sourceItem = Qt.createQmlObject('
+import QtQuick 2.0;
+import QtGraphicalEffects 1.0;
+Item {
+    Text {
+        anchors.horizontalCenter: markerSource.horizontalCenter;
+        anchors.bottom: markerSource.bottom;
+        anchors.bottomMargin: 30;
+        font.weight: Font.Thin;
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment : Text.AlignBottom;
+        text: "'+name+'"; color: "'+mcolor+'";
+    }
+    Image {
+        id: markerSource;
+        scale: 0.35;
+        source: "qrc:/img/mapMarker.png"
+    }
+    ColorOverlay {
+        anchors.fill: markerSource;
+        source: markerSource;
+        scale: 0.35;
+        opacity: 0.5;
+        color: "'+mcolor+'"
+    }
+}', mapView, "dynamic");
         //marker.zoomLevel = 16.5;
         mapView.addMapItem(marker);
         enableMarkerPlacement = false;
@@ -139,6 +187,7 @@ Rectangle {
     }
 
 
+
     Plugin {
         id: googlemaps
         name: "googlemaps"//g
@@ -151,6 +200,21 @@ Rectangle {
         center: QtPositioning.coordinate(51.660784, 39.200268); //51.660784, 39.200268
         zoomLevel: 15
         copyrightsVisible: false
+
+        MapQuickItem {
+            id: planeMapItem
+            anchorPoint.x: planeSource.width*0.175*0.5;
+            anchorPoint.y: planeSource.height*0.175*0.5;
+            transform: Rotation {
+                origin.x: planeSource.width*0.175*0.5; origin.y: planeSource.height*0.175*0.5; angle: 45
+            }
+
+            sourceItem: Image {
+                id: planeSource;
+                scale: 0.175;
+                source: "qrc:/img/planeIco.png"
+            }
+        }
 
         MapPolyline {
             id: mapPolyline
@@ -174,10 +238,12 @@ Rectangle {
             //onReleased: drawTooltip();
             onClicked:
             {
-                coordToMarker = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
+                //coordToMarker = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
                 if(enableMarkerPlacement===true)
                 {
-                    dialogNameMarker.open();
+                    var markerCoord = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
+                    //dialogNameMarker.open();
+                    markerDialog.qmlDialogMarker(markerCoord.latitude, markerCoord.longitude);
                     //console.log(markerName);
                 }
             }
@@ -209,37 +275,10 @@ Rectangle {
             }
         }
         }
-    }
-    Dialog {
-        id: dialogNameMarker
-        anchors.centerIn: parent
-        title: "Новый маркер"
-        modal: true
-        font.weight: Font.Thin
-        width: 320
-        height: 160
-        standardButtons: StandardButton.Ok
-        Row {
-            anchors.centerIn: parent
-            Label {
-                text: "Введите название нового маркера:  "
-                color: "gray"
-            }
-            TextInput {
-                id: inputDialog
-                cursorVisible: true
-                text: "Новый маркер"
-                overwriteMode: true
-                selectByMouse: true
-            }
-        }
-        onAccepted: {
-            console.log(inputDialog.text);
-            markerName = inputDialog.text;
-            addMarker(coordToMarker.latitude, coordToMarker.longitude);
+        Component.onCompleted: {
+            mapView.addMapItem(planeMapItem);
         }
     }
-
 }
 
 
