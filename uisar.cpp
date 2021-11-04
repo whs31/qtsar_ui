@@ -511,7 +511,7 @@ void uiSAR::updateTelemetry(){
     char* infoHtml = "<font color=\"DarkGray\">";
     char* markupHtml = "<font color=\"Cyan\">";
     char* markup2Html = "<font color=\"DarkCyan\">";
-    char* endHtml = "</font><br>";
+    char* endHtml = "</font>";
 
     ui->udpDisp->setTextColor(Qt::darkGray);
     ui->udpDisp->insertPlainText("udp incoming telemetry: ");
@@ -525,10 +525,10 @@ void uiSAR::updateTelemetry(){
     ui->nav_londisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LON: "+tmp+"  ");
     tmp.sprintf("%0.1f", TelemetryData->speed);
-    ui->nav_accdisp->setText(markup2Html+tmp+endHtml+infoHtml+" км/ч"+endHtml);
+    ui->nav_accdisp->setText(markup2Html+tmp+infoHtml+" км/ч"+endHtml);
     ui->udpDisp->insertPlainText("SPD: "+tmp+"  ");
     tmp.sprintf("%0.1f", TelemetryData->ele);
-    ui->nav_altdisp->setText(markup2Html+tmp+endHtml+infoHtml+" м"+endHtml);
+    ui->nav_altdisp->setText(markup2Html+tmp+infoHtml+" м"+endHtml);
     ui->udpDisp->insertPlainText("ELE: "+tmp+"\r\n");
 
     if(TelemetryData->lat != 0.0 && TelemetryData->lon != 0){
