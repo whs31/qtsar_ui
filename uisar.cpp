@@ -584,3 +584,10 @@ void uiSAR::on_gpsPanClone_clicked()
 {
     on_panGPS_clicked();
 }
+
+void uiSAR::on_t_up_clicked()
+{
+    auto qml = ui->osmMap->rootObject();
+        QMetaObject::invokeMethod(qml, "transformUp",
+                Q_ARG(int, fileCounter));
+}

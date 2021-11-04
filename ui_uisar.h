@@ -1247,7 +1247,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(3);
         DecodeJPG->setDefault(false);
 
 

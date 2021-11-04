@@ -97,6 +97,8 @@ private slots:
 
     void on_gpsPanClone_clicked();
 
+    void on_t_up_clicked();
+
 private:
     static uiSAR * pMainWindow;
 

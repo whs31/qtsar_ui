@@ -28,6 +28,11 @@ Rectangle {
         id: markerDialog
     }
 
+    function transformUp(fileCounter: int)
+    {
+        imageArray[fileCounter-1].coordinate.latitude += 0.005; //fix
+    }
+
     function swapMapModes(satellite: bool)
     {
         if(satellite) {
