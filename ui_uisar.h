@@ -1014,6 +1014,7 @@ public:
         sizePolicy6.setHeightForWidth(osmMap->sizePolicy().hasHeightForWidth());
         osmMap->setSizePolicy(sizePolicy6);
         osmMap->setMaximumSize(QSize(4096, 2048));
+        osmMap->setFont(font);
         osmMap->setCursor(QCursor(Qt::CrossCursor));
         osmMap->setMouseTracking(true);
         osmMap->setResizeMode(QQuickWidget::SizeRootObjectToView);
@@ -1032,7 +1033,7 @@ public:
         sizePolicy9.setVerticalStretch(0);
         sizePolicy9.setHeightForWidth(docker->sizePolicy().hasHeightForWidth());
         docker->setSizePolicy(sizePolicy9);
-        docker->setMinimumSize(QSize(318, 58));
+        docker->setMinimumSize(QSize(325, 58));
         docker->setMaximumSize(QSize(524287, 58));
         docker->setFeatures(QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
         docker->setAllowedAreas(Qt::BottomDockWidgetArea|Qt::TopDockWidgetArea);
@@ -1043,12 +1044,20 @@ public:
         gpsPanClone = new QPushButton(dockWidgetContents_2);
         gpsPanClone->setObjectName(QString::fromUtf8("gpsPanClone"));
         gpsPanClone->setEnabled(false);
+        sizePolicy5.setHeightForWidth(gpsPanClone->sizePolicy().hasHeightForWidth());
+        gpsPanClone->setSizePolicy(sizePolicy5);
+        gpsPanClone->setIcon(icon1);
 
         horizontalLayout_2->addWidget(gpsPanClone);
 
         rulerButton = new QPushButton(dockWidgetContents_2);
         rulerButton->setObjectName(QString::fromUtf8("rulerButton"));
         rulerButton->setEnabled(false);
+        sizePolicy5.setHeightForWidth(rulerButton->sizePolicy().hasHeightForWidth());
+        rulerButton->setSizePolicy(sizePolicy5);
+        QIcon icon23;
+        icon23.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
+        rulerButton->setIcon(icon23);
 
         horizontalLayout_2->addWidget(rulerButton);
 
@@ -1088,6 +1097,9 @@ public:
 "  background: #60798B;\n"
 "  color: #E0E1E3;\n"
 "}"));
+        QIcon icon24;
+        icon24.addFile(QString::fromUtf8(":/img/swapMode.png"), QSize(), QIcon::Normal, QIcon::Off);
+        changeMapMode->setIcon(icon24);
         changeMapMode->setCheckable(true);
         changeMapMode->setChecked(true);
 
@@ -1187,8 +1199,8 @@ public:
         infoLabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"center\"><img src=\":/img/ui.png\"/></p><p>\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: <span style=\" font-weight:600; font-style:italic; color:#8f8fff;\">inDev</span><span style=\" font-weight:600; font-style:italic; color:#bbb8ff;\">1104</span></p><p>\320\241\320\276\320\261\321\200\320\260\320\275\320\276 <span style=\" font-weight:600;\">04.11.2021</span></p><p><span style=\" color:#aaffff;\">github.com/whs31/qtsar_ui</span></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(info_tab), QString());
         docker->setWindowTitle(QCoreApplication::translate("uiSAR", "\320\237\320\260\320\275\320\265\320\273\321\214 \320\270\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\320\276\320\262", nullptr));
-        gpsPanClone->setText(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\201\321\202\320\276\320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\261\320\276\321\200\321\202\320\260", nullptr));
-        rulerButton->setText(QCoreApplication::translate("uiSAR", "\320\233\320\270\320\275\320\265\320\271\320\272\320\260", nullptr));
+        gpsPanClone->setText(QString());
+        rulerButton->setText(QString());
         changeMapMode->setText(QCoreApplication::translate("uiSAR", "\320\241\320\277\321\203\321\202\320\275\320\270\320\272", nullptr));
     } // retranslateUi
 

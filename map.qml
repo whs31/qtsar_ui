@@ -30,9 +30,11 @@ Rectangle {
     {
         if(satellite) {
             mapView.activeMapType = mapView.supportedMapTypes[3]//sat
+            routeLengthText.color = "white";
         }
         else {
             mapView.activeMapType = mapView.supportedMapTypes[0]//map
+            routeLengthText.color = "black";
         }
     }
 
@@ -66,6 +68,7 @@ Rectangle {
     {
         if(enableRoute) {
             mapPolyline.addCoordinate(QtPositioning.coordinate(lat,lon));
+            routeLengthText.text = "Точки трека: " + mapPolyline.pathLength();
             var dx = lat - panToCurrentlocation.latitude;
             var dy = lon - panToCurrentlocation.longitude;
             var angle = 0.0;
@@ -235,6 +238,7 @@ Item {
         id: googlemaps
         name: "googlemaps"//g
     }
+
     Map {
         id: mapView
         anchors.fill: parent
@@ -290,6 +294,43 @@ Item {
             onExited: {
                 clearTooltip();
             }
+
+            Slider {
+                id: slider
+                x: 592
+                width: 40
+                opacity: 0.5
+                live: true
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 294
+                anchors.top: parent.top
+                anchors.topMargin: 8
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                snapMode: Slider.NoSnap
+                to: 0
+                from: 1
+                layer.enabled: false
+                transformOrigin: Item.BottomRight
+                wheelEnabled: false
+                clip: false
+                orientation: Qt.Vertical
+                value: 0.75
+                onMoved: mapView.zoomLevel = (1-value)*19;
+            }
+
+            Text {
+                id: routeLengthText;
+                x: 609
+                y: 458
+                color: "#ffffff"
+                text: qsTr("Точки трека: ---")
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 8
+                font.pixelSize: 12
+            }
         }
 
         Popup {
@@ -325,3 +366,9 @@ Item {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}D{i:9;anchors_height:270;anchors_width:40;anchors_x:592;anchors_y:8}
+}
+##^##*/

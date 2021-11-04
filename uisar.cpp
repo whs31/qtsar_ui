@@ -518,10 +518,10 @@ void uiSAR::updateTelemetry(){
     ui->udpDisp->setTextColor(Qt::darkYellow);
 
     QString tmp;
-    tmp.sprintf("%0.1f", TelemetryData->lat);
+    tmp.sprintf("%0.6f", TelemetryData->lat);
     ui->nav_latdisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LAT: "+tmp+"  ");
-    tmp.sprintf("%0.1f", TelemetryData->lon);
+    tmp.sprintf("%0.6f", TelemetryData->lon);
     ui->nav_londisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LON: "+tmp+"  ");
     tmp.sprintf("%0.1f", TelemetryData->speed);

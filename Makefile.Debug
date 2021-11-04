@@ -378,23 +378,25 @@ debug/qrc_img.cpp: img.qrc \
 		tabIcons/connect.png \
 		tabIcons/jpg.png \
 		tabIcons/settings.png \
-		img/close.png \
-		img/mapMarker.png \
-		img/nav_pan.png \
-		img/save.png \
-		img/take_coords.png \
-		img/planeIco.png \
-		img/jpg_pan.png \
 		img/add_marker.png \
-		img/planeSmall.png \
+		img/swapMode.png \
+		img/ui_ico.ico \
+		img/follow.png \
+		img/refresh.png \
+		img/close.png \
+		img/route.png \
 		img/toggle_overlay.png \
 		img/ui.png \
-		img/follow.png \
-		img/route.png \
-		img/load.png \
-		img/refresh.png \
+		img/take_coords.png \
+		img/nav_pan.png \
+		img/ruler.png \
+		img/planeSmall.png \
 		img/radar.png \
-		img/ui_ico.ico
+		img/load.png \
+		img/save.png \
+		img/mapMarker.png \
+		img/planeIco.png \
+		img/jpg_pan.png
 	C:\Qt\Qt5.14.2\5.14.2\mingw73_64\bin\rcc.exe -name img img.qrc -o debug\qrc_img.cpp
 
 debug/qrc_lstyle.cpp: lstyle.qrc \

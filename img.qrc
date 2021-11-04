@@ -24,5 +24,7 @@
         <file>tabIcons/connectUdp.png</file>
         <file>img/planeIco.png</file>
         <file>img/planeSmall.png</file>
+        <file>img/ruler.png</file>
+        <file>img/swapMode.png</file>
     </qresource>
 </RCC>

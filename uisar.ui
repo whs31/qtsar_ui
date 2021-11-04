@@ -1729,6 +1729,11 @@ p, li { white-space: pre-wrap; }
         <height>2048</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>MS Shell Dlg 2</family>
+       </font>
+      </property>
       <property name="cursor">
        <cursorShape>CrossCursor</cursorShape>
       </property>
@@ -1757,7 +1762,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="minimumSize">
     <size>
-     <width>318</width>
+     <width>325</width>
      <height>58</height>
     </size>
    </property>
@@ -1786,8 +1791,18 @@ p, li { white-space: pre-wrap; }
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Местоположение борта</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/img/nav_pan.png</normaloff>:/img/nav_pan.png</iconset>
        </property>
       </widget>
      </item>
@@ -1796,8 +1811,18 @@ p, li { white-space: pre-wrap; }
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Линейка</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/img/ruler.png</normaloff>:/img/ruler.png</iconset>
        </property>
       </widget>
      </item>
@@ -1841,6 +1866,10 @@ QPushButton:selected {
        </property>
        <property name="text">
         <string>Спутник</string>
+       </property>
+       <property name="icon">
+        <iconset resource="img.qrc">
+         <normaloff>:/img/swapMode.png</normaloff>:/img/swapMode.png</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
