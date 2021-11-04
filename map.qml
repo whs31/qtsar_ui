@@ -26,6 +26,16 @@ Rectangle {
         id: markerDialog
     }
 
+    function swapMapModes(satellite: bool)
+    {
+        if(satellite) {
+            mapView.activeMapType = mapView.supportedMapTypes[3]//sat
+        }
+        else {
+            mapView.activeMapType = mapView.supportedMapTypes[0]//map
+        }
+    }
+
     function clearRoute()
     {
         var path = mapPolyline.path;
@@ -83,7 +93,7 @@ Rectangle {
     function addMarker(lat: float, lon: float, name: QString, mcolor: QColor)
     {
         //console.log(lat, lon, markerName);
-        var marker = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; import QtGraphicalEffects 1.0; MapQuickItem{}', mapView, "dynamic");
+        var marker = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; import QtGraphicalEffects 1.0; MapQuickItem{ }', mapView, "dynamic");
         marker.anchorPoint.x = 64;
         marker.anchorPoint.y = 64+32;
         marker.coordinate = QtPositioning.coordinate(lat, lon);
@@ -91,6 +101,7 @@ Rectangle {
 import QtQuick 2.0;
 import QtGraphicalEffects 1.0;
 Item {
+    id: markerQI; visible: true; enabled: true; opacity: 1;
     Text {
         anchors.horizontalCenter: markerSource.horizontalCenter;
         anchors.bottom: markerSource.bottom;
@@ -104,6 +115,38 @@ Item {
         id: markerSource;
         scale: 0.35;
         source: "qrc:/img/mapMarker.png"
+        MouseArea {
+            id: markerHoverArea
+            propagateComposedEvents: true
+            anchors.centerIn: parent;
+            width: 150;
+            height: 200;
+            hoverEnabled: true
+            onEntered: {
+                markerCross.enabled = true;
+                markerCross.visible = true;
+            }
+            onExited: {
+                markerCross.enabled = false;
+                markerCross.visible = false;
+            }
+            onDoubleClicked:
+            {
+                        markerQI.visible = false;
+                        markerQI.enabled = false;
+            }
+        }
+    }
+    Image {
+        id: markerCross;
+        enabled: false;
+        visible: false;
+        scale: 0.35;
+        source: "qrc:/img/close.png";
+        anchors.right: markerSource.right;
+        anchors.rightMargin: 20;
+        anchors.bottom: markerSource.top;
+        anchors.bottomMargin: -62;
     }
     ColorOverlay {
         anchors.fill: markerSource;
@@ -218,7 +261,7 @@ Item {
 
         MapPolyline {
             id: mapPolyline
-                line.width: 4
+            line.width: 4
                 opacity: 0.8
                 line.color: 'yellow'
                 path: [ ]

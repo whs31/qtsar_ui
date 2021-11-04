@@ -93,6 +93,8 @@ private slots:
     void on_clearTrack_clicked();
     void ReadTelemetry(QByteArray data);
 
+    void on_changeMapMode_toggled(bool checked);
+
 private:
     static uiSAR * pMainWindow;
 

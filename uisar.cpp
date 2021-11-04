@@ -561,3 +561,21 @@ void uiSAR::qmlDialogSlot(float markerLat, float markerLon)
                     Q_ARG(QVariant, markerColor));
         }
 }
+
+void uiSAR::on_changeMapMode_toggled(bool checked)
+{
+    bool satellite = false;
+    auto qml = ui->osmMap->rootObject();
+    if(checked == true)
+    {
+       ui->changeMapMode->setText("Спутник");
+       satellite = true;
+       QMetaObject::invokeMethod(qml, "swapMapModes",
+               Q_ARG(bool, satellite)
+              );
+    }
+    else { ui->changeMapMode->setText("Схема");  satellite = false;
+        QMetaObject::invokeMethod(qml, "swapMapModes",
+                Q_ARG(bool, satellite)
+               );}
+}
