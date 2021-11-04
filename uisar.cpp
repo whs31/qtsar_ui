@@ -6,7 +6,7 @@ void uiSAR::ReadTelemetry(QByteArray data){
 
     // Тут приходят данные телеметрии
     TelemetryData = reinterpret_cast<TelemetryData_t*>(data.data());
-    qDebug() << data;
+    //qDebug() << data;
     updateTelemetry();
 
 }
@@ -237,13 +237,27 @@ void uiSAR::on_udpSendButton_clicked()
     if(commandUDP.startsWith("connect"))
     {
         commandUDP.remove("connect ");
-
+        ui->udpDisp->setTextColor(Qt::blue);
+        ui->udpDisp->insertPlainText("Address: "+commandUDP+"\r\n");
+        ui->udpDisp->setTextColor(Qt::white);
         Telemery->Connect(commandUDP);
 
         ui->udpDisp->setTextColor(Qt::darkGreen);
         ui->udpDisp->insertPlainText("Successfully binded!\r\n");
         ui->udpDisp->setTextColor(Qt::white);
         qDebug()<< "Try to connect to" << commandUDP;
+    }
+    if(commandUDP=="start"||commandUDP=="begin")
+    {
+        on_pushButton_2_clicked();
+    }
+    if(commandUDP=="default"||commandUDP=="def")
+    {
+        on_pushButton_clicked();
+    }
+    if(commandUDP=="stop"||commandUDP=="st")
+    {
+        on_udpStopButton_clicked();
     }
     if(commandUDP=="clear"||commandUDP=="cc"||commandUDP=="clr"||commandUDP=="clearall")
     {
@@ -273,6 +287,30 @@ void uiSAR::on_udpSendButton_clicked()
         ui->udpDisp->insertPlainText("rn   ");
         ui->udpDisp->setTextColor(Qt::darkGray);
         ui->udpDisp->insertPlainText("break line \r\n");
+        ui->udpDisp->setTextColor(Qt::magenta);
+        ui->udpDisp->insertPlainText("start ");
+        ui->udpDisp->setTextColor(Qt::darkGray);
+        ui->udpDisp->insertPlainText("or ");
+        ui->udpDisp->setTextColor(Qt::darkMagenta);
+        ui->udpDisp->insertPlainText("begin   ");
+        ui->udpDisp->setTextColor(Qt::darkGray);
+        ui->udpDisp->insertPlainText("starts data reading from binded server \r\n");
+        ui->udpDisp->setTextColor(Qt::magenta);
+        ui->udpDisp->insertPlainText("default ");
+        ui->udpDisp->setTextColor(Qt::darkGray);
+        ui->udpDisp->insertPlainText("or ");
+        ui->udpDisp->setTextColor(Qt::darkMagenta);
+        ui->udpDisp->insertPlainText("def   ");
+        ui->udpDisp->setTextColor(Qt::darkGray);
+        ui->udpDisp->insertPlainText("connects to default UDP server \r\n");
+        ui->udpDisp->setTextColor(Qt::magenta);
+        ui->udpDisp->insertPlainText("stop ");
+        ui->udpDisp->setTextColor(Qt::darkGray);
+        ui->udpDisp->insertPlainText("or ");
+        ui->udpDisp->setTextColor(Qt::darkMagenta);
+        ui->udpDisp->insertPlainText("st   ");
+        ui->udpDisp->setTextColor(Qt::darkGray);
+        ui->udpDisp->insertPlainText("pauses data reading \r\n");
 
         ui->udpDisp->setTextColor(Qt::white);
     }
@@ -292,8 +330,13 @@ void uiSAR::on_pushButton_clicked()
 {
     QString xmlAddress = ui->UDPIPxml->text();
     bool ok;
-    QString strPort = ui->UDPPortxml->text();
-    quint16 xmlPort = strPort.toUShort(&ok, 10);
+    QString xmlPort = ui->UDPPortxml->text();
+    ui->udpDisp->setTextColor(Qt::blue);
+    ui->udpDisp->insertPlainText("Address: "+xmlAddress+":"+xmlPort+"\r\n");
+    ui->udpDisp->setTextColor(Qt::darkGreen);
+    ui->udpDisp->insertPlainText("Connecting to default server...\r\n");
+    ui->udpDisp->setTextColor(Qt::white);
+    Telemery->Connect(xmlAddress+":"+xmlPort);
 }
 
 void uiSAR::onTimer()
@@ -303,12 +346,17 @@ void uiSAR::onTimer()
 
 void uiSAR::on_pushButton_2_clicked()
 {
-
+    ui->udpDisp->setTextColor(Qt::darkGreen);
+    ui->udpDisp->insertPlainText("Beginning reading data...\r\n");
+    ui->udpDisp->setTextColor(Qt::white);
     timer->start(500);
 }
 
 void uiSAR::on_udpStopButton_clicked()
 {
+    ui->udpDisp->setTextColor(Qt::darkRed);
+    ui->udpDisp->insertPlainText("Reading paused\r\n");
+    ui->udpDisp->setTextColor(Qt::white);
     timer->stop();
 }
 
@@ -465,24 +513,23 @@ void uiSAR::updateTelemetry(){
     char* markup2Html = "<font color=\"DarkCyan\">";
     char* endHtml = "</font><br>";
 
+    ui->udpDisp->setTextColor(Qt::darkGray);
+    ui->udpDisp->insertPlainText("udp incoming telemetry: ");
+    ui->udpDisp->setTextColor(Qt::darkYellow);
+
     QString tmp;
-    //double t = TelemetryData->lat;
-    //tmp = QString::number(t);
     tmp.sprintf("%0.1f", TelemetryData->lat);
     ui->nav_latdisp->setText(markupHtml+tmp+endHtml);
-    //t = TelemetryData->lon;
-    //tmp = QString::number(t);
+    ui->udpDisp->insertPlainText("LAT: "+tmp+"  ");
     tmp.sprintf("%0.1f", TelemetryData->lon);
     ui->nav_londisp->setText(markupHtml+tmp+endHtml);
-    //t = TelemetryData->speed;
-    //tmp = QString::number(t);
-
+    ui->udpDisp->insertPlainText("LON: "+tmp+"  ");
     tmp.sprintf("%0.1f", TelemetryData->speed);
     ui->nav_accdisp->setText(markup2Html+tmp+endHtml+infoHtml+" км/ч"+endHtml);
-    //t = TelemetryData->ele;
-    //tmp = QString::number(t);
+    ui->udpDisp->insertPlainText("SPD: "+tmp+"  ");
     tmp.sprintf("%0.1f", TelemetryData->ele);
     ui->nav_altdisp->setText(markup2Html+tmp+endHtml+infoHtml+" м"+endHtml);
+    ui->udpDisp->insertPlainText("ELE: "+tmp+"\r\n");
 
     if(TelemetryData->lat != 0.0 && TelemetryData->lon != 0){
         auto qml = ui->osmMap->rootObject();

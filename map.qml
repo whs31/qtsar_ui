@@ -15,14 +15,12 @@ Rectangle {
     objectName: "mapLoaded"
     property var imageArray: []
     property var coordinate: QtPositioning.coordinate(0,0);
-    //property var coordToMarker: QtPositioning.coordinate(0,0); //comm
     property var panToCurrentlocation: QtPositioning.coordinate(51.660784, 39.200268);
 
     property var enableTooltip: true;
     property var enableMarkerPlacement: false;
     property var enableRoute: true;
     property var enablePlane: true;
-    //property var markerName: "Новый маркер"; //comm
 
     Invoker {
         id: markerDialog
@@ -63,10 +61,12 @@ Rectangle {
             var angle = 0.0;
             if(dx!==0&&dy!==0)
             {
-                angle = Math.atan(dy/dx);
-                angle = (angle * 180) / Math.PI;
-                planeMapItem.transform[0].angle = angle-13;
-                //console.log(angle);
+                angle = (Math.atan(dy/dx)* 180)/ Math.PI;
+                if(dx<0)
+                {
+                    angle += 180;
+                }
+                planeMapItem.transform[0].angle = angle;
             }
 
             panToCurrentlocation = QtPositioning.coordinate(lat,lon);
@@ -206,7 +206,7 @@ Item {
             anchorPoint.x: planeSource.width*0.175*0.5;
             anchorPoint.y: planeSource.height*0.175*0.5;
             transform: Rotation {
-                origin.x: planeSource.width*0.175*0.5; origin.y: planeSource.height*0.175*0.5; angle: 45
+                origin.x: planeSource.width*0.175*0.5; origin.y: planeSource.height*0.175*0.5; angle: 0
             }
 
             sourceItem: Image {

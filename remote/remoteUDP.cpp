@@ -36,7 +36,7 @@ int RemoteUDP::Send(QByteArray data){
 
 void RemoteUDP::readyRead(){
 
-    qDebug() << "Read";
+    //qDebug() << "Read";
 
     QByteArray Buffer;
     Buffer.resize(socket->pendingDatagramSize());
