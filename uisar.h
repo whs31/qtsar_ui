@@ -95,6 +95,8 @@ private slots:
 
     void on_changeMapMode_toggled(bool checked);
 
+    void on_gpsPanClone_clicked();
+
 private:
     static uiSAR * pMainWindow;
 

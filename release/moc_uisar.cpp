@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_uiSAR_t {
-    QByteArrayData data[30];
-    char stringdata0[562];
+    QByteArrayData data[31];
+    char stringdata0[585];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,7 +61,8 @@ QT_MOC_LITERAL(25, 488, 21), // "on_clearTrack_clicked"
 QT_MOC_LITERAL(26, 510, 13), // "ReadTelemetry"
 QT_MOC_LITERAL(27, 524, 4), // "data"
 QT_MOC_LITERAL(28, 529, 24), // "on_changeMapMode_toggled"
-QT_MOC_LITERAL(29, 554, 7) // "checked"
+QT_MOC_LITERAL(29, 554, 7), // "checked"
+QT_MOC_LITERAL(30, 562, 22) // "on_gpsPanClone_clicked"
 
     },
     "uiSAR\0qmlDialogSlot\0\0markerLat\0markerLon\0"
@@ -79,7 +80,8 @@ QT_MOC_LITERAL(29, 554, 7) // "checked"
     "on_selectFolderButton_clicked\0"
     "on_nav_displayroute_stateChanged\0"
     "on_clearTrack_clicked\0ReadTelemetry\0"
-    "data\0on_changeMapMode_toggled\0checked"
+    "data\0on_changeMapMode_toggled\0checked\0"
+    "on_gpsPanClone_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -89,7 +91,7 @@ static const uint qt_meta_data_uiSAR[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      22,   14, // methods
+      23,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -97,28 +99,29 @@ static const uint qt_meta_data_uiSAR[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    2,  124,    2, 0x0a /* Public */,
-       5,    0,  129,    2, 0x08 /* Private */,
-       6,    0,  130,    2, 0x08 /* Private */,
-       7,    0,  131,    2, 0x08 /* Private */,
-       8,    1,  132,    2, 0x08 /* Private */,
-      10,    1,  135,    2, 0x08 /* Private */,
-      12,    0,  138,    2, 0x08 /* Private */,
-      13,    0,  139,    2, 0x08 /* Private */,
-      14,    0,  140,    2, 0x08 /* Private */,
-      15,    0,  141,    2, 0x08 /* Private */,
-      16,    0,  142,    2, 0x08 /* Private */,
-      17,    0,  143,    2, 0x08 /* Private */,
-      18,    0,  144,    2, 0x08 /* Private */,
-      19,    1,  145,    2, 0x08 /* Private */,
-      20,    0,  148,    2, 0x08 /* Private */,
-      21,    0,  149,    2, 0x08 /* Private */,
-      22,    0,  150,    2, 0x08 /* Private */,
-      23,    0,  151,    2, 0x08 /* Private */,
-      24,    1,  152,    2, 0x08 /* Private */,
-      25,    0,  155,    2, 0x08 /* Private */,
-      26,    1,  156,    2, 0x08 /* Private */,
-      28,    1,  159,    2, 0x08 /* Private */,
+       1,    2,  129,    2, 0x0a /* Public */,
+       5,    0,  134,    2, 0x08 /* Private */,
+       6,    0,  135,    2, 0x08 /* Private */,
+       7,    0,  136,    2, 0x08 /* Private */,
+       8,    1,  137,    2, 0x08 /* Private */,
+      10,    1,  140,    2, 0x08 /* Private */,
+      12,    0,  143,    2, 0x08 /* Private */,
+      13,    0,  144,    2, 0x08 /* Private */,
+      14,    0,  145,    2, 0x08 /* Private */,
+      15,    0,  146,    2, 0x08 /* Private */,
+      16,    0,  147,    2, 0x08 /* Private */,
+      17,    0,  148,    2, 0x08 /* Private */,
+      18,    0,  149,    2, 0x08 /* Private */,
+      19,    1,  150,    2, 0x08 /* Private */,
+      20,    0,  153,    2, 0x08 /* Private */,
+      21,    0,  154,    2, 0x08 /* Private */,
+      22,    0,  155,    2, 0x08 /* Private */,
+      23,    0,  156,    2, 0x08 /* Private */,
+      24,    1,  157,    2, 0x08 /* Private */,
+      25,    0,  160,    2, 0x08 /* Private */,
+      26,    1,  161,    2, 0x08 /* Private */,
+      28,    1,  164,    2, 0x08 /* Private */,
+      30,    0,  167,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Float, QMetaType::Float,    3,    4,
@@ -143,6 +146,7 @@ static const uint qt_meta_data_uiSAR[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QByteArray,   27,
     QMetaType::Void, QMetaType::Bool,   29,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -175,6 +179,7 @@ void uiSAR::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 19: _t->on_clearTrack_clicked(); break;
         case 20: _t->ReadTelemetry((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
         case 21: _t->on_changeMapMode_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->on_gpsPanClone_clicked(); break;
         default: ;
         }
     }
@@ -209,13 +214,13 @@ int uiSAR::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 22)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 22;
+        _id -= 23;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 22)
+        if (_id < 23)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 22;
+        _id -= 23;
     }
     return _id;
 }

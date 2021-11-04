@@ -22,6 +22,8 @@ Rectangle {
     property var enableRoute: true;
     property var enablePlane: true;
 
+    property var gOpacity: 100;
+
     Invoker {
         id: markerDialog
     }
@@ -182,10 +184,13 @@ Item {
             item.zoomLevel = 16.5
             mapView.addMapItem(item);
             imageArray.push(item);
+            //change opacity of newly created jpg
+            changeOpacityOfCurrentImage(gOpacity);
     }
     function changeOpacityOfCurrentImage(opacity: int)
     {
-        var realOpacity = opacity/100;
+        gOpacity = opacity;
+        var realOpacity = gOpacity/100;
         for (var i in imageArray) {
             imageArray[i].sourceItem.opacity = realOpacity;
         }

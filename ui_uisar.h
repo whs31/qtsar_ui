@@ -14,7 +14,9 @@
 #include <QtQuickWidgets/QQuickWidget>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QDial>
 #include <QtWidgets/QDockWidget>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
@@ -24,6 +26,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
@@ -91,6 +94,25 @@ public:
     QWidget *img_tab;
     QGridLayout *gridLayout_7;
     QFrame *line_3;
+    QLabel *label_7;
+    QGridLayout *jpgButtonsLayout;
+    QPushButton *showButton;
+    QPushButton *panButton;
+    QSpacerItem *verticalSpacer_5;
+    QHBoxLayout *horizontalLayout;
+    QToolButton *jpg_gleft;
+    QLabel *jpgtls_filenamelabel;
+    QLabel *jpgtls_filenamedisp;
+    QToolButton *jpg_gright;
+    QSpacerItem *verticalSpacer_8;
+    QHBoxLayout *detectLayout;
+    QSpacerItem *horizontalSpacer_2;
+    QToolButton *detect_refresh;
+    QLabel *detect_detectedlabel;
+    QLabel *detect_detecteddisp;
+    QHBoxLayout *opacityLayout;
+    QLabel *opacityLabel;
+    QSlider *opacitySlider;
     QGroupBox *groupBox;
     QFormLayout *formLayout_2;
     QLabel *jpgtls_latlabel;
@@ -107,26 +129,24 @@ public:
     QLabel *jpgtls_y0disp;
     QLabel *jpgtls_anglabel;
     QLabel *jpgtls_angdisp;
-    QLabel *label_7;
-    QSpacerItem *verticalSpacer_8;
-    QHBoxLayout *opacityLayout;
-    QLabel *opacityLabel;
-    QSlider *opacitySlider;
-    QSpacerItem *verticalSpacer_5;
-    QGridLayout *jpgButtonsLayout;
-    QPushButton *showButton;
-    QPushButton *panButton;
-    QHBoxLayout *horizontalLayout;
-    QToolButton *jpg_gleft;
-    QLabel *jpgtls_filenamelabel;
-    QLabel *jpgtls_filenamedisp;
-    QToolButton *jpg_gright;
-    QHBoxLayout *detectLayout;
-    QSpacerItem *horizontalSpacer_2;
-    QToolButton *detect_refresh;
-    QLabel *detect_detectedlabel;
-    QLabel *detect_detecteddisp;
     QPushButton *pushButton_3;
+    QGroupBox *transformJPGbox;
+    QGridLayout *gridLayout_9;
+    QDial *t_rotation;
+    QDoubleSpinBox *t_ySpin;
+    QLabel *label_10;
+    QDoubleSpinBox *t_rSpin;
+    QGridLayout *gridLayout_10;
+    QPushButton *t_right;
+    QPushButton *t_left;
+    QPushButton *t_up;
+    QPushButton *t_down;
+    QDoubleSpinBox *t_xSpin;
+    QLabel *label_8;
+    QDoubleSpinBox *t_sSpin;
+    QScrollBar *t_scale;
+    QLabel *label_9;
+    QLabel *label_11;
     QWidget *cfg_tab;
     QGridLayout *gridLayout_6;
     QLabel *label_3;
@@ -236,7 +256,7 @@ public:
         clearTrack = new QPushButton(map_tab);
         clearTrack->setObjectName(QString::fromUtf8("clearTrack"));
         clearTrack->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"  background-color: rgb(150, 0, 0);\n"
+"  background-color: rgb(191, 118, 118);\n"
 "  color: #E0E1E3;\n"
 "  border-radius: 4px;\n"
 "  padding: 2px;\n"
@@ -252,7 +272,7 @@ public:
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"  background-color: rgb(191, 118, 118);\n"
+"  background-color: rgb(255, 213, 213);\n"
 "  color: #E0E1E3;\n"
 "}\n"
 "\n"
@@ -600,15 +620,190 @@ public:
 
         gridLayout_7->addWidget(line_3, 1, 0, 1, 1);
 
+        label_7 = new QLabel(img_tab);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        gridLayout_7->addWidget(label_7, 0, 0, 1, 1);
+
+        jpgButtonsLayout = new QGridLayout();
+        jpgButtonsLayout->setObjectName(QString::fromUtf8("jpgButtonsLayout"));
+        jpgButtonsLayout->setSizeConstraint(QLayout::SetMinimumSize);
+        jpgButtonsLayout->setHorizontalSpacing(6);
+        jpgButtonsLayout->setVerticalSpacing(1);
+        showButton = new QPushButton(img_tab);
+        showButton->setObjectName(QString::fromUtf8("showButton"));
+        QSizePolicy sizePolicy8(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy8.setHorizontalStretch(0);
+        sizePolicy8.setVerticalStretch(0);
+        sizePolicy8.setHeightForWidth(showButton->sizePolicy().hasHeightForWidth());
+        showButton->setSizePolicy(sizePolicy8);
+        showButton->setToolTipDuration(1);
+        QIcon icon15;
+        icon15.addFile(QString::fromUtf8(":/img/toggle_overlay.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon15.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_toggledispico_A.png"), QSize(), QIcon::Active, QIcon::Off);
+        icon15.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_toggledispico_A.png"), QSize(), QIcon::Selected, QIcon::Off);
+        showButton->setIcon(icon15);
+        showButton->setIconSize(QSize(16, 16));
+
+        jpgButtonsLayout->addWidget(showButton, 0, 0, 1, 1);
+
+        panButton = new QPushButton(img_tab);
+        panButton->setObjectName(QString::fromUtf8("panButton"));
+        sizePolicy8.setHeightForWidth(panButton->sizePolicy().hasHeightForWidth());
+        panButton->setSizePolicy(sizePolicy8);
+        panButton->setLayoutDirection(Qt::LeftToRight);
+        QIcon icon16;
+        icon16.addFile(QString::fromUtf8(":/img/jpg_pan.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon16.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_centeronjpgico_A.png"), QSize(), QIcon::Active, QIcon::Off);
+        icon16.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_centeronjpgico_A.png"), QSize(), QIcon::Selected, QIcon::Off);
+        panButton->setIcon(icon16);
+        panButton->setIconSize(QSize(16, 16));
+        panButton->setCheckable(false);
+        panButton->setChecked(false);
+
+        jpgButtonsLayout->addWidget(panButton, 0, 1, 1, 1);
+
+
+        gridLayout_7->addLayout(jpgButtonsLayout, 5, 0, 1, 1);
+
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_7->addItem(verticalSpacer_5, 15, 0, 1, 1);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        jpg_gleft = new QToolButton(img_tab);
+        jpg_gleft->setObjectName(QString::fromUtf8("jpg_gleft"));
+        jpg_gleft->setEnabled(false);
+        sizePolicy5.setHeightForWidth(jpg_gleft->sizePolicy().hasHeightForWidth());
+        jpg_gleft->setSizePolicy(sizePolicy5);
+        jpg_gleft->setCursor(QCursor(Qt::PointingHandCursor));
+        jpg_gleft->setIconSize(QSize(10, 10));
+        jpg_gleft->setCheckable(false);
+        jpg_gleft->setChecked(false);
+        jpg_gleft->setAutoRaise(true);
+        jpg_gleft->setArrowType(Qt::LeftArrow);
+
+        horizontalLayout->addWidget(jpg_gleft);
+
+        jpgtls_filenamelabel = new QLabel(img_tab);
+        jpgtls_filenamelabel->setObjectName(QString::fromUtf8("jpgtls_filenamelabel"));
+        sizePolicy8.setHeightForWidth(jpgtls_filenamelabel->sizePolicy().hasHeightForWidth());
+        jpgtls_filenamelabel->setSizePolicy(sizePolicy8);
+        jpgtls_filenamelabel->setCursor(QCursor(Qt::IBeamCursor));
+        jpgtls_filenamelabel->setTextFormat(Qt::AutoText);
+
+        horizontalLayout->addWidget(jpgtls_filenamelabel);
+
+        jpgtls_filenamedisp = new QLabel(img_tab);
+        jpgtls_filenamedisp->setObjectName(QString::fromUtf8("jpgtls_filenamedisp"));
+        sizePolicy8.setHeightForWidth(jpgtls_filenamedisp->sizePolicy().hasHeightForWidth());
+        jpgtls_filenamedisp->setSizePolicy(sizePolicy8);
+        jpgtls_filenamedisp->setCursor(QCursor(Qt::IBeamCursor));
+
+        horizontalLayout->addWidget(jpgtls_filenamedisp);
+
+        jpg_gright = new QToolButton(img_tab);
+        jpg_gright->setObjectName(QString::fromUtf8("jpg_gright"));
+        jpg_gright->setEnabled(false);
+        sizePolicy5.setHeightForWidth(jpg_gright->sizePolicy().hasHeightForWidth());
+        jpg_gright->setSizePolicy(sizePolicy5);
+        jpg_gright->setCursor(QCursor(Qt::PointingHandCursor));
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon17.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right_disabled.png"), QSize(), QIcon::Disabled, QIcon::Off);
+        jpg_gright->setIcon(icon17);
+        jpg_gright->setIconSize(QSize(10, 10));
+        jpg_gright->setCheckable(false);
+        jpg_gright->setChecked(false);
+        jpg_gright->setAutoRaise(true);
+        jpg_gright->setArrowType(Qt::RightArrow);
+
+        horizontalLayout->addWidget(jpg_gright);
+
+
+        gridLayout_7->addLayout(horizontalLayout, 7, 0, 1, 1);
+
+        verticalSpacer_8 = new QSpacerItem(20, 5, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        gridLayout_7->addItem(verticalSpacer_8, 2, 0, 1, 1);
+
+        detectLayout = new QHBoxLayout();
+        detectLayout->setSpacing(3);
+        detectLayout->setObjectName(QString::fromUtf8("detectLayout"));
+        detectLayout->setContentsMargins(-1, -1, -1, 0);
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        detectLayout->addItem(horizontalSpacer_2);
+
+        detect_refresh = new QToolButton(img_tab);
+        detect_refresh->setObjectName(QString::fromUtf8("detect_refresh"));
+        detect_refresh->setCursor(QCursor(Qt::PointingHandCursor));
+        QIcon icon18;
+        icon18.addFile(QString::fromUtf8(":/img/refresh.png"), QSize(), QIcon::Normal, QIcon::Off);
+        detect_refresh->setIcon(icon18);
+        detect_refresh->setIconSize(QSize(16, 16));
+        detect_refresh->setAutoRepeat(false);
+        detect_refresh->setAutoRepeatDelay(10);
+        detect_refresh->setAutoRepeatInterval(10);
+        detect_refresh->setPopupMode(QToolButton::InstantPopup);
+        detect_refresh->setAutoRaise(true);
+
+        detectLayout->addWidget(detect_refresh);
+
+        detect_detectedlabel = new QLabel(img_tab);
+        detect_detectedlabel->setObjectName(QString::fromUtf8("detect_detectedlabel"));
+        sizePolicy.setHeightForWidth(detect_detectedlabel->sizePolicy().hasHeightForWidth());
+        detect_detectedlabel->setSizePolicy(sizePolicy);
+        detect_detectedlabel->setScaledContents(true);
+        detect_detectedlabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        detectLayout->addWidget(detect_detectedlabel);
+
+        detect_detecteddisp = new QLabel(img_tab);
+        detect_detecteddisp->setObjectName(QString::fromUtf8("detect_detecteddisp"));
+        detect_detecteddisp->setScaledContents(true);
+        detect_detecteddisp->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        detectLayout->addWidget(detect_detecteddisp);
+
+
+        gridLayout_7->addLayout(detectLayout, 3, 0, 1, 1);
+
+        opacityLayout = new QHBoxLayout();
+        opacityLayout->setSpacing(10);
+        opacityLayout->setObjectName(QString::fromUtf8("opacityLayout"));
+        opacityLayout->setContentsMargins(0, 0, -1, -1);
+        opacityLabel = new QLabel(img_tab);
+        opacityLabel->setObjectName(QString::fromUtf8("opacityLabel"));
+        sizePolicy3.setHeightForWidth(opacityLabel->sizePolicy().hasHeightForWidth());
+        opacityLabel->setSizePolicy(sizePolicy3);
+        opacityLabel->setFrameShape(QFrame::NoFrame);
+        opacityLabel->setFrameShadow(QFrame::Sunken);
+        opacityLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        opacityLayout->addWidget(opacityLabel);
+
+        opacitySlider = new QSlider(img_tab);
+        opacitySlider->setObjectName(QString::fromUtf8("opacitySlider"));
+        sizePolicy4.setHeightForWidth(opacitySlider->sizePolicy().hasHeightForWidth());
+        opacitySlider->setSizePolicy(sizePolicy4);
+        opacitySlider->setCursor(QCursor(Qt::SizeHorCursor));
+        opacitySlider->setValue(99);
+        opacitySlider->setOrientation(Qt::Horizontal);
+        opacitySlider->setInvertedAppearance(true);
+
+        opacityLayout->addWidget(opacitySlider);
+
+
+        gridLayout_7->addLayout(opacityLayout, 4, 0, 1, 1);
+
         groupBox = new QGroupBox(img_tab);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         formLayout_2 = new QFormLayout(groupBox);
         formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
         jpgtls_latlabel = new QLabel(groupBox);
         jpgtls_latlabel->setObjectName(QString::fromUtf8("jpgtls_latlabel"));
-        QSizePolicy sizePolicy8(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy8.setHorizontalStretch(0);
-        sizePolicy8.setVerticalStretch(0);
         sizePolicy8.setHeightForWidth(jpgtls_latlabel->sizePolicy().hasHeightForWidth());
         jpgtls_latlabel->setSizePolicy(sizePolicy8);
         jpgtls_latlabel->setCursor(QCursor(Qt::IBeamCursor));
@@ -724,181 +919,6 @@ public:
 
         gridLayout_7->addWidget(groupBox, 11, 0, 1, 1);
 
-        label_7 = new QLabel(img_tab);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-
-        gridLayout_7->addWidget(label_7, 0, 0, 1, 1);
-
-        verticalSpacer_8 = new QSpacerItem(20, 5, QSizePolicy::Minimum, QSizePolicy::Fixed);
-
-        gridLayout_7->addItem(verticalSpacer_8, 2, 0, 1, 1);
-
-        opacityLayout = new QHBoxLayout();
-        opacityLayout->setSpacing(10);
-        opacityLayout->setObjectName(QString::fromUtf8("opacityLayout"));
-        opacityLayout->setContentsMargins(0, 0, -1, -1);
-        opacityLabel = new QLabel(img_tab);
-        opacityLabel->setObjectName(QString::fromUtf8("opacityLabel"));
-        sizePolicy3.setHeightForWidth(opacityLabel->sizePolicy().hasHeightForWidth());
-        opacityLabel->setSizePolicy(sizePolicy3);
-        opacityLabel->setFrameShape(QFrame::NoFrame);
-        opacityLabel->setFrameShadow(QFrame::Sunken);
-        opacityLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-
-        opacityLayout->addWidget(opacityLabel);
-
-        opacitySlider = new QSlider(img_tab);
-        opacitySlider->setObjectName(QString::fromUtf8("opacitySlider"));
-        sizePolicy4.setHeightForWidth(opacitySlider->sizePolicy().hasHeightForWidth());
-        opacitySlider->setSizePolicy(sizePolicy4);
-        opacitySlider->setCursor(QCursor(Qt::SizeHorCursor));
-        opacitySlider->setValue(99);
-        opacitySlider->setOrientation(Qt::Horizontal);
-        opacitySlider->setInvertedAppearance(true);
-
-        opacityLayout->addWidget(opacitySlider);
-
-
-        gridLayout_7->addLayout(opacityLayout, 4, 0, 1, 1);
-
-        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_7->addItem(verticalSpacer_5, 13, 0, 1, 1);
-
-        jpgButtonsLayout = new QGridLayout();
-        jpgButtonsLayout->setObjectName(QString::fromUtf8("jpgButtonsLayout"));
-        jpgButtonsLayout->setSizeConstraint(QLayout::SetMinimumSize);
-        jpgButtonsLayout->setHorizontalSpacing(6);
-        jpgButtonsLayout->setVerticalSpacing(1);
-        showButton = new QPushButton(img_tab);
-        showButton->setObjectName(QString::fromUtf8("showButton"));
-        sizePolicy8.setHeightForWidth(showButton->sizePolicy().hasHeightForWidth());
-        showButton->setSizePolicy(sizePolicy8);
-        showButton->setToolTipDuration(1);
-        QIcon icon15;
-        icon15.addFile(QString::fromUtf8(":/img/toggle_overlay.png"), QSize(), QIcon::Normal, QIcon::Off);
-        icon15.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_toggledispico_A.png"), QSize(), QIcon::Active, QIcon::Off);
-        icon15.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_toggledispico_A.png"), QSize(), QIcon::Selected, QIcon::Off);
-        showButton->setIcon(icon15);
-        showButton->setIconSize(QSize(16, 16));
-
-        jpgButtonsLayout->addWidget(showButton, 0, 0, 1, 1);
-
-        panButton = new QPushButton(img_tab);
-        panButton->setObjectName(QString::fromUtf8("panButton"));
-        sizePolicy8.setHeightForWidth(panButton->sizePolicy().hasHeightForWidth());
-        panButton->setSizePolicy(sizePolicy8);
-        panButton->setLayoutDirection(Qt::LeftToRight);
-        QIcon icon16;
-        icon16.addFile(QString::fromUtf8(":/img/jpg_pan.png"), QSize(), QIcon::Normal, QIcon::Off);
-        icon16.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_centeronjpgico_A.png"), QSize(), QIcon::Active, QIcon::Off);
-        icon16.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_centeronjpgico_A.png"), QSize(), QIcon::Selected, QIcon::Off);
-        panButton->setIcon(icon16);
-        panButton->setIconSize(QSize(16, 16));
-        panButton->setCheckable(false);
-        panButton->setChecked(false);
-
-        jpgButtonsLayout->addWidget(panButton, 0, 1, 1, 1);
-
-
-        gridLayout_7->addLayout(jpgButtonsLayout, 5, 0, 1, 1);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        jpg_gleft = new QToolButton(img_tab);
-        jpg_gleft->setObjectName(QString::fromUtf8("jpg_gleft"));
-        jpg_gleft->setEnabled(false);
-        sizePolicy5.setHeightForWidth(jpg_gleft->sizePolicy().hasHeightForWidth());
-        jpg_gleft->setSizePolicy(sizePolicy5);
-        jpg_gleft->setCursor(QCursor(Qt::PointingHandCursor));
-        jpg_gleft->setIconSize(QSize(10, 10));
-        jpg_gleft->setCheckable(false);
-        jpg_gleft->setChecked(false);
-        jpg_gleft->setAutoRaise(true);
-        jpg_gleft->setArrowType(Qt::LeftArrow);
-
-        horizontalLayout->addWidget(jpg_gleft);
-
-        jpgtls_filenamelabel = new QLabel(img_tab);
-        jpgtls_filenamelabel->setObjectName(QString::fromUtf8("jpgtls_filenamelabel"));
-        sizePolicy8.setHeightForWidth(jpgtls_filenamelabel->sizePolicy().hasHeightForWidth());
-        jpgtls_filenamelabel->setSizePolicy(sizePolicy8);
-        jpgtls_filenamelabel->setCursor(QCursor(Qt::IBeamCursor));
-        jpgtls_filenamelabel->setTextFormat(Qt::AutoText);
-
-        horizontalLayout->addWidget(jpgtls_filenamelabel);
-
-        jpgtls_filenamedisp = new QLabel(img_tab);
-        jpgtls_filenamedisp->setObjectName(QString::fromUtf8("jpgtls_filenamedisp"));
-        sizePolicy8.setHeightForWidth(jpgtls_filenamedisp->sizePolicy().hasHeightForWidth());
-        jpgtls_filenamedisp->setSizePolicy(sizePolicy8);
-        jpgtls_filenamedisp->setCursor(QCursor(Qt::IBeamCursor));
-
-        horizontalLayout->addWidget(jpgtls_filenamedisp);
-
-        jpg_gright = new QToolButton(img_tab);
-        jpg_gright->setObjectName(QString::fromUtf8("jpg_gright"));
-        jpg_gright->setEnabled(false);
-        sizePolicy5.setHeightForWidth(jpg_gright->sizePolicy().hasHeightForWidth());
-        jpg_gright->setSizePolicy(sizePolicy5);
-        jpg_gright->setCursor(QCursor(Qt::PointingHandCursor));
-        QIcon icon17;
-        icon17.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
-        icon17.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right_disabled.png"), QSize(), QIcon::Disabled, QIcon::Off);
-        jpg_gright->setIcon(icon17);
-        jpg_gright->setIconSize(QSize(10, 10));
-        jpg_gright->setCheckable(false);
-        jpg_gright->setChecked(false);
-        jpg_gright->setAutoRaise(true);
-        jpg_gright->setArrowType(Qt::RightArrow);
-
-        horizontalLayout->addWidget(jpg_gright);
-
-
-        gridLayout_7->addLayout(horizontalLayout, 7, 0, 1, 1);
-
-        detectLayout = new QHBoxLayout();
-        detectLayout->setSpacing(3);
-        detectLayout->setObjectName(QString::fromUtf8("detectLayout"));
-        detectLayout->setContentsMargins(-1, -1, -1, 0);
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        detectLayout->addItem(horizontalSpacer_2);
-
-        detect_refresh = new QToolButton(img_tab);
-        detect_refresh->setObjectName(QString::fromUtf8("detect_refresh"));
-        detect_refresh->setCursor(QCursor(Qt::PointingHandCursor));
-        QIcon icon18;
-        icon18.addFile(QString::fromUtf8(":/img/refresh.png"), QSize(), QIcon::Normal, QIcon::Off);
-        detect_refresh->setIcon(icon18);
-        detect_refresh->setIconSize(QSize(16, 16));
-        detect_refresh->setAutoRepeat(false);
-        detect_refresh->setAutoRepeatDelay(10);
-        detect_refresh->setAutoRepeatInterval(10);
-        detect_refresh->setPopupMode(QToolButton::InstantPopup);
-        detect_refresh->setAutoRaise(true);
-
-        detectLayout->addWidget(detect_refresh);
-
-        detect_detectedlabel = new QLabel(img_tab);
-        detect_detectedlabel->setObjectName(QString::fromUtf8("detect_detectedlabel"));
-        sizePolicy.setHeightForWidth(detect_detectedlabel->sizePolicy().hasHeightForWidth());
-        detect_detectedlabel->setSizePolicy(sizePolicy);
-        detect_detectedlabel->setScaledContents(true);
-        detect_detectedlabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-
-        detectLayout->addWidget(detect_detectedlabel);
-
-        detect_detecteddisp = new QLabel(img_tab);
-        detect_detecteddisp->setObjectName(QString::fromUtf8("detect_detecteddisp"));
-        detect_detecteddisp->setScaledContents(true);
-        detect_detecteddisp->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-
-        detectLayout->addWidget(detect_detecteddisp);
-
-
-        gridLayout_7->addLayout(detectLayout, 3, 0, 1, 1);
-
         pushButton_3 = new QPushButton(img_tab);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
         pushButton_3->setEnabled(false);
@@ -908,9 +928,126 @@ public:
 
         gridLayout_7->addWidget(pushButton_3, 6, 0, 1, 1);
 
+        transformJPGbox = new QGroupBox(img_tab);
+        transformJPGbox->setObjectName(QString::fromUtf8("transformJPGbox"));
+        gridLayout_9 = new QGridLayout(transformJPGbox);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        t_rotation = new QDial(transformJPGbox);
+        t_rotation->setObjectName(QString::fromUtf8("t_rotation"));
+        QSizePolicy sizePolicy9(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy9.setHorizontalStretch(0);
+        sizePolicy9.setVerticalStretch(0);
+        sizePolicy9.setHeightForWidth(t_rotation->sizePolicy().hasHeightForWidth());
+        t_rotation->setSizePolicy(sizePolicy9);
+        t_rotation->setMaximum(360);
+        t_rotation->setOrientation(Qt::Horizontal);
+        t_rotation->setWrapping(false);
+        t_rotation->setNotchTarget(30.000000000000000);
+        t_rotation->setNotchesVisible(true);
+
+        gridLayout_9->addWidget(t_rotation, 0, 5, 4, 1);
+
+        t_ySpin = new QDoubleSpinBox(transformJPGbox);
+        t_ySpin->setObjectName(QString::fromUtf8("t_ySpin"));
+
+        gridLayout_9->addWidget(t_ySpin, 1, 1, 1, 1);
+
+        label_10 = new QLabel(transformJPGbox);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        gridLayout_9->addWidget(label_10, 2, 0, 1, 1);
+
+        t_rSpin = new QDoubleSpinBox(transformJPGbox);
+        t_rSpin->setObjectName(QString::fromUtf8("t_rSpin"));
+
+        gridLayout_9->addWidget(t_rSpin, 2, 1, 1, 1);
+
+        gridLayout_10 = new QGridLayout();
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        gridLayout_10->setVerticalSpacing(0);
+        t_right = new QPushButton(transformJPGbox);
+        t_right->setObjectName(QString::fromUtf8("t_right"));
+        sizePolicy5.setHeightForWidth(t_right->sizePolicy().hasHeightForWidth());
+        t_right->setSizePolicy(sizePolicy5);
         QIcon icon20;
-        icon20.addFile(QString::fromUtf8(":/tabIcons/jpg.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(img_tab, icon20, QString());
+        icon20.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_right->setIcon(icon20);
+
+        gridLayout_10->addWidget(t_right, 1, 2, 1, 1);
+
+        t_left = new QPushButton(transformJPGbox);
+        t_left->setObjectName(QString::fromUtf8("t_left"));
+        sizePolicy5.setHeightForWidth(t_left->sizePolicy().hasHeightForWidth());
+        t_left->setSizePolicy(sizePolicy5);
+        QIcon icon21;
+        icon21.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_left->setIcon(icon21);
+
+        gridLayout_10->addWidget(t_left, 1, 0, 1, 1);
+
+        t_up = new QPushButton(transformJPGbox);
+        t_up->setObjectName(QString::fromUtf8("t_up"));
+        sizePolicy5.setHeightForWidth(t_up->sizePolicy().hasHeightForWidth());
+        t_up->setSizePolicy(sizePolicy5);
+        QIcon icon22;
+        icon22.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_up.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_up->setIcon(icon22);
+
+        gridLayout_10->addWidget(t_up, 0, 1, 1, 1);
+
+        t_down = new QPushButton(transformJPGbox);
+        t_down->setObjectName(QString::fromUtf8("t_down"));
+        sizePolicy5.setHeightForWidth(t_down->sizePolicy().hasHeightForWidth());
+        t_down->setSizePolicy(sizePolicy5);
+        QIcon icon23;
+        icon23.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_down.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_down->setIcon(icon23);
+
+        gridLayout_10->addWidget(t_down, 2, 1, 1, 1);
+
+
+        gridLayout_9->addLayout(gridLayout_10, 0, 3, 4, 2);
+
+        t_xSpin = new QDoubleSpinBox(transformJPGbox);
+        t_xSpin->setObjectName(QString::fromUtf8("t_xSpin"));
+
+        gridLayout_9->addWidget(t_xSpin, 0, 1, 1, 1);
+
+        label_8 = new QLabel(transformJPGbox);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_9->addWidget(label_8, 0, 0, 1, 1);
+
+        t_sSpin = new QDoubleSpinBox(transformJPGbox);
+        t_sSpin->setObjectName(QString::fromUtf8("t_sSpin"));
+
+        gridLayout_9->addWidget(t_sSpin, 3, 1, 1, 1);
+
+        t_scale = new QScrollBar(transformJPGbox);
+        t_scale->setObjectName(QString::fromUtf8("t_scale"));
+        t_scale->setMinimum(150);
+        t_scale->setMaximum(180);
+        t_scale->setValue(165);
+        t_scale->setOrientation(Qt::Vertical);
+
+        gridLayout_9->addWidget(t_scale, 0, 2, 4, 1);
+
+        label_9 = new QLabel(transformJPGbox);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_9->addWidget(label_9, 1, 0, 1, 1);
+
+        label_11 = new QLabel(transformJPGbox);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        gridLayout_9->addWidget(label_11, 3, 0, 1, 1);
+
+
+        gridLayout_7->addWidget(transformJPGbox, 14, 0, 1, 1);
+
+        QIcon icon24;
+        icon24.addFile(QString::fromUtf8(":/tabIcons/jpg.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(img_tab, icon24, QString());
         cfg_tab = new QWidget();
         cfg_tab->setObjectName(QString::fromUtf8("cfg_tab"));
         gridLayout_6 = new QGridLayout(cfg_tab);
@@ -975,9 +1112,9 @@ public:
 
         gridLayout_6->addWidget(TCPIPxml, 2, 1, 1, 2);
 
-        QIcon icon21;
-        icon21.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(cfg_tab, icon21, QString());
+        QIcon icon25;
+        icon25.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(cfg_tab, icon25, QString());
         info_tab = new QWidget();
         info_tab->setObjectName(QString::fromUtf8("info_tab"));
         gridLayout_8 = new QGridLayout(info_tab);
@@ -1002,9 +1139,9 @@ public:
 
         gridLayout_8->addItem(verticalSpacer, 2, 0, 1, 1);
 
-        QIcon icon22;
-        icon22.addFile(QString::fromUtf8(":/tabIcons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(info_tab, icon22, QString());
+        QIcon icon26;
+        icon26.addFile(QString::fromUtf8(":/tabIcons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(info_tab, icon26, QString());
 
         gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -1028,11 +1165,11 @@ public:
         uiSAR->setStatusBar(statusBar);
         docker = new QDockWidget(uiSAR);
         docker->setObjectName(QString::fromUtf8("docker"));
-        QSizePolicy sizePolicy9(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy9.setHorizontalStretch(0);
-        sizePolicy9.setVerticalStretch(0);
-        sizePolicy9.setHeightForWidth(docker->sizePolicy().hasHeightForWidth());
-        docker->setSizePolicy(sizePolicy9);
+        QSizePolicy sizePolicy10(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy10.setHorizontalStretch(0);
+        sizePolicy10.setVerticalStretch(0);
+        sizePolicy10.setHeightForWidth(docker->sizePolicy().hasHeightForWidth());
+        docker->setSizePolicy(sizePolicy10);
         docker->setMinimumSize(QSize(325, 58));
         docker->setMaximumSize(QSize(524287, 58));
         docker->setFeatures(QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable);
@@ -1043,7 +1180,7 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         gpsPanClone = new QPushButton(dockWidgetContents_2);
         gpsPanClone->setObjectName(QString::fromUtf8("gpsPanClone"));
-        gpsPanClone->setEnabled(false);
+        gpsPanClone->setEnabled(true);
         sizePolicy5.setHeightForWidth(gpsPanClone->sizePolicy().hasHeightForWidth());
         gpsPanClone->setSizePolicy(sizePolicy5);
         gpsPanClone->setIcon(icon1);
@@ -1055,9 +1192,9 @@ public:
         rulerButton->setEnabled(false);
         sizePolicy5.setHeightForWidth(rulerButton->sizePolicy().hasHeightForWidth());
         rulerButton->setSizePolicy(sizePolicy5);
-        QIcon icon23;
-        icon23.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
-        rulerButton->setIcon(icon23);
+        QIcon icon27;
+        icon27.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
+        rulerButton->setIcon(icon27);
 
         horizontalLayout_2->addWidget(rulerButton);
 
@@ -1097,9 +1234,9 @@ public:
 "  background: #60798B;\n"
 "  color: #E0E1E3;\n"
 "}"));
-        QIcon icon24;
-        icon24.addFile(QString::fromUtf8(":/img/swapMode.png"), QSize(), QIcon::Normal, QIcon::Off);
-        changeMapMode->setIcon(icon24);
+        QIcon icon28;
+        icon28.addFile(QString::fromUtf8(":/img/swapMode.png"), QSize(), QIcon::Normal, QIcon::Off);
+        changeMapMode->setIcon(icon28);
         changeMapMode->setCheckable(true);
         changeMapMode->setChecked(true);
 
@@ -1110,7 +1247,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(0);
         DecodeJPG->setDefault(false);
 
 
@@ -1157,6 +1294,20 @@ public:
         udpDisp->setPlaceholderText(QCoreApplication::translate("uiSAR", "Waiting for connection...  type \"connect ip:port\" for udp connection or connect via default UDP IP  type \"help\" for additional command info  ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(link_tab), QString());
         tabWidget->setTabText(tabWidget->indexOf(tcp_tab), QString());
+        label_7->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\240\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217</span></p></body></html>", nullptr));
+#if QT_CONFIG(tooltip)
+        showButton->setToolTip(QString());
+#endif // QT_CONFIG(tooltip)
+        showButton->setText(QCoreApplication::translate("uiSAR", "\320\236\321\202\320\276\320\261\321\200\320\260\320\267\320\270\321\202\321\214 \320\240\320\233\320\230", nullptr));
+        panButton->setText(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\201\321\202\320\276\320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\240\320\233\320\230 ", nullptr));
+        jpg_gleft->setText(QString());
+        jpgtls_filenamelabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p>\320\242\320\265\320\272\321\203\321\211\320\270\320\271 \321\204\320\260\320\271\320\273:</p></body></html>", nullptr));
+        jpgtls_filenamedisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-weight:600;\">-----------</span></p></body></html>", nullptr));
+        jpg_gright->setText(QString());
+        detect_refresh->setText(QString());
+        detect_detectedlabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p>\320\236\320\261\320\275\320\260\321\200\321\203\320\266\320\265\320\275\320\276 \320\240\320\233\320\230: </p></body></html>", nullptr));
+        detect_detecteddisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p>0</p></body></html>", nullptr));
+        opacityLabel->setText(QCoreApplication::translate("uiSAR", "\320\237\321\200\320\276\320\267\321\200\320\260\321\207\320\275\320\276\321\201\321\202\321\214 \321\201\320\273\320\276\321\217 \320\240\320\233\320\230", nullptr));
         groupBox->setTitle(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\202\320\260\320\264\320\260\320\275\320\275\321\213\320\265 \320\240\320\233\320\230", nullptr));
         jpgtls_latlabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-size:7pt;\">\320\250\320\270\321\200\320\276\321\202\320\260</span></p></body></html>", nullptr));
         jpgtls_latdisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-size:7pt; font-weight:600;\">-----------</span></p></body></html>", nullptr));
@@ -1172,21 +1323,16 @@ public:
         jpgtls_y0disp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-size:7pt; font-weight:600;\">-----------</span></p></body></html>", nullptr));
         jpgtls_anglabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-size:7pt;\">\320\243\320\263\320\276\320\273:</span></p></body></html>", nullptr));
         jpgtls_angdisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-size:7pt; font-weight:600;\">-----------</span></p></body></html>", nullptr));
-        label_7->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\240\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217</span></p></body></html>", nullptr));
-        opacityLabel->setText(QCoreApplication::translate("uiSAR", "\320\237\321\200\320\276\320\267\321\200\320\260\321\207\320\275\320\276\321\201\321\202\321\214 \321\201\320\273\320\276\321\217 \320\240\320\233\320\230", nullptr));
-#if QT_CONFIG(tooltip)
-        showButton->setToolTip(QString());
-#endif // QT_CONFIG(tooltip)
-        showButton->setText(QCoreApplication::translate("uiSAR", "\320\236\321\202\320\276\320\261\321\200\320\260\320\267\320\270\321\202\321\214 \320\240\320\233\320\230", nullptr));
-        panButton->setText(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\201\321\202\320\276\320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\240\320\233\320\230 ", nullptr));
-        jpg_gleft->setText(QString());
-        jpgtls_filenamelabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p>\320\242\320\265\320\272\321\203\321\211\320\270\320\271 \321\204\320\260\320\271\320\273:</p></body></html>", nullptr));
-        jpgtls_filenamedisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-weight:600;\">-----------</span></p></body></html>", nullptr));
-        jpg_gright->setText(QString());
-        detect_refresh->setText(QString());
-        detect_detectedlabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p>\320\236\320\261\320\275\320\260\321\200\321\203\320\266\320\265\320\275\320\276 \320\240\320\233\320\230: </p></body></html>", nullptr));
-        detect_detecteddisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p>0</p></body></html>", nullptr));
         pushButton_3->setText(QCoreApplication::translate("uiSAR", "\320\236\321\202\320\276\320\261\321\200\320\260\320\267\320\270\321\202\321\214 \320\262\321\201\320\265", nullptr));
+        transformJPGbox->setTitle(QCoreApplication::translate("uiSAR", "\320\240\320\265\320\264\320\260\320\272\321\202\320\270\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\263\320\265\320\276\320\274\320\265\321\202\321\200\320\270\320\270 \320\240\320\233\320\230", nullptr));
+        label_10->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\262\321\200\320\260\321\211\320\265\320\275\320\270\321\217", nullptr));
+        t_right->setText(QString());
+        t_left->setText(QString());
+        t_up->setText(QString());
+        t_down->setText(QString());
+        label_8->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 X", nullptr));
+        label_9->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 Y", nullptr));
+        label_11->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \321\200\320\260\320\267\320\274\320\265\321\200\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(img_tab), QString());
         label_3->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 UDP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
         selectFolderButton->setText(QCoreApplication::translate("uiSAR", "\320\243\320\272\320\260\320\267\320\260\321\202\321\214", nullptr));

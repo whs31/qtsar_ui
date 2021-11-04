@@ -579,3 +579,8 @@ void uiSAR::on_changeMapMode_toggled(bool checked)
                 Q_ARG(bool, satellite)
                );}
 }
+
+void uiSAR::on_gpsPanClone_clicked()
+{
+    on_panGPS_clicked();
+}
