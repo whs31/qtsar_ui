@@ -1,0 +1,10 @@
+#!/bin/bash
+
+read -p 'Выключение. Вы уверены? (y/N): ' MODE
+
+if [[ $MODE == 'y' ]]
+then
+    sudo poweroff
+fi
+
+

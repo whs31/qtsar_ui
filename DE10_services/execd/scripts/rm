@@ -1,0 +1,10 @@
+#!/bin/bash
+
+read -p 'Вы уверены? (y/N): ' MODE
+
+if [[ $MODE == 'y' ]]
+then
+    rm -rf /home/sar/readdata/data/*
+fi
+
+

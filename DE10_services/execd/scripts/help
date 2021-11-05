@@ -1,0 +1,18 @@
+#!/bin/bash
+clear
+echo "**************************"
+echo "* Управление модулем РСА  "
+echo "**************************"
+echo -e "\n"
+echo "Свободное место на диске"
+df -h | grep --color=never "Filesystem\|root"
+echo -e "\n"
+
+band=$(cat ./scripts/cfg/mode)
+
+echo -e "Текущий диапазон \033[31m $band \033[m"
+echo -e "\n"
+echo "1) Запуск"
+echo "2) Изменить диапазон"
+echo "3) Очистить диск"
+echo "4) Выход"

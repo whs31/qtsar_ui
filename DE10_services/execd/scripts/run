@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MY_DIR=$(pwd)
+
+
+
+cd /home/sar/readdata
+sudo ./start.py $(cat $MY_DIR/scripts/cfg/mode)
+
+cd $MY_DIR

@@ -1,0 +1,2 @@
+#!/bin/bash
+/home/root/Work/services/imgd.py $1 $2 $3 $4

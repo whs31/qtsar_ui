@@ -1,0 +1,14 @@
+#!/bin/bash
+
+read -p 'Выберите диапазон: ' MODE
+
+
+if [[ $MODE < 4 ]]
+then
+    if [[ $MODE > 0 ]]
+    then
+        echo $MODE > ./scripts/cfg/mode
+    fi
+fi
+
+
