@@ -11,7 +11,7 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
 
     rawbuf = (char*)malloc(w*h*2);
 
-    int id = QFontDatabase::addApplicationFont("C:/Users/0/Documents/uiSAR/consoleUbuntuMono.ttf");
+    int id = QFontDatabase::addApplicationFont("../qtsar_ui/console/UbuntuMono.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont fontConsole(family);
     fontConsole.setPointSize(13);

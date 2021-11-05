@@ -18,6 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += "C:\Program Files\OpenSSL-Win64\include"
 #LIBS += -L"C:\Program Files\OpenSSL-Win64\lib" -llibcrypto -llibssl
 SOURCES += \
+    console/console.cpp \
+    console/fvemu.c \
     main.cpp \
     qmlinvoker.cpp \
     qmlmarkerdialog.cpp \
@@ -27,6 +29,9 @@ SOURCES += \
     uisar.cpp
 
 HEADERS += \
+    console/DefaultColors.h \
+    console/console.h \
+    console/fvemu.h \
     qmlinvoker.h \
     qmlmarkerdialog.h \
     remote/remote.h \
@@ -49,6 +54,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \ \
+    console/UbuntuMono.ttf \
     qdarkstyle/dark/rc/.keep \
     qdarkstyle/dark/rc/arrow_down.png \
     qdarkstyle/dark/rc/arrow_down@2x.png \
