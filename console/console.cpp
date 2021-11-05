@@ -9,13 +9,13 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
     rawbuf = (char*)malloc(w*h*2);
 
 
-    QFont fontConsole = setFont("D:/SAR/qtsar_ui-master/console/UbuntuMono.ttf1", 13);
+    QFont fontConsole = setFont("qrc:/console/UbuntuMono.ttf", 13);
     this->QWidget::setFont(fontConsole);
     QFontMetrics metrics = this->fontMetrics();
 
     this->setFrameStyle (QFrame::Panel | QFrame::Sunken);
 
-    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("margin: 0px");
@@ -24,9 +24,10 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
 
     fontWidth = metrics.width("0");
     fontHeight = metrics.height();
-    int margin = document()->documentMargin() *2;
+    int margin = document()->documentMargin() * 2;
 
-    this->resize(fontWidth *(w+1) + margin, h*fontHeight + margin);
+    this->resize(fontWidth *(w+1) + margin, h*fontHeight + margin); //что-то странное происходит с размерами виджета
+    //this->resize(w, h);
 
 
 }

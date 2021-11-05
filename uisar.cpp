@@ -33,12 +33,7 @@ uiSAR::uiSAR(QWidget *parent)
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 
 
-    /* Консоль для всех событий с поддержкой vt100 */
-    //Console *con = new Console(this);
-    //con->write("Тест");
-    //con->flush();
 
-    //con->hide(); // Закомментировать чтобы показать
 
 }
 
@@ -488,6 +483,14 @@ void uiSAR::initUI(){
     ui->nav_altdisp->setFont(bold8pxfont);
 
     ui->udpIn->installEventFilter(this);
+
+    /* Консоль для всех событий с поддержкой vt100 */
+
+    Console *con = new Console(ui->consoleMain, ui->consoleMain->width(), ui->consoleMain->height());
+    con->write("Тест");
+    con->flush();
+    //con->resize(ui->consoleMain->width(), ui->consoleMain->height());
+    //con->hide(); // Закомментировать чтобы показать
 }
 
 
