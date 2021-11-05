@@ -73,10 +73,11 @@ public:
     QSpacerItem *verticalSpacer_6;
     QGridLayout *gridLayout_2;
     QCheckBox *nav_follow;
-    QCheckBox *nav_displayroute;
     QCheckBox *nav_displaytriangle;
-    QCheckBox *showCoordsBox;
     QCheckBox *planeCheckbox;
+    QCheckBox *showCoordsBox;
+    QCheckBox *nav_displayroute;
+    QCheckBox *checkBox;
     QLabel *label_5;
     QWidget *tcp_tab;
     QGridLayout *gridLayout_11;
@@ -138,15 +139,24 @@ public:
     QLabel *label_11;
     QWidget *cfg_tab;
     QGridLayout *gridLayout_6;
-    QLabel *label_3;
-    QPushButton *selectFolderButton;
-    QLabel *label_2;
-    QLineEdit *UDPPortxml;
-    QSpacerItem *verticalSpacer_4;
-    QLineEdit *UDPIPxml;
-    QLabel *label_4;
     QLineEdit *TCPPortxml;
     QLineEdit *TCPIPxml;
+    QDoubleSpinBox *predictRangexml;
+    QLabel *label_13;
+    QDoubleSpinBox *refreshtelemetryxml;
+    QLabel *label_14;
+    QPushButton *selectFolderButton;
+    QSpacerItem *verticalSpacer_4;
+    QLineEdit *UDPPortxml;
+    QLabel *label_4;
+    QLabel *label_3;
+    QLabel *label_2;
+    QLineEdit *UDPIPxml;
+    QGridLayout *gridLayout_12;
+    QDoubleSpinBox *diaTimexml;
+    QLabel *label_15;
+    QLabel *label_16;
+    QDoubleSpinBox *diaRangexml;
     QWidget *link_tab;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_6;
@@ -451,25 +461,25 @@ public:
 
         gridLayout_2->addWidget(nav_follow, 0, 1, 1, 1);
 
-        nav_displayroute = new QCheckBox(map_tab);
-        nav_displayroute->setObjectName(QString::fromUtf8("nav_displayroute"));
-        nav_displayroute->setEnabled(true);
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/img/route.png"), QSize(), QIcon::Normal, QIcon::Off);
-        nav_displayroute->setIcon(icon6);
-        nav_displayroute->setChecked(true);
-
-        gridLayout_2->addWidget(nav_displayroute, 1, 1, 1, 1);
-
         nav_displaytriangle = new QCheckBox(map_tab);
         nav_displaytriangle->setObjectName(QString::fromUtf8("nav_displaytriangle"));
         nav_displaytriangle->setEnabled(false);
-        QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/img/radar.png"), QSize(), QIcon::Normal, QIcon::Off);
-        nav_displaytriangle->setIcon(icon7);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/img/radar.png"), QSize(), QIcon::Normal, QIcon::Off);
+        nav_displaytriangle->setIcon(icon6);
         nav_displaytriangle->setChecked(true);
 
-        gridLayout_2->addWidget(nav_displaytriangle, 3, 1, 1, 1);
+        gridLayout_2->addWidget(nav_displaytriangle, 4, 1, 1, 1);
+
+        planeCheckbox = new QCheckBox(map_tab);
+        planeCheckbox->setObjectName(QString::fromUtf8("planeCheckbox"));
+        planeCheckbox->setEnabled(false);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/img/planeSmall.png"), QSize(), QIcon::Normal, QIcon::Off);
+        planeCheckbox->setIcon(icon7);
+        planeCheckbox->setChecked(true);
+
+        gridLayout_2->addWidget(planeCheckbox, 5, 1, 1, 1);
 
         showCoordsBox = new QCheckBox(map_tab);
         showCoordsBox->setObjectName(QString::fromUtf8("showCoordsBox"));
@@ -481,17 +491,23 @@ public:
         showCoordsBox->setIcon(icon8);
         showCoordsBox->setChecked(true);
 
-        gridLayout_2->addWidget(showCoordsBox, 5, 1, 1, 1);
+        gridLayout_2->addWidget(showCoordsBox, 6, 1, 1, 1);
 
-        planeCheckbox = new QCheckBox(map_tab);
-        planeCheckbox->setObjectName(QString::fromUtf8("planeCheckbox"));
-        planeCheckbox->setEnabled(false);
+        nav_displayroute = new QCheckBox(map_tab);
+        nav_displayroute->setObjectName(QString::fromUtf8("nav_displayroute"));
+        nav_displayroute->setEnabled(true);
         QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/img/planeSmall.png"), QSize(), QIcon::Normal, QIcon::Off);
-        planeCheckbox->setIcon(icon9);
-        planeCheckbox->setChecked(true);
+        icon9.addFile(QString::fromUtf8(":/img/route.png"), QSize(), QIcon::Normal, QIcon::Off);
+        nav_displayroute->setIcon(icon9);
+        nav_displayroute->setChecked(true);
 
-        gridLayout_2->addWidget(planeCheckbox, 4, 1, 1, 1);
+        gridLayout_2->addWidget(nav_displayroute, 1, 1, 1, 1);
+
+        checkBox = new QCheckBox(map_tab);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        checkBox->setEnabled(false);
+
+        gridLayout_2->addWidget(checkBox, 3, 1, 1, 1);
 
 
         gridLayout_5->addLayout(gridLayout_2, 5, 0, 1, 2);
@@ -964,52 +980,6 @@ public:
         cfg_tab->setObjectName(QString::fromUtf8("cfg_tab"));
         gridLayout_6 = new QGridLayout(cfg_tab);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        label_3 = new QLabel(cfg_tab);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        sizePolicy5.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
-        label_3->setSizePolicy(sizePolicy5);
-
-        gridLayout_6->addWidget(label_3, 1, 0, 1, 1);
-
-        selectFolderButton = new QPushButton(cfg_tab);
-        selectFolderButton->setObjectName(QString::fromUtf8("selectFolderButton"));
-
-        gridLayout_6->addWidget(selectFolderButton, 0, 2, 1, 2);
-
-        label_2 = new QLabel(cfg_tab);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        sizePolicy5.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy5);
-
-        gridLayout_6->addWidget(label_2, 0, 0, 1, 1);
-
-        UDPPortxml = new QLineEdit(cfg_tab);
-        UDPPortxml->setObjectName(QString::fromUtf8("UDPPortxml"));
-        sizePolicy6.setHeightForWidth(UDPPortxml->sizePolicy().hasHeightForWidth());
-        UDPPortxml->setSizePolicy(sizePolicy6);
-        UDPPortxml->setMaximumSize(QSize(50, 16777215));
-        UDPPortxml->setMaxLength(5);
-        UDPPortxml->setFrame(true);
-        UDPPortxml->setEchoMode(QLineEdit::Normal);
-
-        gridLayout_6->addWidget(UDPPortxml, 1, 3, 1, 1);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_6->addItem(verticalSpacer_4, 3, 0, 1, 1);
-
-        UDPIPxml = new QLineEdit(cfg_tab);
-        UDPIPxml->setObjectName(QString::fromUtf8("UDPIPxml"));
-        UDPIPxml->setMaxLength(15);
-        UDPIPxml->setClearButtonEnabled(false);
-
-        gridLayout_6->addWidget(UDPIPxml, 1, 1, 1, 2);
-
-        label_4 = new QLabel(cfg_tab);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_6->addWidget(label_4, 2, 0, 1, 1);
-
         TCPPortxml = new QLineEdit(cfg_tab);
         TCPPortxml->setObjectName(QString::fromUtf8("TCPPortxml"));
         TCPPortxml->setMaximumSize(QSize(50, 16777215));
@@ -1023,6 +993,111 @@ public:
         TCPIPxml->setMaxLength(15);
 
         gridLayout_6->addWidget(TCPIPxml, 2, 1, 1, 2);
+
+        predictRangexml = new QDoubleSpinBox(cfg_tab);
+        predictRangexml->setObjectName(QString::fromUtf8("predictRangexml"));
+        predictRangexml->setDecimals(1);
+        predictRangexml->setMaximum(20.000000000000000);
+        predictRangexml->setValue(5.000000000000000);
+
+        gridLayout_6->addWidget(predictRangexml, 4, 1, 1, 3);
+
+        label_13 = new QLabel(cfg_tab);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        gridLayout_6->addWidget(label_13, 3, 0, 1, 1);
+
+        refreshtelemetryxml = new QDoubleSpinBox(cfg_tab);
+        refreshtelemetryxml->setObjectName(QString::fromUtf8("refreshtelemetryxml"));
+        refreshtelemetryxml->setMinimum(0.050000000000000);
+        refreshtelemetryxml->setMaximum(100.000000000000000);
+        refreshtelemetryxml->setSingleStep(0.500000000000000);
+        refreshtelemetryxml->setValue(0.500000000000000);
+
+        gridLayout_6->addWidget(refreshtelemetryxml, 3, 1, 1, 3);
+
+        label_14 = new QLabel(cfg_tab);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        gridLayout_6->addWidget(label_14, 4, 0, 1, 1);
+
+        selectFolderButton = new QPushButton(cfg_tab);
+        selectFolderButton->setObjectName(QString::fromUtf8("selectFolderButton"));
+
+        gridLayout_6->addWidget(selectFolderButton, 0, 2, 1, 2);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_6->addItem(verticalSpacer_4, 8, 0, 1, 1);
+
+        UDPPortxml = new QLineEdit(cfg_tab);
+        UDPPortxml->setObjectName(QString::fromUtf8("UDPPortxml"));
+        sizePolicy6.setHeightForWidth(UDPPortxml->sizePolicy().hasHeightForWidth());
+        UDPPortxml->setSizePolicy(sizePolicy6);
+        UDPPortxml->setMaximumSize(QSize(50, 16777215));
+        UDPPortxml->setMaxLength(5);
+        UDPPortxml->setFrame(true);
+        UDPPortxml->setEchoMode(QLineEdit::Normal);
+
+        gridLayout_6->addWidget(UDPPortxml, 1, 3, 1, 1);
+
+        label_4 = new QLabel(cfg_tab);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout_6->addWidget(label_4, 2, 0, 1, 1);
+
+        label_3 = new QLabel(cfg_tab);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        sizePolicy5.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy5);
+
+        gridLayout_6->addWidget(label_3, 1, 0, 1, 1);
+
+        label_2 = new QLabel(cfg_tab);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        sizePolicy5.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy5);
+
+        gridLayout_6->addWidget(label_2, 0, 0, 1, 1);
+
+        UDPIPxml = new QLineEdit(cfg_tab);
+        UDPIPxml->setObjectName(QString::fromUtf8("UDPIPxml"));
+        UDPIPxml->setMaxLength(15);
+        UDPIPxml->setClearButtonEnabled(false);
+
+        gridLayout_6->addWidget(UDPIPxml, 1, 1, 1, 2);
+
+        gridLayout_12 = new QGridLayout();
+        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
+        diaTimexml = new QDoubleSpinBox(cfg_tab);
+        diaTimexml->setObjectName(QString::fromUtf8("diaTimexml"));
+        diaTimexml->setDecimals(1);
+        diaTimexml->setMinimum(1.000000000000000);
+        diaTimexml->setMaximum(50.000000000000000);
+        diaTimexml->setValue(15.000000000000000);
+
+        gridLayout_12->addWidget(diaTimexml, 0, 1, 1, 1);
+
+        label_15 = new QLabel(cfg_tab);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+
+        gridLayout_12->addWidget(label_15, 0, 0, 1, 1);
+
+        label_16 = new QLabel(cfg_tab);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        gridLayout_12->addWidget(label_16, 0, 2, 1, 1);
+
+        diaRangexml = new QDoubleSpinBox(cfg_tab);
+        diaRangexml->setObjectName(QString::fromUtf8("diaRangexml"));
+        diaRangexml->setDecimals(1);
+        diaRangexml->setMaximum(30.000000000000000);
+        diaRangexml->setValue(3.000000000000000);
+
+        gridLayout_12->addWidget(diaRangexml, 0, 3, 1, 1);
+
+
+        gridLayout_6->addLayout(gridLayout_12, 5, 0, 1, 4);
 
         QIcon icon21;
         icon21.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -1256,7 +1331,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(3);
         DecodeJPG->setDefault(false);
 
 
@@ -1282,13 +1357,14 @@ public:
         saveMarkerButton->setText(QString());
         loadMarkerButton->setText(QString());
         nav_follow->setText(QCoreApplication::translate("uiSAR", "\320\241\320\273\320\265\320\264\320\270\321\202\321\214 \320\267\320\260 \321\201\320\260\320\274\320\276\320\273\320\265\321\202\320\276\320\274", nullptr));
-        nav_displayroute->setText(QCoreApplication::translate("uiSAR", "\320\242\321\200\320\260\320\265\320\272\321\202\320\276\321\200\320\270\321\217 \320\277\320\276\320\273\320\265\321\202\320\260", nullptr));
         nav_displaytriangle->setText(QCoreApplication::translate("uiSAR", "\320\224\320\270\320\260\320\263\321\200\320\260\320\274\320\274\320\260 \320\275\320\260\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\275\320\276\321\201\321\202\320\270", nullptr));
-        showCoordsBox->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\321\213 \320\272\321\203\321\200\321\201\320\276\321\200\320\260", nullptr));
         planeCheckbox->setText(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\201\321\202\320\276\320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\261\320\276\321\200\321\202\320\260", nullptr));
+        showCoordsBox->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\321\213 \320\272\321\203\321\200\321\201\320\276\321\200\320\260", nullptr));
+        nav_displayroute->setText(QCoreApplication::translate("uiSAR", "\320\242\321\200\320\260\320\265\320\272\321\202\320\276\321\200\320\270\321\217 \320\277\320\276\320\273\320\265\321\202\320\260", nullptr));
+        checkBox->setText(QCoreApplication::translate("uiSAR", "\320\235\320\260\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\277\320\276\320\273\320\265\321\202\320\260", nullptr));
         label_5->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\230\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\321\213 \320\272\320\260\321\200\321\202\321\213</span></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(map_tab), QString());
-        groupBox_2->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\2141", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\214", nullptr));
         label_12->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\243\320\264\320\260\320\273\320\265\320\275\320\275\320\276\320\265 \321\201\320\276\320\265\320\264\320\270\320\275\320\265\320\275\320\270\320\265 \321\201 \320\240\320\233\320\241</span></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tcp_tab), QString());
         groupBox->setTitle(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\202\320\260\320\264\320\260\320\275\320\275\321\213\320\265 \320\240\320\233\320\230", nullptr));
@@ -1332,12 +1408,20 @@ public:
         label_9->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 Y", nullptr));
         label_11->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \321\200\320\260\320\267\320\274\320\265\321\200\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(img_tab), QString());
-        label_3->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 UDP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
+        predictRangexml->setSuffix(QCoreApplication::translate("uiSAR", " \320\272\320\274", nullptr));
+        label_13->setText(QCoreApplication::translate("uiSAR", "\320\247\320\260\321\201\321\202\320\276\321\202\320\260 \320\276\320\261\320\275\320\276\320\262\320\273\320\265\320\275\320\270\321\217 \320\264\320\260\320\275\320\275\321\213\321\205 \321\202\320\265\320\273\320\265\320\274\320\265\321\202\321\200\320\270\320\270:", nullptr));
+        refreshtelemetryxml->setSuffix(QCoreApplication::translate("uiSAR", " c", nullptr));
+        label_14->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \320\276\321\202\321\200\320\270\321\201\320\276\320\262\320\272\320\270 \320\275\320\260\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\321\217 \320\277\320\276\320\273\320\265\321\202\320\260:", nullptr));
         selectFolderButton->setText(QCoreApplication::translate("uiSAR", "\320\243\320\272\320\260\320\267\320\260\321\202\321\214", nullptr));
-        label_2->setText(QCoreApplication::translate("uiSAR", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\277\320\276\320\270\321\201\320\272\320\260 \321\200\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\321\205 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\271:", nullptr));
         UDPPortxml->setText(QCoreApplication::translate("uiSAR", "9999", nullptr));
-        UDPIPxml->setText(QCoreApplication::translate("uiSAR", "48.78.136.210", nullptr));
         label_4->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 TCP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
+        label_3->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 UDP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
+        label_2->setText(QCoreApplication::translate("uiSAR", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\277\320\276\320\270\321\201\320\272\320\260 \321\200\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\321\205 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\271:", nullptr));
+        UDPIPxml->setText(QCoreApplication::translate("uiSAR", "48.78.136.210", nullptr));
+        diaTimexml->setSuffix(QCoreApplication::translate("uiSAR", " \321\201", nullptr));
+        label_15->setText(QCoreApplication::translate("uiSAR", "\320\224\320\273\320\270\321\202\320\265\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
+        label_16->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
+        diaRangexml->setSuffix(QCoreApplication::translate("uiSAR", " \320\272\320\274", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(cfg_tab), QString());
         label_6->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\230\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\321\213 \321\203\320\264\320\260\320\273\320\265\320\275\320\275\320\276\320\263\320\276 \321\201\320\276\320\265\320\264\320\270\320\275\320\265\320\275\320\270\321\217 </span><span style=\" font-weight:600; color:#aaaaff;\">UDP</span></p></body></html>", nullptr));
         UDPConsole->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\214 UDP", nullptr));
@@ -1345,13 +1429,13 @@ public:
         pushButton->setText(QCoreApplication::translate("uiSAR", "\320\237\320\276\320\264\320\272\320\273\321\216\321\207\320\270\321\202\321\214\321\201\321\217 \320\272 \321\201\320\265\321\200\320\262\320\265\321\200\321\203 \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216", nullptr));
         udpStopButton->setText(QString());
         udpSendButton->setText(QString());
+        udpDisp->setMarkdown(QString());
         udpDisp->setHtml(QCoreApplication::translate("uiSAR", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
         udpDisp->setPlaceholderText(QCoreApplication::translate("uiSAR", "Waiting for connection...  type \"connect ip:port\" for udp connection or connect via default UDP IP  type \"help\" for additional command info  ", nullptr));
-        udpDisp->setProperty("markdown", QVariant(QString()));
         tabWidget->setTabText(tabWidget->indexOf(link_tab), QString());
         DecodeJPG->setText(QString());
         infoLabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"center\"><img src=\":/img/ui.png\"/></p><p>\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: <span style=\" font-weight:600; font-style:italic; color:#8f8fff;\">inDev</span><span style=\" font-weight:600; font-style:italic; color:#bbb8ff;\">1105</span></p><p>\320\241\320\276\320\261\321\200\320\260\320\275\320\276 <span style=\" font-weight:600;\">05.11.2021</span></p><p><span style=\" color:#aaffff;\">github.com/whs31/qtsar_ui</span></p></body></html>", nullptr));

@@ -48,8 +48,9 @@ uiSAR::uiSAR(QWidget *parent)
     connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
     */
 
-
-
+    settings = new QSettings(QCoreApplication::applicationDirPath()+"/config.ini",
+                             QSettings::IniFormat);
+    settings->setValue("header/version", "1105");
 }
 
 uiSAR::~uiSAR()
@@ -671,3 +672,45 @@ void uiSAR::on_t_scale_valueChanged(int value)
     double temp = value;
     ui->t_sSpin->setValue(temp/100);
 }
+
+void uiSAR::on_UDPIPxml_textChanged(const QString &arg1)
+{
+    settings->setValue("telemetry/udp_ip_default", arg1);
+}
+
+void uiSAR::on_UDPPortxml_textChanged(const QString &arg1)
+{
+    settings->setValue("telemetry/udp_port_default", arg1);
+}
+
+void uiSAR::on_TCPIPxml_textChanged(const QString &arg1)
+{
+    settings->setValue("telemetry/tcp_ip_default", arg1);
+}
+
+void uiSAR::on_TCPPortxml_textChanged(const QString &arg1)
+{
+    settings->setValue("telemetry/tcp_port_default", arg1);
+}
+
+void uiSAR::on_refreshtelemetryxml_valueChanged(double arg1)
+{
+    settings->setValue("telemetry/refresh_telemetry_time", arg1);
+}
+
+void uiSAR::on_predictRangexml_valueChanged(double arg1)
+{
+    settings->setValue("map/predict_line_range", arg1);
+}
+
+void uiSAR::on_diaTimexml_valueChanged(double arg1)
+{
+    settings->setValue("map/capture_time", arg1);
+}
+
+void uiSAR::on_diaRangexml_valueChanged(double arg1)
+{
+    settings->setValue("map/diagram_length", arg1);
+}
+
+//load_settings

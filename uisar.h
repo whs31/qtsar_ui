@@ -23,6 +23,8 @@
 #include <QtMath>
 #include <QtEndian>
 
+#include <QSettings>
+
 #include "remote/remoteBase.h"
 #include "console/console.h"
 
@@ -39,6 +41,7 @@ class uiSAR : public QMainWindow
 public:
     uiSAR(QWidget *parent = nullptr);
     ~uiSAR();
+    QSettings *settings;
     static uiSAR * getMainWinPtr();
     struct JPGFields {
         double latitude;
@@ -104,6 +107,22 @@ private slots:
     void on_t_ySpin_valueChanged(double arg1);
     void on_t_sSpin_valueChanged(double arg1);
     void on_t_scale_valueChanged(int value);
+
+    void on_UDPIPxml_textChanged(const QString &arg1);
+
+    void on_UDPPortxml_textChanged(const QString &arg1);
+
+    void on_TCPIPxml_textChanged(const QString &arg1);
+
+    void on_TCPPortxml_textChanged(const QString &arg1);
+
+    void on_refreshtelemetryxml_valueChanged(double arg1);
+
+    void on_predictRangexml_valueChanged(double arg1);
+
+    void on_diaTimexml_valueChanged(double arg1);
+
+    void on_diaRangexml_valueChanged(double arg1);
 
 private:
     static uiSAR * pMainWindow;
