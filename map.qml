@@ -13,6 +13,11 @@ import cpp.invoker 1.0
 Rectangle {
     id:rect
     objectName: "mapLoaded"
+    //эти переменные должны импортироваться из .ini
+    property var predictLength: 0.2; //11 км
+    //*********************************************
+
+
     property var imageArray: []
     property var coordinate: QtPositioning.coordinate(0,0);
     property var panToCurrentlocation: QtPositioning.coordinate(51.660784, 39.200268);
@@ -48,12 +53,14 @@ Rectangle {
             routeLengthText.color = "white";
             overlayPlane.color = "yellow";
             mapPolyline.line.color = "yellow";
+            mapPredictLine.line.color = '#ffe9ad';
         }
         else {
             mapView.activeMapType = mapView.supportedMapTypes[0]//map
             routeLengthText.color = "black";
             overlayPlane.color = "darkRed";
             mapPolyline.line.color = "darkRed";
+            mapPredictLine.line.color = '#ff7a7a';
         }
     }
 
@@ -83,23 +90,47 @@ Rectangle {
         mapView.center = panToCurrentlocation;
     }
 
+    function clearPredict()
+    {
+        var path = mapPredictLine.path;
+        for (var i = path.length; i >= 0; i--)
+        {
+            mapPredictLine.removeCoordinate(i);
+        }
+    }
+
     function drawRoute(lat: float, lon: float)
     {
         if(enableRoute) {
+            var angle = 0.0;
+            var radAngle = 0.0;
             mapPolyline.addCoordinate(QtPositioning.coordinate(lat,lon));
+            clearPredict();
+            mapPredictLine.addCoordinate(QtPositioning.coordinate(lat,lon));
+
             routeLengthText.text = "Точки трека: " + mapPolyline.pathLength();
             var dx = lat - panToCurrentlocation.latitude;
             var dy = lon - panToCurrentlocation.longitude;
-            var angle = 0.0;
             if(dx!==0&&dy!==0)
             {
-                angle = (Math.atan(dy/dx)* 180)/ Math.PI;
+                var tan = dy/dx;
+                radAngle = Math.atan(tan);
+                angle = (radAngle * 180) / Math.PI;
                 if(dx<0)
                 {
-                    angle += 180;
+                    angle += 180; //170
                 }
-                planeMapItem.rotation = angle; //загадка
+
+                if(dx<0) { planeMapItem.rotation = angle-10; } //загадка //проблема в том, как qml считает центр вращения, так как предикт работает как ожидалось
+                else if(dx>0) { planeMapItem.rotation = angle+10; }
+                var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
+                var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength;
+                mapPredictLine.addCoordinate(QtPositioning.coordinate(p_lat, p_lon));
             }
+
+            //длина предикта = 3 км, примерно 1/35 или 0.028 градуса
+            //широта = синус угла * длина
+            //долгота = косинус угла * длина
 
             panToCurrentlocation = QtPositioning.coordinate(lat,lon);
         }
@@ -294,6 +325,13 @@ Item {
             line.width: 4
                 opacity: 0.8
                 line.color: 'yellow'
+                path: [ ]
+        }
+        MapPolyline {
+            id: mapPredictLine
+            line.width: 3
+                opacity: 0.4
+                line.color: '#ffe9ad'
                 path: [ ]
         }
         MouseArea {
