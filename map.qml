@@ -29,17 +29,17 @@ Rectangle {
     }
     function transformScale(fileCounter: int, arg: double)
     {
-        imageArray[fileCounter-1].zoomLevel += arg;
+        imageArray[fileCounter].zoomLevel += arg;
     }
 
     //С ФУНКЦИЙ СПИНБОКСОВ ПОСТУПАЮТ ЗНАЧЕНИЯ В МЕТРАХ, НУЖНО ДЕЛИТЬ ИХ НА 111120
     function transformX(fileCounter: int, arg1: double)
     {
-        imageArray[fileCounter-1].coordinate.longitude += (arg1/111120); //fix
+        imageArray[fileCounter].coordinate.longitude += (arg1/111120); //fix
     }
     function transformY(fileCounter: int, arg1: double)
     {
-        imageArray[fileCounter-1].coordinate.latitude += (arg1/111120); //fix
+        imageArray[fileCounter].coordinate.latitude += (arg1/111120); //fix
     }
     function swapMapModes(satellite: bool)
     {
@@ -347,7 +347,7 @@ Item {
                 anchors.rightMargin: 8
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 8
-                font.pixelSize: 12
+                font.pixelSize: 9
             }
         }
 

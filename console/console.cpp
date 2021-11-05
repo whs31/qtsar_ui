@@ -26,8 +26,8 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
     fontHeight = metrics.height();
     int margin = document()->documentMargin() * 2;
 
-    this->resize(fontWidth *(w+1) + margin, h*fontHeight + margin); //что-то странное происходит с размерами виджета
-    //this->resize(w, h);
+    //this->resize(fontWidth *(w+1) + margin, h*fontHeight + margin); //что-то странное происходит с размерами виджета
+    this->resize(431, 500);
 
 
 }
