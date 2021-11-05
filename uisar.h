@@ -91,6 +91,7 @@ private slots:
     void on_nav_displayroute_stateChanged(int arg1);
     void on_clearTrack_clicked();
     void ReadTelemetry(QByteArray data);
+    void ReadExec(QByteArray data);
 
     void on_changeMapMode_toggled(bool checked);
     void on_gpsPanClone_clicked();

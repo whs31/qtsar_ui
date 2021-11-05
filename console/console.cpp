@@ -13,21 +13,22 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
     this->QWidget::setFont(fontConsole);
     QFontMetrics metrics = this->fontMetrics();
 
-    this->setFrameStyle (QFrame::Panel | QFrame::Sunken);
-
-    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    //setFrameStyle (QFrame::Panel | QFrame::Sunken);
+    //setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("margin: 0px");
     setStyleSheet("padding:0;");
+    setReadOnly(true);
+    setLineWrapMode(QTextEdit::FixedColumnWidth);
 
 
     fontWidth = metrics.width("0");
     fontHeight = metrics.height();
-    int margin = document()->documentMargin() * 2;
+
 
     //this->resize(fontWidth *(w+1) + margin, h*fontHeight + margin); //что-то странное происходит с размерами виджета
-    this->resize(431, 500);
+    //this->resize(431, 500);
 
 
 }
@@ -69,4 +70,26 @@ QFont Console::setFont(QString name, int size){
     f.setPixelSize(size);
 
     return f;
+}
+
+void Console::resizeEvent(QResizeEvent *event){
+    //QWidget *p = this->parent();
+
+    int margin = document()->documentMargin() * 2;
+
+    int w = (this->width() - margin) / fontWidth;
+    int h = (this->height() - margin) / fontHeight;
+
+    consoleWidth = w+1;
+    consoleHeight = h;
+
+    setLineWrapColumnOrWidth(consoleWidth);
+
+    qDebug() << "Resize" << w << h;
+    emu_core_resize(s,consoleHeight, consoleWidth );
+
+    free(rawbuf);
+    rawbuf = (char*)malloc(consoleWidth*consoleHeight*2);
+
+    QTextEdit::resizeEvent(event);
 }

@@ -12,6 +12,13 @@ void uiSAR::ReadTelemetry(QByteArray data){
 }
 
 
+void uiSAR::ReadExec(QByteArray data){
+    qDebug() << data;
+    ui->consoleMain->write(data);
+    ui->consoleMain->flush();
+}
+
+
 uiSAR * uiSAR::pMainWindow;
 uiSAR::uiSAR(QWidget *parent)
     : QMainWindow(parent)
@@ -32,6 +39,14 @@ uiSAR::uiSAR(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 
+    // Console test
+    /*
+    Remote *c = RemoteAuto("TCP");
+    c->Connect("127.0.0.1:2222");
+    c->Send("test");
+
+    connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
+    */
 
 
 
@@ -478,9 +493,9 @@ void uiSAR::initUI(){
 
     /* Консоль для всех событий с поддержкой vt100 */
 
-    Console *con = new Console(ui->consoleMain, ui->consoleMain->width(), ui->consoleMain->height());
-    con->write("Тест");
-    con->flush();
+    //Console *con = new Console(ui->consoleMain, 10, 5);
+    //con->write("Тест");
+    //con->flush();
     //con->resize(ui->consoleMain->width(), ui->consoleMain->height());
     //con->hide(); // Закомментировать чтобы показать
 }

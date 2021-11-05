@@ -33,6 +33,9 @@ private:
     struct emuState *s;
     char *rawbuf;
 
+private slots:
+    void resizeEvent(QResizeEvent *event);
+
 signals:
 
 };
