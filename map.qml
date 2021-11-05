@@ -14,7 +14,9 @@ Rectangle {
     id:rect
     objectName: "mapLoaded"
     //эти переменные должны импортироваться из .ini
-    property var predictLength: 0.2; //11 км
+    property var predictLength: 0.2; //длина предикта в геоградусах
+    property var diagramWidth: 0.00337; //ширина предикта диаграммы в геоградусах при примерной скорости 90 км.ч и времени формирования 15 с
+    property var diagramLength: 0.0054; //длина предикта (3 км) в геоградусах
     //*********************************************
 
 
@@ -66,11 +68,8 @@ Rectangle {
 
     function clearRoute()
     {
-        var path = mapPolyline.path;
-        for (var i = path.length; i >= 0; i--)
-        {
-            mapPolyline.removeCoordinate(i);
-        }
+        mapPolyline.path = [];
+        mapPredictLine.path = [];
     }
 
     function changeDrawRoute(arg: int)
@@ -92,11 +91,8 @@ Rectangle {
 
     function clearPredict()
     {
-        var path = mapPredictLine.path;
-        for (var i = path.length; i >= 0; i--)
-        {
-            mapPredictLine.removeCoordinate(i);
-        }
+        mapPredictLine.path = [];
+        predictPoly.path = [];
     }
 
     function drawRoute(lat: float, lon: float)
@@ -107,6 +103,7 @@ Rectangle {
             mapPolyline.addCoordinate(QtPositioning.coordinate(lat,lon));
             clearPredict();
             mapPredictLine.addCoordinate(QtPositioning.coordinate(lat,lon));
+            //predictPoly.addCoordinate(QtPositioning.coordinate(lat,lon));
 
             routeLengthText.text = "Точки трека: " + mapPolyline.pathLength();
             var dx = lat - panToCurrentlocation.latitude;
@@ -125,7 +122,18 @@ Rectangle {
                 else if(dx>0) { planeMapItem.rotation = angle+10; }
                 var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
                 var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength;
+                var polyVertex_lat = lat+Math.sin((90-angle)*Math.PI/180) * diagramWidth/2;
+                var polyVertex_lon = lon+Math.cos((90-angle)*Math.PI/180) * diagramWidth/2; //нужна еще проверка на левый и правый борт рлс
+                //need fix
+                var polyBottom_lat = lat+Math.sin((90+angle)*Math.PI/180) * diagramLength;
+                var polyBottom_lon = lon+Math.cos((90+angle)*Math.PI/180) * diagramLength;
+                var polyTop_lat = lat+Math.sin((90-angle)*Math.PI/180) * diagramWidth+Math.sin((90+angle)*Math.PI/180) * diagramLength;
+                var polyTop_lon = lon+Math.cos((90-angle)*Math.PI/180) * diagramWidth+Math.cos((90+angle)*Math.PI/180) * diagramLength;
+                //
                 mapPredictLine.addCoordinate(QtPositioning.coordinate(p_lat, p_lon));
+                predictPoly.addCoordinate(QtPositioning.coordinate(polyVertex_lat, polyVertex_lon));
+                predictPoly.addCoordinate(QtPositioning.coordinate(polyTop_lat, polyTop_lon));
+                predictPoly.addCoordinate(QtPositioning.coordinate(polyBottom_lat, polyBottom_lon));
             }
 
             //длина предикта = 3 км, примерно 1/35 или 0.028 градуса
@@ -329,11 +337,20 @@ Item {
         }
         MapPolyline {
             id: mapPredictLine
-            line.width: 3
+            line.width: 4
                 opacity: 0.4
                 line.color: '#ffe9ad'
                 path: [ ]
         }
+        MapPolygon {
+            id: predictPoly
+            opacity: 0.4
+            border.color: "yellow"
+            border.width: 3
+            color: "#ffe9ad"
+            path: []
+        }
+
         MouseArea {
             id: mapMouseArea
             anchors.fill: parent
