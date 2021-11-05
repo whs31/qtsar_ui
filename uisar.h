@@ -86,7 +86,6 @@ private slots:
     void on_nav_follow_stateChanged(int arg1);
     void on_jpg_gright_clicked();
     void on_jpg_gleft_clicked();
-    void on_detect_refresh_clicked();
     void on_selectFolderButton_clicked();
 
     void on_nav_displayroute_stateChanged(int arg1);
@@ -115,7 +114,6 @@ private:
     double spinsArg0 = 0;
 
     bool followPlane = false;
-    bool allowRefresh = false;
 
     Ui::uiSAR *ui; 
     QTimer *timer;

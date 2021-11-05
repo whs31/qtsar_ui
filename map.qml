@@ -29,27 +29,31 @@ Rectangle {
     }
     function transformScale(fileCounter: int, arg: double)
     {
-        imageArray[fileCounter-1].zoomLevel += arg;
+        imageArray[fileCounter].zoomLevel += arg;
     }
 
     //С ФУНКЦИЙ СПИНБОКСОВ ПОСТУПАЮТ ЗНАЧЕНИЯ В МЕТРАХ, НУЖНО ДЕЛИТЬ ИХ НА 111120
     function transformX(fileCounter: int, arg1: double)
     {
-        imageArray[fileCounter-1].coordinate.longitude += (arg1/111120); //fix
+        imageArray[fileCounter].coordinate.longitude += (arg1/111120); //fix
     }
     function transformY(fileCounter: int, arg1: double)
     {
-        imageArray[fileCounter-1].coordinate.latitude += (arg1/111120); //fix
+        imageArray[fileCounter].coordinate.latitude += (arg1/111120); //fix
     }
     function swapMapModes(satellite: bool)
     {
         if(satellite) {
             mapView.activeMapType = mapView.supportedMapTypes[3]//sat
             routeLengthText.color = "white";
+            overlayPlane.color = "yellow";
+            mapPolyline.line.color = "yellow";
         }
         else {
             mapView.activeMapType = mapView.supportedMapTypes[0]//map
             routeLengthText.color = "black";
+            overlayPlane.color = "darkRed";
+            mapPolyline.line.color = "darkRed";
         }
     }
 
@@ -94,7 +98,7 @@ Rectangle {
                 {
                     angle += 180;
                 }
-                planeMapItem.transform[0].angle = angle;
+                planeMapItem.rotation = angle; //загадка
             }
 
             panToCurrentlocation = QtPositioning.coordinate(lat,lon);
@@ -268,16 +272,20 @@ Item {
 
         MapQuickItem {
             id: planeMapItem
-            anchorPoint.x: planeSource.width*0.175*0.5;
-            anchorPoint.y: planeSource.height*0.175*0.5;
-            transform: Rotation {
-                origin.x: planeSource.width*0.175*0.5; origin.y: planeSource.height*0.175*0.5; angle: 0
-            }
-
+            anchorPoint.x: 20;
+            anchorPoint.y: 20;
+            transformOrigin: Item.Center;
+            rotation: 0
             sourceItem: Image {
                 id: planeSource;
-                scale: 0.175;
                 source: "qrc:/img/planeIco.png"
+            }
+            ColorOverlay {
+                id: overlayPlane;
+                anchors.fill: planeMapItem;
+                source: planeSource;
+                opacity: 1;
+                color: "yellow"
             }
         }
 
@@ -347,7 +355,7 @@ Item {
                 anchors.rightMargin: 8
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 8
-                font.pixelSize: 12
+                font.pixelSize: 9
             }
         }
 

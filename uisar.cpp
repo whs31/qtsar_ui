@@ -395,14 +395,6 @@ void uiSAR::on_jpg_gleft_clicked()
     }
 }
 
-void uiSAR::on_detect_refresh_clicked()
-{
-    if(allowRefresh)
-    {
-        on_selectFolderButton_clicked();
-    }
-}
-
 void uiSAR::on_selectFolderButton_clicked()
 {
     QString path = QFileDialog::getExistingDirectory(this, "Выберите папку с выходными изображениями РЛС",
