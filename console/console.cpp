@@ -1,8 +1,5 @@
 #include "console.h"
 #include <QDebug>
-#include <QFont>
-#include <QFontDatabase>
-#include <QFontMetrics>
 #include <QDir>
 
 Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidth(w), consoleHeight(h)
@@ -11,11 +8,9 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
 
     rawbuf = (char*)malloc(w*h*2);
 
-    int id = QFontDatabase::addApplicationFont("../qtsar_ui/console/UbuntuMono.ttf");
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    QFont fontConsole(family);
-    fontConsole.setPointSize(13);
-    this->setFont(fontConsole);
+
+    QFont fontConsole = setFont("D:/SAR/qtsar_ui-master/console/UbuntuMono.ttf1", 13);
+    this->QWidget::setFont(fontConsole);
     QFontMetrics metrics = this->fontMetrics();
 
     this->setFrameStyle (QFrame::Panel | QFrame::Sunken);
@@ -57,4 +52,20 @@ void Console::flush(){
     }
 
     this->setText(rawbuf);
+}
+
+QFont Console::setFont(QString name, int size){
+    QFont f;
+    int id = QFontDatabase::addApplicationFont(name);
+
+    if(id < 0){
+        f = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    }else{
+        QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+        f.setFamily(family);
+    }
+
+    f.setPixelSize(size);
+
+    return f;
 }

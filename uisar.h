@@ -24,6 +24,7 @@
 #include <QtEndian>
 
 #include "remote/remoteBase.h"
+#include "console/console.h"
 
 #define JPEG_HEADER_SIZE 20
 

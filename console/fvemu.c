@@ -1,12 +1,11 @@
 #include "fvemu.h"
 #include "DefaultColors.h"
 
+#define _BSD_SOURCE
+
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-
-
-#pragma mark Macros and debug utils
 
 
 #ifndef unlikely
@@ -38,7 +37,7 @@
 
 #define MODE(intermed, num) (((num) << 8) | (intermed))
 
-#define APPLY_ATTR(ch) ((((uint16_t) S->cursorAttr) << 32) | (ch))
+#define APPLY_ATTR(ch) ((((uint16_t) S->cursorAttr) << 8) | (ch))
 
 #define EMPTY_FIELD APPLY_ATTR(0x20)
 
@@ -70,9 +69,6 @@ static const char * safeHex(uint32_t ch)
     return buf;
 }
 #endif
-
-
-#pragma mark - Buffer manipulation utils
 
 
 static void row_fill(struct emuState *S, int row, int start, int count, uint16_t value)
@@ -172,14 +168,12 @@ static void cursor_index(struct emuState *S, int count)
     }
 }
 
-
-#pragma mark - Control sequences
-
-
+/*
 static void do_BEL(struct emuState *S)
 {
     //TerminalEmulator_bell(S);
 }
+*/
 
 
 static void do_BS(struct emuState *S)
@@ -259,7 +253,7 @@ static void do_CSI(struct emuState *S)
     S->state = ST_CSI;
     S->paramPtr = S->paramVal = 0;
     S->intermed = 0;
-    bzero(S->params, sizeof(S->params));
+    memset(S->params, 0, sizeof(S->params));
 }
 
 
@@ -315,12 +309,13 @@ static void do_CUP_HVP(struct emuState *S)
     CAP_MIN_MAX(S->cCol, 0, S->wCols - 1);
 }
 
-
+/*
 static void do_DA(struct emuState *S)
 {
     // VT100 with AVO
     //TerminalEmulator_writeStr(S, "\e[?1;2c");
 }
+*/
 
 
 static void do_DA2(struct emuState *S)
@@ -562,7 +557,7 @@ static void do_OSC(struct emuState *S)
     S->state = ST_OSC;
     S->paramPtr = S->paramVal = 0;
     S->intermed = 0;
-    bzero(S->oscBuf, sizeof(S->oscBuf));
+    memset(S->oscBuf, 0, sizeof(S->oscBuf));
 }
 
 
@@ -839,9 +834,6 @@ static void do_dterm_window(struct emuState *S)
 }
 
 
-#pragma mark VT52 sequences
-
-
 static void do_VT52_graphics_on(struct emuState *S)
 {
     // A real VT52 had a different special graphics character set than the
@@ -857,14 +849,14 @@ static void do_VT52_graphics_off(struct emuState *S)
     S->charset = 'B';
 }
 
-
+/*
 static void do_VT52_ident(struct emuState *S)
 {
     // VT52 had a pretty simple ident string, in large part because it didn't
     // have the brains to send anything more complex.
     //TerminalEmulator_writeStr(S, "\e/Z");
 }
-
+*/
 
 static void do_VT52_loc_start(struct emuState *S)
 {
@@ -921,8 +913,6 @@ static void do_VT52_tab(struct emuState *S)
     S->wrapnext = 0;
 }
 
-
-#pragma mark - Modes
 
 
 static void do_modes(struct emuState *S, int flag)
@@ -1064,8 +1054,6 @@ static void do_RM(struct emuState *S)
 }
 
 
-#pragma mark - Emulator state switches
-
 
 #define CASE(frm, to) case frm: to(S); break
 #define CASE2(frm, frm2, to) CASE(PACK2(frm, frm2), to)
@@ -1074,7 +1062,7 @@ static void emu_ops_do_ctrl(struct emuState *S, uint8_t ch)
 {
     switch(ch) {
             //CASE(0x05, do_ENQ);
-            CASE(0x07, do_BEL);
+            //CASE(0x07, do_BEL);
             CASE(0x08, do_BS);
             CASE(0x09, do_HT);
             CASE(0x0A, do_NL);
@@ -1204,7 +1192,7 @@ static void emu_ops_do_csi(struct emuState *S, uint8_t lastch)
             CASE('Z', do_CBT);
             CASE('`', do_HPA);
             //CASE('b', do_REP); (ugh!)
-            CASE('c', do_DA);
+            //CASE('c', do_DA);
             CASE2('>', 'c', do_DA2);
             //CASE2('=', 'c', do_DA3);
             CASE('d', do_VPA);
@@ -1245,7 +1233,7 @@ static void emu_ops_do_csi(struct emuState *S, uint8_t lastch)
     }
 }
 
-
+/*
 static void emu_ops_do_osc(struct emuState *S, int op)
 {
     switch(op) {
@@ -1261,12 +1249,12 @@ static void emu_ops_do_osc(struct emuState *S, int op)
 #endif
     }
 }
-
+*/
 
 static void emu_ops_do_vt52_ctrl(struct emuState *S, uint8_t ch)
 {
     switch(ch) {
-            CASE(0x07, do_BEL);
+            //CASE(0x07, do_BEL);
             CASE(0x08, do_BS);
             CASE(0x09, do_VT52_tab);
             CASE(0x0a, do_IND);
@@ -1291,7 +1279,7 @@ static void emu_ops_do_vt52_esc(struct emuState *S, uint8_t ch)
 
     // A lot of VT52 operations behave like a VT100 equivalent with all params
     // zero, so we can use this as a shortcut:
-    bzero(S->params, sizeof(S->params));
+    memset(S->params, 0, sizeof(S->params));
 
     switch(ch) {
             CASE('A', do_CUU);
@@ -1306,7 +1294,7 @@ static void emu_ops_do_vt52_esc(struct emuState *S, uint8_t ch)
             CASE('K', do_EL);
 
             CASE('Y', do_VT52_loc_start);
-            CASE('Z', do_VT52_ident);
+            //CASE('Z', do_VT52_ident);
 
             //CASE('=', do_VT52_altkeypad_on);
             //CASE('>', do_VT52_altkeypad_off);
@@ -1319,9 +1307,6 @@ static void emu_ops_do_vt52_esc(struct emuState *S, uint8_t ch)
 #endif
     }
 }
-
-
-#pragma mark - Ground-state output
 
 
 static void do_unichar(struct emuState *S, uint16_t uc)
@@ -1428,7 +1413,7 @@ static void emu_ops_text(struct emuState * restrict S, const uint8_t *bytes, siz
         return;
     }
 
-    for(int i = 0; i < len; i++) {
+    for(size_t i = 0; i < len; i++) {
         uint8_t c = bytes[i];
 
         // DEC linedrawing charset
@@ -1511,9 +1496,6 @@ static void emu_ops_text(struct emuState * restrict S, const uint8_t *bytes, siz
 }
 
 
-#pragma mark - Initialization, cleanup, and main loop
-
-
 static void emu_term_reset(struct emuState *S)
 {
     S->state = ST_GROUND;
@@ -1562,8 +1544,8 @@ struct emuState * emu_core_init(int rows, int cols)
     S = malloc(sizeof(struct emuState));
     S->wRows = rows;
     S->wCols = cols;
-    //S->cCol = 0;
-    //S->cRow = 0;
+    S->cCol = 0;
+    S->cRow = 0;
 
     allocBackBuffers(S);
     emu_term_reset(S);
@@ -1628,7 +1610,7 @@ size_t emu_core_run(struct emuState *S, const uint8_t *bytes, size_t len)
 
 #define UTF8_FLUSH() emu_ops_text(S, NULL, 0)
 
-    for(int i = 0; i < len; i++) {
+    for(size_t i = 0; i < len; i++) {
         uint8_t ch = bytes[i];
 
         if(unlikely(S->flags & MODE_VT52)) {
@@ -1721,18 +1703,20 @@ size_t emu_core_run(struct emuState *S, const uint8_t *bytes, size_t len)
                     break;
                 }
 
+                /*
                 if(ch == 0x07 || ch == 0x9C || (ch == 0x5C && S->intermed == 2)) {
                     // ECMA48 specifies ST (ESC 0x5C or 0x9C), vt100 uses BEL.
                     // We allow both.
                     emu_ops_do_osc(S, S->paramVal);
                     S->state = ST_GROUND;
                 }
+                */
 
                 if((ch >= 0x20 && ch < 0x7f) || (ch >= 0xa0)) {
                     // ECMA48 allows for "00/08 to 00/13 and 02/00 to 07/14",
                     // but I've tweaked the conditions a bit to allow UTF8 text
                     // and disallow control characters.
-                    if(S->paramPtr < sizeof(S->oscBuf) - 1)
+                    if((size_t)S->paramPtr < sizeof(S->oscBuf) - 1)
                         S->oscBuf[S->paramPtr++] = ch;
                 } else {
                     // Invalid characters terminate OSC, so that you don't get

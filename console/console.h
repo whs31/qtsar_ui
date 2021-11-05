@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QTextEdit>
 #include <QLabel>
+#include <QFont>
+#include <QFontDatabase>
+#include <QFontMetrics>
+
 extern "C"{
 #include "fvemu.h"
 }
@@ -23,6 +27,9 @@ public:
     void flush();
 
 private:
+
+    QFont setFont(QString name, int size);
+
     struct emuState *s;
     char *rawbuf;
 

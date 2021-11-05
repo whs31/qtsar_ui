@@ -56,7 +56,7 @@ struct emuState {
     };
 };
 
-#define _BIT(n) (1UL<<(n))
+#define _BIT(n) (1ULL<<(n))
 
 #define TERMROW_DIRTY       _BIT(0)
 #define TERMROW_WRAPPED     _BIT(1)

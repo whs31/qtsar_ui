@@ -1,6 +1,6 @@
 #include <stdint.h>
 // 0RGB format.
-const static uint32_t default_colormap[258] = {
+static const uint32_t default_colormap[258] = {
     0x000000, //  0: black
     0xcc0000, //  1: red
     0x00cc11, //  2: green
