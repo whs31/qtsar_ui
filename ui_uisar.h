@@ -1307,7 +1307,7 @@ public:
         pushButton->setText(QCoreApplication::translate("uiSAR", "\320\237\320\276\320\264\320\272\320\273\321\216\321\207\320\270\321\202\321\214\321\201\321\217 \320\272 \321\201\320\265\321\200\320\262\320\265\321\200\321\203 \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216", nullptr));
         udpStopButton->setText(QString());
         udpSendButton->setText(QString());
-        udpDisp->setMarkdown(QString());
+        //udpDisp->setMarkdown(QString());
         udpDisp->setHtml(QCoreApplication::translate("uiSAR", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

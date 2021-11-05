@@ -108,14 +108,12 @@ uiSAR::JPGFields uiSAR::readField()
 }
 uiSAR::JPGFields uiSAR::decode_jpgs(QString path)
 {
-
     JPGFields _field = { 0,0,0,0,0,0,0, "empty filename" };
-    QFile jpg;
-    QString _fileCounter = QString::number(fileCounter);
-    jpg.setFileName(path + "/" + _fileCounter + ".jpg");
+    QFile f(path);
 
-    if(jpg.open(QIODevice::ReadOnly)){
-        QByteArray rawData = jpg.readAll();
+
+    if(f.open(QIODevice::ReadOnly)){
+        QByteArray rawData = f.readAll();
         char *data = rawData.data();
         uint16_t *metaMarker = reinterpret_cast<uint16_t *>(data + JPEG_HEADER_SIZE);
 
@@ -126,9 +124,7 @@ uiSAR::JPGFields uiSAR::decode_jpgs(QString path)
 
             memcpy(&_field, (data + JPEG_HEADER_SIZE + 4), *metaSize);
         }
-
-        QFileInfo fi(jpg.fileName());
-        _field.filename = fi.fileName();
+        _field.filename = path;
 
         statusBar()->showMessage(tr("Декодирование метаданных успешно произведено"), 15000);
         update_jpgblocklabels_from_field(_field);
@@ -136,11 +132,14 @@ uiSAR::JPGFields uiSAR::decode_jpgs(QString path)
 
     return _field;
 
+
 }
 
 void uiSAR::on_DecodeJPG_clicked()
 {
-    decode_jpgs(jpg_path);
+    //
+    //decode_jpgs(jpg_path);
+    qDebug() << "on_DecodeJPG_clicked";
 }
 
 
@@ -166,6 +165,7 @@ void uiSAR::on_panButton_clicked()
     else {
         statusBar()->showMessage(tr("Широта и долгота изображения не распознаны"), 15000);
     }
+
 }
 
 void uiSAR::on_showButton_clicked()
@@ -175,8 +175,7 @@ void uiSAR::on_showButton_clicked()
     {
         statusBar()->showMessage(tr("Изображение отображено на карте"), 15000);
         auto qml = ui->osmMap->rootObject();
-        QString _fileCounter = QString::number(fileCounter);
-        QString filename = jpg_path + "/" + _fileCounter + ".jpg";
+        QString filename = imageList[fileCounter];
         QMetaObject::invokeMethod(qml, "addImage",
                 Q_ARG(QVariant, (float)_field.latitude),
                 Q_ARG(QVariant, (float)_field.longitude),
@@ -385,30 +384,20 @@ void uiSAR::on_nav_follow_stateChanged(int arg1)
 
 void uiSAR::on_jpg_gright_clicked()
 {
-    if(fileCounter==1)
-    {
-        ui->jpg_gleft->setEnabled(true);
+    if(fileCounter < imageList.size()-1){
+        fileCounter++;
+        decode_jpgs(imageList[fileCounter]);
     }
-    fileCounter++;
-    if(fileCounter==totalJPGDetected)
-    {
-        ui->jpg_gright->setEnabled(false);
-    }
-    on_DecodeJPG_clicked();
 }
 
 void uiSAR::on_jpg_gleft_clicked()
 {
-    if(fileCounter==totalJPGDetected)
-    {
-        ui->jpg_gright->setEnabled(true);
+    if(fileCounter){
+        fileCounter--;
+        if(!imageList.empty()){
+            decode_jpgs(imageList[fileCounter]);
+        }
     }
-    fileCounter--;
-    if(fileCounter==1)
-    {
-        ui->jpg_gleft->setEnabled(false);
-    }
-    on_DecodeJPG_clicked();
 }
 
 void uiSAR::on_detect_refresh_clicked()
@@ -421,43 +410,31 @@ void uiSAR::on_detect_refresh_clicked()
 
 void uiSAR::on_selectFolderButton_clicked()
 {
-    jpg_path = QFileDialog::getExistingDirectory(this, "Выберите папку с выходными изображениями РЛС", QStandardPaths::displayName(QStandardPaths::PicturesLocation), QFileDialog::ShowDirsOnly);
-    //
-    QFile jpg;
-    //
-    fileCounter = 1;
-    QString _fileCounter = QString::number(fileCounter);
-    jpg.setFileName(jpg_path + "/" + _fileCounter + ".jpg");
-    if(jpg.exists())
-    {
-        statusBar()->showMessage(tr("Каталог с изображениями распознан"), 15000);
-        for(fileCounter = 1; fileCounter<100; fileCounter++)
-        {
-            QFile trackJPGs;
-            _fileCounter = QString::number(fileCounter);
-            trackJPGs.setFileName(jpg_path + "/" + _fileCounter + ".jpg");
-            if(trackJPGs.exists())
-            {
-                totalJPGDetected = fileCounter;
-                QFont bold7pxfont = ui->nav_latdisp->font();
-                ui->detect_detecteddisp->setText(_fileCounter);
-                ui->jpg_gright->setEnabled(true);
-                ui->jpg_gleft->setEnabled(false);
-                allowRefresh = true;
-            } else {
-                fileCounter = 1;
-                on_DecodeJPG_clicked();
-                break;
-            }
+    QString path = QFileDialog::getExistingDirectory(this, "Выберите папку с выходными изображениями РЛС",
+                                                     QStandardPaths::displayName(QStandardPaths::PicturesLocation),
+                                                     QFileDialog::ShowDirsOnly);
+    QDir dir(path);
+    dir.setFilter(QDir::Files | QDir::NoSymLinks | QDir::NoDot | QDir::NoDotDot);
+    dir.setNameFilters(QStringList("*.jpg"));
+
+    QStringList fileList = dir.entryList();
+
+    if(!fileList.empty()){
+        imageList.clear();
+        for ( QString f : fileList  ){
+            imageList.append(f.prepend(path+"/"));
         }
-    }
-    else
-    {
+
+        ui->jpg_gright->setEnabled(true);
+        ui->jpg_gleft->setEnabled(true);
+
+        decode_jpgs(imageList[0]);
+    }else{
         statusBar()->showMessage(tr("Каталог с изображениями не распознан, повторите ввод через панель инструментов"), 15000);
         QMessageBox warningDialogue;
         warningDialogue.setWindowTitle("Неверный каталог!");
         warningDialogue.setIcon(QMessageBox::Warning);
-        warningDialogue.setText("Укажите верный каталог поиска изображений!");
+        warningDialogue.setText("Изображения не найдены!");
         warningDialogue.exec();
     }
 }

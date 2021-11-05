@@ -117,8 +117,6 @@ private slots:
 private:
     static uiSAR * pMainWindow;
 
-    QString jpg_path;
-    int fileCounter;
     int totalJPGDetected;
     double spinxArg0 = 0;
     double spinyArg0 = 0;
@@ -133,6 +131,9 @@ private:
 
     Remote *Telemery;
     TelemetryData_t *TelemetryData;
+
+    QStringList imageList;
+    int fileCounter = 0;
 
     void updateTelemetry();
     //TelemetryData_t parseTelemetry(const QByteArray & src);
