@@ -26,5 +26,6 @@
         <file>img/planeSmall.png</file>
         <file>img/ruler.png</file>
         <file>img/swapMode.png</file>
+        <file>console/UbuntuMono.ttf</file>
     </qresource>
 </RCC>

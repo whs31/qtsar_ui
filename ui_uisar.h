@@ -43,6 +43,7 @@ class Ui_uiSAR
 public:
     QWidget *centralwidget;
     QGridLayout *gridLayout;
+    QQuickWidget *osmMap;
     QTabWidget *tabWidget;
     QWidget *map_tab;
     QGridLayout *gridLayout_5;
@@ -91,6 +92,13 @@ public:
     QPushButton *udpSendButton;
     QTextEdit *udpDisp;
     QWidget *tcp_tab;
+    QGridLayout *gridLayout_11;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_13;
+    QWidget *consoleMain;
+    QGridLayout *gridLayout_12;
+    QLabel *label_12;
+    QFrame *line_4;
     QWidget *img_tab;
     QGridLayout *gridLayout_7;
     QFrame *line_3;
@@ -163,7 +171,6 @@ public:
     QPushButton *DecodeJPG;
     QLabel *infoLabel;
     QSpacerItem *verticalSpacer;
-    QQuickWidget *osmMap;
     QStatusBar *statusBar;
     QDockWidget *docker;
     QWidget *dockWidgetContents_2;
@@ -206,17 +213,34 @@ public:
         gridLayout->setSpacing(0);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        tabWidget = new QTabWidget(centralwidget);
-        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        osmMap = new QQuickWidget(centralwidget);
+        osmMap->setObjectName(QString::fromUtf8("osmMap"));
+        osmMap->setEnabled(true);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
-        tabWidget->setSizePolicy(sizePolicy2);
-        tabWidget->setMinimumSize(QSize(400, 0));
-        tabWidget->setMaximumSize(QSize(16777215, 16777215));
+        sizePolicy2.setHeightForWidth(osmMap->sizePolicy().hasHeightForWidth());
+        osmMap->setSizePolicy(sizePolicy2);
+        osmMap->setMaximumSize(QSize(4096, 2048));
         QFont font;
         font.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
+        osmMap->setFont(font);
+        osmMap->setCursor(QCursor(Qt::CrossCursor));
+        osmMap->setMouseTracking(true);
+        osmMap->setResizeMode(QQuickWidget::SizeRootObjectToView);
+        osmMap->setSource(QUrl(QString::fromUtf8("qrc:/map.qml")));
+
+        gridLayout->addWidget(osmMap, 0, 2, 10, 1);
+
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
+        tabWidget->setSizePolicy(sizePolicy3);
+        tabWidget->setMinimumSize(QSize(400, 0));
+        tabWidget->setMaximumSize(QSize(16777215, 16777215));
         tabWidget->setFont(font);
         tabWidget->setTabPosition(QTabWidget::West);
         tabWidget->setTabShape(QTabWidget::Rounded);
@@ -238,11 +262,11 @@ public:
 
         panGPS = new QPushButton(map_tab);
         panGPS->setObjectName(QString::fromUtf8("panGPS"));
-        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(panGPS->sizePolicy().hasHeightForWidth());
-        panGPS->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(panGPS->sizePolicy().hasHeightForWidth());
+        panGPS->setSizePolicy(sizePolicy4);
         panGPS->setMinimumSize(QSize(0, 0));
         panGPS->setMaximumSize(QSize(999999, 27));
         panGPS->setCursor(QCursor(Qt::PointingHandCursor));
@@ -292,8 +316,8 @@ public:
 
         NAVSAR = new QGroupBox(map_tab);
         NAVSAR->setObjectName(QString::fromUtf8("NAVSAR"));
-        sizePolicy3.setHeightForWidth(NAVSAR->sizePolicy().hasHeightForWidth());
-        NAVSAR->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(NAVSAR->sizePolicy().hasHeightForWidth());
+        NAVSAR->setSizePolicy(sizePolicy4);
         NAVSAR->setFlat(false);
         formLayout = new QFormLayout(NAVSAR);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
@@ -359,18 +383,18 @@ public:
         markerLayout->setSizeConstraint(QLayout::SetMinimumSize);
         label = new QLabel(map_tab);
         label->setObjectName(QString::fromUtf8("label"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy4);
+        QSizePolicy sizePolicy5(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy5);
 
         markerLayout->addWidget(label);
 
         placeMarkerButton = new QPushButton(map_tab);
         placeMarkerButton->setObjectName(QString::fromUtf8("placeMarkerButton"));
-        sizePolicy3.setHeightForWidth(placeMarkerButton->sizePolicy().hasHeightForWidth());
-        placeMarkerButton->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(placeMarkerButton->sizePolicy().hasHeightForWidth());
+        placeMarkerButton->setSizePolicy(sizePolicy4);
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/img/add_marker.png"), QSize(), QIcon::Normal, QIcon::Off);
         placeMarkerButton->setIcon(icon2);
@@ -381,11 +405,11 @@ public:
         saveMarkerButton = new QPushButton(map_tab);
         saveMarkerButton->setObjectName(QString::fromUtf8("saveMarkerButton"));
         saveMarkerButton->setEnabled(false);
-        QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(saveMarkerButton->sizePolicy().hasHeightForWidth());
-        saveMarkerButton->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(saveMarkerButton->sizePolicy().hasHeightForWidth());
+        saveMarkerButton->setSizePolicy(sizePolicy6);
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/img/save.png"), QSize(), QIcon::Normal, QIcon::Off);
         saveMarkerButton->setIcon(icon3);
@@ -395,8 +419,8 @@ public:
         loadMarkerButton = new QPushButton(map_tab);
         loadMarkerButton->setObjectName(QString::fromUtf8("loadMarkerButton"));
         loadMarkerButton->setEnabled(false);
-        sizePolicy5.setHeightForWidth(loadMarkerButton->sizePolicy().hasHeightForWidth());
-        loadMarkerButton->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(loadMarkerButton->sizePolicy().hasHeightForWidth());
+        loadMarkerButton->setSizePolicy(sizePolicy6);
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/img/load.png"), QSize(), QIcon::Normal, QIcon::Off);
         loadMarkerButton->setIcon(icon4);
@@ -512,11 +536,8 @@ public:
 
         UDPConsole = new QGroupBox(link_tab);
         UDPConsole->setObjectName(QString::fromUtf8("UDPConsole"));
-        QSizePolicy sizePolicy6(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(UDPConsole->sizePolicy().hasHeightForWidth());
-        UDPConsole->setSizePolicy(sizePolicy6);
+        sizePolicy2.setHeightForWidth(UDPConsole->sizePolicy().hasHeightForWidth());
+        UDPConsole->setSizePolicy(sizePolicy2);
         UDPConsole->setMinimumSize(QSize(452, 170));
         UDPConsole->setAutoFillBackground(false);
         UDPConsole->setFlat(false);
@@ -526,8 +547,8 @@ public:
         pushButton_2 = new QPushButton(UDPConsole);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setEnabled(true);
-        sizePolicy4.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
-        pushButton_2->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
+        pushButton_2->setSizePolicy(sizePolicy5);
         pushButton_2->setCheckable(false);
 
         gridLayout_4->addWidget(pushButton_2, 1, 1, 1, 1);
@@ -535,8 +556,8 @@ public:
         pushButton = new QPushButton(UDPConsole);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setEnabled(true);
-        sizePolicy4.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy5);
         pushButton->setMinimumSize(QSize(0, 0));
         pushButton->setCheckable(false);
 
@@ -561,8 +582,8 @@ public:
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         udpIn = new QTextEdit(UDPConsole);
         udpIn->setObjectName(QString::fromUtf8("udpIn"));
-        sizePolicy3.setHeightForWidth(udpIn->sizePolicy().hasHeightForWidth());
-        udpIn->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(udpIn->sizePolicy().hasHeightForWidth());
+        udpIn->setSizePolicy(sizePolicy4);
         udpIn->setMinimumSize(QSize(0, 20));
         udpIn->setMaximumSize(QSize(16777215, 20));
         udpIn->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -573,8 +594,8 @@ public:
 
         udpSendButton = new QPushButton(UDPConsole);
         udpSendButton->setObjectName(QString::fromUtf8("udpSendButton"));
-        sizePolicy5.setHeightForWidth(udpSendButton->sizePolicy().hasHeightForWidth());
-        udpSendButton->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(udpSendButton->sizePolicy().hasHeightForWidth());
+        udpSendButton->setSizePolicy(sizePolicy6);
         udpSendButton->setMinimumSize(QSize(20, 20));
         udpSendButton->setMaximumSize(QSize(20, 20));
         udpSendButton->setSizeIncrement(QSize(0, 0));
@@ -589,8 +610,8 @@ public:
 
         udpDisp = new QTextEdit(UDPConsole);
         udpDisp->setObjectName(QString::fromUtf8("udpDisp"));
-        sizePolicy6.setHeightForWidth(udpDisp->sizePolicy().hasHeightForWidth());
-        udpDisp->setSizePolicy(sizePolicy6);
+        sizePolicy2.setHeightForWidth(udpDisp->sizePolicy().hasHeightForWidth());
+        udpDisp->setSizePolicy(sizePolicy2);
         udpDisp->setReadOnly(true);
 
         gridLayout_3->addWidget(udpDisp, 0, 0, 1, 2);
@@ -606,6 +627,38 @@ public:
         tabWidget->addTab(link_tab, icon13, QString());
         tcp_tab = new QWidget();
         tcp_tab->setObjectName(QString::fromUtf8("tcp_tab"));
+        gridLayout_11 = new QGridLayout(tcp_tab);
+        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        groupBox_2 = new QGroupBox(tcp_tab);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setFlat(false);
+        gridLayout_13 = new QGridLayout(groupBox_2);
+        gridLayout_13->setObjectName(QString::fromUtf8("gridLayout_13"));
+        consoleMain = new QWidget(groupBox_2);
+        consoleMain->setObjectName(QString::fromUtf8("consoleMain"));
+        sizePolicy3.setHeightForWidth(consoleMain->sizePolicy().hasHeightForWidth());
+        consoleMain->setSizePolicy(sizePolicy3);
+        consoleMain->setMinimumSize(QSize(0, 0));
+        gridLayout_12 = new QGridLayout(consoleMain);
+        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
+
+        gridLayout_13->addWidget(consoleMain, 0, 0, 1, 1);
+
+
+        gridLayout_11->addWidget(groupBox_2, 3, 0, 1, 1);
+
+        label_12 = new QLabel(tcp_tab);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        gridLayout_11->addWidget(label_12, 1, 0, 1, 1);
+
+        line_4 = new QFrame(tcp_tab);
+        line_4->setObjectName(QString::fromUtf8("line_4"));
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_11->addWidget(line_4, 2, 0, 1, 1);
+
         QIcon icon14;
         icon14.addFile(QString::fromUtf8(":/tabIcons/connectTcp.png"), QSize(), QIcon::Normal, QIcon::Off);
         tabWidget->addTab(tcp_tab, icon14, QString());
@@ -675,8 +728,8 @@ public:
         jpg_gleft = new QToolButton(img_tab);
         jpg_gleft->setObjectName(QString::fromUtf8("jpg_gleft"));
         jpg_gleft->setEnabled(false);
-        sizePolicy5.setHeightForWidth(jpg_gleft->sizePolicy().hasHeightForWidth());
-        jpg_gleft->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(jpg_gleft->sizePolicy().hasHeightForWidth());
+        jpg_gleft->setSizePolicy(sizePolicy6);
         jpg_gleft->setCursor(QCursor(Qt::PointingHandCursor));
         jpg_gleft->setIconSize(QSize(10, 10));
         jpg_gleft->setCheckable(false);
@@ -706,8 +759,8 @@ public:
         jpg_gright = new QToolButton(img_tab);
         jpg_gright->setObjectName(QString::fromUtf8("jpg_gright"));
         jpg_gright->setEnabled(false);
-        sizePolicy5.setHeightForWidth(jpg_gright->sizePolicy().hasHeightForWidth());
-        jpg_gright->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(jpg_gright->sizePolicy().hasHeightForWidth());
+        jpg_gright->setSizePolicy(sizePolicy6);
         jpg_gright->setCursor(QCursor(Qt::PointingHandCursor));
         QIcon icon17;
         icon17.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -776,8 +829,8 @@ public:
         opacityLayout->setContentsMargins(0, 0, -1, -1);
         opacityLabel = new QLabel(img_tab);
         opacityLabel->setObjectName(QString::fromUtf8("opacityLabel"));
-        sizePolicy3.setHeightForWidth(opacityLabel->sizePolicy().hasHeightForWidth());
-        opacityLabel->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(opacityLabel->sizePolicy().hasHeightForWidth());
+        opacityLabel->setSizePolicy(sizePolicy4);
         opacityLabel->setFrameShape(QFrame::NoFrame);
         opacityLabel->setFrameShadow(QFrame::Sunken);
         opacityLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
@@ -786,8 +839,8 @@ public:
 
         opacitySlider = new QSlider(img_tab);
         opacitySlider->setObjectName(QString::fromUtf8("opacitySlider"));
-        sizePolicy4.setHeightForWidth(opacitySlider->sizePolicy().hasHeightForWidth());
-        opacitySlider->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(opacitySlider->sizePolicy().hasHeightForWidth());
+        opacitySlider->setSizePolicy(sizePolicy5);
         opacitySlider->setCursor(QCursor(Qt::SizeHorCursor));
         opacitySlider->setValue(99);
         opacitySlider->setOrientation(Qt::Horizontal);
@@ -975,8 +1028,8 @@ public:
         gridLayout_10->setVerticalSpacing(0);
         t_right = new QPushButton(transformJPGbox);
         t_right->setObjectName(QString::fromUtf8("t_right"));
-        sizePolicy5.setHeightForWidth(t_right->sizePolicy().hasHeightForWidth());
-        t_right->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(t_right->sizePolicy().hasHeightForWidth());
+        t_right->setSizePolicy(sizePolicy6);
         QIcon icon20;
         icon20.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
         t_right->setIcon(icon20);
@@ -985,8 +1038,8 @@ public:
 
         t_left = new QPushButton(transformJPGbox);
         t_left->setObjectName(QString::fromUtf8("t_left"));
-        sizePolicy5.setHeightForWidth(t_left->sizePolicy().hasHeightForWidth());
-        t_left->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(t_left->sizePolicy().hasHeightForWidth());
+        t_left->setSizePolicy(sizePolicy6);
         QIcon icon21;
         icon21.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_left.png"), QSize(), QIcon::Normal, QIcon::Off);
         t_left->setIcon(icon21);
@@ -995,8 +1048,8 @@ public:
 
         t_up = new QPushButton(transformJPGbox);
         t_up->setObjectName(QString::fromUtf8("t_up"));
-        sizePolicy5.setHeightForWidth(t_up->sizePolicy().hasHeightForWidth());
-        t_up->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(t_up->sizePolicy().hasHeightForWidth());
+        t_up->setSizePolicy(sizePolicy6);
         QIcon icon22;
         icon22.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_up.png"), QSize(), QIcon::Normal, QIcon::Off);
         t_up->setIcon(icon22);
@@ -1005,8 +1058,8 @@ public:
 
         t_down = new QPushButton(transformJPGbox);
         t_down->setObjectName(QString::fromUtf8("t_down"));
-        sizePolicy5.setHeightForWidth(t_down->sizePolicy().hasHeightForWidth());
-        t_down->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(t_down->sizePolicy().hasHeightForWidth());
+        t_down->setSizePolicy(sizePolicy6);
         QIcon icon23;
         icon23.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_down.png"), QSize(), QIcon::Normal, QIcon::Off);
         t_down->setIcon(icon23);
@@ -1076,8 +1129,8 @@ public:
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         label_3 = new QLabel(cfg_tab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        sizePolicy4.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
-        label_3->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy5);
 
         gridLayout_6->addWidget(label_3, 1, 0, 1, 1);
 
@@ -1088,15 +1141,15 @@ public:
 
         label_2 = new QLabel(cfg_tab);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        sizePolicy4.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy4);
+        sizePolicy5.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy5);
 
         gridLayout_6->addWidget(label_2, 0, 0, 1, 1);
 
         UDPPortxml = new QLineEdit(cfg_tab);
         UDPPortxml->setObjectName(QString::fromUtf8("UDPPortxml"));
-        sizePolicy5.setHeightForWidth(UDPPortxml->sizePolicy().hasHeightForWidth());
-        UDPPortxml->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(UDPPortxml->sizePolicy().hasHeightForWidth());
+        UDPPortxml->setSizePolicy(sizePolicy6);
         UDPPortxml->setMaximumSize(QSize(50, 16777215));
         UDPPortxml->setMaxLength(5);
         UDPPortxml->setFrame(true);
@@ -1144,8 +1197,8 @@ public:
         DecodeJPG = new QPushButton(info_tab);
         DecodeJPG->setObjectName(QString::fromUtf8("DecodeJPG"));
         DecodeJPG->setEnabled(true);
-        sizePolicy5.setHeightForWidth(DecodeJPG->sizePolicy().hasHeightForWidth());
-        DecodeJPG->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(DecodeJPG->sizePolicy().hasHeightForWidth());
+        DecodeJPG->setSizePolicy(sizePolicy6);
         DecodeJPG->setMaximumSize(QSize(1, 1));
         DecodeJPG->setAutoDefault(true);
         DecodeJPG->setFlat(true);
@@ -1166,20 +1219,6 @@ public:
         tabWidget->addTab(info_tab, icon26, QString());
 
         gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
-
-        osmMap = new QQuickWidget(centralwidget);
-        osmMap->setObjectName(QString::fromUtf8("osmMap"));
-        osmMap->setEnabled(true);
-        sizePolicy6.setHeightForWidth(osmMap->sizePolicy().hasHeightForWidth());
-        osmMap->setSizePolicy(sizePolicy6);
-        osmMap->setMaximumSize(QSize(4096, 2048));
-        osmMap->setFont(font);
-        osmMap->setCursor(QCursor(Qt::CrossCursor));
-        osmMap->setMouseTracking(true);
-        osmMap->setResizeMode(QQuickWidget::SizeRootObjectToView);
-        osmMap->setSource(QUrl(QString::fromUtf8("qrc:/map.qml")));
-
-        gridLayout->addWidget(osmMap, 0, 2, 10, 1);
 
         uiSAR->setCentralWidget(centralwidget);
         statusBar = new QStatusBar(uiSAR);
@@ -1203,8 +1242,8 @@ public:
         gpsPanClone = new QPushButton(dockWidgetContents_2);
         gpsPanClone->setObjectName(QString::fromUtf8("gpsPanClone"));
         gpsPanClone->setEnabled(true);
-        sizePolicy5.setHeightForWidth(gpsPanClone->sizePolicy().hasHeightForWidth());
-        gpsPanClone->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(gpsPanClone->sizePolicy().hasHeightForWidth());
+        gpsPanClone->setSizePolicy(sizePolicy6);
         gpsPanClone->setIcon(icon1);
 
         horizontalLayout_2->addWidget(gpsPanClone);
@@ -1212,8 +1251,8 @@ public:
         rulerButton = new QPushButton(dockWidgetContents_2);
         rulerButton->setObjectName(QString::fromUtf8("rulerButton"));
         rulerButton->setEnabled(false);
-        sizePolicy5.setHeightForWidth(rulerButton->sizePolicy().hasHeightForWidth());
-        rulerButton->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(rulerButton->sizePolicy().hasHeightForWidth());
+        rulerButton->setSizePolicy(sizePolicy6);
         QIcon icon27;
         icon27.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
         rulerButton->setIcon(icon27);
@@ -1269,7 +1308,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(2);
         DecodeJPG->setDefault(false);
 
 
@@ -1315,6 +1354,8 @@ public:
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
         udpDisp->setPlaceholderText(QCoreApplication::translate("uiSAR", "Waiting for connection...  type \"connect ip:port\" for udp connection or connect via default UDP IP  type \"help\" for additional command info  ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(link_tab), QString());
+        groupBox_2->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\214", nullptr));
+        label_12->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\243\320\264\320\260\320\273\320\265\320\275\320\275\320\276\320\265 \321\201\320\276\320\265\320\264\320\270\320\275\320\265\320\275\320\270\320\265 \321\201 \320\240\320\233\320\241</span></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tcp_tab), QString());
         label_7->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\240\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217</span></p></body></html>", nullptr));
 #if QT_CONFIG(tooltip)

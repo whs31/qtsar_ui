@@ -1,3 +1,5 @@
+release/console.o
+release/fvemu.o
 release/main.o
 release/qmlinvoker.o
 release/qmlmarkerdialog.o
@@ -10,6 +12,7 @@ release/qmlcache_loader.o
 release/qrc_img.o
 release/qrc_lstyle.o
 release/qrc_style.o
+release/moc_console.o
 release/moc_qmlinvoker.o
 release/moc_qmlmarkerdialog.o
 release/moc_remote.o

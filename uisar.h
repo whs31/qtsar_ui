@@ -90,28 +90,19 @@ private slots:
     void on_selectFolderButton_clicked();
 
     void on_nav_displayroute_stateChanged(int arg1);
-
     void on_clearTrack_clicked();
     void ReadTelemetry(QByteArray data);
 
     void on_changeMapMode_toggled(bool checked);
-
     void on_gpsPanClone_clicked();
 
     void on_t_up_clicked();
-
     void on_t_down_clicked();
-
     void on_t_left_clicked();
-
     void on_t_right_clicked();
-
     void on_t_xSpin_valueChanged(double arg1);
-
     void on_t_ySpin_valueChanged(double arg1);
-
     void on_t_sSpin_valueChanged(double arg1);
-
     void on_t_scale_valueChanged(int value);
 
 private:

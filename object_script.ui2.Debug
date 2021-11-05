@@ -1,3 +1,5 @@
+debug/console.o
+debug/fvemu.o
 debug/main.o
 debug/qmlinvoker.o
 debug/qmlmarkerdialog.o
@@ -10,6 +12,7 @@ debug/qmlcache_loader.o
 debug/qrc_img.o
 debug/qrc_lstyle.o
 debug/qrc_style.o
+debug/moc_console.o
 debug/moc_qmlinvoker.o
 debug/moc_qmlmarkerdialog.o
 debug/moc_remote.o
