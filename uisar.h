@@ -99,12 +99,30 @@ private slots:
 
     void on_t_up_clicked();
 
+    void on_t_down_clicked();
+
+    void on_t_left_clicked();
+
+    void on_t_right_clicked();
+
+    void on_t_xSpin_valueChanged(double arg1);
+
+    void on_t_ySpin_valueChanged(double arg1);
+
+    void on_t_sSpin_valueChanged(double arg1);
+
+    void on_t_scale_valueChanged(int value);
+
 private:
     static uiSAR * pMainWindow;
 
     QString jpg_path;
     int fileCounter;
     int totalJPGDetected;
+    double spinxArg0 = 0;
+    double spinyArg0 = 0;
+    double spinrArg0 = 0;
+    double spinsArg0 = 0;
 
     bool followPlane = false;
     bool allowRefresh = false;

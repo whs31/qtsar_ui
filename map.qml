@@ -27,12 +27,20 @@ Rectangle {
     Invoker {
         id: markerDialog
     }
-
-    function transformUp(fileCounter: int)
+    function transformScale(fileCounter: int, arg: double)
     {
-        imageArray[fileCounter-1].coordinate.latitude += 0.005; //fix
+        imageArray[fileCounter-1].zoomLevel += arg;
     }
 
+    //С ФУНКЦИЙ СПИНБОКСОВ ПОСТУПАЮТ ЗНАЧЕНИЯ В МЕТРАХ, НУЖНО ДЕЛИТЬ ИХ НА 111120
+    function transformX(fileCounter: int, arg1: double)
+    {
+        imageArray[fileCounter-1].coordinate.longitude += (arg1/111120); //fix
+    }
+    function transformY(fileCounter: int, arg1: double)
+    {
+        imageArray[fileCounter-1].coordinate.latitude += (arg1/111120); //fix
+    }
     function swapMapModes(satellite: bool)
     {
         if(satellite) {

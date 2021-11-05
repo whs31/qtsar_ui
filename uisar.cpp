@@ -32,6 +32,14 @@ uiSAR::uiSAR(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 
+
+    /* Консоль для всех событий с поддержкой vt100 */
+    //Console *con = new Console(this);
+    //con->write("Тест");
+    //con->flush();
+
+    //con->hide(); // Закомментировать чтобы показать
+
 }
 
 uiSAR::~uiSAR()
@@ -587,7 +595,92 @@ void uiSAR::on_gpsPanClone_clicked()
 
 void uiSAR::on_t_up_clicked()
 {
+    double temp = ui->t_ySpin->value();
+    ui->t_ySpin->setValue(temp+3);
+}
+
+void uiSAR::on_t_down_clicked()
+{
+    double temp = ui->t_ySpin->value();
+    ui->t_ySpin->setValue(temp-3);
+}
+
+
+void uiSAR::on_t_left_clicked()
+{
+    double temp = ui->t_xSpin->value();
+    ui->t_xSpin->setValue(temp-3);
+}
+
+
+void uiSAR::on_t_right_clicked()
+{
+    double temp = ui->t_xSpin->value();
+    ui->t_xSpin->setValue(temp+3);
+}
+
+
+void uiSAR::on_t_xSpin_valueChanged(double arg1)
+{
     auto qml = ui->osmMap->rootObject();
-        QMetaObject::invokeMethod(qml, "transformUp",
-                Q_ARG(int, fileCounter));
+    if(arg1>=10000) {
+        ui->t_right->setEnabled(false);
+    }
+    else if (arg1<10000)
+    {
+        ui->t_right->setEnabled(true);
+    }
+    if(arg1<=-10000) {
+        ui->t_left->setEnabled(false);
+    }
+    else if (arg1>-10000)
+    {
+        ui->t_left->setEnabled(true);
+    }
+    double dx = arg1 - spinxArg0;
+    //qDebug()<<arg1<<spinxArg0<<dx;
+    spinxArg0 = arg1;
+        QMetaObject::invokeMethod(qml, "transformX",
+                Q_ARG(int, fileCounter),
+                Q_ARG(double, dx)                  );
+}
+
+void uiSAR::on_t_ySpin_valueChanged(double arg1)
+{
+    auto qml = ui->osmMap->rootObject();
+    if(arg1>=10000) {
+        ui->t_up->setEnabled(false);
+    }
+    else if (arg1<10000)
+    {
+        ui->t_up->setEnabled(true);
+    }
+    if(arg1<=-10000) {
+        ui->t_down->setEnabled(false);
+    }
+    else if (arg1>-10000)
+    {
+        ui->t_down->setEnabled(true);
+    }
+    double dy = arg1 - spinyArg0;
+    spinyArg0 = arg1;
+        QMetaObject::invokeMethod(qml, "transformY",
+                Q_ARG(int, fileCounter),
+                Q_ARG(double, dy)                  );
+}
+
+void uiSAR::on_t_sSpin_valueChanged(double arg1)
+{
+    auto qml = ui->osmMap->rootObject();
+    double d = arg1-spinsArg0;
+    spinsArg0 = arg1;
+    QMetaObject::invokeMethod(qml, "transformScale",
+            Q_ARG(int, fileCounter),
+            Q_ARG(double, d));
+}
+
+void uiSAR::on_t_scale_valueChanged(int value)
+{
+    double temp = value;
+    ui->t_sSpin->setValue(temp/100);
 }

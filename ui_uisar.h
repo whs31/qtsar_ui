@@ -949,6 +949,12 @@ public:
 
         t_ySpin = new QDoubleSpinBox(transformJPGbox);
         t_ySpin->setObjectName(QString::fromUtf8("t_ySpin"));
+        t_ySpin->setButtonSymbols(QAbstractSpinBox::PlusMinus);
+        t_ySpin->setAccelerated(true);
+        t_ySpin->setDecimals(1);
+        t_ySpin->setMinimum(-10000.000000000000000);
+        t_ySpin->setMaximum(10000.000000000000000);
+        t_ySpin->setSingleStep(3.000000000000000);
 
         gridLayout_9->addWidget(t_ySpin, 1, 1, 1, 1);
 
@@ -959,6 +965,8 @@ public:
 
         t_rSpin = new QDoubleSpinBox(transformJPGbox);
         t_rSpin->setObjectName(QString::fromUtf8("t_rSpin"));
+        t_rSpin->setMinimum(-360.000000000000000);
+        t_rSpin->setMaximum(360.000000000000000);
 
         gridLayout_9->addWidget(t_rSpin, 2, 1, 1, 1);
 
@@ -1010,6 +1018,15 @@ public:
 
         t_xSpin = new QDoubleSpinBox(transformJPGbox);
         t_xSpin->setObjectName(QString::fromUtf8("t_xSpin"));
+        t_xSpin->setFont(font);
+        t_xSpin->setWrapping(false);
+        t_xSpin->setFrame(true);
+        t_xSpin->setButtonSymbols(QAbstractSpinBox::PlusMinus);
+        t_xSpin->setAccelerated(true);
+        t_xSpin->setDecimals(1);
+        t_xSpin->setMinimum(-10000.000000000000000);
+        t_xSpin->setMaximum(10000.000000000000000);
+        t_xSpin->setSingleStep(3.000000000000000);
 
         gridLayout_9->addWidget(t_xSpin, 0, 1, 1, 1);
 
@@ -1020,14 +1037,19 @@ public:
 
         t_sSpin = new QDoubleSpinBox(transformJPGbox);
         t_sSpin->setObjectName(QString::fromUtf8("t_sSpin"));
+        t_sSpin->setDecimals(1);
+        t_sSpin->setMinimum(-1.500000000000000);
+        t_sSpin->setMaximum(1.500000000000000);
+        t_sSpin->setSingleStep(0.100000000000000);
+        t_sSpin->setValue(0.000000000000000);
 
         gridLayout_9->addWidget(t_sSpin, 3, 1, 1, 1);
 
         t_scale = new QScrollBar(transformJPGbox);
         t_scale->setObjectName(QString::fromUtf8("t_scale"));
-        t_scale->setMinimum(150);
-        t_scale->setMaximum(180);
-        t_scale->setValue(165);
+        t_scale->setMinimum(-150);
+        t_scale->setMaximum(150);
+        t_scale->setValue(0);
         t_scale->setOrientation(Qt::Vertical);
 
         gridLayout_9->addWidget(t_scale, 0, 2, 4, 1);
@@ -1325,11 +1347,15 @@ public:
         jpgtls_angdisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-size:7pt; font-weight:600;\">-----------</span></p></body></html>", nullptr));
         pushButton_3->setText(QCoreApplication::translate("uiSAR", "\320\236\321\202\320\276\320\261\321\200\320\260\320\267\320\270\321\202\321\214 \320\262\321\201\320\265", nullptr));
         transformJPGbox->setTitle(QCoreApplication::translate("uiSAR", "\320\240\320\265\320\264\320\260\320\272\321\202\320\270\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\263\320\265\320\276\320\274\320\265\321\202\321\200\320\270\320\270 \320\240\320\233\320\230", nullptr));
+        t_ySpin->setSuffix(QCoreApplication::translate("uiSAR", " \320\274", nullptr));
         label_10->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\262\321\200\320\260\321\211\320\265\320\275\320\270\321\217", nullptr));
+        t_rSpin->setSuffix(QCoreApplication::translate("uiSAR", " \342\210\230", nullptr));
         t_right->setText(QString());
         t_left->setText(QString());
         t_up->setText(QString());
         t_down->setText(QString());
+        t_xSpin->setPrefix(QString());
+        t_xSpin->setSuffix(QCoreApplication::translate("uiSAR", " \320\274", nullptr));
         label_8->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 X", nullptr));
         label_9->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 Y", nullptr));
         label_11->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \321\200\320\260\320\267\320\274\320\265\321\200\320\260", nullptr));
