@@ -153,10 +153,14 @@ public:
     QLabel *label_2;
     QLineEdit *UDPIPxml;
     QGridLayout *gridLayout_12;
-    QDoubleSpinBox *diaTimexml;
+    QDoubleSpinBox *diaRangexml;
     QLabel *label_15;
     QLabel *label_16;
-    QDoubleSpinBox *diaRangexml;
+    QDoubleSpinBox *diaTimexml;
+    QLabel *label_17;
+    QDoubleSpinBox *diaThetaAzimuth;
+    QLabel *label_18;
+    QDoubleSpinBox *diaDriftAngle;
     QWidget *link_tab;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_6;
@@ -1069,14 +1073,13 @@ public:
 
         gridLayout_12 = new QGridLayout();
         gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
-        diaTimexml = new QDoubleSpinBox(cfg_tab);
-        diaTimexml->setObjectName(QString::fromUtf8("diaTimexml"));
-        diaTimexml->setDecimals(1);
-        diaTimexml->setMinimum(1.000000000000000);
-        diaTimexml->setMaximum(50.000000000000000);
-        diaTimexml->setValue(15.000000000000000);
+        diaRangexml = new QDoubleSpinBox(cfg_tab);
+        diaRangexml->setObjectName(QString::fromUtf8("diaRangexml"));
+        diaRangexml->setDecimals(1);
+        diaRangexml->setMaximum(30.000000000000000);
+        diaRangexml->setValue(3.000000000000000);
 
-        gridLayout_12->addWidget(diaTimexml, 0, 1, 1, 1);
+        gridLayout_12->addWidget(diaRangexml, 0, 3, 1, 1);
 
         label_15 = new QLabel(cfg_tab);
         label_15->setObjectName(QString::fromUtf8("label_15"));
@@ -1088,13 +1091,38 @@ public:
 
         gridLayout_12->addWidget(label_16, 0, 2, 1, 1);
 
-        diaRangexml = new QDoubleSpinBox(cfg_tab);
-        diaRangexml->setObjectName(QString::fromUtf8("diaRangexml"));
-        diaRangexml->setDecimals(1);
-        diaRangexml->setMaximum(30.000000000000000);
-        diaRangexml->setValue(3.000000000000000);
+        diaTimexml = new QDoubleSpinBox(cfg_tab);
+        diaTimexml->setObjectName(QString::fromUtf8("diaTimexml"));
+        diaTimexml->setDecimals(1);
+        diaTimexml->setMinimum(1.000000000000000);
+        diaTimexml->setMaximum(50.000000000000000);
+        diaTimexml->setValue(15.000000000000000);
 
-        gridLayout_12->addWidget(diaRangexml, 0, 3, 1, 1);
+        gridLayout_12->addWidget(diaTimexml, 0, 1, 1, 1);
+
+        label_17 = new QLabel(cfg_tab);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+
+        gridLayout_12->addWidget(label_17, 1, 0, 1, 1);
+
+        diaThetaAzimuth = new QDoubleSpinBox(cfg_tab);
+        diaThetaAzimuth->setObjectName(QString::fromUtf8("diaThetaAzimuth"));
+        diaThetaAzimuth->setMaximum(360.000000000000000);
+        diaThetaAzimuth->setValue(15.000000000000000);
+
+        gridLayout_12->addWidget(diaThetaAzimuth, 1, 1, 1, 1);
+
+        label_18 = new QLabel(cfg_tab);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+
+        gridLayout_12->addWidget(label_18, 1, 2, 1, 1);
+
+        diaDriftAngle = new QDoubleSpinBox(cfg_tab);
+        diaDriftAngle->setObjectName(QString::fromUtf8("diaDriftAngle"));
+        diaDriftAngle->setMaximum(360.000000000000000);
+        diaDriftAngle->setValue(13.000000000000000);
+
+        gridLayout_12->addWidget(diaDriftAngle, 1, 3, 1, 1);
 
 
         gridLayout_6->addLayout(gridLayout_12, 5, 0, 1, 4);
@@ -1418,10 +1446,14 @@ public:
         label_3->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 UDP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
         label_2->setText(QCoreApplication::translate("uiSAR", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\277\320\276\320\270\321\201\320\272\320\260 \321\200\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\321\205 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\271:", nullptr));
         UDPIPxml->setText(QCoreApplication::translate("uiSAR", "48.78.136.210", nullptr));
-        diaTimexml->setSuffix(QCoreApplication::translate("uiSAR", " \321\201", nullptr));
+        diaRangexml->setSuffix(QCoreApplication::translate("uiSAR", " \320\272\320\274", nullptr));
         label_15->setText(QCoreApplication::translate("uiSAR", "\320\224\320\273\320\270\321\202\320\265\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
         label_16->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
-        diaRangexml->setSuffix(QCoreApplication::translate("uiSAR", " \320\272\320\274", nullptr));
+        diaTimexml->setSuffix(QCoreApplication::translate("uiSAR", " \321\201", nullptr));
+        label_17->setText(QCoreApplication::translate("uiSAR", "\316\270-\320\260\320\267\320\270\320\274\321\203\321\202:", nullptr));
+        diaThetaAzimuth->setSuffix(QCoreApplication::translate("uiSAR", " \302\260", nullptr));
+        label_18->setText(QCoreApplication::translate("uiSAR", "\320\243\320\263\320\276\320\273 \321\201\320\275\320\276\321\201\320\260:", nullptr));
+        diaDriftAngle->setSuffix(QCoreApplication::translate("uiSAR", " \302\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(cfg_tab), QString());
         label_6->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\230\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\321\213 \321\203\320\264\320\260\320\273\320\265\320\275\320\275\320\276\320\263\320\276 \321\201\320\276\320\265\320\264\320\270\320\275\320\265\320\275\320\270\321\217 </span><span style=\" font-weight:600; color:#aaaaff;\">UDP</span></p></body></html>", nullptr));
         UDPConsole->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\214 UDP", nullptr));

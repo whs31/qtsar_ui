@@ -124,6 +124,10 @@ private slots:
 
     void on_diaRangexml_valueChanged(double arg1);
 
+    void on_diaThetaAzimuth_valueChanged(double arg1);
+
+    void on_diaDriftAngle_valueChanged(double arg1);
+
 private:
     static uiSAR * pMainWindow;
 
@@ -147,6 +151,7 @@ private:
     void updateTelemetry();
     //TelemetryData_t parseTelemetry(const QByteArray & src);
     void initUI();
+    void loadSettings();
     void update_jpgblocklabels_from_field(JPGFields _field);
     bool eventFilter(QObject *watched, QEvent *event);
 

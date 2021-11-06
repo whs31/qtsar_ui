@@ -24,13 +24,11 @@ uiSAR::uiSAR(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::uiSAR)
 {
-    QDateTime UTC(QDateTime::currentDateTimeUtc());
-    QDateTime local(UTC.toLocalTime());
-    qInfo() << "Logging data...";
-    qInfo() << "------------Session time: " << local << "--------------------------";
-    qWarning() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
     pMainWindow = this;
-    initUI();
+    settings = new QSettings(QCoreApplication::applicationDirPath()+"/config.ini",
+                             QSettings::IniFormat);
+    settings->setValue("header/version", "1106");
+
 
     /* Интерфейс для получения телеметрии */
     Telemery = RemoteAuto("UDP");
@@ -47,10 +45,8 @@ uiSAR::uiSAR(QWidget *parent)
 
     connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
     */
-
-    settings = new QSettings(QCoreApplication::applicationDirPath()+"/config.ini",
-                             QSettings::IniFormat);
-    settings->setValue("header/version", "1105");
+    initUI();
+    loadSettings();
 }
 
 uiSAR::~uiSAR()
@@ -673,6 +669,53 @@ void uiSAR::on_t_scale_valueChanged(int value)
     ui->t_sSpin->setValue(temp/100);
 }
 
+void uiSAR::loadSettings()
+{
+    QDateTime UTC(QDateTime::currentDateTimeUtc());
+    QDateTime local(UTC.toLocalTime());
+    qInfo() << "                                        log start>>";
+    qInfo() << "------------Session time: " << local << "--------------------------";
+    if (QSslSocket::supportsSsl())
+    {
+        qInfo() << "OpenSSL detected: " << QSslSocket::supportsSsl() << ", OpenSSL build version: " << QSslSocket::sslLibraryBuildVersionString() << ", OpenSSL ver.: " << QSslSocket::sslLibraryVersionString();
+    }
+    else {
+        qCritical() << "OpenSSL detected: " << QSslSocket::supportsSsl() << ", OpenSSL build version: " << QSslSocket::sslLibraryBuildVersionString() << ", OpenSSL ver.: " << QSslSocket::sslLibraryVersionString();
+        QMessageBox openSSLDialogue;
+        openSSLDialogue.setWindowTitle("Библиотека OpenSSL не обнаружена!");
+        openSSLDialogue.setIcon(QMessageBox::Critical);
+        openSSLDialogue.setText("Попробуйте переустановить программу.");
+        openSSLDialogue.exec();
+    }
+    QString t = settings->value("telemetry/udp_ip_default").toString();
+    double d;
+    ui->UDPIPxml->setText(t);
+    t = settings->value("telemetry/udp_port_default").toString();
+    ui->UDPPortxml->setText(t);
+    t = settings->value("telemetry/tcp_ip_default").toString();
+    ui->TCPIPxml->setText(t);
+    t = settings->value("telemetry/tcp_port_default").toString();
+    ui->TCPPortxml->setText(t);
+    d = settings->value("telemetry/refresh_telemetry_time").toDouble();
+    ui->refreshtelemetryxml->setValue(d);
+    d = settings->value("map/predict_line_range").toDouble();
+    ui->predictRangexml->setValue(d);
+    d = settings->value("map/capture_time").toDouble();
+    ui->diaTimexml->setValue(d);
+    d = settings->value("map/diagram_length").toDouble();
+    ui->diaRangexml->setValue(d);
+    d = settings->value("map/diagram_theta_azimuth").toDouble();
+    ui->diaThetaAzimuth->setValue(d);
+    d = settings->value("map/diagram_drift_angle").toDouble();
+    ui->diaDriftAngle->setValue(d);
+    t = settings->value("header/version").toString();
+
+    //to qml
+
+    qInfo()<<"Config loaded. Version "<<t;
+
+}
+
 void uiSAR::on_UDPIPxml_textChanged(const QString &arg1)
 {
     settings->setValue("telemetry/udp_ip_default", arg1);
@@ -713,4 +756,12 @@ void uiSAR::on_diaRangexml_valueChanged(double arg1)
     settings->setValue("map/diagram_length", arg1);
 }
 
-//load_settings
+void uiSAR::on_diaThetaAzimuth_valueChanged(double arg1)
+{
+    settings->setValue("map/diagram_theta_azimuth", arg1);
+}
+
+void uiSAR::on_diaDriftAngle_valueChanged(double arg1)
+{
+    settings->setValue("map/diagram_drift_angle", arg1);
+}
