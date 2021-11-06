@@ -26,6 +26,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QScrollBar>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
@@ -81,11 +82,12 @@ public:
     QLabel *label_5;
     QWidget *tcp_tab;
     QGridLayout *gridLayout_11;
+    QFrame *line_4;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_13;
     Console *consoleMain;
     QLabel *label_12;
-    QFrame *line_4;
+    QSpacerItem *verticalSpacer_10;
     QWidget *img_tab;
     QGridLayout *gridLayout_7;
     QFrame *line_3;
@@ -140,27 +142,34 @@ public:
     QWidget *cfg_tab;
     QGridLayout *gridLayout_6;
     QLineEdit *TCPPortxml;
-    QLineEdit *TCPIPxml;
+    QLabel *label_3;
+    QSpacerItem *verticalSpacer_4;
+    QGridLayout *gridLayout_12;
+    QLabel *label_18;
+    QLabel *label_15;
+    QLabel *label_16;
+    QDoubleSpinBox *diaThetaAzimuth;
+    QLabel *label_17;
+    QDoubleSpinBox *diaDriftAngle;
+    QDoubleSpinBox *diaTimexml;
+    QDoubleSpinBox *diaRangexml;
+    QLabel *label_19;
+    QRadioButton *providerGoogle;
+    QRadioButton *providerESRI;
+    QRadioButton *providerOSM;
+    QFrame *line_5;
     QDoubleSpinBox *predictRangexml;
     QLabel *label_13;
     QDoubleSpinBox *refreshtelemetryxml;
-    QLabel *label_14;
     QPushButton *selectFolderButton;
-    QSpacerItem *verticalSpacer_4;
-    QLineEdit *UDPPortxml;
-    QLabel *label_4;
-    QLabel *label_3;
-    QLabel *label_2;
     QLineEdit *UDPIPxml;
-    QGridLayout *gridLayout_12;
-    QDoubleSpinBox *diaRangexml;
-    QLabel *label_15;
-    QLabel *label_16;
-    QDoubleSpinBox *diaTimexml;
-    QLabel *label_17;
-    QDoubleSpinBox *diaThetaAzimuth;
-    QLabel *label_18;
-    QDoubleSpinBox *diaDriftAngle;
+    QLabel *label_4;
+    QLabel *label_14;
+    QLineEdit *TCPIPxml;
+    QLineEdit *UDPPortxml;
+    QLabel *label_2;
+    QSpacerItem *verticalSpacer_11;
+    QLabel *label_20;
     QWidget *link_tab;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_6;
@@ -533,6 +542,13 @@ public:
         tcp_tab->setObjectName(QString::fromUtf8("tcp_tab"));
         gridLayout_11 = new QGridLayout(tcp_tab);
         gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        line_4 = new QFrame(tcp_tab);
+        line_4->setObjectName(QString::fromUtf8("line_4"));
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_11->addWidget(line_4, 2, 0, 1, 1);
+
         groupBox_2 = new QGroupBox(tcp_tab);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setFlat(false);
@@ -544,19 +560,16 @@ public:
         gridLayout_13->addWidget(consoleMain, 0, 0, 1, 1);
 
 
-        gridLayout_11->addWidget(groupBox_2, 3, 0, 1, 1);
+        gridLayout_11->addWidget(groupBox_2, 4, 0, 1, 1);
 
         label_12 = new QLabel(tcp_tab);
         label_12->setObjectName(QString::fromUtf8("label_12"));
 
         gridLayout_11->addWidget(label_12, 1, 0, 1, 1);
 
-        line_4 = new QFrame(tcp_tab);
-        line_4->setObjectName(QString::fromUtf8("line_4"));
-        line_4->setFrameShape(QFrame::HLine);
-        line_4->setFrameShadow(QFrame::Sunken);
+        verticalSpacer_10 = new QSpacerItem(20, 5, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
-        gridLayout_11->addWidget(line_4, 2, 0, 1, 1);
+        gridLayout_11->addItem(verticalSpacer_10, 3, 0, 1, 1);
 
         QIcon icon11;
         icon11.addFile(QString::fromUtf8(":/tabIcons/connectTcp.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -989,97 +1002,25 @@ public:
         TCPPortxml->setMaximumSize(QSize(50, 16777215));
         TCPPortxml->setMaxLength(5);
 
-        gridLayout_6->addWidget(TCPPortxml, 2, 3, 1, 1);
-
-        TCPIPxml = new QLineEdit(cfg_tab);
-        TCPIPxml->setObjectName(QString::fromUtf8("TCPIPxml"));
-        TCPIPxml->setInputMethodHints(Qt::ImhNone);
-        TCPIPxml->setMaxLength(15);
-
-        gridLayout_6->addWidget(TCPIPxml, 2, 1, 1, 2);
-
-        predictRangexml = new QDoubleSpinBox(cfg_tab);
-        predictRangexml->setObjectName(QString::fromUtf8("predictRangexml"));
-        predictRangexml->setDecimals(1);
-        predictRangexml->setMaximum(20.000000000000000);
-        predictRangexml->setValue(5.000000000000000);
-
-        gridLayout_6->addWidget(predictRangexml, 4, 1, 1, 3);
-
-        label_13 = new QLabel(cfg_tab);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-
-        gridLayout_6->addWidget(label_13, 3, 0, 1, 1);
-
-        refreshtelemetryxml = new QDoubleSpinBox(cfg_tab);
-        refreshtelemetryxml->setObjectName(QString::fromUtf8("refreshtelemetryxml"));
-        refreshtelemetryxml->setMinimum(0.050000000000000);
-        refreshtelemetryxml->setMaximum(100.000000000000000);
-        refreshtelemetryxml->setSingleStep(0.500000000000000);
-        refreshtelemetryxml->setValue(0.500000000000000);
-
-        gridLayout_6->addWidget(refreshtelemetryxml, 3, 1, 1, 3);
-
-        label_14 = new QLabel(cfg_tab);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-
-        gridLayout_6->addWidget(label_14, 4, 0, 1, 1);
-
-        selectFolderButton = new QPushButton(cfg_tab);
-        selectFolderButton->setObjectName(QString::fromUtf8("selectFolderButton"));
-
-        gridLayout_6->addWidget(selectFolderButton, 0, 2, 1, 2);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_6->addItem(verticalSpacer_4, 8, 0, 1, 1);
-
-        UDPPortxml = new QLineEdit(cfg_tab);
-        UDPPortxml->setObjectName(QString::fromUtf8("UDPPortxml"));
-        sizePolicy6.setHeightForWidth(UDPPortxml->sizePolicy().hasHeightForWidth());
-        UDPPortxml->setSizePolicy(sizePolicy6);
-        UDPPortxml->setMaximumSize(QSize(50, 16777215));
-        UDPPortxml->setMaxLength(5);
-        UDPPortxml->setFrame(true);
-        UDPPortxml->setEchoMode(QLineEdit::Normal);
-
-        gridLayout_6->addWidget(UDPPortxml, 1, 3, 1, 1);
-
-        label_4 = new QLabel(cfg_tab);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_6->addWidget(label_4, 2, 0, 1, 1);
+        gridLayout_6->addWidget(TCPPortxml, 5, 3, 1, 1);
 
         label_3 = new QLabel(cfg_tab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         sizePolicy5.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
         label_3->setSizePolicy(sizePolicy5);
 
-        gridLayout_6->addWidget(label_3, 1, 0, 1, 1);
+        gridLayout_6->addWidget(label_3, 4, 0, 1, 1);
 
-        label_2 = new QLabel(cfg_tab);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        sizePolicy5.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy5);
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_6->addWidget(label_2, 0, 0, 1, 1);
-
-        UDPIPxml = new QLineEdit(cfg_tab);
-        UDPIPxml->setObjectName(QString::fromUtf8("UDPIPxml"));
-        UDPIPxml->setMaxLength(15);
-        UDPIPxml->setClearButtonEnabled(false);
-
-        gridLayout_6->addWidget(UDPIPxml, 1, 1, 1, 2);
+        gridLayout_6->addItem(verticalSpacer_4, 12, 0, 1, 1);
 
         gridLayout_12 = new QGridLayout();
         gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
-        diaRangexml = new QDoubleSpinBox(cfg_tab);
-        diaRangexml->setObjectName(QString::fromUtf8("diaRangexml"));
-        diaRangexml->setDecimals(1);
-        diaRangexml->setMaximum(30.000000000000000);
-        diaRangexml->setValue(3.000000000000000);
+        label_18 = new QLabel(cfg_tab);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
 
-        gridLayout_12->addWidget(diaRangexml, 0, 3, 1, 1);
+        gridLayout_12->addWidget(label_18, 1, 2, 1, 1);
 
         label_15 = new QLabel(cfg_tab);
         label_15->setObjectName(QString::fromUtf8("label_15"));
@@ -1091,6 +1032,25 @@ public:
 
         gridLayout_12->addWidget(label_16, 0, 2, 1, 1);
 
+        diaThetaAzimuth = new QDoubleSpinBox(cfg_tab);
+        diaThetaAzimuth->setObjectName(QString::fromUtf8("diaThetaAzimuth"));
+        diaThetaAzimuth->setMaximum(360.000000000000000);
+        diaThetaAzimuth->setValue(15.000000000000000);
+
+        gridLayout_12->addWidget(diaThetaAzimuth, 1, 1, 1, 1);
+
+        label_17 = new QLabel(cfg_tab);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+
+        gridLayout_12->addWidget(label_17, 1, 0, 1, 1);
+
+        diaDriftAngle = new QDoubleSpinBox(cfg_tab);
+        diaDriftAngle->setObjectName(QString::fromUtf8("diaDriftAngle"));
+        diaDriftAngle->setMaximum(360.000000000000000);
+        diaDriftAngle->setValue(13.000000000000000);
+
+        gridLayout_12->addWidget(diaDriftAngle, 1, 3, 1, 1);
+
         diaTimexml = new QDoubleSpinBox(cfg_tab);
         diaTimexml->setObjectName(QString::fromUtf8("diaTimexml"));
         diaTimexml->setDecimals(1);
@@ -1100,32 +1060,264 @@ public:
 
         gridLayout_12->addWidget(diaTimexml, 0, 1, 1, 1);
 
-        label_17 = new QLabel(cfg_tab);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
+        diaRangexml = new QDoubleSpinBox(cfg_tab);
+        diaRangexml->setObjectName(QString::fromUtf8("diaRangexml"));
+        diaRangexml->setDecimals(1);
+        diaRangexml->setMaximum(30.000000000000000);
+        diaRangexml->setValue(3.000000000000000);
 
-        gridLayout_12->addWidget(label_17, 1, 0, 1, 1);
+        gridLayout_12->addWidget(diaRangexml, 0, 3, 1, 1);
 
-        diaThetaAzimuth = new QDoubleSpinBox(cfg_tab);
-        diaThetaAzimuth->setObjectName(QString::fromUtf8("diaThetaAzimuth"));
-        diaThetaAzimuth->setMaximum(360.000000000000000);
-        diaThetaAzimuth->setValue(15.000000000000000);
+        label_19 = new QLabel(cfg_tab);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
 
-        gridLayout_12->addWidget(diaThetaAzimuth, 1, 1, 1, 1);
+        gridLayout_12->addWidget(label_19, 2, 0, 1, 1);
 
-        label_18 = new QLabel(cfg_tab);
-        label_18->setObjectName(QString::fromUtf8("label_18"));
+        providerGoogle = new QRadioButton(cfg_tab);
+        providerGoogle->setObjectName(QString::fromUtf8("providerGoogle"));
+        providerGoogle->setToolTipDuration(5000);
+        providerGoogle->setStyleSheet(QString::fromUtf8("QRadioButton {\n"
+"  background-color: #19232D;\n"
+"  color: #03DAC6;\n"
+"  spacing: 4px;\n"
+"  padding-top: 4px;\n"
+"  padding-bottom: 4px;\n"
+"  border: none;\n"
+"  outline: none;\n"
+"}\n"
+"\n"
+"QRadioButton:focus {\n"
+"  border: none;\n"
+"}\n"
+"\n"
+"QRadioButton:disabled {\n"
+"  background-color: #19232D;\n"
+"  color: #9DA9B5;\n"
+"  border: none;\n"
+"  outline: none;\n"
+"}\n"
+"\n"
+"QRadioButton QWidget {\n"
+"  background-color: #19232D;\n"
+"  color: #E0E1E3;\n"
+"  spacing: 0px;\n"
+"  padding: 0px;\n"
+"  outline: none;\n"
+"  border: none;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  margin-left: 2px;\n"
+"  height: 14px;\n"
+"  width: 14px;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked {\n"
+"  image: url(\":/qss_icons/dark/rc/radio_unchecked.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked:hover, QRadioButton::indicator:unchecked:focus, QRadioButton::indicator:unchecked:pressed {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/r"
+                        "c/radio_unchecked_focus.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked:disabled {\n"
+"  image: url(\":/qss_icons/dark/rc/radio_unchecked_disabled.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/rc/radio_checked.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked:hover, QRadioButton::indicator:checked:focus, QRadioButton::indicator:checked:pressed {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/rc/radio_checked_focus.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked:disabled {\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/rc/radio_checked_disabled.png\");\n"
+"}\n"
+""));
+        providerGoogle->setChecked(true);
 
-        gridLayout_12->addWidget(label_18, 1, 2, 1, 1);
+        gridLayout_12->addWidget(providerGoogle, 2, 1, 1, 1);
 
-        diaDriftAngle = new QDoubleSpinBox(cfg_tab);
-        diaDriftAngle->setObjectName(QString::fromUtf8("diaDriftAngle"));
-        diaDriftAngle->setMaximum(360.000000000000000);
-        diaDriftAngle->setValue(13.000000000000000);
+        providerESRI = new QRadioButton(cfg_tab);
+        providerESRI->setObjectName(QString::fromUtf8("providerESRI"));
 
-        gridLayout_12->addWidget(diaDriftAngle, 1, 3, 1, 1);
+        gridLayout_12->addWidget(providerESRI, 2, 2, 1, 1);
+
+        providerOSM = new QRadioButton(cfg_tab);
+        providerOSM->setObjectName(QString::fromUtf8("providerOSM"));
+        providerOSM->setToolTipDuration(5000);
+        providerOSM->setStyleSheet(QString::fromUtf8("QRadioButton {\n"
+"  background-color: #19232D;\n"
+"	color: #CF6679;\n"
+"  spacing: 4px;\n"
+"  padding-top: 4px;\n"
+"  padding-bottom: 4px;\n"
+"  border: none;\n"
+"  outline: none;\n"
+"}\n"
+"\n"
+"QRadioButton:focus {\n"
+"  border: none;\n"
+"}\n"
+"\n"
+"QRadioButton:disabled {\n"
+"  background-color: #19232D;\n"
+"  color: #9DA9B5;\n"
+"  border: none;\n"
+"  outline: none;\n"
+"}\n"
+"\n"
+"QRadioButton QWidget {\n"
+"  background-color: #19232D;\n"
+"  color: #E0E1E3;\n"
+"  spacing: 0px;\n"
+"  padding: 0px;\n"
+"  outline: none;\n"
+"  border: none;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  margin-left: 2px;\n"
+"  height: 14px;\n"
+"  width: 14px;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked {\n"
+"  image: url(\":/qss_icons/dark/rc/radio_unchecked.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked:hover, QRadioButton::indicator:unchecked:focus, QRadioButton::indicator:unchecked:pressed {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/rc"
+                        "/radio_unchecked_focus.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked:disabled {\n"
+"  image: url(\":/qss_icons/dark/rc/radio_unchecked_disabled.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/rc/radio_checked.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked:hover, QRadioButton::indicator:checked:focus, QRadioButton::indicator:checked:pressed {\n"
+"  border: none;\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/rc/radio_checked_focus.png\");\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked:disabled {\n"
+"  outline: none;\n"
+"  image: url(\":/qss_icons/dark/rc/radio_checked_disabled.png\");\n"
+"}\n"
+""));
+
+        gridLayout_12->addWidget(providerOSM, 2, 3, 1, 1);
 
 
-        gridLayout_6->addLayout(gridLayout_12, 5, 0, 1, 4);
+        gridLayout_6->addLayout(gridLayout_12, 8, 0, 1, 4);
+
+        line_5 = new QFrame(cfg_tab);
+        line_5->setObjectName(QString::fromUtf8("line_5"));
+        line_5->setFrameShape(QFrame::HLine);
+        line_5->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_6->addWidget(line_5, 1, 0, 1, 4);
+
+        predictRangexml = new QDoubleSpinBox(cfg_tab);
+        predictRangexml->setObjectName(QString::fromUtf8("predictRangexml"));
+        predictRangexml->setDecimals(1);
+        predictRangexml->setMaximum(20.000000000000000);
+        predictRangexml->setValue(5.000000000000000);
+
+        gridLayout_6->addWidget(predictRangexml, 7, 1, 1, 3);
+
+        label_13 = new QLabel(cfg_tab);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        gridLayout_6->addWidget(label_13, 6, 0, 1, 1);
+
+        refreshtelemetryxml = new QDoubleSpinBox(cfg_tab);
+        refreshtelemetryxml->setObjectName(QString::fromUtf8("refreshtelemetryxml"));
+        refreshtelemetryxml->setMinimum(0.050000000000000);
+        refreshtelemetryxml->setMaximum(100.000000000000000);
+        refreshtelemetryxml->setSingleStep(0.500000000000000);
+        refreshtelemetryxml->setValue(0.500000000000000);
+
+        gridLayout_6->addWidget(refreshtelemetryxml, 6, 1, 1, 3);
+
+        selectFolderButton = new QPushButton(cfg_tab);
+        selectFolderButton->setObjectName(QString::fromUtf8("selectFolderButton"));
+
+        gridLayout_6->addWidget(selectFolderButton, 3, 2, 1, 2);
+
+        UDPIPxml = new QLineEdit(cfg_tab);
+        UDPIPxml->setObjectName(QString::fromUtf8("UDPIPxml"));
+        UDPIPxml->setMaxLength(15);
+        UDPIPxml->setClearButtonEnabled(false);
+
+        gridLayout_6->addWidget(UDPIPxml, 4, 1, 1, 2);
+
+        label_4 = new QLabel(cfg_tab);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout_6->addWidget(label_4, 5, 0, 1, 1);
+
+        label_14 = new QLabel(cfg_tab);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        gridLayout_6->addWidget(label_14, 7, 0, 1, 1);
+
+        TCPIPxml = new QLineEdit(cfg_tab);
+        TCPIPxml->setObjectName(QString::fromUtf8("TCPIPxml"));
+        TCPIPxml->setInputMethodHints(Qt::ImhNone);
+        TCPIPxml->setMaxLength(15);
+
+        gridLayout_6->addWidget(TCPIPxml, 5, 1, 1, 2);
+
+        UDPPortxml = new QLineEdit(cfg_tab);
+        UDPPortxml->setObjectName(QString::fromUtf8("UDPPortxml"));
+        sizePolicy6.setHeightForWidth(UDPPortxml->sizePolicy().hasHeightForWidth());
+        UDPPortxml->setSizePolicy(sizePolicy6);
+        UDPPortxml->setMaximumSize(QSize(50, 16777215));
+        UDPPortxml->setMaxLength(5);
+        UDPPortxml->setFrame(true);
+        UDPPortxml->setEchoMode(QLineEdit::Normal);
+
+        gridLayout_6->addWidget(UDPPortxml, 4, 3, 1, 1);
+
+        label_2 = new QLabel(cfg_tab);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        sizePolicy5.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy5);
+
+        gridLayout_6->addWidget(label_2, 3, 0, 1, 1);
+
+        verticalSpacer_11 = new QSpacerItem(20, 5, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        gridLayout_6->addItem(verticalSpacer_11, 2, 0, 1, 1);
+
+        label_20 = new QLabel(cfg_tab);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+
+        gridLayout_6->addWidget(label_20, 0, 0, 1, 4);
 
         QIcon icon21;
         icon21.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -1359,7 +1551,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(3);
         DecodeJPG->setDefault(false);
 
 
@@ -1436,24 +1628,35 @@ public:
         label_9->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 Y", nullptr));
         label_11->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \321\200\320\260\320\267\320\274\320\265\321\200\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(img_tab), QString());
+        label_3->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 UDP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
+        label_18->setText(QCoreApplication::translate("uiSAR", "\320\243\320\263\320\276\320\273 \321\201\320\275\320\276\321\201\320\260:", nullptr));
+        label_15->setText(QCoreApplication::translate("uiSAR", "\320\224\320\273\320\270\321\202\320\265\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
+        label_16->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
+        diaThetaAzimuth->setSuffix(QCoreApplication::translate("uiSAR", " \302\260", nullptr));
+        label_17->setText(QCoreApplication::translate("uiSAR", "\316\270-\320\260\320\267\320\270\320\274\321\203\321\202:", nullptr));
+        diaDriftAngle->setSuffix(QCoreApplication::translate("uiSAR", " \302\260", nullptr));
+        diaTimexml->setSuffix(QCoreApplication::translate("uiSAR", " \321\201", nullptr));
+        diaRangexml->setSuffix(QCoreApplication::translate("uiSAR", " \320\272\320\274", nullptr));
+        label_19->setText(QCoreApplication::translate("uiSAR", "\320\237\320\276\321\201\321\202\320\260\320\262\321\211\320\270\320\272 \320\272\320\260\321\200\321\202: ", nullptr));
+#if QT_CONFIG(tooltip)
+        providerGoogle->setToolTip(QCoreApplication::translate("uiSAR", "\320\240\320\265\320\272\320\276\320\274\320\265\320\275\320\264\321\203\320\265\321\202\321\201\321\217", nullptr));
+#endif // QT_CONFIG(tooltip)
+        providerGoogle->setText(QCoreApplication::translate("uiSAR", "Google", nullptr));
+        providerESRI->setText(QCoreApplication::translate("uiSAR", "Mapbox", nullptr));
+#if QT_CONFIG(tooltip)
+        providerOSM->setToolTip(QCoreApplication::translate("uiSAR", "\320\235\320\265 \321\200\320\265\320\272\320\276\320\274\320\265\320\275\320\264\321\203\320\265\321\202\321\201\321\217: \320\276\321\202\321\201\321\203\321\202\321\201\321\202\320\262\321\203\321\216\321\202 \321\201\320\277\321\203\321\202\320\275\320\270\320\272\320\276\320\262\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217", nullptr));
+#endif // QT_CONFIG(tooltip)
+        providerOSM->setText(QCoreApplication::translate("uiSAR", "OpenStreet", nullptr));
         predictRangexml->setSuffix(QCoreApplication::translate("uiSAR", " \320\272\320\274", nullptr));
         label_13->setText(QCoreApplication::translate("uiSAR", "\320\247\320\260\321\201\321\202\320\276\321\202\320\260 \320\276\320\261\320\275\320\276\320\262\320\273\320\265\320\275\320\270\321\217 \320\264\320\260\320\275\320\275\321\213\321\205 \321\202\320\265\320\273\320\265\320\274\320\265\321\202\321\200\320\270\320\270:", nullptr));
         refreshtelemetryxml->setSuffix(QCoreApplication::translate("uiSAR", " c", nullptr));
-        label_14->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \320\276\321\202\321\200\320\270\321\201\320\276\320\262\320\272\320\270 \320\275\320\260\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\321\217 \320\277\320\276\320\273\320\265\321\202\320\260:", nullptr));
         selectFolderButton->setText(QCoreApplication::translate("uiSAR", "\320\243\320\272\320\260\320\267\320\260\321\202\321\214", nullptr));
-        UDPPortxml->setText(QCoreApplication::translate("uiSAR", "9999", nullptr));
-        label_4->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 TCP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
-        label_3->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 UDP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
-        label_2->setText(QCoreApplication::translate("uiSAR", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\277\320\276\320\270\321\201\320\272\320\260 \321\200\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\321\205 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\271:", nullptr));
         UDPIPxml->setText(QCoreApplication::translate("uiSAR", "48.78.136.210", nullptr));
-        diaRangexml->setSuffix(QCoreApplication::translate("uiSAR", " \320\272\320\274", nullptr));
-        label_15->setText(QCoreApplication::translate("uiSAR", "\320\224\320\273\320\270\321\202\320\265\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
-        label_16->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \321\201\321\212\320\265\320\274\320\272\320\270:", nullptr));
-        diaTimexml->setSuffix(QCoreApplication::translate("uiSAR", " \321\201", nullptr));
-        label_17->setText(QCoreApplication::translate("uiSAR", "\316\270-\320\260\320\267\320\270\320\274\321\203\321\202:", nullptr));
-        diaThetaAzimuth->setSuffix(QCoreApplication::translate("uiSAR", " \302\260", nullptr));
-        label_18->setText(QCoreApplication::translate("uiSAR", "\320\243\320\263\320\276\320\273 \321\201\320\275\320\276\321\201\320\260:", nullptr));
-        diaDriftAngle->setSuffix(QCoreApplication::translate("uiSAR", " \302\260", nullptr));
+        label_4->setText(QCoreApplication::translate("uiSAR", "\320\220\320\264\321\200\320\265\321\201 TCP \320\277\320\276 \321\203\320\274\320\276\320\273\321\207\320\260\320\275\320\270\321\216:", nullptr));
+        label_14->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \320\276\321\202\321\200\320\270\321\201\320\276\320\262\320\272\320\270 \320\275\320\260\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\321\217 \320\277\320\276\320\273\320\265\321\202\320\260:", nullptr));
+        UDPPortxml->setText(QCoreApplication::translate("uiSAR", "9999", nullptr));
+        label_2->setText(QCoreApplication::translate("uiSAR", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\277\320\276\320\270\321\201\320\272\320\260 \321\200\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\321\205 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\271:", nullptr));
+        label_20->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213</span></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(cfg_tab), QString());
         label_6->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\230\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\321\213 \321\203\320\264\320\260\320\273\320\265\320\275\320\275\320\276\320\263\320\276 \321\201\320\276\320\265\320\264\320\270\320\275\320\265\320\275\320\270\321\217 </span><span style=\" font-weight:600; color:#aaaaff;\">UDP</span></p></body></html>", nullptr));
         UDPConsole->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\214 UDP", nullptr));
@@ -1470,7 +1673,7 @@ public:
         udpDisp->setPlaceholderText(QCoreApplication::translate("uiSAR", "Waiting for connection...  type \"connect ip:port\" for udp connection or connect via default UDP IP  type \"help\" for additional command info  ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(link_tab), QString());
         DecodeJPG->setText(QString());
-        infoLabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"center\"><img src=\":/img/ui.png\"/></p><p>\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: <span style=\" font-weight:600; font-style:italic; color:#8f8fff;\">inDev</span><span style=\" font-weight:600; font-style:italic; color:#bbb8ff;\">1105</span></p><p>\320\241\320\276\320\261\321\200\320\260\320\275\320\276 <span style=\" font-weight:600;\">05.11.2021</span></p><p><span style=\" color:#aaffff;\">github.com/whs31/qtsar_ui</span></p></body></html>", nullptr));
+        infoLabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"center\"><img src=\":/img/ui.png\"/></p><p>\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: <span style=\" font-weight:600; font-style:italic; color:#8f8fff;\">inDev</span><span style=\" font-weight:600; font-style:italic; color:#bbb8ff;\">1106</span></p><p>\320\241\320\276\320\261\321\200\320\260\320\275\320\276 <span style=\" font-weight:600;\">06.11.2021</span></p><p><a href=\"https://github.com/whs31/qtsar_ui\"><span style=\" text-decoration: underline; color:#007af4;\">github.com/qtsar_ui</span></a></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(info_tab), QString());
         docker->setWindowTitle(QCoreApplication::translate("uiSAR", "\320\237\320\260\320\275\320\265\320\273\321\214 \320\270\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\320\276\320\262", nullptr));
         gpsPanClone->setText(QString());

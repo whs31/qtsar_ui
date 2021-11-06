@@ -14,10 +14,14 @@ Rectangle {
     id:rect
     objectName: "mapLoaded"
     //эти переменные должны импортироваться из .ini
-    property var predictLength: 0.2; //длина предикта в геоградусах
-    property var diagramWidth: 0.00337; //ширина предикта диаграммы в геоградусах при примерной скорости 90 км.ч и времени формирования 15 с
-    property var diagramLength: 0.0054; //длина предикта (3 км) в геоградусах
-    //*********************************************
+    property var mapProvider: "googlemaps";
+    property var mapModeSat: 3;
+    property var mapModeMap: 0;
+    property var dAzimuth: 0.0;
+    property var dLength: 0.0;
+    property var dAngle: 0.0;
+    property var dTime: 0.0;
+    property var predictLength: 0.2;
 
 
     property var imageArray: []
@@ -34,6 +38,31 @@ Rectangle {
     Invoker {
         id: markerDialog
     }
+
+    function loadSettings(provider: QString, d_azimuth: double, d_length: double, drift_angle: double, capture_time: double, predict_range: double)
+    {
+        console.log("QML settings loaded!");
+        if(provider==="google")
+        {
+            mapProvider = "googlemaps"; mapModeSat = 3; mapModeMap = 0;
+        } else if(provider==="esri") { mapModeSat = 9; mapModeMap = 5;
+            mapProvider = "mapboxgl";
+        } else if(provider==="osm") { mapModeSat = 5; mapModeMap = 0;
+            mapProvider = "osm";
+        }
+        dAzimuth = d_azimuth;
+        dLength = convertGeoKMeters(d_length);
+        dAngle = drift_angle;
+        dTime = capture_time;
+        predictLength = convertGeoKMeters(predict_range);
+    }
+
+    function convertGeoKMeters (metric: double)
+    {
+        //1 градус = 111.12 км
+        return metric*0.00899928;
+    }
+
     function transformScale(fileCounter: int, arg: double)
     {
         imageArray[fileCounter].zoomLevel += arg;
@@ -51,14 +80,14 @@ Rectangle {
     function swapMapModes(satellite: bool)
     {
         if(satellite) {
-            mapView.activeMapType = mapView.supportedMapTypes[3]//sat
+            mapView.activeMapType = mapView.supportedMapTypes[mapModeSat]//sat
             routeLengthText.color = "white";
             overlayPlane.color = "yellow";
             mapPolyline.line.color = "yellow";
             mapPredictLine.line.color = '#ffe9ad';
         }
         else {
-            mapView.activeMapType = mapView.supportedMapTypes[0]//map
+            mapView.activeMapType = mapView.supportedMapTypes[mapModeMap]//map
             routeLengthText.color = "black";
             overlayPlane.color = "darkRed";
             mapPolyline.line.color = "darkRed";
@@ -120,7 +149,7 @@ Rectangle {
 
                 if(dx<0) { planeMapItem.rotation = angle-10; } //загадка //проблема в том, как qml считает центр вращения, так как предикт работает как ожидалось
                 else if(dx>0) { planeMapItem.rotation = angle+10; }
-                var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
+                /*var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
                 var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength;
                 var polyVertex_lat = lat+Math.sin((90-angle)*Math.PI/180) * diagramWidth/2;
                 var polyVertex_lon = lon+Math.cos((90-angle)*Math.PI/180) * diagramWidth/2; //нужна еще проверка на левый и правый борт рлс
@@ -129,11 +158,11 @@ Rectangle {
                 var polyBottom_lon = lon+Math.cos((90+angle)*Math.PI/180) * diagramLength;
                 var polyTop_lat = lat+Math.sin((90-angle)*Math.PI/180) * diagramWidth+Math.sin((90+angle)*Math.PI/180) * diagramLength;
                 var polyTop_lon = lon+Math.cos((90-angle)*Math.PI/180) * diagramWidth+Math.cos((90+angle)*Math.PI/180) * diagramLength;
-                //
+                //*/
                 mapPredictLine.addCoordinate(QtPositioning.coordinate(p_lat, p_lon));
-                predictPoly.addCoordinate(QtPositioning.coordinate(polyVertex_lat, polyVertex_lon));
-                predictPoly.addCoordinate(QtPositioning.coordinate(polyTop_lat, polyTop_lon));
-                predictPoly.addCoordinate(QtPositioning.coordinate(polyBottom_lat, polyBottom_lon));
+                //predictPoly.addCoordinate(QtPositioning.coordinate(polyVertex_lat, polyVertex_lon));
+                //predictPoly.addCoordinate(QtPositioning.coordinate(polyTop_lat, polyTop_lon));
+                //predictPoly.addCoordinate(QtPositioning.coordinate(polyBottom_lat, polyBottom_lon));
             }
 
             //длина предикта = 3 км, примерно 1/35 или 0.028 градуса
@@ -297,13 +326,13 @@ Item {
 
     Plugin {
         id: googlemaps
-        name: "googlemaps"//g
+        name: mapProvider
     }
 
     Map {
         id: mapView
         anchors.fill: parent
-        activeMapType: mapView.supportedMapTypes[3]//3
+        activeMapType: mapView.supportedMapTypes[mapModeSat]//3
         plugin: googlemaps
         center: QtPositioning.coordinate(51.660784, 39.200268); //51.660784, 39.200268
         zoomLevel: 15

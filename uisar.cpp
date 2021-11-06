@@ -699,9 +699,32 @@ void uiSAR::loadSettings()
     ui->diaThetaAzimuth->setValue(d);
     d = settings->value("map/diagram_drift_angle").toDouble();
     ui->diaDriftAngle->setValue(d);
+    t = settings->value("map/map_provider").toString();
+    if(t=="google")
+    {
+        ui->providerGoogle->setChecked(1);
+        ui->providerESRI->setChecked(0);
+        ui->providerOSM->setChecked(0);
+    } else if(t=="esri") {
+        ui->providerESRI->setChecked(1);
+        ui->providerOSM->setChecked(0);
+        ui->providerGoogle->setChecked(0);
+    } else if(t=="osm") {
+        ui->providerOSM->setChecked(1);
+        ui->providerESRI->setChecked(0);
+        ui->providerGoogle->setChecked(0);
+    }
     t = settings->value("header/version").toString();
 
     //to qml
+    auto qml = ui->osmMap->rootObject();
+    QMetaObject::invokeMethod(qml, "loadSettings",
+            Q_ARG(QVariant, settings->value("map/map_provider").toString()),
+            Q_ARG(double, settings->value("map/diagram_theta_azimuth").toDouble()),
+            Q_ARG(double, settings->value("map/diagram_length").toDouble()),
+            Q_ARG(double, settings->value("map/diagram_drift_angle").toDouble()),
+            Q_ARG(double, settings->value("map/capture_time").toDouble()),
+            Q_ARG(double, settings->value("map/predict_line_range").toDouble()));
 
     qInfo()<<"Config loaded. Version "<<t;
 
@@ -755,4 +778,19 @@ void uiSAR::on_diaThetaAzimuth_valueChanged(double arg1)
 void uiSAR::on_diaDriftAngle_valueChanged(double arg1)
 {
     settings->setValue("map/diagram_drift_angle", arg1);
+}
+
+void uiSAR::on_providerGoogle_clicked()
+{
+    settings->setValue("map/map_provider", "google");
+}
+
+void uiSAR::on_providerESRI_clicked()
+{
+    settings->setValue("map/map_provider", "esri");
+}
+
+void uiSAR::on_providerOSM_clicked()
+{
+    settings->setValue("map/map_provider", "osm");
 }

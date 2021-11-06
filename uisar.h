@@ -127,6 +127,12 @@ private slots:
 
     void on_diaDriftAngle_valueChanged(double arg1);
 
+    void on_providerGoogle_clicked();
+
+    void on_providerESRI_clicked();
+
+    void on_providerOSM_clicked();
+
 private:
     static uiSAR * pMainWindow;
 
