@@ -729,7 +729,7 @@ void uiSAR::loadSettings()
     qInfo()<<"Config loaded. Version "<<t;
 
 }
-
+//Здесь нужно все поменять: настройки должны сохраняться по нажатию на кнопку, а не по изменению, и передаваться в QML по нажатию этой же кнопки. Также нужно добавить кнопку отмены изменений (просто загружать конфиг обратно по нажатию, не передавать в кумл)
 void uiSAR::on_UDPIPxml_textChanged(const QString &arg1)
 {
     settings->setValue("telemetry/udp_ip_default", arg1);

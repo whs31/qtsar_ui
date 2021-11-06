@@ -298,7 +298,7 @@ public:
         clearTrack = new QPushButton(map_tab);
         clearTrack->setObjectName(QString::fromUtf8("clearTrack"));
         clearTrack->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"  background-color: rgb(191, 118, 118);\n"
+"  background-color: #CF6679;\n"
 "  color: #E0E1E3;\n"
 "  border-radius: 4px;\n"
 "  padding: 2px;\n"
@@ -1077,7 +1077,7 @@ public:
         providerGoogle->setObjectName(QString::fromUtf8("providerGoogle"));
         providerGoogle->setToolTipDuration(5000);
         providerGoogle->setStyleSheet(QString::fromUtf8("QRadioButton {\n"
-"  background-color: #19232D;\n"
+"  background-color: transparent;\n"
 "  color: #03DAC6;\n"
 "  spacing: 4px;\n"
 "  padding-top: 4px;\n"
@@ -1098,7 +1098,7 @@ public:
 "}\n"
 "\n"
 "QRadioButton QWidget {\n"
-"  background-color: #19232D;\n"
+"  background-color: transparent;\n"
 "  color: #E0E1E3;\n"
 "  spacing: 0px;\n"
 "  padding: 0px;\n"
@@ -1121,8 +1121,8 @@ public:
 "QRadioButton::indicator:unchecked:hover, QRadioButton::indicator:unchecked:focus, QRadioButton::indicator:unchecked:pressed {\n"
 "  border: none;\n"
 "  outline: none;\n"
-"  image: url(\":/qss_icons/dark/r"
-                        "c/radio_unchecked_focus.png\");\n"
+"  image: url(\":/qss_icon"
+                        "s/dark/rc/radio_unchecked_focus.png\");\n"
 "}\n"
 "\n"
 "QRadioButton::indicator:unchecked:disabled {\n"
@@ -1159,7 +1159,7 @@ public:
         providerOSM->setObjectName(QString::fromUtf8("providerOSM"));
         providerOSM->setToolTipDuration(5000);
         providerOSM->setStyleSheet(QString::fromUtf8("QRadioButton {\n"
-"  background-color: #19232D;\n"
+"  background-color: transparent;\n"
 "	color: #CF6679;\n"
 "  spacing: 4px;\n"
 "  padding-top: 4px;\n"
@@ -1180,7 +1180,7 @@ public:
 "}\n"
 "\n"
 "QRadioButton QWidget {\n"
-"  background-color: #19232D;\n"
+"  background-color: transparent;\n"
 "  color: #E0E1E3;\n"
 "  spacing: 0px;\n"
 "  padding: 0px;\n"
@@ -1203,8 +1203,8 @@ public:
 "QRadioButton::indicator:unchecked:hover, QRadioButton::indicator:unchecked:focus, QRadioButton::indicator:unchecked:pressed {\n"
 "  border: none;\n"
 "  outline: none;\n"
-"  image: url(\":/qss_icons/dark/rc"
-                        "/radio_unchecked_focus.png\");\n"
+"  image: url(\":/qss_icons"
+                        "/dark/rc/radio_unchecked_focus.png\");\n"
 "}\n"
 "\n"
 "QRadioButton::indicator:unchecked:disabled {\n"
@@ -1505,7 +1505,7 @@ public:
         changeMapMode = new QPushButton(dockWidgetContents_2);
         changeMapMode->setObjectName(QString::fromUtf8("changeMapMode"));
         changeMapMode->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"  background-color: rgb(170, 113, 84);\n"
+"  background-color:#7c513a;\n"
 "  color: #E0E1E3;\n"
 "  border-radius: 4px;\n"
 "  padding: 2px;\n"
@@ -1515,7 +1515,7 @@ public:
 "\n"
 "\n"
 "QPushButton:checked {\n"
-"  background-color:rgb(73, 132, 63);\n"
+"  background-color:#00564d;\n"
 "  border-radius: 4px;\n"
 "  padding: 2px;\n"
 "  outline: none;\n"
@@ -1526,7 +1526,7 @@ public:
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"  background-color: rgb(170, 170, 127);\n"
+"  background-color: #AAAAAA;\n"
 "  color: #E0E1E3;\n"
 "}\n"
 "\n"
@@ -1551,7 +1551,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(0);
         DecodeJPG->setDefault(false);
 
 

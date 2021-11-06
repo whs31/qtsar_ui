@@ -82,9 +82,9 @@ Rectangle {
         if(satellite) {
             mapView.activeMapType = mapView.supportedMapTypes[mapModeSat]//sat
             routeLengthText.color = "white";
-            overlayPlane.color = "yellow";
-            mapPolyline.line.color = "yellow";
-            mapPredictLine.line.color = '#ffe9ad';
+            overlayPlane.color = "#03DAC6";
+            mapPolyline.line.color = "#03DAC6";
+            mapPredictLine.line.color = '#93E5DD';
         }
         else {
             mapView.activeMapType = mapView.supportedMapTypes[mapModeMap]//map
@@ -353,7 +353,7 @@ Item {
                 anchors.fill: planeMapItem;
                 source: planeSource;
                 opacity: 1;
-                color: "yellow"
+                color: "#03DAC6"
             }
         }
 
@@ -361,22 +361,22 @@ Item {
             id: mapPolyline
             line.width: 4
                 opacity: 0.8
-                line.color: 'yellow'
+                line.color: '#03DAC6'
                 path: [ ]
         }
         MapPolyline {
             id: mapPredictLine
             line.width: 4
                 opacity: 0.4
-                line.color: '#ffe9ad'
+                line.color: '#93E5DD'
                 path: [ ]
         }
         MapPolygon {
             id: predictPoly
             opacity: 0.4
-            border.color: "yellow"
-            border.width: 3
-            color: "#ffe9ad"
+            border.color: "#03DAC6"
+            border.width: 2
+            color: "#93E5DD"
             path: []
         }
 

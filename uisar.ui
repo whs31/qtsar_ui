@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -247,7 +247,7 @@
            <widget class="QPushButton" name="clearTrack">
             <property name="styleSheet">
              <string notr="true">QPushButton {
-  background-color: rgb(191, 118, 118);
+  background-color: #CF6679;
   color: #E0E1E3;
   border-radius: 4px;
   padding: 2px;
@@ -1686,7 +1686,7 @@ QPushButton:pressed {
             </property>
             <property name="styleSheet">
              <string notr="true">QRadioButton {
-  background-color: #19232D;
+  background-color: transparent;
   color: #03DAC6;
   spacing: 4px;
   padding-top: 4px;
@@ -1707,7 +1707,7 @@ QRadioButton:disabled {
 }
 
 QRadioButton QWidget {
-  background-color: #19232D;
+  background-color: transparent;
   color: #E0E1E3;
   spacing: 0px;
   padding: 0px;
@@ -1780,7 +1780,7 @@ QRadioButton::indicator:checked:disabled {
             </property>
             <property name="styleSheet">
              <string notr="true">QRadioButton {
-  background-color: #19232D;
+  background-color: transparent;
 	color: #CF6679;
   spacing: 4px;
   padding-top: 4px;
@@ -1801,7 +1801,7 @@ QRadioButton:disabled {
 }
 
 QRadioButton QWidget {
-  background-color: #19232D;
+  background-color: transparent;
   color: #E0E1E3;
   spacing: 0px;
   padding: 0px;
@@ -2406,7 +2406,7 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="changeMapMode">
        <property name="styleSheet">
         <string notr="true">QPushButton {
-  background-color: rgb(170, 113, 84);
+  background-color:#7c513a;
   color: #E0E1E3;
   border-radius: 4px;
   padding: 2px;
@@ -2416,7 +2416,7 @@ p, li { white-space: pre-wrap; }
 
 
 QPushButton:checked {
-  background-color:rgb(73, 132, 63);
+  background-color:#00564d;
   border-radius: 4px;
   padding: 2px;
   outline: none;
@@ -2427,7 +2427,7 @@ QPushButton:checked:selected {
 }
 
 QPushButton:hover {
-  background-color: rgb(170, 170, 127);
+  background-color: #AAAAAA;
   color: #E0E1E3;
 }
 
