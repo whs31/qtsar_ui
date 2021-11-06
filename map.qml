@@ -158,8 +158,8 @@ Rectangle {
 
                 if(dx<0) { planeMapItem.rotation = angle-10; } //загадка //проблема в том, как qml считает центр вращения, так как предикт работает как ожидалось
                 else if(dx>0) { planeMapItem.rotation = angle+10; }
-                /*var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
-                var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength;
+                var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
+                var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength; /*
                 var polyVertex_lat = lat+Math.sin((90-angle)*Math.PI/180) * diagramWidth/2;
                 var polyVertex_lon = lon+Math.cos((90-angle)*Math.PI/180) * diagramWidth/2; //нужна еще проверка на левый и правый борт рлс
                 //need fix
