@@ -110,6 +110,10 @@ private slots:
     void on_saveSettings_clicked();
     void on_discardSettings_clicked();
 
+    void on_t_rSpin_valueChanged(double arg1);
+
+    void on_t_rotation_valueChanged(int value);
+
 private:
     static uiSAR * pMainWindow;
 

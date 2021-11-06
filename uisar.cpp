@@ -779,3 +779,18 @@ void uiSAR::on_discardSettings_clicked()
           break;
     }
 }
+
+void uiSAR::on_t_rSpin_valueChanged(double arg1)
+{
+    auto qml = ui->osmMap->rootObject();
+    double d = arg1-spinrArg0;
+    spinrArg0 = arg1;
+    QMetaObject::invokeMethod(qml, "transformRotate",
+            Q_ARG(int, fileCounter),
+            Q_ARG(double, d));
+}
+
+void uiSAR::on_t_rotation_valueChanged(int value)
+{
+    ui->t_rSpin->setValue(value);
+}

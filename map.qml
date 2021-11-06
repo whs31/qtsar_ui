@@ -67,6 +67,11 @@ Rectangle {
         return metric*0.00899928;
     }
 
+    function transformRotate(fileCounter: int, arg: double)
+    {
+        imageArray[fileCounter].sourceItem.rotation += arg;
+    }
+
     function transformScale(fileCounter: int, arg: double)
     {
         imageArray[fileCounter].zoomLevel += arg;
@@ -264,8 +269,7 @@ Item {
     function addImage(centerlat: float, centerlon: float, dx: float, dy: float, x0: float, y0: float, angle: float, filename: Qstring)
     {
         console.log("Displaying image from " + filename);
-        var item = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; MapQuickItem { transformOrigin: Item.TopLeft;
-            rotation: 0 }', mapView, "dynamic");
+        var item = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; MapQuickItem {  }', mapView, "dynamic");
         //one degree = 111 120 meters
             item.anchorPoint.x = -x0-1.5*y0;
             item.anchorPoint.y = 1.5*y0;
@@ -274,6 +278,8 @@ Item {
 import QtQuick 2.0;
 Rectangle {
     opacity: 0.99;
+    transformOrigin: Item.TopLeft;
+    rotation: 0
     Image {
         id: imageSource;
         opacity: 50;
@@ -282,6 +288,7 @@ Rectangle {
 }', mapView, "dynamic");
             item.zoomLevel = 16.5
             mapView.addMapItem(item);
+            item.sourceItem.rotation = angle;
             imageArray.push(item);
             //change opacity of newly created jpg
             changeOpacityOfCurrentImage(gOpacity);
