@@ -71,7 +71,6 @@ public slots:
     void qmlDialogSlot(float markerLat, float markerLon);
 private slots:
     //JPG slots
-    void on_DecodeJPG_clicked();
     void on_panButton_clicked();
     void on_showButton_clicked();
     void on_opacitySlider_sliderMoved(int position);

@@ -142,14 +142,6 @@ uiSAR::JPGFields uiSAR::decode_jpgs(QString path)
 
 }
 
-void uiSAR::on_DecodeJPG_clicked()
-{
-    //
-    //decode_jpgs(jpg_path);
-    qDebug() << "on_DecodeJPG_clicked";
-}
-
-
 void uiSAR::on_panButton_clicked()
 {
     JPGFields _field = readField();
@@ -343,7 +335,6 @@ void uiSAR::on_placeMarkerButton_clicked()
 void uiSAR::on_pushButton_clicked()
 {
     QString xmlAddress = ui->UDPIPxml->text();
-    bool ok;
     QString xmlPort = ui->UDPPortxml->text();
     ui->udpDisp->setTextColor(Qt::blue);
     ui->udpDisp->insertPlainText("Address: "+xmlAddress+":"+xmlPort+"\r\n");
@@ -355,7 +346,7 @@ void uiSAR::on_pushButton_clicked()
 
 void uiSAR::onTimer()
 {
-    int t = Telemery->Send("update");
+    Telemery->Send("update"); //int t =
 }
 
 void uiSAR::on_pushButton_2_clicked()
@@ -500,26 +491,26 @@ void uiSAR::initUI(){
 
 void uiSAR::updateTelemetry(){
 
-    char* infoHtml = "<font color=\"DarkGray\">";
-    char* markupHtml = "<font color=\"Cyan\">";
-    char* markup2Html = "<font color=\"DarkCyan\">";
-    char* endHtml = "</font>";
+    QString infoHtml = "<font color=\"DarkGray\">";
+    QString markupHtml = "<font color=\"Cyan\">";
+    QString markup2Html = "<font color=\"DarkCyan\">";
+    QString endHtml = "</font>";
 
     ui->udpDisp->setTextColor(Qt::darkGray);
     ui->udpDisp->insertPlainText("udp incoming telemetry: ");
     ui->udpDisp->setTextColor(Qt::darkYellow);
 
     QString tmp;
-    tmp.sprintf("%0.6f", TelemetryData->lat);
+    tmp.asprintf("%0.6f", TelemetryData->lat);
     ui->nav_latdisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LAT: "+tmp+"  ");
-    tmp.sprintf("%0.6f", TelemetryData->lon);
+    tmp.asprintf("%0.6f", TelemetryData->lon);
     ui->nav_londisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LON: "+tmp+"  ");
-    tmp.sprintf("%0.1f", TelemetryData->speed);
+    tmp.asprintf("%0.1f", TelemetryData->speed);
     ui->nav_accdisp->setText(markup2Html+tmp+infoHtml+" км/ч"+endHtml);
     ui->udpDisp->insertPlainText("SPD: "+tmp+"  ");
-    tmp.sprintf("%0.1f", TelemetryData->ele);
+    tmp.asprintf("%0.1f", TelemetryData->ele);
     ui->nav_altdisp->setText(markup2Html+tmp+infoHtml+" м"+endHtml);
     ui->udpDisp->insertPlainText("ELE: "+tmp+"\r\n");
 
