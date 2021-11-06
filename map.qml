@@ -17,11 +17,17 @@ Rectangle {
     property var mapProvider: "googlemaps";
     property var mapModeSat: 3;
     property var mapModeMap: 0;
+
     property var dAzimuth: 0.0;
     property var dLength: 0.0;
     property var dAngle: 0.0;
     property var dTime: 0.0;
     property var predictLength: 0.2;
+
+    property var planeSpeed: 80.0;
+    //---------------------------------------------
+    property var rectMajor: 0.0;
+    property var rectMinor: 0.0;
 
     property var imageArray: []
     property var coordinate: QtPositioning.coordinate(0,0);
@@ -59,6 +65,17 @@ Rectangle {
         dAngle = drift_angle;
         dTime = capture_time;
         predictLength = convertGeoKMeters(predict_range);
+
+        //Math block
+        var b = 0.5*(180-dAzimuth);
+        var c = 90-b;
+        c = c*Math.PI/180;
+        var radAzimuth = (dAzimuth*Math.PI)/180;
+        var side = dLength/(Math.cos(c));
+        rectMajor = side*Math.sqrt(2-2*Math.cos(radAzimuth));
+        rectMinor = rectMajor*0.35;
+        //console.log("Большая сторона полигона: ", rectMajor, " , меньшая сторона полигона: ", rectMinor);
+        //-----------
     }
 
     function convertGeoKMeters (metric: double)
@@ -141,7 +158,6 @@ Rectangle {
             mapPolyline.addCoordinate(QtPositioning.coordinate(lat,lon));
             clearPredict();
             mapPredictLine.addCoordinate(QtPositioning.coordinate(lat,lon));
-            //predictPoly.addCoordinate(QtPositioning.coordinate(lat,lon));
 
             routeLengthText.text = "Точки трека: " + mapPolyline.pathLength();
             var dx = lat - panToCurrentlocation.latitude;
@@ -153,31 +169,39 @@ Rectangle {
                 angle = (radAngle * 180) / Math.PI;
                 if(dx<0)
                 {
-                    angle += 180; //170
+                    angle += 180;
                 }
-
-                if(dx<0) { planeMapItem.rotation = angle-10; } //загадка //проблема в том, как qml считает центр вращения, так как предикт работает как ожидалось
+                if(dx<0) { planeMapItem.rotation = angle-10; } //загадка //проблема в том, как qml считает центр вращения, так как предикт работает как ожидалось //почему-то все не работает на других провайдерах карт
                 else if(dx>0) { planeMapItem.rotation = angle+10; }
                 var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
-                var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength; /*
-                var polyVertex_lat = lat+Math.sin((90-angle)*Math.PI/180) * diagramWidth/2;
-                var polyVertex_lon = lon+Math.cos((90-angle)*Math.PI/180) * diagramWidth/2; //нужна еще проверка на левый и правый борт рлс
-                //need fix
-                var polyBottom_lat = lat+Math.sin((90+angle)*Math.PI/180) * diagramLength;
-                var polyBottom_lon = lon+Math.cos((90+angle)*Math.PI/180) * diagramLength;
-                var polyTop_lat = lat+Math.sin((90-angle)*Math.PI/180) * diagramWidth+Math.sin((90+angle)*Math.PI/180) * diagramLength;
-                var polyTop_lon = lon+Math.cos((90-angle)*Math.PI/180) * diagramWidth+Math.cos((90+angle)*Math.PI/180) * diagramLength;
-                //*/
+                var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength;
+                /*
+                    1 точка -> малое основание трапеции, лежит дальше от иконки
+                    2 точка -> малое основание трапеции, лежит ближе к иконке
+                    3 точка -> большее основание трапеции, лежит дальше от иконки
+                    4 точка -> большее основание трапеции, лежит ближе к иконке
+                  */
+                var y1 = lat+Math.sin((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime;
+                var x1 = lon+Math.cos((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime;
+                var y2 = lat+Math.sin((90-angle)*Math.PI/180) * (convertGeoKMeters(planeSpeed/3.6/1000) * dTime - rectMinor);  //все равно что-то не так со скоростью, нужно менять конвертацию
+                var x2 = lon+Math.cos((90-angle)*Math.PI/180) * (convertGeoKMeters(planeSpeed/3.6/1000) * dTime - rectMinor);
+
+                var beta = Math.atan((2*dLength)/(rectMajor-rectMinor));
+                var side = dLength / (Math.sin(beta));
+                beta = beta * 180 / Math.PI;
+                beta = beta + (90-angle);
+
+                var y3 = lat+Math.sin((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.sin(beta*Math.PI/180) * side;
+                var x3 = lon+Math.cos((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.cos(beta*Math.PI/180) * side;
+                var y4 = lat+Math.sin((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.sin(beta*Math.PI/180) * side - Math.sin((90-angle)*Math.PI/180) * rectMajor;
+                var x4 = lon+Math.cos((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.cos(beta*Math.PI/180) * side - Math.cos((90-angle)*Math.PI/180) * rectMajor;
+
+                predictPoly.addCoordinate(QtPositioning.coordinate(y1, x1));
+                predictPoly.addCoordinate(QtPositioning.coordinate(y2, x2));
+                predictPoly.addCoordinate(QtPositioning.coordinate(y4, x4));
+                predictPoly.addCoordinate(QtPositioning.coordinate(y3, x3));
                 mapPredictLine.addCoordinate(QtPositioning.coordinate(p_lat, p_lon));
-                //predictPoly.addCoordinate(QtPositioning.coordinate(polyVertex_lat, polyVertex_lon));
-                //predictPoly.addCoordinate(QtPositioning.coordinate(polyTop_lat, polyTop_lon));
-                //predictPoly.addCoordinate(QtPositioning.coordinate(polyBottom_lat, polyBottom_lon));
             }
-
-            //длина предикта = 3 км, примерно 1/35 или 0.028 градуса
-            //широта = синус угла * длина
-            //долгота = косинус угла * длина
-
             panToCurrentlocation = QtPositioning.coordinate(lat,lon);
         }
         if(enablePlane) {
@@ -395,7 +419,7 @@ Rectangle {
         MapPolygon {
             id: predictPoly
             opacity: 0.4
-            border.color: "#03DAC6"
+            border.color: "#03DAC6" //03DAC6
             border.width: 2
             color: "#93E5DD"
             path: []

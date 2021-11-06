@@ -25,7 +25,7 @@ uiSAR::uiSAR(QWidget *parent)
     pMainWindow = this;
     settings = new QSettings(QCoreApplication::applicationDirPath()+"/config.ini",
                              QSettings::IniFormat);
-    settings->setValue("header/version", "1106");
+    //settings->setValue("header/version", "1106");
 
 
     /* Интерфейс для получения телеметрии */
@@ -418,6 +418,7 @@ void uiSAR::on_selectFolderButton_clicked()
 
         decode_jpgs(imageList[0]);
         ui->transformJPGbox->setEnabled(1);
+        ui->groupBox->setEnabled(1);
     }else{
         statusBar()->showMessage(tr("Каталог с изображениями не распознан, повторите ввод через панель инструментов"), 15000);
         QMessageBox warningDialogue;
@@ -514,16 +515,16 @@ void uiSAR::updateTelemetry(){
     ui->udpDisp->setTextColor(Qt::darkYellow);
 
     QString tmp;
-    tmp.asprintf("%0.6f", TelemetryData->lat);
+    tmp.sprintf("%0.6f", TelemetryData->lat);
     ui->nav_latdisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LAT: "+tmp+"  ");
-    tmp.asprintf("%0.6f", TelemetryData->lon);
+    tmp.sprintf("%0.6f", TelemetryData->lon);
     ui->nav_londisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LON: "+tmp+"  ");
-    tmp.asprintf("%0.1f", TelemetryData->speed);
+    tmp.sprintf("%0.1f", TelemetryData->speed);
     ui->nav_accdisp->setText(markup2Html+tmp+infoHtml+" км/ч"+endHtml);
     ui->udpDisp->insertPlainText("SPD: "+tmp+"  ");
-    tmp.asprintf("%0.1f", TelemetryData->ele);
+    tmp.sprintf("%0.1f", TelemetryData->ele);
     ui->nav_altdisp->setText(markup2Html+tmp+infoHtml+" м"+endHtml);
     ui->udpDisp->insertPlainText("ELE: "+tmp+"\r\n");
 

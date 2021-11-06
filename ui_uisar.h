@@ -588,6 +588,7 @@ public:
         tabWidget->addTab(tcp_tab, icon12, QString());
         img_tab = new QWidget();
         img_tab->setObjectName(QString::fromUtf8("img_tab"));
+        img_tab->setEnabled(true);
         gridLayout_7 = new QGridLayout(img_tab);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
         line_3 = new QFrame(img_tab);
@@ -603,6 +604,7 @@ public:
 
         groupBox = new QGroupBox(img_tab);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setEnabled(false);
         formLayout_2 = new QFormLayout(groupBox);
         formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
         jpgtls_latlabel = new QLabel(groupBox);
@@ -779,6 +781,7 @@ public:
 
         opacitySlider = new QSlider(img_tab);
         opacitySlider->setObjectName(QString::fromUtf8("opacitySlider"));
+        opacitySlider->setEnabled(true);
         sizePolicy5.setHeightForWidth(opacitySlider->sizePolicy().hasHeightForWidth());
         opacitySlider->setSizePolicy(sizePolicy5);
         opacitySlider->setCursor(QCursor(Qt::SizeHorCursor));
@@ -1695,7 +1698,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(5);
         DecodeJPG->setDefault(false);
 
 
@@ -1819,7 +1822,7 @@ public:
         udpDisp->setPlaceholderText(QCoreApplication::translate("uiSAR", "Waiting for connection...  type \"connect ip:port\" for udp connection or connect via default UDP IP  type \"help\" for additional command info  ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(link_tab), QString());
         DecodeJPG->setText(QString());
-        infoLabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"center\"><img src=\":/img/ui.png\"/></p><p>\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: <span style=\" font-weight:600; font-style:italic; color:#8f8fff;\">inDev</span><span style=\" font-weight:600; font-style:italic; color:#bbb8ff;\">1106</span></p><p>\320\241\320\276\320\261\321\200\320\260\320\275\320\276 <span style=\" font-weight:600;\">06.11.2021</span></p><p><a href=\"https://github.com/whs31/qtsar_ui\"><span style=\" text-decoration: underline; color:#007af4;\">github.com/qtsar_ui</span></a></p></body></html>", nullptr));
+        infoLabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"center\"><img src=\":/img/ui.png\"/></p><p>\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: <span style=\" font-weight:600; font-style:italic; color:#aa4444;\">alpha </span><span style=\" font-weight:600; font-style:italic; color:#c77777;\">0.1.0</span></p><p>\320\241\320\276\320\261\321\200\320\260\320\275\320\276 <span style=\" font-weight:600;\">06.11.2021</span></p><p><a href=\"https://github.com/whs31/qtsar_ui\"><span style=\" text-decoration: underline; color:#395f78;\">github.com/qtsar_ui</span></a></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(info_tab), QString());
         docker->setWindowTitle(QCoreApplication::translate("uiSAR", "\320\237\320\260\320\275\320\265\320\273\321\214 \320\270\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\320\276\320\262", nullptr));
         gpsPanClone->setText(QString());

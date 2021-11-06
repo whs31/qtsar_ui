@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -723,6 +723,9 @@ QPushButton:pressed {
        </layout>
       </widget>
       <widget class="QWidget" name="img_tab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <attribute name="icon">
         <iconset resource="img.qrc">
          <normaloff>:/tabIcons/jpg.png</normaloff>:/tabIcons/jpg.png</iconset>
@@ -756,6 +759,9 @@ QPushButton:pressed {
         </item>
         <item row="10" column="0">
          <widget class="QGroupBox" name="groupBox">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="title">
            <string>Метаданные РЛИ</string>
           </property>
@@ -1106,6 +1112,9 @@ QPushButton:pressed {
           </item>
           <item>
            <widget class="QSlider" name="opacitySlider">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -2453,7 +2462,7 @@ p, li { white-space: pre-wrap; }
         <item row="1" column="0">
          <widget class="QLabel" name="infoLabel">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/img/ui.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;Версия программы: &lt;span style=&quot; font-weight:600; font-style:italic; color:#8f8fff;&quot;&gt;inDev&lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic; color:#bbb8ff;&quot;&gt;1106&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Собрано &lt;span style=&quot; font-weight:600;&quot;&gt;06.11.2021&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/whs31/qtsar_ui&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;github.com/qtsar_ui&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/img/ui.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;Версия программы: &lt;span style=&quot; font-weight:600; font-style:italic; color:#aa4444;&quot;&gt;alpha &lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic; color:#c77777;&quot;&gt;0.1.0&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Собрано &lt;span style=&quot; font-weight:600;&quot;&gt;06.11.2021&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/whs31/qtsar_ui&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#395f78;&quot;&gt;github.com/qtsar_ui&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -2620,8 +2629,8 @@ QPushButton:selected {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="img.qrc"/>
   <include location="qdarkstyle/dark/style.qrc"/>
+  <include location="img.qrc"/>
  </resources>
  <connections/>
 </ui>
