@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -184,116 +184,12 @@
         <string/>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="5" column="2">
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <property name="spacing">
-           <number>3</number>
+        <item row="1" column="0" colspan="3">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <item>
-           <spacer name="verticalSpacer_9">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Maximum</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>25</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="panGPS">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>999999</width>
-              <height>27</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>Местоположение РЛС</string>
-            </property>
-            <property name="icon">
-             <iconset resource="img.qrc">
-              <normaloff>:/img/nav_pan.png</normaloff>:/img/nav_pan.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>21</width>
-              <height>21</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="clearTrack">
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-  background-color: #CF6679;
-  color: #E0E1E3;
-  border-radius: 4px;
-  padding: 2px;
-  outline: none;
-  border: none;
-}
-
-QPushButton:disabled {
-  background-color: rgb(131, 79, 79);
-  color: #9DA9B5;
-  border-radius: 4px;
-  padding: 2px;
-}
-
-QPushButton:hover {
-  background-color: rgb(255, 213, 213);
-  color: #E0E1E3;
-}
-
-QPushButton:pressed {
-  background-color: rgb(223, 223, 223);
-}
-</string>
-            </property>
-            <property name="text">
-             <string>Очистить трек</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Maximum</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>25</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+         </widget>
         </item>
         <item row="4" column="0" colspan="3">
          <widget class="QGroupBox" name="NAVSAR">
@@ -408,6 +304,44 @@ QPushButton:pressed {
           </layout>
          </widget>
         </item>
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label_5">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Инструменты карты&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+         </widget>
+        </item>
         <item row="7" column="0" colspan="3">
          <layout class="QHBoxLayout" name="markerLayout">
           <property name="spacing">
@@ -490,45 +424,6 @@ QPushButton:pressed {
            </widget>
           </item>
          </layout>
-        </item>
-        <item row="1" column="0" colspan="3">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <spacer name="verticalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0">
-         <spacer name="verticalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="5" column="0" colspan="2">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -631,31 +526,143 @@ QPushButton:pressed {
             <property name="text">
              <string>Направление полета</string>
             </property>
+            <property name="icon">
+             <iconset resource="img.qrc">
+              <normaloff>:/img/path.png</normaloff>:/img/path.png</iconset>
+            </property>
            </widget>
           </item>
          </layout>
         </item>
-        <item row="0" column="0" colspan="3">
-         <widget class="QLabel" name="label_5">
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
+        <item row="9" column="1">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="frameShadow">
-           <enum>QFrame::Plain</enum>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
           </property>
-          <property name="lineWidth">
-           <number>0</number>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
           </property>
-          <property name="midLineWidth">
-           <number>0</number>
+         </spacer>
+        </item>
+        <item row="5" column="2">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>3</number>
           </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Инструменты карты&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="textFormat">
-           <enum>Qt::AutoText</enum>
-          </property>
-         </widget>
+          <item>
+           <spacer name="verticalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Maximum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>25</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="panGPS">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>999999</width>
+              <height>27</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Местоположение РЛС</string>
+            </property>
+            <property name="icon">
+             <iconset resource="img.qrc">
+              <normaloff>:/img/nav_pan.png</normaloff>:/img/nav_pan.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>21</width>
+              <height>21</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="clearTrack">
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: #b46363;
+  color: #E0E1E3;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+  border: none;
+}
+
+QPushButton:disabled {
+  background-color: rgb(131, 79, 79);
+  color: #9DA9B5;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+QPushButton:hover {
+  background-color: rgb(255, 213, 213);
+  color: #E0E1E3;
+}
+
+QPushButton:pressed {
+  background-color: rgb(223, 223, 223);
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Очистить трек</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Maximum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>25</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="8" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
         </item>
        </layout>
       </widget>
@@ -1278,6 +1285,9 @@ QPushButton:pressed {
         </item>
         <item row="13" column="0">
          <widget class="QGroupBox" name="transformJPGbox">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="title">
            <string>Редактирование геометрии РЛИ</string>
           </property>
@@ -1536,16 +1546,56 @@ QPushButton:pressed {
         <string/>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="5" column="3">
-         <widget class="QLineEdit" name="TCPPortxml">
-          <property name="maximumSize">
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Дальность отрисовки направления полета:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Каталог поиска радиолокационных изображений:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
            <size>
-            <width>50</width>
-            <height>16777215</height>
+            <width>20</width>
+            <height>5</height>
            </size>
           </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Настройки программы&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1" colspan="2">
+         <widget class="QLineEdit" name="TCPIPxml">
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
+          </property>
           <property name="maxLength">
-           <number>5</number>
+           <number>15</number>
           </property>
          </widget>
         </item>
@@ -1562,21 +1612,24 @@ QPushButton:pressed {
           </property>
          </widget>
         </item>
-        <item row="12" column="0">
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="6" column="1" colspan="3">
+         <widget class="QDoubleSpinBox" name="refreshtelemetryxml">
+          <property name="suffix">
+           <string> c</string>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
+          <property name="minimum">
+           <double>0.050000000000000</double>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
+          <property name="maximum">
+           <double>100.000000000000000</double>
           </property>
-         </spacer>
+          <property name="singleStep">
+           <double>0.500000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.500000000000000</double>
+          </property>
+         </widget>
         </item>
         <item row="8" column="0" colspan="4">
          <layout class="QGridLayout" name="gridLayout_12">
@@ -1856,13 +1909,6 @@ QRadioButton::indicator:checked:disabled {
           </item>
          </layout>
         </item>
-        <item row="1" column="0" colspan="4">
-         <widget class="Line" name="line_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
         <item row="7" column="1" colspan="3">
          <widget class="QDoubleSpinBox" name="predictRangexml">
           <property name="suffix">
@@ -1886,22 +1932,16 @@ QRadioButton::indicator:checked:disabled {
           </property>
          </widget>
         </item>
-        <item row="6" column="1" colspan="3">
-         <widget class="QDoubleSpinBox" name="refreshtelemetryxml">
-          <property name="suffix">
-           <string> c</string>
+        <item row="5" column="3">
+         <widget class="QLineEdit" name="TCPPortxml">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
           </property>
-          <property name="minimum">
-           <double>0.050000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.500000000000000</double>
-          </property>
-          <property name="value">
-           <double>0.500000000000000</double>
+          <property name="maxLength">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -1932,20 +1972,26 @@ QRadioButton::indicator:checked:disabled {
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Дальность отрисовки направления полета:</string>
+        <item row="12" column="0">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-         </widget>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
-        <item row="5" column="1" colspan="2">
-         <widget class="QLineEdit" name="TCPIPxml">
-          <property name="inputMethodHints">
-           <set>Qt::ImhNone</set>
-          </property>
-          <property name="maxLength">
-           <number>15</number>
+        <item row="1" column="0" colspan="4">
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -1977,41 +2023,143 @@ QRadioButton::indicator:checked:disabled {
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Каталог поиска радиолокационных изображений:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <spacer name="verticalSpacer_11">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0" colspan="4">
-         <widget class="QLabel" name="label_20">
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Настройки программы&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
+        <item row="9" column="0" colspan="4">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="saveSettings">
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: #521AD5;
+  color: #E0E1E3;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+  border: none;
+}
+
+QPushButton:disabled {
+  background-color: #222222;
+  color: #AAAAAA;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+QPushButton:checked {
+  background-color: #93E5DD;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+}
+
+QPushButton:checked:disabled {
+  background-color: #272727;
+  color: #AAAAAA;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+}
+
+QPushButton:checked:selected {
+  background: #93E5DD;
+}
+
+QPushButton:hover {
+  background-color: #BBBBBB;
+  color: #E0E1E3;
+}
+
+QPushButton:pressed {
+  background-color: #93E5DD;
+}
+
+QPushButton:selected {
+  background: #93E5DD;
+  color: #E0E1E3;
+}
+
+QPushButton::menu-indicator {
+  subcontrol-origin: padding;
+  subcontrol-position: bottom right;
+  bottom: 4px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Сохранить изменения</string>
+            </property>
+            <property name="icon">
+             <iconset resource="img.qrc">
+              <normaloff>:/img/save_white.png</normaloff>:/img/save_white.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="discardSettings">
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: #b46363;
+  color: #E0E1E3;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+  border: none;
+}
+
+QPushButton:disabled {
+  background-color: #222222;
+  color: #AAAAAA;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+QPushButton:checked {
+  background-color: #93E5DD;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+}
+
+QPushButton:checked:disabled {
+  background-color: #272727;
+  color: #AAAAAA;
+  border-radius: 4px;
+  padding: 2px;
+  outline: none;
+}
+
+QPushButton:checked:selected {
+  background: #93E5DD;
+}
+
+QPushButton:hover {
+  background-color: #BBBBBB;
+  color: #E0E1E3;
+}
+
+QPushButton:pressed {
+  background-color: #93E5DD;
+}
+
+QPushButton:selected {
+  background: #93E5DD;
+  color: #E0E1E3;
+}
+
+QPushButton::menu-indicator {
+  subcontrol-origin: padding;
+  subcontrol-position: bottom right;
+  bottom: 4px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Отменить изменения</string>
+            </property>
+            <property name="icon">
+             <iconset resource="img.qrc">
+              <normaloff>:/img/cancel.png</normaloff>:/img/cancel.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>

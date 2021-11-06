@@ -11,13 +11,11 @@ void uiSAR::ReadTelemetry(QByteArray data){
 
 }
 
-
 void uiSAR::ReadExec(QByteArray data){
     qDebug() << data;
     ui->consoleMain->write(data);
     ui->consoleMain->flush();
 }
-
 
 uiSAR * uiSAR::pMainWindow;
 uiSAR::uiSAR(QWidget *parent)
@@ -113,6 +111,7 @@ uiSAR::JPGFields uiSAR::readField()
     _field.filename = reader;
     return _field;
 }
+
 uiSAR::JPGFields uiSAR::decode_jpgs(QString path)
 {
     JPGFields _field = { 0,0,0,0,0,0,0, "empty filename" };
@@ -400,9 +399,8 @@ void uiSAR::on_jpg_gleft_clicked()
 
 void uiSAR::on_selectFolderButton_clicked()
 {
-    QString path = QFileDialog::getExistingDirectory(this, "Выберите папку с выходными изображениями РЛС",
-                                                     QStandardPaths::displayName(QStandardPaths::PicturesLocation),
-                                                     QFileDialog::ShowDirsOnly);
+    QString path = QFileDialog::getExistingDirectory(this, tr("Выберите папку с выходными изображениями РЛС"),
+                                                     QStandardPaths::displayName(QStandardPaths::DesktopLocation));
     QDir dir(path);
     dir.setFilter(QDir::Files | QDir::NoSymLinks | QDir::NoDot | QDir::NoDotDot);
     dir.setNameFilters(QStringList("*.jpg"));
@@ -419,6 +417,7 @@ void uiSAR::on_selectFolderButton_clicked()
         ui->jpg_gleft->setEnabled(true);
 
         decode_jpgs(imageList[0]);
+        ui->transformJPGbox->setEnabled(1);
     }else{
         statusBar()->showMessage(tr("Каталог с изображениями не распознан, повторите ввод через панель инструментов"), 15000);
         QMessageBox warningDialogue;
@@ -460,7 +459,22 @@ void uiSAR::on_clearTrack_clicked()
 void uiSAR::initUI(){
 
     ui->setupUi(this);
-
+    QDateTime UTC(QDateTime::currentDateTimeUtc());
+    QDateTime local(UTC.toLocalTime());
+    qInfo() << "                                        log start>>";
+    qInfo() << "------------Session time: " << local << "--------------------------";
+    if (QSslSocket::supportsSsl())
+    {
+        qInfo() << "OpenSSL detected: " << QSslSocket::supportsSsl() << ", OpenSSL build version: " << QSslSocket::sslLibraryBuildVersionString() << ", OpenSSL ver.: " << QSslSocket::sslLibraryVersionString();
+    }
+    else {
+        qCritical() << "OpenSSL detected: " << QSslSocket::supportsSsl() << ", OpenSSL build version: " << QSslSocket::sslLibraryBuildVersionString() << ", OpenSSL ver.: " << QSslSocket::sslLibraryVersionString();
+        QMessageBox openSSLDialogue;
+        openSSLDialogue.setWindowTitle("Библиотека OpenSSL не обнаружена!");
+        openSSLDialogue.setIcon(QMessageBox::Critical);
+        openSSLDialogue.setText("Попробуйте переустановить программу.");
+        openSSLDialogue.exec();
+    }
     //ui->osmMap->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
     ui->osmMap->show();
 
@@ -487,7 +501,6 @@ void uiSAR::initUI(){
     //con->resize(ui->consoleMain->width(), ui->consoleMain->height());
     //con->hide(); // Закомментировать чтобы показать
 }
-
 
 void uiSAR::updateTelemetry(){
 
@@ -580,20 +593,17 @@ void uiSAR::on_t_down_clicked()
     ui->t_ySpin->setValue(temp-3);
 }
 
-
 void uiSAR::on_t_left_clicked()
 {
     double temp = ui->t_xSpin->value();
     ui->t_xSpin->setValue(temp-3);
 }
 
-
 void uiSAR::on_t_right_clicked()
 {
     double temp = ui->t_xSpin->value();
     ui->t_xSpin->setValue(temp+3);
 }
-
 
 void uiSAR::on_t_xSpin_valueChanged(double arg1)
 {
@@ -662,22 +672,6 @@ void uiSAR::on_t_scale_valueChanged(int value)
 
 void uiSAR::loadSettings()
 {
-    QDateTime UTC(QDateTime::currentDateTimeUtc());
-    QDateTime local(UTC.toLocalTime());
-    qInfo() << "                                        log start>>";
-    qInfo() << "------------Session time: " << local << "--------------------------";
-    if (QSslSocket::supportsSsl())
-    {
-        qInfo() << "OpenSSL detected: " << QSslSocket::supportsSsl() << ", OpenSSL build version: " << QSslSocket::sslLibraryBuildVersionString() << ", OpenSSL ver.: " << QSslSocket::sslLibraryVersionString();
-    }
-    else {
-        qCritical() << "OpenSSL detected: " << QSslSocket::supportsSsl() << ", OpenSSL build version: " << QSslSocket::sslLibraryBuildVersionString() << ", OpenSSL ver.: " << QSslSocket::sslLibraryVersionString();
-        QMessageBox openSSLDialogue;
-        openSSLDialogue.setWindowTitle("Библиотека OpenSSL не обнаружена!");
-        openSSLDialogue.setIcon(QMessageBox::Critical);
-        openSSLDialogue.setText("Попробуйте переустановить программу.");
-        openSSLDialogue.exec();
-    }
     QString t = settings->value("telemetry/udp_ip_default").toString();
     double d;
     ui->UDPIPxml->setText(t);
@@ -729,68 +723,59 @@ void uiSAR::loadSettings()
     qInfo()<<"Config loaded. Version "<<t;
 
 }
-//Здесь нужно все поменять: настройки должны сохраняться по нажатию на кнопку, а не по изменению, и передаваться в QML по нажатию этой же кнопки. Также нужно добавить кнопку отмены изменений (просто загружать конфиг обратно по нажатию, не передавать в кумл)
-void uiSAR::on_UDPIPxml_textChanged(const QString &arg1)
+
+void uiSAR::on_saveSettings_clicked()
 {
-    settings->setValue("telemetry/udp_ip_default", arg1);
+    settings->setValue("telemetry/udp_ip_default", ui->UDPIPxml->text());
+    settings->setValue("telemetry/udp_port_default", ui->UDPPortxml->text());
+    settings->setValue("telemetry/tcp_ip_default", ui->TCPIPxml->text());
+    settings->setValue("telemetry/tcp_port_default", ui->TCPPortxml->text());
+    settings->setValue("telemetry/refresh_telemetry_time", ui->refreshtelemetryxml->value());
+    settings->setValue("map/predict_line_range", ui->predictRangexml->value());
+    settings->setValue("map/capture_time", ui->diaTimexml->value());
+    settings->setValue("map/diagram_length", ui->diaRangexml->value());
+    settings->setValue("map/diagram_theta_azimuth", ui->diaThetaAzimuth->value());
+    settings->setValue("map/diagram_drift_angle", ui->diaDriftAngle->value());
+    //
+    if(ui->providerGoogle->isChecked()) { settings->setValue("map/map_provider", "google"); } else if (ui->providerESRI->isChecked()) { settings->setValue("map/map_provider", "esri"); }
+    else if (ui->providerOSM->isChecked()) { settings->setValue("map/map_provider", "osm"); }
+
+    //to qml
+    auto qml = ui->osmMap->rootObject();
+    //провайдера карты можно менять только при перезапуске
+    QMetaObject::invokeMethod(qml, "loadSettings",
+            Q_ARG(QVariant, settings->value("map/map_provider").toString()),
+            Q_ARG(double, settings->value("map/diagram_theta_azimuth").toDouble()),
+            Q_ARG(double, settings->value("map/diagram_length").toDouble()),
+            Q_ARG(double, settings->value("map/diagram_drift_angle").toDouble()),
+            Q_ARG(double, settings->value("map/capture_time").toDouble()),
+            Q_ARG(double, settings->value("map/predict_line_range").toDouble()));
+    qInfo()<<"Config saved.";
+    QMessageBox notifyAboutRestart;
+    notifyAboutRestart.setWindowTitle("Сохранение настроек");
+    notifyAboutRestart.setIcon(QMessageBox::Information);
+    notifyAboutRestart.setText("Провайдер карт изменится при перезапуске программы.");
+    notifyAboutRestart.setStandardButtons(QMessageBox::Yes);
+    notifyAboutRestart.setDefaultButton(QMessageBox::Yes);
+    notifyAboutRestart.exec();
 }
 
-void uiSAR::on_UDPPortxml_textChanged(const QString &arg1)
+void uiSAR::on_discardSettings_clicked()
 {
-    settings->setValue("telemetry/udp_port_default", arg1);
-}
 
-void uiSAR::on_TCPIPxml_textChanged(const QString &arg1)
-{
-    settings->setValue("telemetry/tcp_ip_default", arg1);
-}
-
-void uiSAR::on_TCPPortxml_textChanged(const QString &arg1)
-{
-    settings->setValue("telemetry/tcp_port_default", arg1);
-}
-
-void uiSAR::on_refreshtelemetryxml_valueChanged(double arg1)
-{
-    settings->setValue("telemetry/refresh_telemetry_time", arg1);
-}
-
-void uiSAR::on_predictRangexml_valueChanged(double arg1)
-{
-    settings->setValue("map/predict_line_range", arg1);
-}
-
-void uiSAR::on_diaTimexml_valueChanged(double arg1)
-{
-    settings->setValue("map/capture_time", arg1);
-}
-
-void uiSAR::on_diaRangexml_valueChanged(double arg1)
-{
-    settings->setValue("map/diagram_length", arg1);
-}
-
-void uiSAR::on_diaThetaAzimuth_valueChanged(double arg1)
-{
-    settings->setValue("map/diagram_theta_azimuth", arg1);
-}
-
-void uiSAR::on_diaDriftAngle_valueChanged(double arg1)
-{
-    settings->setValue("map/diagram_drift_angle", arg1);
-}
-
-void uiSAR::on_providerGoogle_clicked()
-{
-    settings->setValue("map/map_provider", "google");
-}
-
-void uiSAR::on_providerESRI_clicked()
-{
-    settings->setValue("map/map_provider", "esri");
-}
-
-void uiSAR::on_providerOSM_clicked()
-{
-    settings->setValue("map/map_provider", "osm");
+    QMessageBox askForDiscardSettings;
+    askForDiscardSettings.setWindowTitle("Отмена изменений");
+    askForDiscardSettings.setIcon(QMessageBox::Question);
+    askForDiscardSettings.setText("Вы уверены, что хотите отменить изменения настроек?");
+    askForDiscardSettings.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+    askForDiscardSettings.setDefaultButton(QMessageBox::Cancel);
+    int ret = askForDiscardSettings.exec();
+    switch (ret) {
+      case QMessageBox::Yes: loadSettings();
+          break;
+      case QMessageBox::Cancel:
+          break;
+      default:
+          break;
+    }
 }

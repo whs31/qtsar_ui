@@ -23,7 +23,6 @@ Rectangle {
     property var dTime: 0.0;
     property var predictLength: 0.2;
 
-
     property var imageArray: []
     property var coordinate: QtPositioning.coordinate(0,0);
     property var panToCurrentlocation: QtPositioning.coordinate(51.660784, 39.200268);
@@ -34,6 +33,11 @@ Rectangle {
     property var enablePlane: true;
 
     property var gOpacity: 100;
+
+    onMapProviderChanged: {
+        console.log("Map mode changed.");
+        googlemaps.name = mapProvider;
+    }
 
     Invoker {
         id: markerDialog
@@ -260,12 +264,22 @@ Item {
     function addImage(centerlat: float, centerlon: float, dx: float, dy: float, x0: float, y0: float, angle: float, filename: Qstring)
     {
         console.log("Displaying image from " + filename);
-        var item = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; MapQuickItem{}', mapView, "dynamic");
+        var item = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; MapQuickItem { transformOrigin: Item.TopLeft;
+            rotation: 0 }', mapView, "dynamic");
         //one degree = 111 120 meters
             item.anchorPoint.x = -x0-1.5*y0;
             item.anchorPoint.y = 1.5*y0;
             item.coordinate = QtPositioning.coordinate(centerlat, centerlon);
-            item.sourceItem = Qt.createQmlObject('import QtQuick 2.0; Rectangle { opacity: 0.99; Image{ id: imageSource; opacity: 50; source: "file:///'+ filename +'"} }', mapView, "dynamic");
+            item.sourceItem = Qt.createQmlObject('
+import QtQuick 2.0;
+Rectangle {
+    opacity: 0.99;
+    Image {
+        id: imageSource;
+        opacity: 50;
+        source: "file:///'+ filename +'"
+    }
+}', mapView, "dynamic");
             item.zoomLevel = 16.5
             mapView.addMapItem(item);
             imageArray.push(item);

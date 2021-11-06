@@ -107,31 +107,8 @@ private slots:
     void on_t_sSpin_valueChanged(double arg1);
     void on_t_scale_valueChanged(int value);
 
-    void on_UDPIPxml_textChanged(const QString &arg1);
-
-    void on_UDPPortxml_textChanged(const QString &arg1);
-
-    void on_TCPIPxml_textChanged(const QString &arg1);
-
-    void on_TCPPortxml_textChanged(const QString &arg1);
-
-    void on_refreshtelemetryxml_valueChanged(double arg1);
-
-    void on_predictRangexml_valueChanged(double arg1);
-
-    void on_diaTimexml_valueChanged(double arg1);
-
-    void on_diaRangexml_valueChanged(double arg1);
-
-    void on_diaThetaAzimuth_valueChanged(double arg1);
-
-    void on_diaDriftAngle_valueChanged(double arg1);
-
-    void on_providerGoogle_clicked();
-
-    void on_providerESRI_clicked();
-
-    void on_providerOSM_clicked();
+    void on_saveSettings_clicked();
+    void on_discardSettings_clicked();
 
 private:
     static uiSAR * pMainWindow;
@@ -154,9 +131,9 @@ private:
     int fileCounter = 0;
 
     void updateTelemetry();
-    //TelemetryData_t parseTelemetry(const QByteArray & src);
     void initUI();
     void loadSettings();
+
     void update_jpgblocklabels_from_field(JPGFields _field);
     bool eventFilter(QObject *watched, QEvent *event);
 

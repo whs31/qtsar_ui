@@ -12,7 +12,7 @@ CSS colors:
 purple 			#BB86FC  #B2A4D4
 blue 			#3700B3  #521AD5
 green			#03DAC6  #93E5DD
-red				#CF6679
+red				#CF6679  #b46363
 
 back			#121212
 darker back		#000000

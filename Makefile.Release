@@ -403,12 +403,15 @@ release/qrc_img.cpp: img.qrc \
 		img/take_coords.png \
 		img/nav_pan.png \
 		img/ruler.png \
+		img/path.png \
 		img/planeSmall.png \
+		img/save_white.png \
 		img/radar.png \
 		img/load.png \
 		img/save.png \
 		img/mapMarker.png \
 		img/planeIco.png \
+		img/cancel.png \
 		img/jpg_pan.png
 	C:\Qt\Qt5.14.2\5.14.2\mingw73_64\bin\rcc.exe -name img img.qrc -o release\qrc_img.cpp
 
