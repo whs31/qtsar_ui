@@ -22,6 +22,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -34,6 +35,7 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolButton>
+#include <QtWidgets/QTreeView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "console/console.h"
@@ -140,6 +142,11 @@ public:
     QScrollBar *t_scale;
     QLabel *label_9;
     QLabel *label_11;
+    QWidget *tree_tab;
+    QGridLayout *gridLayout_14;
+    QLabel *label_21;
+    QTreeView *treeView;
+    QFrame *line_6;
     QWidget *cfg_tab;
     QGridLayout *gridLayout_6;
     QLabel *label_14;
@@ -1010,6 +1017,33 @@ public:
         QIcon icon21;
         icon21.addFile(QString::fromUtf8(":/tabIcons/jpg.png"), QSize(), QIcon::Normal, QIcon::Off);
         tabWidget->addTab(img_tab, icon21, QString());
+        tree_tab = new QWidget();
+        tree_tab->setObjectName(QString::fromUtf8("tree_tab"));
+        gridLayout_14 = new QGridLayout(tree_tab);
+        gridLayout_14->setObjectName(QString::fromUtf8("gridLayout_14"));
+        label_21 = new QLabel(tree_tab);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+
+        gridLayout_14->addWidget(label_21, 0, 0, 1, 1);
+
+        treeView = new QTreeView(tree_tab);
+        treeView->setObjectName(QString::fromUtf8("treeView"));
+        treeView->setSelectionMode(QAbstractItemView::SingleSelection);
+        treeView->setAnimated(true);
+        treeView->setHeaderHidden(false);
+
+        gridLayout_14->addWidget(treeView, 2, 0, 1, 1);
+
+        line_6 = new QFrame(tree_tab);
+        line_6->setObjectName(QString::fromUtf8("line_6"));
+        line_6->setFrameShape(QFrame::HLine);
+        line_6->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_14->addWidget(line_6, 1, 0, 1, 1);
+
+        QIcon icon22;
+        icon22.addFile(QString::fromUtf8(":/img/tree.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(tree_tab, icon22, QString());
         cfg_tab = new QWidget();
         cfg_tab->setObjectName(QString::fromUtf8("cfg_tab"));
         gridLayout_6 = new QGridLayout(cfg_tab);
@@ -1395,9 +1429,9 @@ public:
                         " bottom right;\n"
 "  bottom: 4px;\n"
 "}"));
-        QIcon icon22;
-        icon22.addFile(QString::fromUtf8(":/img/save_white.png"), QSize(), QIcon::Normal, QIcon::Off);
-        saveSettings->setIcon(icon22);
+        QIcon icon23;
+        icon23.addFile(QString::fromUtf8(":/img/save_white.png"), QSize(), QIcon::Normal, QIcon::Off);
+        saveSettings->setIcon(icon23);
 
         horizontalLayout_4->addWidget(saveSettings);
 
@@ -1458,18 +1492,18 @@ public:
                         " bottom right;\n"
 "  bottom: 4px;\n"
 "}"));
-        QIcon icon23;
-        icon23.addFile(QString::fromUtf8(":/img/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
-        discardSettings->setIcon(icon23);
+        QIcon icon24;
+        icon24.addFile(QString::fromUtf8(":/img/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
+        discardSettings->setIcon(icon24);
 
         horizontalLayout_4->addWidget(discardSettings);
 
 
         gridLayout_6->addLayout(horizontalLayout_4, 9, 0, 1, 4);
 
-        QIcon icon24;
-        icon24.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(cfg_tab, icon24, QString());
+        QIcon icon25;
+        icon25.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(cfg_tab, icon25, QString());
         link_tab = new QWidget();
         link_tab->setObjectName(QString::fromUtf8("link_tab"));
         verticalLayout_2 = new QVBoxLayout(link_tab);
@@ -1526,9 +1560,9 @@ public:
         sizePolicy9.setVerticalStretch(0);
         sizePolicy9.setHeightForWidth(udpStopButton->sizePolicy().hasHeightForWidth());
         udpStopButton->setSizePolicy(sizePolicy9);
-        QIcon icon25;
-        icon25.addFile(QString::fromUtf8(":/img/close.png"), QSize(), QIcon::Normal, QIcon::Off);
-        udpStopButton->setIcon(icon25);
+        QIcon icon26;
+        icon26.addFile(QString::fromUtf8(":/img/close.png"), QSize(), QIcon::Normal, QIcon::Off);
+        udpStopButton->setIcon(icon26);
         udpStopButton->setIconSize(QSize(12, 12));
 
         gridLayout_4->addWidget(udpStopButton, 1, 2, 1, 1);
@@ -1557,9 +1591,9 @@ public:
         udpSendButton->setSizeIncrement(QSize(0, 0));
         udpSendButton->setStyleSheet(QString::fromUtf8("\n"
 "border-radius: 1px;"));
-        QIcon icon26;
-        icon26.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right@2x.png"), QSize(), QIcon::Normal, QIcon::Off);
-        udpSendButton->setIcon(icon26);
+        QIcon icon27;
+        icon27.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right@2x.png"), QSize(), QIcon::Normal, QIcon::Off);
+        udpSendButton->setIcon(icon27);
         udpSendButton->setIconSize(QSize(10, 10));
 
         gridLayout_3->addWidget(udpSendButton, 1, 1, 1, 1);
@@ -1578,9 +1612,9 @@ public:
 
         verticalLayout_2->addWidget(UDPConsole);
 
-        QIcon icon27;
-        icon27.addFile(QString::fromUtf8(":/tabIcons/connectUdp.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(link_tab, icon27, QString());
+        QIcon icon28;
+        icon28.addFile(QString::fromUtf8(":/tabIcons/connectUdp.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(link_tab, icon28, QString());
         info_tab = new QWidget();
         info_tab->setObjectName(QString::fromUtf8("info_tab"));
         gridLayout_8 = new QGridLayout(info_tab);
@@ -1605,9 +1639,9 @@ public:
 
         gridLayout_8->addItem(verticalSpacer, 2, 0, 1, 1);
 
-        QIcon icon28;
-        icon28.addFile(QString::fromUtf8(":/tabIcons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(info_tab, icon28, QString());
+        QIcon icon29;
+        icon29.addFile(QString::fromUtf8(":/tabIcons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(info_tab, icon29, QString());
 
         gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -1644,9 +1678,9 @@ public:
         rulerButton->setEnabled(true);
         sizePolicy6.setHeightForWidth(rulerButton->sizePolicy().hasHeightForWidth());
         rulerButton->setSizePolicy(sizePolicy6);
-        QIcon icon29;
-        icon29.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
-        rulerButton->setIcon(icon29);
+        QIcon icon30;
+        icon30.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
+        rulerButton->setIcon(icon30);
 
         horizontalLayout_2->addWidget(rulerButton);
 
@@ -1686,9 +1720,9 @@ public:
 "  background: #60798B;\n"
 "  color: #E0E1E3;\n"
 "}"));
-        QIcon icon30;
-        icon30.addFile(QString::fromUtf8(":/img/swapMode.png"), QSize(), QIcon::Normal, QIcon::Off);
-        changeMapMode->setIcon(icon30);
+        QIcon icon31;
+        icon31.addFile(QString::fromUtf8(":/img/swapMode.png"), QSize(), QIcon::Normal, QIcon::Off);
+        changeMapMode->setIcon(icon31);
         changeMapMode->setCheckable(true);
         changeMapMode->setChecked(true);
 
@@ -1699,7 +1733,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(3);
         DecodeJPG->setDefault(false);
 
 
@@ -1776,6 +1810,8 @@ public:
         label_9->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 Y", nullptr));
         label_11->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \321\200\320\260\320\267\320\274\320\265\321\200\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(img_tab), QString());
+        label_21->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\240\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217</span></p></body></html>", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tree_tab), QString());
         label_14->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \320\276\321\202\321\200\320\270\321\201\320\276\320\262\320\272\320\270 \320\275\320\260\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\321\217 \320\277\320\276\320\273\320\265\321\202\320\260:", nullptr));
         label_2->setText(QCoreApplication::translate("uiSAR", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\277\320\276\320\270\321\201\320\272\320\260 \321\200\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\321\205 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\271:", nullptr));
         label_20->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213</span></p></body></html>", nullptr));

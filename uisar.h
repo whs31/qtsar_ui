@@ -24,6 +24,9 @@
 #include <QtEndian>
 
 #include <QSettings>
+#include <QDirIterator>
+#include <QDir>
+#include <QFileSystemModel>
 
 #include "remote/remoteBase.h"
 #include "console/console.h"

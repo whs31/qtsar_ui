@@ -33,5 +33,6 @@
         <file>img/planeTriangle.png</file>
         <file>img/planeTest.png</file>
         <file>img/mapRulerPoint.png</file>
+        <file>img/tree.png</file>
     </qresource>
 </RCC>

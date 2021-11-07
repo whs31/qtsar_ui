@@ -1882,10 +1882,10 @@ QTreeView,
 QListView,
 QTableView,
 QColumnView {
-  background-color: #19232D;
-  border: 1px solid #455364;
+  background-color: #121212;
+  border: 1px solid #2e2e2e;
   color: #E0E1E3;
-  gridline-color: #455364;
+  gridline-color: #2e2e2e;
   border-radius: 4px;
 }
 
@@ -1893,15 +1893,15 @@ QTreeView:disabled,
 QListView:disabled,
 QTableView:disabled,
 QColumnView:disabled {
-  background-color: #19232D;
-  color: #9DA9B5;
+  background-color: #000000;
+  color: #AAAAAA;
 }
 
 QTreeView:selected,
 QListView:selected,
 QTableView:selected,
 QColumnView:selected {
-  background-color: #346792;
+  background-color: #93E5DD;
   color: #455364;
 }
 
@@ -1909,21 +1909,21 @@ QTreeView:focus,
 QListView:focus,
 QTableView:focus,
 QColumnView:focus {
-  border: 1px solid #1A72BB;
+  border: 1px solid #03DAC6;
 }
 
 QTreeView::item:pressed,
 QListView::item:pressed,
 QTableView::item:pressed,
 QColumnView::item:pressed {
-  background-color: #346792;
+  background-color: #93E5DD;
 }
 
 QTreeView::item:selected:active,
 QListView::item:selected:active,
 QTableView::item:selected:active,
 QColumnView::item:selected:active {
-  background-color: #346792;
+  background-color: #93E5DD;
 }
 
 QTreeView::item:selected:!active,
@@ -1944,8 +1944,8 @@ QColumnView::item:!selected:hover {
 }
 
 QTableCornerButton::section {
-  background-color: #19232D;
-  border: 1px transparent #455364;
+  background-color: #222222;
+  border: 1px transparent #2e2e2e;
   border-radius: 0px;
 }
 
@@ -1955,20 +1955,20 @@ https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qheaderview
 
 --------------------------------------------------------------------------- */
 QHeaderView {
-  background-color: #455364;
-  border: 0px transparent #455364;
+  background-color: #2e2e2e;
+  border: 0px transparent #2e2e2e;
   padding: 0;
   margin: 0;
   border-radius: 0;
 }
 
 QHeaderView:disabled {
-  background-color: #455364;
-  border: 1px transparent #455364;
+  background-color: #2e2e2e;
+  border: 1px transparent #2e2e2e;
 }
 
 QHeaderView::section {
-  background-color: #455364;
+  background-color: #2e2e2e;
   color: #E0E1E3;
   border-radius: 0;
   text-align: left;
@@ -1980,11 +1980,11 @@ QHeaderView::section::horizontal {
   padding-bottom: 0;
   padding-left: 4px;
   padding-right: 4px;
-  border-left: 1px solid #19232D;
+  border-left: 1px solid #2e2e2e;
 }
 
 QHeaderView::section::horizontal::first, QHeaderView::section::horizontal::only-one {
-  border-left: 1px solid #455364;
+  border-left: 1px solid #2e2e2e;
 }
 
 QHeaderView::section::horizontal:disabled {

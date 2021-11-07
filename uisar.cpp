@@ -401,11 +401,32 @@ void uiSAR::on_selectFolderButton_clicked()
 {
     QString path = QFileDialog::getExistingDirectory(this, tr("Выберите папку с выходными изображениями РЛС"),
                                                      QStandardPaths::displayName(QStandardPaths::DesktopLocation));
-    QDir dir(path);
-    dir.setFilter(QDir::Files | QDir::NoSymLinks | QDir::NoDot | QDir::NoDotDot);
-    dir.setNameFilters(QStringList("*.jpg"));
+    QStringList childDirectoryList;
 
-    QStringList fileList = dir.entryList();
+    QDir parentDirectory(path);
+    QDirIterator iterator(parentDirectory.path(), QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+    while(iterator.hasNext()){
+           iterator.next();
+           childDirectoryList << iterator.filePath();
+    }
+    /*
+     * 1. Нужно вместо qfilesystemmodel использовать класс, унаследованный от нее, с переопределенными методами data(), setData()
+     * 2. Нужно реворкнуть кнопку <показать изображение>: она должна быть checkable, и менять свое состояние в зависимости от текущего выбранного изображения
+     * 3. Изображения должны отображаться только однажды
+     * 4. Кнопка показа изображения должна быть связанна с деревом
+     * 5. При чеке\анчеке директории в дереве должны чекаться\анчекаться все изображения в этой директории
+     */
+    QFileSystemModel *model = new QFileSystemModel;
+    model->setRootPath(parentDirectory.path());
+    ui->treeView->setModel(model);
+    ui->treeView->setRootIndex(model->index(parentDirectory.path()));
+    //tree->setModel(model);
+
+    QDir childDirectory(path);
+    childDirectory.setFilter(QDir::Files | QDir::NoSymLinks | QDir::NoDot | QDir::NoDotDot);
+    childDirectory.setNameFilters(QStringList("*.jpg"));
+
+    QStringList fileList = childDirectory.entryList();
 
     if(!fileList.empty()){
         imageList.clear();
