@@ -399,11 +399,14 @@ release/qrc_img.cpp: img.qrc \
 		img/close.png \
 		img/route.png \
 		img/toggle_overlay.png \
+		img/planeTriangle.png \
 		img/ui.png \
 		img/take_coords.png \
+		img/planeTest.png \
 		img/nav_pan.png \
 		img/ruler.png \
 		img/path.png \
+		img/mapRulerPoint.png \
 		img/planeSmall.png \
 		img/save_white.png \
 		img/radar.png \

@@ -30,5 +30,8 @@
         <file>img/cancel.png</file>
         <file>img/path.png</file>
         <file>img/save_white.png</file>
+        <file>img/planeTriangle.png</file>
+        <file>img/planeTest.png</file>
+        <file>img/mapRulerPoint.png</file>
     </qresource>
 </RCC>

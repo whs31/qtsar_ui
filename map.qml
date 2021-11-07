@@ -95,7 +95,7 @@ Rectangle {
         rulerText.text = "Линейка: "+output.toFixed(3)+" км";
         rulerLine.addCoordinate(ruler1c);
         rulerLine.addCoordinate(ruler2c);
-        return output;
+        return output; //шрифт у линейки должен быть жирный и больше, передвинуть текст надо к зумслайдеру
     }
 
     function convertGeoKMeters (metric: double)
@@ -117,29 +117,31 @@ Rectangle {
     //С ФУНКЦИЙ СПИНБОКСОВ ПОСТУПАЮТ ЗНАЧЕНИЯ В МЕТРАХ, НУЖНО ДЕЛИТЬ ИХ НА 111120
     function transformX(fileCounter: int, arg1: double)
     {
-        imageArray[fileCounter].coordinate.longitude += (arg1/111120); //fix
+        imageArray[fileCounter].coordinate.longitude += (arg1/111120);
     }
     function transformY(fileCounter: int, arg1: double)
     {
-        imageArray[fileCounter].coordinate.latitude += (arg1/111120); //fix
+        imageArray[fileCounter].coordinate.latitude += (arg1/111120);
     }
     function swapMapModes(satellite: bool)
     {
         if(satellite) {
             mapView.activeMapType = mapView.supportedMapTypes[mapModeSat]//sat
             routeLengthText.color = "white";
-            rulerText.color = "white";
             overlayPlane.color = "#03DAC6";
             mapPolyline.line.color = "#03DAC6";
             mapPredictLine.line.color = '#93E5DD';
+            predictPoly.color = '#93E5DD';
+            predictPoly.border.color = '#03DAC6';
         }
         else {
             mapView.activeMapType = mapView.supportedMapTypes[mapModeMap]//map
             routeLengthText.color = "black";
-            rulerText.color = "black";
             overlayPlane.color = "darkRed";
             mapPolyline.line.color = "darkRed";
             mapPredictLine.line.color = '#ff7a7a';
+            predictPoly.color = '#ff7a7a';
+            predictPoly.border.color = 'darkRed';
         }
     }
 
@@ -178,9 +180,6 @@ Rectangle {
             var angle = 0.0;
             var radAngle = 0.0;
             mapPolyline.addCoordinate(QtPositioning.coordinate(lat,lon));
-            clearPredict();
-            mapPredictLine.addCoordinate(QtPositioning.coordinate(lat,lon));
-
             routeLengthText.text = "Точки трека: " + mapPolyline.pathLength();
             var dx = lat - panToCurrentlocation.latitude;
             var dy = lon - panToCurrentlocation.longitude;
@@ -193,8 +192,8 @@ Rectangle {
                 {
                     angle += 180;
                 }
-                if(dx<0) { planeMapItem.rotation = angle-10; } //загадка //проблема в том, как qml считает центр вращения, так как предикт работает как ожидалось //почему-то все не работает на других провайдерах карт
-                else if(dx>0) { planeMapItem.rotation = angle+10; }
+                planeMapItem.rotationAngle = angle; //загадка //проблема в том, как qml считает центр вращения, так как предикт работает как ожидалось //почему-то все не работает на других провайдерах карт
+                //нужно попробовать переносить центр вращения картинки каждый вызов функции drawRoute()
                 var p_lat = lat+Math.sin((90-angle)*Math.PI/180) * predictLength;
                 var p_lon = lon+Math.cos((90-angle)*Math.PI/180) * predictLength;
                 /*
@@ -208,7 +207,7 @@ Rectangle {
 
                 var y1 = lat+Math.sin((90-angle)*Math.PI/180) * speedxtime;
                 var x1 = lon+Math.cos((90-angle)*Math.PI/180) * speedxtime;
-                var y2 = lat+Math.sin((90-angle)*Math.PI/180) * (speedxtime - rectMinor);  //все равно что-то не так со скоростью, нужно менять конвертацию
+                var y2 = lat+Math.sin((90-angle)*Math.PI/180) * (speedxtime - rectMinor);
                 var x2 = lon+Math.cos((90-angle)*Math.PI/180) * (speedxtime - rectMinor);
 
                 var beta = Math.atan((2*dLength)/(rectMajor-rectMinor));
@@ -221,6 +220,8 @@ Rectangle {
                 var y4 = lat+Math.sin((90-angle)*Math.PI/180) * speedxtime + Math.sin(beta*Math.PI/180) * side - Math.sin((90-angle)*Math.PI/180) * rectMajor;
                 var x4 = lon+Math.cos((90-angle)*Math.PI/180) * speedxtime + Math.cos(beta*Math.PI/180) * side - Math.cos((90-angle)*Math.PI/180) * rectMajor;
 
+                clearPredict();
+                mapPredictLine.addCoordinate(QtPositioning.coordinate(lat,lon));
                 predictPoly.addCoordinate(QtPositioning.coordinate(y1, x1));
                 predictPoly.addCoordinate(QtPositioning.coordinate(y2, x2));
                 predictPoly.addCoordinate(QtPositioning.coordinate(y4, x4));
@@ -309,6 +310,34 @@ Item {
         enableMarkerPlacement = false;
     }
 
+
+    function addRulerPoint(lat: float, lon: float)
+    {
+        var rulerPoint = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; import QtGraphicalEffects 1.0; MapQuickItem{ }', mapView, "dynamic");
+        rulerPoint.anchorPoint.x = 128;
+        rulerPoint.anchorPoint.y = 128;
+        rulerPoint.coordinate = QtPositioning.coordinate(lat, lon);
+        rulerPoint.sourceItem = Qt.createQmlObject('
+import QtQuick 2.0;
+import QtGraphicalEffects 1.0;
+Item {
+    id: rulerPointSource; visible: true; enabled: true; opacity: 0.9;
+    Image {
+        id: rulerPointImage;
+        scale: 0.07;
+        source: "qrc:/img/mapRulerPoint.png"
+    }
+    ColorOverlay {
+        anchors.fill: rulerPointImage;
+        source: rulerPointImage;
+        scale: 0.07;
+        opacity: 1;
+        color: "#e8e8e8"
+    }
+}', mapView, "dynamic");
+        mapView.addMapItem(rulerPoint);
+    }
+
     function pan(centerlat: float, centerlon: float, dx: float, dy: float, x0: float, y0: float, angle: float, filename: Qstring)
     {
         console.log("panned");
@@ -320,10 +349,10 @@ Item {
         console.log("Displaying image from " + filename);
         var item = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; MapQuickItem {  }', mapView, "dynamic");
         //one degree = 111 120 meters
-            item.anchorPoint.x = -x0-1.5*y0;
-            item.anchorPoint.y = 1.5*y0;
-            item.coordinate = QtPositioning.coordinate(centerlat, centerlon);
-            item.sourceItem = Qt.createQmlObject('
+        item.anchorPoint.x = -x0-1.5*y0;
+        item.anchorPoint.y = 1.5*y0;
+        item.coordinate = QtPositioning.coordinate(centerlat, centerlon);
+        item.sourceItem = Qt.createQmlObject('
 import QtQuick 2.0;
 Rectangle {
     opacity: 0.99;
@@ -335,12 +364,12 @@ Rectangle {
         source: "file:///'+ filename +'"
     }
 }', mapView, "dynamic");
-            item.zoomLevel = 16.5
-            mapView.addMapItem(item);
-            item.sourceItem.rotation = angle;
-            imageArray.push(item);
-            //change opacity of newly created jpg
-            changeOpacityOfCurrentImage(gOpacity);
+        item.zoomLevel = 16.5
+        mapView.addMapItem(item);
+        item.sourceItem.rotation = angle;
+        imageArray.push(item);
+        //change opacity of newly created jpg
+        changeOpacityOfCurrentImage(gOpacity);
     }
     function changeOpacityOfCurrentImage(opacity: int)
     {
@@ -364,12 +393,12 @@ Rectangle {
                 clearTooltip();
             }
             else {
-            drawTooltip();
-            tooltip.x = mapMouseArea.mouseX;
-            tooltip.y = mapMouseArea.mouseY;
-            var coordToStr = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
-            //console.log(coordToStr);
-            latText.text = "Ш: <b><i>"+coordToStr.latitude.toFixed(5)+"</b></i>,   Д: <b><i>"+coordToStr.longitude.toFixed(5)+"</b></i>";
+                drawTooltip();
+                tooltip.x = mapMouseArea.mouseX;
+                tooltip.y = mapMouseArea.mouseY;
+                var coordToStr = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
+                //console.log(coordToStr);
+                latText.text = "Ш: <b><i>"+coordToStr.latitude.toFixed(5)+"</b></i>,   Д: <b><i>"+coordToStr.longitude.toFixed(5)+"</b></i>";
             }
         }
         else {
@@ -409,13 +438,21 @@ Rectangle {
         copyrightsVisible: false
 
         MapQuickItem {
+            property alias rotationAngle: rotation.angle
             id: planeMapItem
             anchorPoint.x: 20;
             anchorPoint.y: 20;
-            transformOrigin: Item.Center;
-            rotation: 0
+            transform: Rotation {
+                        id: rotation
+                        origin { x: 20;
+                                 y: 20  }
+                        angle: 0
+                    }
+            z:5
             sourceItem: Image {
                 id: planeSource;
+                layer.enabled: true
+                transformOrigin: Item.Center
                 source: "qrc:/img/planeIco.png"
             }
             ColorOverlay {
@@ -430,23 +467,23 @@ Rectangle {
         MapPolyline {
             id: mapPolyline
             line.width: 4
-                opacity: 0.8
-                line.color: '#03DAC6'
-                path: [ ]
+            opacity: 0.8
+            line.color: '#03DAC6'
+            path: [ ]
         }
         MapPolyline {
             id: rulerLine
             line.width: 5
-                opacity: 0.9
-                line.color: '#7c513a'
-                path: [ ]
+            opacity: 0.9
+            line.color: '#e8e8e8'
+            path: [ ]
         }
         MapPolyline {
             id: mapPredictLine
             line.width: 4
-                opacity: 0.4
-                line.color: '#93E5DD'
-                path: [ ]
+            opacity: 0.4
+            line.color: '#93E5DD'
+            path: [ ]
         }
         MapPolygon {
             id: predictPoly
@@ -481,6 +518,7 @@ Rectangle {
                 {
                     ruler2c = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
                     rulerSecondBoolean = false;
+                    addRulerPoint(ruler2c.latitude, ruler2c.longitude);
                     ruler();
                 }
                 if(enableRuler === true & mouse.button === Qt.LeftButton)
@@ -488,6 +526,7 @@ Rectangle {
                     rulerLine.path = [];
                     ruler1c = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
                     rulerSecondBoolean = true;
+                    addRulerPoint(ruler1c.latitude, ruler1c.longitude);
                     enableRuler = false;
                 }
 
@@ -519,9 +558,9 @@ Rectangle {
                 opacity: 0.5
                 live: true
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: 294
+                anchors.bottomMargin: 150
                 anchors.top: parent.top
-                anchors.topMargin: 8
+                anchors.topMargin: 50
                 anchors.right: parent.right
                 anchors.rightMargin: 8
                 snapMode: Slider.NoSnap
@@ -549,19 +588,34 @@ Rectangle {
                 font.pixelSize: 9
             }
 
-            Text {
-                id: rulerText
-                y: 460
-                width: 193
-                height: 14
-                color: "#ffffff"
-                text: qsTr("Линейка: -- км")
+            Rectangle {
+                id: rectangle
+                height: 22
+                color: "#242424"
+                anchors.right: parent.right
+                anchors.rightMargin: 0
                 anchors.left: parent.left
-                anchors.leftMargin: 359
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 6
-                font.pixelSize: 12
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 0
+
+                Text {
+                    id: rulerText
+                    width: 109
+                    height: 14
+                    color: "#FFFFFF"
+                    text: qsTr("Линейка: 0.000 км")
+                    font.bold: true
+                    font.weight: Font.Bold
+                    textFormat: Text.RichText
+                    anchors.left: parent.left
+                    anchors.leftMargin: 6
+                    anchors.top: parent.top
+                    anchors.topMargin: 3
+                    font.pixelSize: 12
+                }
             }
+
         }
 
         Popup {
@@ -571,20 +625,20 @@ Rectangle {
             visible: true
             width: 0
             height: 0
-        Rectangle {
-            id: tooltip
-            color: "white"
-            width: 148
-            height: 15
-            radius: 1
-            opacity: 0.75
-            Text {
-                id: latText
-                enabled: false
-                anchors.fill: parent
-                textFormat: Text.StyledText
+            Rectangle {
+                id: tooltip
+                color: "white"
+                width: 148
+                height: 15
+                radius: 1
+                opacity: 0.75
+                Text {
+                    id: latText
+                    enabled: false
+                    anchors.fill: parent
+                    textFormat: Text.StyledText
+                }
             }
-        }
         }
         Component.onCompleted: {
             mapView.addMapItem(planeMapItem);
@@ -601,6 +655,6 @@ Rectangle {
 /*##^##
 Designer {
     D{i:0;autoSize:true;height:480;width:640}D{i:9;anchors_height:270;anchors_width:40;anchors_x:592;anchors_y:8}
-D{i:13;anchors_x:359}
+D{i:15;anchors_x:"-685";anchors_y:872}D{i:14;anchors_width:200;anchors_x:146;anchors_y:76}
 }
 ##^##*/
