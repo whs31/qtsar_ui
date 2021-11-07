@@ -37,7 +37,10 @@ Rectangle {
     property var enableMarkerPlacement: false;
     property var enableRoute: true;
     property var enablePlane: true;
-
+    property var enableRuler: false;
+    property var rulerSecondBoolean: false;
+    property var ruler1c: QtPositioning.coordinate(0,0);
+    property var ruler2c: QtPositioning.coordinate(0,0);
     property var gOpacity: 100;
 
     onMapProviderChanged: {
@@ -73,9 +76,26 @@ Rectangle {
         var radAzimuth = (dAzimuth*Math.PI)/180;
         var side = dLength/(Math.cos(c));
         rectMajor = side*Math.sqrt(2-2*Math.cos(radAzimuth));
-        rectMinor = rectMajor*0.35;
+        rectMinor = rectMajor*0.15;
         //console.log("Большая сторона полигона: ", rectMajor, " , меньшая сторона полигона: ", rectMinor);
         //-----------
+    }
+
+    function rulerHandler()
+    {
+        enableRuler = true;
+    }
+
+    function ruler()
+    {
+        var dx = Math.abs(ruler1c.longitude-ruler2c.longitude);
+        var dy = Math.abs(ruler1c.latitude-ruler2c.latitude);
+        var output = 111.12*Math.sqrt(dx*dx+dy*dy);
+        //console.log("Ruler output: ", output, " km");
+        rulerText.text = "Линейка: "+output.toFixed(3)+" км";
+        rulerLine.addCoordinate(ruler1c);
+        rulerLine.addCoordinate(ruler2c);
+        return output;
     }
 
     function convertGeoKMeters (metric: double)
@@ -108,6 +128,7 @@ Rectangle {
         if(satellite) {
             mapView.activeMapType = mapView.supportedMapTypes[mapModeSat]//sat
             routeLengthText.color = "white";
+            rulerText.color = "white";
             overlayPlane.color = "#03DAC6";
             mapPolyline.line.color = "#03DAC6";
             mapPredictLine.line.color = '#93E5DD';
@@ -115,6 +136,7 @@ Rectangle {
         else {
             mapView.activeMapType = mapView.supportedMapTypes[mapModeMap]//map
             routeLengthText.color = "black";
+            rulerText.color = "black";
             overlayPlane.color = "darkRed";
             mapPolyline.line.color = "darkRed";
             mapPredictLine.line.color = '#ff7a7a';
@@ -181,20 +203,23 @@ Rectangle {
                     3 точка -> большее основание трапеции, лежит дальше от иконки
                     4 точка -> большее основание трапеции, лежит ближе к иконке
                   */
-                var y1 = lat+Math.sin((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime;
-                var x1 = lon+Math.cos((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime;
-                var y2 = lat+Math.sin((90-angle)*Math.PI/180) * (convertGeoKMeters(planeSpeed/3.6/1000) * dTime - rectMinor);  //все равно что-то не так со скоростью, нужно менять конвертацию
-                var x2 = lon+Math.cos((90-angle)*Math.PI/180) * (convertGeoKMeters(planeSpeed/3.6/1000) * dTime - rectMinor);
+                var speedxtime = (planeSpeed/3600)*dTime;
+                speedxtime = convertGeoKMeters(speedxtime);
+
+                var y1 = lat+Math.sin((90-angle)*Math.PI/180) * speedxtime;
+                var x1 = lon+Math.cos((90-angle)*Math.PI/180) * speedxtime;
+                var y2 = lat+Math.sin((90-angle)*Math.PI/180) * (speedxtime - rectMinor);  //все равно что-то не так со скоростью, нужно менять конвертацию
+                var x2 = lon+Math.cos((90-angle)*Math.PI/180) * (speedxtime - rectMinor);
 
                 var beta = Math.atan((2*dLength)/(rectMajor-rectMinor));
                 var side = dLength / (Math.sin(beta));
                 beta = beta * 180 / Math.PI;
                 beta = beta + (90-angle);
 
-                var y3 = lat+Math.sin((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.sin(beta*Math.PI/180) * side;
-                var x3 = lon+Math.cos((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.cos(beta*Math.PI/180) * side;
-                var y4 = lat+Math.sin((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.sin(beta*Math.PI/180) * side - Math.sin((90-angle)*Math.PI/180) * rectMajor;
-                var x4 = lon+Math.cos((90-angle)*Math.PI/180) * convertGeoKMeters(planeSpeed/3.6/1000) * dTime + Math.cos(beta*Math.PI/180) * side - Math.cos((90-angle)*Math.PI/180) * rectMajor;
+                var y3 = lat+Math.sin((90-angle)*Math.PI/180) * speedxtime + Math.sin(beta*Math.PI/180) * side;
+                var x3 = lon+Math.cos((90-angle)*Math.PI/180) * speedxtime + Math.cos(beta*Math.PI/180) * side;
+                var y4 = lat+Math.sin((90-angle)*Math.PI/180) * speedxtime + Math.sin(beta*Math.PI/180) * side - Math.sin((90-angle)*Math.PI/180) * rectMajor;
+                var x4 = lon+Math.cos((90-angle)*Math.PI/180) * speedxtime + Math.cos(beta*Math.PI/180) * side - Math.cos((90-angle)*Math.PI/180) * rectMajor;
 
                 predictPoly.addCoordinate(QtPositioning.coordinate(y1, x1));
                 predictPoly.addCoordinate(QtPositioning.coordinate(y2, x2));
@@ -410,6 +435,13 @@ Rectangle {
                 path: [ ]
         }
         MapPolyline {
+            id: rulerLine
+            line.width: 5
+                opacity: 0.9
+                line.color: '#7c513a'
+                path: [ ]
+        }
+        MapPolyline {
             id: mapPredictLine
             line.width: 4
                 opacity: 0.4
@@ -430,6 +462,7 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             propagateComposedEvents: true
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
             onEntered: {
                 drawTooltip();
             }
@@ -439,6 +472,35 @@ Rectangle {
             onClicked:
             {
                 //coordToMarker = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
+                if(rulerSecondBoolean === false & enableRuler === false)
+                {
+                    rulerLine.path = [];
+                }
+
+                if(rulerSecondBoolean === true & mouse.button === Qt.LeftButton)
+                {
+                    ruler2c = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
+                    rulerSecondBoolean = false;
+                    ruler();
+                }
+                if(enableRuler === true & mouse.button === Qt.LeftButton)
+                {
+                    rulerLine.path = [];
+                    ruler1c = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
+                    rulerSecondBoolean = true;
+                    enableRuler = false;
+                }
+
+                if(rulerSecondBoolean === true & mouse.button === Qt.RightButton)
+                {
+                    rulerSecondBoolean = false;
+                }
+                else if(enableRuler === true & mouse.button === Qt.RightButton)
+                {
+                    enableRuler = false;
+                }
+
+
                 if(enableMarkerPlacement===true)
                 {
                     var markerCoord = mapView.toCoordinate(Qt.point(mapMouseArea.mouseX,mapMouseArea.mouseY));
@@ -486,6 +548,20 @@ Rectangle {
                 anchors.bottomMargin: 8
                 font.pixelSize: 9
             }
+
+            Text {
+                id: rulerText
+                y: 460
+                width: 193
+                height: 14
+                color: "#ffffff"
+                text: qsTr("Линейка: -- км")
+                anchors.left: parent.left
+                anchors.leftMargin: 359
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 6
+                font.pixelSize: 12
+            }
         }
 
         Popup {
@@ -525,5 +601,6 @@ Rectangle {
 /*##^##
 Designer {
     D{i:0;autoSize:true;height:480;width:640}D{i:9;anchors_height:270;anchors_width:40;anchors_x:592;anchors_y:8}
+D{i:13;anchors_x:359}
 }
 ##^##*/

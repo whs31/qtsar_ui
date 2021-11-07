@@ -114,6 +114,8 @@ private slots:
 
     void on_t_rotation_valueChanged(int value);
 
+    void on_rulerButton_clicked();
+
 private:
     static uiSAR * pMainWindow;
 

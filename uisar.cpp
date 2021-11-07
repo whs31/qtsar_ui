@@ -795,3 +795,9 @@ void uiSAR::on_t_rotation_valueChanged(int value)
 {
     ui->t_rSpin->setValue(value);
 }
+
+void uiSAR::on_rulerButton_clicked()
+{
+    auto qml = ui->osmMap->rootObject();
+    QMetaObject::invokeMethod(qml, "rulerHandler");
+}

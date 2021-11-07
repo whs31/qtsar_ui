@@ -275,10 +275,7 @@ RESOURCES += \
     qml.qrc \
 
 
-SUBDIRS += \
-    googlemaps-v.0.0.0.2/googlemaps.pro
-
-TARGET = ui2
+TARGET = Quasar
 win32 {
     RC_FILE = winadmin.rc
 }

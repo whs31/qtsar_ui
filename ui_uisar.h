@@ -474,6 +474,7 @@ public:
         QIcon icon9;
         icon9.addFile(QString::fromUtf8(":/img/path.png"), QSize(), QIcon::Normal, QIcon::Off);
         checkBox->setIcon(icon9);
+        checkBox->setChecked(true);
 
         gridLayout_2->addWidget(checkBox, 3, 1, 1, 1);
 
@@ -1640,7 +1641,7 @@ public:
 
         rulerButton = new QPushButton(dockWidgetContents_2);
         rulerButton->setObjectName(QString::fromUtf8("rulerButton"));
-        rulerButton->setEnabled(false);
+        rulerButton->setEnabled(true);
         sizePolicy6.setHeightForWidth(rulerButton->sizePolicy().hasHeightForWidth());
         rulerButton->setSizePolicy(sizePolicy6);
         QIcon icon29;
@@ -1698,7 +1699,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(1);
         DecodeJPG->setDefault(false);
 
 

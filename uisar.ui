@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -529,6 +529,9 @@
             <property name="icon">
              <iconset resource="img.qrc">
               <normaloff>:/img/path.png</normaloff>:/img/path.png</iconset>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -2542,7 +2545,7 @@ p, li { white-space: pre-wrap; }
      <item>
       <widget class="QPushButton" name="rulerButton">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -2629,8 +2632,8 @@ QPushButton:selected {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="qdarkstyle/dark/style.qrc"/>
   <include location="img.qrc"/>
+  <include location="qdarkstyle/dark/style.qrc"/>
  </resources>
  <connections/>
 </ui>
