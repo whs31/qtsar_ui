@@ -35,16 +35,27 @@ uiSAR::uiSAR(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 
-    // Console test
-    /*
-    Remote *c = RemoteAuto("TCP");
-    c->Connect("127.0.0.1:2222");
-    c->Send("test");
-
-    connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
-    */
     initUI();
     loadSettings();
+
+    // Console test
+/*
+    QString execAddr = "127.0.0.1:2222";
+    QString connectStatus = "connect to " + execAddr + " ";
+    Remote *c = RemoteAuto("TCP");
+
+    if(c->Connect(execAddr) != -1){
+        c->Send("test"); // Запуск удаленной команды execd
+        connectStatus.append("OK");
+    }else{
+        connectStatus.append("Error");
+    }
+
+    ui->consoleMain->write(connectStatus.toUtf8());
+    ui->consoleMain->flush();
+
+    connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
+*/
 }
 
 uiSAR::~uiSAR()
