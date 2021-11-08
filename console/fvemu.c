@@ -1496,7 +1496,7 @@ static void emu_ops_text(struct emuState * restrict S, const uint8_t *bytes, siz
 }
 
 
-static void emu_term_reset(struct emuState *S)
+void emu_term_reset(struct emuState *S)
 {
     S->state = ST_GROUND;
     S->utf8state = 0;

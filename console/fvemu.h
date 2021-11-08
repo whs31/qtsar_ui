@@ -117,6 +117,7 @@ struct emuState *emu_core_init(int rows, int cols);
 void emu_core_resize(struct emuState *S, int rows, int cols);
 size_t emu_core_run(struct emuState *S, const uint8_t *bytes, size_t len);
 void emu_core_free(struct emuState *S);
+void emu_term_reset(struct emuState *S);
 
 // Functions imported by fvemu
 

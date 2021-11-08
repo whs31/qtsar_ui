@@ -21,6 +21,7 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
     setStyleSheet("padding:0;");
     setReadOnly(true);
     setLineWrapMode(QTextEdit::FixedColumnWidth);
+    setLineWrapColumnOrWidth(consoleWidth);
 
 
     fontWidth = metrics.width("0");
@@ -73,23 +74,31 @@ QFont Console::setFont(QString name, int size){
 }
 
 void Console::resizeEvent(QResizeEvent *event){
-    //QWidget *p = this->parent();
 
     int margin = document()->documentMargin() * 2;
 
     int w = (this->width() - margin) / fontWidth;
     int h = (this->height() - margin) / fontHeight;
 
-    consoleWidth = w+1;
-    consoleHeight = h;
+    if(w != consoleWidth || h != consoleHeight){
+        consoleWidth = w;
+        consoleHeight = h;
 
-    setLineWrapColumnOrWidth(consoleWidth);
+        setLineWrapColumnOrWidth(consoleWidth);
 
-    qDebug() << "Resize" << w << h;
-    emu_core_resize(s,consoleHeight, consoleWidth );
+        qDebug() << consoleHeight << consoleWidth;
 
-    free(rawbuf);
-    rawbuf = (char*)malloc(consoleWidth*consoleHeight*2);
+        emu_core_resize(s,consoleHeight, consoleWidth );
+
+        free(rawbuf);
+        rawbuf = (char*)malloc(consoleWidth*consoleHeight*2);
+    }
 
     QTextEdit::resizeEvent(event);
+}
+
+void Console::reset(){
+    if(s){
+        emu_term_reset(s);
+    }
 }

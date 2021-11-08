@@ -25,6 +25,7 @@ public:
     explicit Console(QWidget *parent = nullptr, int w = 80, int h = 24);
     int write(QByteArray data);
     void flush();
+    void reset();
 
 private:
 
