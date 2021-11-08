@@ -30,6 +30,7 @@
 
 #include "remote/remoteBase.h"
 #include "console/console.h"
+#include "filesystem/checkablemodel.h"
 
 #define JPEG_HEADER_SIZE 20
 

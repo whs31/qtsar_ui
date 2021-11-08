@@ -20,6 +20,7 @@ INCLUDEPATH += "C:\Program Files\OpenSSL-Win64\include"
 SOURCES += \
     console/console.cpp \
     console/fvemu.c \
+    filesystem/checkablemodel.cpp \
     main.cpp \
     qmlinvoker.cpp \
     qmlmarkerdialog.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     console/DefaultColors.h \
     console/console.h \
     console/fvemu.h \
+    filesystem/checkablemodel.h \
     qmlinvoker.h \
     qmlmarkerdialog.h \
     remote/remote.h \

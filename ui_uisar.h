@@ -83,14 +83,11 @@ public:
     QPushButton *clearTrack;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_3;
-    QWidget *tcp_tab;
-    QGridLayout *gridLayout_11;
-    QFrame *line_4;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_13;
-    Console *consoleMain;
-    QLabel *label_12;
-    QSpacerItem *verticalSpacer_10;
+    QWidget *tree_tab;
+    QGridLayout *gridLayout_14;
+    QLabel *label_21;
+    QTreeView *treeView;
+    QFrame *line_6;
     QWidget *img_tab;
     QGridLayout *gridLayout_7;
     QFrame *line_3;
@@ -142,11 +139,14 @@ public:
     QScrollBar *t_scale;
     QLabel *label_9;
     QLabel *label_11;
-    QWidget *tree_tab;
-    QGridLayout *gridLayout_14;
-    QLabel *label_21;
-    QTreeView *treeView;
-    QFrame *line_6;
+    QWidget *tcp_tab;
+    QGridLayout *gridLayout_11;
+    QFrame *line_4;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_13;
+    Console *consoleMain;
+    QLabel *label_12;
+    QSpacerItem *verticalSpacer_10;
     QWidget *cfg_tab;
     QGridLayout *gridLayout_6;
     QLabel *label_14;
@@ -558,42 +558,33 @@ public:
         QIcon icon11;
         icon11.addFile(QString::fromUtf8(":/tabIcons/map.png"), QSize(), QIcon::Normal, QIcon::Off);
         tabWidget->addTab(map_tab, icon11, QString());
-        tcp_tab = new QWidget();
-        tcp_tab->setObjectName(QString::fromUtf8("tcp_tab"));
-        gridLayout_11 = new QGridLayout(tcp_tab);
-        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
-        line_4 = new QFrame(tcp_tab);
-        line_4->setObjectName(QString::fromUtf8("line_4"));
-        line_4->setFrameShape(QFrame::HLine);
-        line_4->setFrameShadow(QFrame::Sunken);
+        tree_tab = new QWidget();
+        tree_tab->setObjectName(QString::fromUtf8("tree_tab"));
+        gridLayout_14 = new QGridLayout(tree_tab);
+        gridLayout_14->setObjectName(QString::fromUtf8("gridLayout_14"));
+        label_21 = new QLabel(tree_tab);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
 
-        gridLayout_11->addWidget(line_4, 2, 0, 1, 1);
+        gridLayout_14->addWidget(label_21, 0, 0, 1, 1);
 
-        groupBox_2 = new QGroupBox(tcp_tab);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setFlat(false);
-        gridLayout_13 = new QGridLayout(groupBox_2);
-        gridLayout_13->setObjectName(QString::fromUtf8("gridLayout_13"));
-        consoleMain = new Console(groupBox_2);
-        consoleMain->setObjectName(QString::fromUtf8("consoleMain"));
+        treeView = new QTreeView(tree_tab);
+        treeView->setObjectName(QString::fromUtf8("treeView"));
+        treeView->setSelectionMode(QAbstractItemView::SingleSelection);
+        treeView->setAnimated(true);
+        treeView->setHeaderHidden(false);
 
-        gridLayout_13->addWidget(consoleMain, 0, 0, 1, 1);
+        gridLayout_14->addWidget(treeView, 2, 0, 1, 1);
 
+        line_6 = new QFrame(tree_tab);
+        line_6->setObjectName(QString::fromUtf8("line_6"));
+        line_6->setFrameShape(QFrame::HLine);
+        line_6->setFrameShadow(QFrame::Sunken);
 
-        gridLayout_11->addWidget(groupBox_2, 4, 0, 1, 1);
-
-        label_12 = new QLabel(tcp_tab);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
-
-        gridLayout_11->addWidget(label_12, 1, 0, 1, 1);
-
-        verticalSpacer_10 = new QSpacerItem(20, 5, QSizePolicy::Minimum, QSizePolicy::Fixed);
-
-        gridLayout_11->addItem(verticalSpacer_10, 3, 0, 1, 1);
+        gridLayout_14->addWidget(line_6, 1, 0, 1, 1);
 
         QIcon icon12;
-        icon12.addFile(QString::fromUtf8(":/tabIcons/connectTcp.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(tcp_tab, icon12, QString());
+        icon12.addFile(QString::fromUtf8(":/img/tree.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(tree_tab, icon12, QString());
         img_tab = new QWidget();
         img_tab->setObjectName(QString::fromUtf8("img_tab"));
         img_tab->setEnabled(true);
@@ -1017,33 +1008,42 @@ public:
         QIcon icon21;
         icon21.addFile(QString::fromUtf8(":/tabIcons/jpg.png"), QSize(), QIcon::Normal, QIcon::Off);
         tabWidget->addTab(img_tab, icon21, QString());
-        tree_tab = new QWidget();
-        tree_tab->setObjectName(QString::fromUtf8("tree_tab"));
-        gridLayout_14 = new QGridLayout(tree_tab);
-        gridLayout_14->setObjectName(QString::fromUtf8("gridLayout_14"));
-        label_21 = new QLabel(tree_tab);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
+        tcp_tab = new QWidget();
+        tcp_tab->setObjectName(QString::fromUtf8("tcp_tab"));
+        gridLayout_11 = new QGridLayout(tcp_tab);
+        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        line_4 = new QFrame(tcp_tab);
+        line_4->setObjectName(QString::fromUtf8("line_4"));
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
 
-        gridLayout_14->addWidget(label_21, 0, 0, 1, 1);
+        gridLayout_11->addWidget(line_4, 2, 0, 1, 1);
 
-        treeView = new QTreeView(tree_tab);
-        treeView->setObjectName(QString::fromUtf8("treeView"));
-        treeView->setSelectionMode(QAbstractItemView::SingleSelection);
-        treeView->setAnimated(true);
-        treeView->setHeaderHidden(false);
+        groupBox_2 = new QGroupBox(tcp_tab);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setFlat(false);
+        gridLayout_13 = new QGridLayout(groupBox_2);
+        gridLayout_13->setObjectName(QString::fromUtf8("gridLayout_13"));
+        consoleMain = new Console(groupBox_2);
+        consoleMain->setObjectName(QString::fromUtf8("consoleMain"));
 
-        gridLayout_14->addWidget(treeView, 2, 0, 1, 1);
+        gridLayout_13->addWidget(consoleMain, 0, 0, 1, 1);
 
-        line_6 = new QFrame(tree_tab);
-        line_6->setObjectName(QString::fromUtf8("line_6"));
-        line_6->setFrameShape(QFrame::HLine);
-        line_6->setFrameShadow(QFrame::Sunken);
 
-        gridLayout_14->addWidget(line_6, 1, 0, 1, 1);
+        gridLayout_11->addWidget(groupBox_2, 4, 0, 1, 1);
+
+        label_12 = new QLabel(tcp_tab);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        gridLayout_11->addWidget(label_12, 1, 0, 1, 1);
+
+        verticalSpacer_10 = new QSpacerItem(20, 5, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        gridLayout_11->addItem(verticalSpacer_10, 3, 0, 1, 1);
 
         QIcon icon22;
-        icon22.addFile(QString::fromUtf8(":/img/tree.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(tree_tab, icon22, QString());
+        icon22.addFile(QString::fromUtf8(":/tabIcons/connectTcp.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(tcp_tab, icon22, QString());
         cfg_tab = new QWidget();
         cfg_tab->setObjectName(QString::fromUtf8("cfg_tab"));
         gridLayout_6 = new QGridLayout(cfg_tab);
@@ -1733,7 +1733,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(0);
         DecodeJPG->setDefault(false);
 
 
@@ -1766,9 +1766,8 @@ public:
         panGPS->setText(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\201\321\202\320\276\320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\240\320\233\320\241", nullptr));
         clearTrack->setText(QCoreApplication::translate("uiSAR", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\321\214 \321\202\321\200\320\265\320\272", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(map_tab), QString());
-        groupBox_2->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\214", nullptr));
-        label_12->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\243\320\264\320\260\320\273\320\265\320\275\320\275\320\276\320\265 \321\201\320\276\320\265\320\264\320\270\320\275\320\265\320\275\320\270\320\265 \321\201 \320\240\320\233\320\241</span></p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tcp_tab), QString());
+        label_21->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\240\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217</span></p></body></html>", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tree_tab), QString());
         groupBox->setTitle(QCoreApplication::translate("uiSAR", "\320\234\320\265\321\202\320\260\320\264\320\260\320\275\320\275\321\213\320\265 \320\240\320\233\320\230", nullptr));
         jpgtls_latlabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-size:7pt;\">\320\250\320\270\321\200\320\276\321\202\320\260</span></p></body></html>", nullptr));
         jpgtls_latdisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-size:7pt; font-weight:600;\">-----------</span></p></body></html>", nullptr));
@@ -1795,7 +1794,7 @@ public:
         jpgtls_filenamedisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-weight:600;\">-----------</span></p></body></html>", nullptr));
         jpg_gright->setText(QString());
         pushButton_3->setText(QCoreApplication::translate("uiSAR", "\320\236\321\202\320\276\320\261\321\200\320\260\320\267\320\270\321\202\321\214 \320\262\321\201\320\265", nullptr));
-        label_7->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\240\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217</span></p></body></html>", nullptr));
+        label_7->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217\320\274\320\270</span></p></body></html>", nullptr));
         transformJPGbox->setTitle(QCoreApplication::translate("uiSAR", "\320\240\320\265\320\264\320\260\320\272\321\202\320\270\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\263\320\265\320\276\320\274\320\265\321\202\321\200\320\270\320\270 \320\240\320\233\320\230", nullptr));
         t_ySpin->setSuffix(QCoreApplication::translate("uiSAR", " \320\274", nullptr));
         label_10->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\262\321\200\320\260\321\211\320\265\320\275\320\270\321\217", nullptr));
@@ -1810,8 +1809,9 @@ public:
         label_9->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \320\277\320\276 Y", nullptr));
         label_11->setText(QCoreApplication::translate("uiSAR", "\320\232\320\276\321\200\321\200\320\265\320\272\321\206\320\270\321\217 \321\200\320\260\320\267\320\274\320\265\321\200\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(img_tab), QString());
-        label_21->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\240\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217</span></p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tree_tab), QString());
+        groupBox_2->setTitle(QCoreApplication::translate("uiSAR", "\320\232\320\276\320\275\321\201\320\276\320\273\321\214", nullptr));
+        label_12->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\243\320\264\320\260\320\273\320\265\320\275\320\275\320\276\320\265 \321\201\320\276\320\265\320\264\320\270\320\275\320\265\320\275\320\270\320\265 \321\201 \320\240\320\233\320\241</span></p></body></html>", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tcp_tab), QString());
         label_14->setText(QCoreApplication::translate("uiSAR", "\320\224\320\260\320\273\321\214\320\275\320\276\321\201\321\202\321\214 \320\276\321\202\321\200\320\270\321\201\320\276\320\262\320\272\320\270 \320\275\320\260\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\321\217 \320\277\320\276\320\273\320\265\321\202\320\260:", nullptr));
         label_2->setText(QCoreApplication::translate("uiSAR", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\277\320\276\320\270\321\201\320\272\320\260 \321\200\320\260\320\264\320\270\320\276\320\273\320\276\320\272\320\260\321\206\320\270\320\276\320\275\320\275\321\213\321\205 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\271:", nullptr));
         label_20->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213</span></p></body></html>", nullptr));

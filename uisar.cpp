@@ -410,17 +410,17 @@ void uiSAR::on_selectFolderButton_clicked()
            childDirectoryList << iterator.filePath();
     }
     /*
-     * 1. Нужно вместо qfilesystemmodel использовать класс, унаследованный от нее, с переопределенными методами data(), setData()
+     * 1. ☑ Нужно вместо qfilesystemmodel использовать класс, унаследованный от нее, с переопределенными методами data(), setData()
      * 2. Нужно реворкнуть кнопку <показать изображение>: она должна быть checkable, и менять свое состояние в зависимости от текущего выбранного изображения
      * 3. Изображения должны отображаться только однажды
      * 4. Кнопка показа изображения должна быть связанна с деревом
      * 5. При чеке\анчеке директории в дереве должны чекаться\анчекаться все изображения в этой директории
      */
-    QFileSystemModel *model = new QFileSystemModel;
+    //QFileSystemModel *model = new QFileSystemModel;
+    CheckableModel *model = new CheckableModel;
     model->setRootPath(parentDirectory.path());
     ui->treeView->setModel(model);
     ui->treeView->setRootIndex(model->index(parentDirectory.path()));
-    //tree->setModel(model);
 
     QDir childDirectory(path);
     childDirectory.setFilter(QDir::Files | QDir::NoSymLinks | QDir::NoDot | QDir::NoDotDot);
