@@ -11,6 +11,7 @@
 #include <QtPositioning/QGeoCoordinate>
 
 #include <QString>
+#include <QImageReader>
 
 #include <QQmlComponent>
 #include <QQmlEngine>

@@ -39,7 +39,7 @@ uiSAR::uiSAR(QWidget *parent)
     loadSettings();
 
     // Console test
-/*
+
     QString execAddr = "127.0.0.1:2222";
     QString connectStatus = "connect to " + execAddr + " ";
     Remote *c = RemoteAuto("TCP");
@@ -55,7 +55,7 @@ uiSAR::uiSAR(QWidget *parent)
     ui->consoleMain->flush();
 
     connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
-*/
+
 }
 
 uiSAR::~uiSAR()
@@ -193,7 +193,8 @@ void uiSAR::on_showButton_clicked()
                 Q_ARG(QVariant, _field.x0),
                 Q_ARG(QVariant, _field.y0),
                 Q_ARG(QVariant, _field.angle),
-                Q_ARG(QVariant, filename));
+                Q_ARG(QVariant, filename)
+                );
     }
     else {
         statusBar()->showMessage(tr("Широта и долгота изображения не распознаны"), 15000);
