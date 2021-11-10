@@ -25,6 +25,8 @@
 #include <QtEndian>
 
 #include <QSettings>
+#include "config/config.h"
+
 #include <QDirIterator>
 #include <QDir>
 #include <QFileSystemModel>
@@ -47,6 +49,8 @@ public:
     uiSAR(QWidget *parent = nullptr);
     ~uiSAR();
     QSettings *settings;
+    Config *config;
+
     static uiSAR * getMainWinPtr();
     struct JPGFields {
         double latitude;

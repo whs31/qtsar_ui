@@ -13,18 +13,29 @@ Config::Config(QString fn) : QSettings(fn, QSettings::IniFormat)
      * checkValuesSimple(<Название группы>);
      */
 
+    group_t utility;
+    utility["version"] = "1111";
+    checkValuesSimple(utility);
+
     group_t telemetry;
     telemetry["type"] = "UDP";
-    telemetry["address"] = "127.0.0.1:5599";
+    telemetry["address"] = "192.168.0.2";
+    telemetry["port"] = "22";
     telemetry["updateTime"] = "0.5";
     checkValuesSimple(telemetry);
 
+    group_t network;
+    network["type"] = "TCP";
+    network["address"] = "127.0.0.1";
+    network["port"] = "25565";
+    checkValuesSimple(network);
+
     group_t map;
-    map["predict_line_range"] = "0";
-    map["capture_time"] = "0";
-    map["diagram_length"] = "0";
-    map["diagram_theta_azimuth"] = "0";
-    map["diagram_drift_angle"] = "0";
+    map["predict_line_range"] = "4";
+    map["capture_time"] = "15";
+    map["diagram_length"] = "3";
+    map["diagram_theta_azimuth"] = "12.5";
+    map["diagram_drift_angle"] = "11";
     map["map_provider"] = "google";
     checkValuesSimple(map);
 

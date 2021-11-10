@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += "C:\Program Files\OpenSSL-Win64\include"
 #LIBS += -L"C:\Program Files\OpenSSL-Win64\lib" -llibcrypto -llibssl
 SOURCES += \
+    config/config.cpp \
     console/console.cpp \
     console/fvemu.c \
     filesystem/checkablemodel.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
     uisar.cpp
 
 HEADERS += \
+    config/config.h \
     console/DefaultColors.h \
     console/console.h \
     console/fvemu.h \

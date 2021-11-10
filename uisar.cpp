@@ -23,8 +23,7 @@ uiSAR::uiSAR(QWidget *parent)
     , ui(new Ui::uiSAR)
 {
     pMainWindow = this;
-    settings = new QSettings(QCoreApplication::applicationDirPath()+"/config.ini",
-                             QSettings::IniFormat);
+    config = new Config(QCoreApplication::applicationDirPath()+"/config2.ini");
     //settings->setValue("header/version", "1106");
 
 
@@ -706,28 +705,28 @@ void uiSAR::on_t_scale_valueChanged(int value)
 
 void uiSAR::loadSettings()
 {
-    QString t = settings->value("telemetry/udp_ip_default").toString();
+    QString t = config->value("telemetry/address").toString();
     double d;
     ui->UDPIPxml->setText(t);
-    t = settings->value("telemetry/udp_port_default").toString();
+    t = config->value("telemetry/port").toString();
     ui->UDPPortxml->setText(t);
-    t = settings->value("telemetry/tcp_ip_default").toString();
+    t = config->value("network/address").toString();
     ui->TCPIPxml->setText(t);
-    t = settings->value("telemetry/tcp_port_default").toString();
+    t = config->value("network/port").toString();
     ui->TCPPortxml->setText(t);
-    d = settings->value("telemetry/refresh_telemetry_time").toDouble();
+    d = config->value("telemetry/updateTime").toDouble();
     ui->refreshtelemetryxml->setValue(d);
-    d = settings->value("map/predict_line_range").toDouble();
+    d = config->value("map/predict_line_range").toDouble();
     ui->predictRangexml->setValue(d);
-    d = settings->value("map/capture_time").toDouble();
+    d = config->value("map/capture_time").toDouble();
     ui->diaTimexml->setValue(d);
-    d = settings->value("map/diagram_length").toDouble();
+    d = config->value("map/diagram_length").toDouble();
     ui->diaRangexml->setValue(d);
-    d = settings->value("map/diagram_theta_azimuth").toDouble();
+    d = config->value("map/diagram_theta_azimuth").toDouble();
     ui->diaThetaAzimuth->setValue(d);
-    d = settings->value("map/diagram_drift_angle").toDouble();
+    d = config->value("map/diagram_drift_angle").toDouble();
     ui->diaDriftAngle->setValue(d);
-    t = settings->value("map/map_provider").toString();
+    t = config->value("map/map_provider").toString();
     if(t=="google")
     {
         ui->providerGoogle->setChecked(1);
@@ -742,17 +741,18 @@ void uiSAR::loadSettings()
         ui->providerESRI->setChecked(0);
         ui->providerGoogle->setChecked(0);
     }
-    t = settings->value("header/version").toString();
+
+    t = config->value("utility/version").toString();
 
     //to qml
     auto qml = ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "loadSettings",
-            Q_ARG(QVariant, settings->value("map/map_provider").toString()),
-            Q_ARG(double, settings->value("map/diagram_theta_azimuth").toDouble()),
-            Q_ARG(double, settings->value("map/diagram_length").toDouble()),
-            Q_ARG(double, settings->value("map/diagram_drift_angle").toDouble()),
-            Q_ARG(double, settings->value("map/capture_time").toDouble()),
-            Q_ARG(double, settings->value("map/predict_line_range").toDouble()));
+            Q_ARG(QVariant, config->value("map/map_provider").toString()),
+            Q_ARG(double, config->value("map/diagram_theta_azimuth").toDouble()),
+            Q_ARG(double, config->value("map/diagram_length").toDouble()),
+            Q_ARG(double, config->value("map/diagram_drift_angle").toDouble()),
+            Q_ARG(double, config->value("map/capture_time").toDouble()),
+            Q_ARG(double, config->value("map/predict_line_range").toDouble()));
 
     qInfo()<<"Config loaded. Version "<<t;
 
@@ -760,30 +760,30 @@ void uiSAR::loadSettings()
 
 void uiSAR::on_saveSettings_clicked()
 {
-    settings->setValue("telemetry/udp_ip_default", ui->UDPIPxml->text());
-    settings->setValue("telemetry/udp_port_default", ui->UDPPortxml->text());
-    settings->setValue("telemetry/tcp_ip_default", ui->TCPIPxml->text());
-    settings->setValue("telemetry/tcp_port_default", ui->TCPPortxml->text());
-    settings->setValue("telemetry/refresh_telemetry_time", ui->refreshtelemetryxml->value());
-    settings->setValue("map/predict_line_range", ui->predictRangexml->value());
-    settings->setValue("map/capture_time", ui->diaTimexml->value());
-    settings->setValue("map/diagram_length", ui->diaRangexml->value());
-    settings->setValue("map/diagram_theta_azimuth", ui->diaThetaAzimuth->value());
-    settings->setValue("map/diagram_drift_angle", ui->diaDriftAngle->value());
+    config->setValue("telemetry/address", ui->UDPIPxml->text());
+    config->setValue("telemetry/port", ui->UDPPortxml->text());
+    config->setValue("network/address", ui->TCPIPxml->text());
+    config->setValue("network/port", ui->TCPPortxml->text());
+    config->setValue("telemetry/updateTime", ui->refreshtelemetryxml->value());
+    config->setValue("map/predict_line_range", ui->predictRangexml->value());
+    config->setValue("map/capture_time", ui->diaTimexml->value());
+    config->setValue("map/diagram_length", ui->diaRangexml->value());
+    config->setValue("map/diagram_theta_azimuth", ui->diaThetaAzimuth->value());
+    config->setValue("map/diagram_drift_angle", ui->diaDriftAngle->value());
     //
-    if(ui->providerGoogle->isChecked()) { settings->setValue("map/map_provider", "google"); } else if (ui->providerESRI->isChecked()) { settings->setValue("map/map_provider", "esri"); }
-    else if (ui->providerOSM->isChecked()) { settings->setValue("map/map_provider", "osm"); }
+    if(ui->providerGoogle->isChecked()) { config->setValue("map/map_provider", "google"); } else if (ui->providerESRI->isChecked()) { config->setValue("map/map_provider", "esri"); }
+    else if (ui->providerOSM->isChecked()) { config->setValue("map/map_provider", "osm"); }
 
     //to qml
     auto qml = ui->osmMap->rootObject();
     //провайдера карты можно менять только при перезапуске
     QMetaObject::invokeMethod(qml, "loadSettings",
-            Q_ARG(QVariant, settings->value("map/map_provider").toString()),
-            Q_ARG(double, settings->value("map/diagram_theta_azimuth").toDouble()),
-            Q_ARG(double, settings->value("map/diagram_length").toDouble()),
-            Q_ARG(double, settings->value("map/diagram_drift_angle").toDouble()),
-            Q_ARG(double, settings->value("map/capture_time").toDouble()),
-            Q_ARG(double, settings->value("map/predict_line_range").toDouble()));
+            Q_ARG(QVariant, config->value("map/map_provider").toString()),
+            Q_ARG(double, config->value("map/diagram_theta_azimuth").toDouble()),
+            Q_ARG(double, config->value("map/diagram_length").toDouble()),
+            Q_ARG(double, config->value("map/diagram_drift_angle").toDouble()),
+            Q_ARG(double, config->value("map/capture_time").toDouble()),
+            Q_ARG(double, config->value("map/predict_line_range").toDouble()));
     qInfo()<<"Config saved.";
     QMessageBox notifyAboutRestart;
     notifyAboutRestart.setWindowTitle("Сохранение настроек");
