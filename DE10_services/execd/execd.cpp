@@ -85,7 +85,7 @@ static void doDaemonize()
 
 
 std::string exec(std::string cmd, int fd) {
-    char buffer[128];
+    char buffer[16];
     std::string result = "";
     
     cmd += " 2>&1";

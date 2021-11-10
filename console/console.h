@@ -26,6 +26,7 @@ public:
     int write(QByteArray data);
     void flush();
     void reset();
+    bool escClosed(QByteArray data);
 
 private:
 
@@ -33,6 +34,8 @@ private:
 
     struct emuState *s;
     char *rawbuf;
+    bool waitForClose = false;
+    //QByteArray tmp;
 
 private slots:
     void resizeEvent(QResizeEvent *event);

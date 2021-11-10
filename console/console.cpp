@@ -34,9 +34,67 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
 
 }
 
+bool Console::escClosed(QByteArray data){
+
+    int size =  data.size();
+    int pos = -1;
+    for(int i = size; i >= 0 ; i--){
+        if(data[i] == 0x1B){
+            pos = i;
+            break;
+        }
+    }
+
+    if(pos == -1){
+        return true;
+    }
+
+    for(int i = pos; i < size ; i++){
+        if(data[i] >= 'A' && data[i] <= 'K'){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 int Console::write(QByteArray data){
-    return emu_core_run(s, (const uint8_t*)data.data(), data.size() );
+
+    static QByteArray tmp; // Возможно, придется заменить на global. Нужно проверить на разных платформах
+    // Проверка на целостность ESC-последовательности
+
+    if(waitForClose){
+        int i;
+        bool found = false;
+        for(i = 0; i < data.size(); i++){
+            if(data[i] >= 'A' && data[i] <= 'K'){
+                found = true;
+                break;
+            }
+        }
+        i++;
+        tmp.append(data.left(i));
+
+        if(found){
+            waitForClose = false;
+            emu_core_run(s, (const uint8_t*)tmp.data(), tmp.size() );
+            data = data.mid(i);
+        }else{
+            return 0;
+        }
+
+
+    }
+
+
+    if(escClosed(data)){
+        return emu_core_run(s, (const uint8_t*)data.data(), data.size() );
+    }else{
+        tmp = data;
+        waitForClose = true;
+        return 0;
+    }
 }
 
 void Console::flush(){
