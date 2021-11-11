@@ -278,7 +278,6 @@ DISTFILES += \ \
 
 RESOURCES += \
     img.qrc \
-    lstyle.qrc \
     qdarkstyle/dark/style.qrc \
     qml.qrc \
 

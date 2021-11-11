@@ -285,7 +285,6 @@ Makefile: uiSAR.pro ../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/win32-g++/
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/lib/qtmain.prl \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/build_pass.prf \
 		img.qrc \
-		lstyle.qrc \
 		qdarkstyle/dark/style.qrc
 	$(QMAKE) -o Makefile uiSAR.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 ../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/spec_pre.prf:
@@ -503,7 +502,6 @@ uiSAR.pro:
 ../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/lib/qtmain.prl:
 ../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/build_pass.prf:
 img.qrc:
-lstyle.qrc:
 qdarkstyle/dark/style.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile uiSAR.pro -spec win32-g++ "CONFIG+=qtquickcompiler"

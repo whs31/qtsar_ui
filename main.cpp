@@ -62,9 +62,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     //раскомментировать для лога отладки в файл
-    //qInstallMessageHandler(myMessageHandler); // Install the handler
+    //qInstallMessageHandler(myMessageHandler);
 
-    QFile LstyleSheetFile(":qdarkstyle/light/style.qss");
     QFile DstyleSheetFile(":qdarkstyle/dark/style.qss");
     if (!DstyleSheetFile.exists())   {
         printf("Unable to set stylesheet, file not found\n");

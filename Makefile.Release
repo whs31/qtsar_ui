@@ -65,7 +65,6 @@ SOURCES       = config\config.cpp \
 		uisar.cpp release\map_qml.cpp \
 		release\qmlcache_loader.cpp \
 		release\qrc_img.cpp \
-		release\qrc_lstyle.cpp \
 		release\qrc_style.cpp \
 		release\moc_config.cpp \
 		release\moc_console.cpp \
@@ -93,7 +92,6 @@ OBJECTS       = release/config.o \
 		release/map_qml.o \
 		release/qmlcache_loader.o \
 		release/qrc_img.o \
-		release/qrc_lstyle.o \
 		release/qrc_style.o \
 		release/moc_config.o \
 		release/moc_console.o \
@@ -367,10 +365,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Quasar.zip $(SOURCES) $(DIST) uiSAR.pro ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\spec_pre.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\qdevice.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\device_config.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\sanitize.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\gcc-base.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\g++-base.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\angle.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\windows-vulkan.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\g++-win32.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\windows-desktop.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\qconfig.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bodymovin_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_vulkan_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qt_functions.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qt_config.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\win32-g++\qmake.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\exclusive_builds.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\toolchain.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\default_pre.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\default_pre.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\resolve_config.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\exclusive_builds_post.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\default_post.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\build_pass.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\resources_functions.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qtquickcompiler.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\precompile_header.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\warn_on.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qt.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\resources.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\moc.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\opengl.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\uic.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qmake_use.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\file_copies.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\windows.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\testcase_targets.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\exceptions.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\yacc.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\lex.prf uiSAR.pro img.qrc lstyle.qrc qdarkstyle\dark\style.qrc ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5QuickWidgets.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Widgets.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Quick.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Gui.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5QmlModels.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Qml.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Network.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Positioning.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Core.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\qtmain.prl uiSAR_ru_RU.ts uiSAR_ru_RU.ts map.qml qml.qrc  img.qrc lstyle.qrc qdarkstyle\dark\style.qrc ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\data\dummy.cpp config\config.h config\confighandler.h console\DefaultColors.h console\console.h console\fvemu.h filesystem\checkablemodel.h image-processing\imageprocessing.h qmlinvoker.h qmlmarkerdialog.h remote\remote.h remote\remoteBase.h remote\remoteTCP.h remote\remoteUDP.h uisar.h  config\config.cpp config\confighandler.cpp console\console.cpp console\fvemu.c filesystem\checkablemodel.cpp image-processing\imageprocessing.cpp main.cpp qmlinvoker.cpp qmlmarkerdialog.cpp remote\remoteBase.cpp remote\remoteTCP.cpp remote\remoteUDP.cpp uisar.cpp qmlmarkerdialog.ui uisar.ui    
+	$(ZIP) Quasar.zip $(SOURCES) $(DIST) uiSAR.pro ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\spec_pre.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\qdevice.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\device_config.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\sanitize.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\gcc-base.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\g++-base.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\angle.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\windows-vulkan.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\g++-win32.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\common\windows-desktop.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\qconfig.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bodymovin_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_vulkan_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qt_functions.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qt_config.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\win32-g++\qmake.conf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\exclusive_builds.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\toolchain.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\default_pre.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\default_pre.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\resolve_config.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\exclusive_builds_post.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\default_post.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\build_pass.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\resources_functions.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qtquickcompiler.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\precompile_header.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\warn_on.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qt.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\resources.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\moc.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\opengl.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\uic.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\qmake_use.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\file_copies.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\win32\windows.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\testcase_targets.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\exceptions.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\yacc.prf ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\lex.prf uiSAR.pro img.qrc qdarkstyle\dark\style.qrc ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5QuickWidgets.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Widgets.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Quick.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Gui.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5QmlModels.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Qml.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Network.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Positioning.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\Qt5Core.prl ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\lib\qtmain.prl uiSAR_ru_RU.ts uiSAR_ru_RU.ts map.qml qml.qrc  img.qrc qdarkstyle\dark\style.qrc ..\..\..\..\Qt\Qt5.14.2\5.14.2\mingw73_64\mkspecs\features\data\dummy.cpp config\config.h config\confighandler.h console\DefaultColors.h console\console.h console\fvemu.h filesystem\checkablemodel.h image-processing\imageprocessing.h qmlinvoker.h qmlmarkerdialog.h remote\remote.h remote\remoteBase.h remote\remoteTCP.h remote\remoteUDP.h uisar.h  config\config.cpp config\confighandler.cpp console\console.cpp console\fvemu.c filesystem\checkablemodel.cpp image-processing\imageprocessing.cpp main.cpp qmlinvoker.cpp qmlmarkerdialog.cpp remote\remoteBase.cpp remote\remoteTCP.cpp remote\remoteUDP.cpp uisar.cpp qmlmarkerdialog.ui uisar.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\config.o release\confighandler.o release\console.o release\fvemu.o release\checkablemodel.o release\imageprocessing.o release\main.o release\qmlinvoker.o release\qmlmarkerdialog.o release\remoteBase.o release\remoteTCP.o release\remoteUDP.o release\uisar.o release\map_qml.o release\qmlcache_loader.o release\qrc_img.o release\qrc_lstyle.o release\qrc_style.o release\moc_config.o release\moc_console.o release\moc_checkablemodel.o release\moc_imageprocessing.o release\moc_qmlinvoker.o release\moc_qmlmarkerdialog.o release\moc_remote.o release\moc_remoteTCP.o release\moc_remoteUDP.o release\moc_uisar.o
+	-$(DEL_FILE) release\config.o release\confighandler.o release\console.o release\fvemu.o release\checkablemodel.o release\imageprocessing.o release\main.o release\qmlinvoker.o release\qmlmarkerdialog.o release\remoteBase.o release\remoteTCP.o release\remoteUDP.o release\uisar.o release\map_qml.o release\qmlcache_loader.o release\qrc_img.o release\qrc_style.o release\moc_config.o release\moc_console.o release\moc_checkablemodel.o release\moc_imageprocessing.o release\moc_qmlinvoker.o release\moc_qmlmarkerdialog.o release\moc_remote.o release\moc_remoteTCP.o release\moc_remoteUDP.o release\moc_uisar.o
 	-$(DEL_FILE) release\winadmin_res.o
 
 distclean: clean 
@@ -400,9 +398,9 @@ release/qmlcache_loader.cpp: qml.qrc
 
 compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
-compiler_rcc_make_all: release/qrc_img.cpp release/qrc_lstyle.cpp release/qrc_style.cpp
+compiler_rcc_make_all: release/qrc_img.cpp release/qrc_style.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) release\qrc_img.cpp release\qrc_lstyle.cpp release\qrc_style.cpp
+	-$(DEL_FILE) release\qrc_img.cpp release\qrc_style.cpp
 release/qrc_img.cpp: img.qrc \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/bin/rcc.exe \
 		console/UbuntuMono.ttf \
@@ -440,226 +438,6 @@ release/qrc_img.cpp: img.qrc \
 		img/cancel.png \
 		img/jpg_pan.png
 	C:\Qt\Qt5.14.2\5.14.2\mingw73_64\bin\rcc.exe -name img img.qrc -o release\qrc_img.cpp
-
-release/qrc_lstyle.cpp: lstyle.qrc \
-		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/bin/rcc.exe \
-		qdarkstyle/light/style.qss \
-		qdarkstyle/light/palette.py \
-		qdarkstyle/light/style.qrc \
-		qdarkstyle/light/__init__.py \
-		qdarkstyle/light/_variables.scss \
-		qdarkstyle/light/main.scss \
-		qdarkstyle/light/style_rc.py \
-		qdarkstyle/light/rc/transparent.png \
-		qdarkstyle/light/rc/line_horizontal_pressed.png \
-		qdarkstyle/light/rc/line_horizontal.png \
-		qdarkstyle/light/rc/arrow_left_disabled@2x.png \
-		qdarkstyle/light/rc/branch_more_focus.png \
-		qdarkstyle/light/rc/.keep \
-		qdarkstyle/light/rc/arrow_down_disabled@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical_pressed.png \
-		qdarkstyle/light/rc/window_close_pressed@2x.png \
-		qdarkstyle/light/rc/arrow_up_focus.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal_pressed@2x.png \
-		qdarkstyle/light/rc/window_close_pressed.png \
-		qdarkstyle/light/rc/branch_open_disabled@2x.png \
-		qdarkstyle/light/rc/line_horizontal_focus@2x.png \
-		qdarkstyle/light/rc/checkbox_unchecked.png \
-		qdarkstyle/light/rc/radio_checked_focus@2x.png \
-		qdarkstyle/light/rc/checkbox_checked_pressed@2x.png \
-		qdarkstyle/light/rc/base_icon_disabled.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal.png \
-		qdarkstyle/light/rc/window_close_disabled.png \
-		qdarkstyle/light/rc/branch_line@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical@2x.png \
-		qdarkstyle/light/rc/arrow_right_pressed@2x.png \
-		qdarkstyle/light/rc/arrow_up_disabled.png \
-		qdarkstyle/light/rc/checkbox_checked@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical_focus.png \
-		qdarkstyle/light/rc/radio_unchecked_disabled.png \
-		qdarkstyle/light/rc/checkbox_indeterminate.png \
-		qdarkstyle/light/rc/window_close_disabled@2x.png \
-		qdarkstyle/light/rc/window_grip_pressed@2x.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal_focus@2x.png \
-		qdarkstyle/light/rc/branch_closed_disabled.png \
-		qdarkstyle/light/rc/branch_line.png \
-		qdarkstyle/light/rc/checkbox_indeterminate_pressed.png \
-		qdarkstyle/light/rc/transparent_focus.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal.png \
-		qdarkstyle/light/rc/branch_end_focus.png \
-		qdarkstyle/light/rc/checkbox_unchecked@2x.png \
-		qdarkstyle/light/rc/window_undock_disabled.png \
-		qdarkstyle/light/rc/radio_checked_pressed@2x.png \
-		qdarkstyle/light/rc/branch_end_focus@2x.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal_focus.png \
-		qdarkstyle/light/rc/arrow_left_focus.png \
-		qdarkstyle/light/rc/arrow_left@2x.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical_focus@2x.png \
-		qdarkstyle/light/rc/window_grip_focus@2x.png \
-		qdarkstyle/light/rc/window_undock_focus.png \
-		qdarkstyle/light/rc/window_close.png \
-		qdarkstyle/light/rc/line_horizontal@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical_disabled@2x.png \
-		qdarkstyle/light/rc/line_vertical_focus@2x.png \
-		qdarkstyle/light/rc/arrow_right@2x.png \
-		qdarkstyle/light/rc/base_icon_pressed.png \
-		qdarkstyle/light/rc/branch_line_focus.png \
-		qdarkstyle/light/rc/window_grip_focus.png \
-		qdarkstyle/light/rc/arrow_right_disabled@2x.png \
-		qdarkstyle/light/rc/branch_more_pressed@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical_disabled.png \
-		qdarkstyle/light/rc/arrow_up.png \
-		qdarkstyle/light/rc/arrow_left_pressed@2x.png \
-		qdarkstyle/light/rc/checkbox_checked.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal_disabled.png \
-		qdarkstyle/light/rc/line_vertical_pressed.png \
-		qdarkstyle/light/rc/base_icon_pressed@2x.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical_focus.png \
-		qdarkstyle/light/rc/branch_end_pressed.png \
-		qdarkstyle/light/rc/checkbox_indeterminate_focus@2x.png \
-		qdarkstyle/light/rc/window_minimize_disabled.png \
-		qdarkstyle/light/rc/window_undock_pressed.png \
-		qdarkstyle/light/rc/radio_checked@2x.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal_disabled@2x.png \
-		qdarkstyle/light/rc/branch_closed_disabled@2x.png \
-		qdarkstyle/light/rc/line_vertical.png \
-		qdarkstyle/light/rc/branch_line_disabled.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical.png \
-		qdarkstyle/light/rc/branch_more_disabled.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal@2x.png \
-		qdarkstyle/light/rc/window_undock_disabled@2x.png \
-		qdarkstyle/light/rc/arrow_down_pressed.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal_disabled@2x.png \
-		qdarkstyle/light/rc/branch_more_disabled@2x.png \
-		qdarkstyle/light/rc/line_vertical_focus.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal@2x.png \
-		qdarkstyle/light/rc/arrow_left_focus@2x.png \
-		qdarkstyle/light/rc/transparent_focus@2x.png \
-		qdarkstyle/light/rc/branch_open_focus@2x.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical_disabled@2x.png \
-		qdarkstyle/light/rc/arrow_down_focus@2x.png \
-		qdarkstyle/light/rc/arrow_up_pressed@2x.png \
-		qdarkstyle/light/rc/arrow_up_disabled@2x.png \
-		qdarkstyle/light/rc/checkbox_checked_disabled.png \
-		qdarkstyle/light/rc/checkbox_checked_disabled@2x.png \
-		qdarkstyle/light/rc/line_vertical@2x.png \
-		qdarkstyle/light/rc/window_close@2x.png \
-		qdarkstyle/light/rc/arrow_right_disabled.png \
-		qdarkstyle/light/rc/branch_open@2x.png \
-		qdarkstyle/light/rc/checkbox_unchecked_focus@2x.png \
-		qdarkstyle/light/rc/line_vertical_disabled@2x.png \
-		qdarkstyle/light/rc/branch_more.png \
-		qdarkstyle/light/rc/transparent_pressed@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical.png \
-		qdarkstyle/light/rc/line_horizontal_focus.png \
-		qdarkstyle/light/rc/window_minimize_focus.png \
-		qdarkstyle/light/rc/checkbox_indeterminate@2x.png \
-		qdarkstyle/light/rc/branch_end_pressed@2x.png \
-		qdarkstyle/light/rc/arrow_up_pressed.png \
-		qdarkstyle/light/rc/arrow_right.png \
-		qdarkstyle/light/rc/radio_checked_disabled@2x.png \
-		qdarkstyle/light/rc/branch_open_pressed.png \
-		qdarkstyle/light/rc/line_horizontal_disabled.png \
-		qdarkstyle/light/rc/window_close_focus.png \
-		qdarkstyle/light/rc/radio_checked_disabled.png \
-		qdarkstyle/light/rc/branch_more@2x.png \
-		qdarkstyle/light/rc/branch_open.png \
-		qdarkstyle/light/rc/checkbox_unchecked_disabled@2x.png \
-		qdarkstyle/light/rc/base_icon_focus@2x.png \
-		qdarkstyle/light/rc/checkbox_unchecked_pressed.png \
-		qdarkstyle/light/rc/window_close_focus@2x.png \
-		qdarkstyle/light/rc/window_minimize_pressed@2x.png \
-		qdarkstyle/light/rc/branch_closed.png \
-		qdarkstyle/light/rc/arrow_up_focus@2x.png \
-		qdarkstyle/light/rc/radio_checked_pressed.png \
-		qdarkstyle/light/rc/branch_end_disabled@2x.png \
-		qdarkstyle/light/rc/radio_unchecked_disabled@2x.png \
-		qdarkstyle/light/rc/radio_unchecked_focus@2x.png \
-		qdarkstyle/light/rc/base_icon@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical_pressed@2x.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical_pressed.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal_disabled.png \
-		qdarkstyle/light/rc/branch_line_disabled@2x.png \
-		qdarkstyle/light/rc/branch_closed_pressed.png \
-		qdarkstyle/light/rc/branch_closed_focus@2x.png \
-		qdarkstyle/light/rc/window_minimize@2x.png \
-		qdarkstyle/light/rc/window_minimize.png \
-		qdarkstyle/light/rc/transparent_pressed.png \
-		qdarkstyle/light/rc/window_grip@2x.png \
-		qdarkstyle/light/rc/checkbox_indeterminate_pressed@2x.png \
-		qdarkstyle/light/rc/base_icon_focus.png \
-		qdarkstyle/light/rc/checkbox_checked_pressed.png \
-		qdarkstyle/light/rc/arrow_down_focus.png \
-		qdarkstyle/light/rc/radio_checked.png \
-		qdarkstyle/light/rc/branch_end_disabled.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal_pressed.png \
-		qdarkstyle/light/rc/radio_unchecked_focus.png \
-		qdarkstyle/light/rc/window_undock_focus@2x.png \
-		qdarkstyle/light/rc/radio_unchecked_pressed.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical_disabled.png \
-		qdarkstyle/light/rc/window_undock.png \
-		qdarkstyle/light/rc/window_grip_disabled.png \
-		qdarkstyle/light/rc/branch_open_pressed@2x.png \
-		qdarkstyle/light/rc/radio_checked_focus.png \
-		qdarkstyle/light/rc/checkbox_checked_focus.png \
-		qdarkstyle/light/rc/window_undock_pressed@2x.png \
-		qdarkstyle/light/rc/line_vertical_disabled.png \
-		qdarkstyle/light/rc/checkbox_unchecked_focus.png \
-		qdarkstyle/light/rc/branch_closed_focus.png \
-		qdarkstyle/light/rc/arrow_down@2x.png \
-		qdarkstyle/light/rc/toolbar_move_vertical_focus@2x.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal_focus.png \
-		qdarkstyle/light/rc/window_grip_disabled@2x.png \
-		qdarkstyle/light/rc/radio_unchecked.png \
-		qdarkstyle/light/rc/checkbox_unchecked_pressed@2x.png \
-		qdarkstyle/light/rc/window_grip.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical@2x.png \
-		qdarkstyle/light/rc/arrow_right_focus.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal_focus@2x.png \
-		qdarkstyle/light/rc/transparent_disabled@2x.png \
-		qdarkstyle/light/rc/base_icon_disabled@2x.png \
-		qdarkstyle/light/rc/window_grip_pressed.png \
-		qdarkstyle/light/rc/base_icon.png \
-		qdarkstyle/light/rc/transparent@2x.png \
-		qdarkstyle/light/rc/arrow_up@2x.png \
-		qdarkstyle/light/rc/line_vertical_pressed@2x.png \
-		qdarkstyle/light/rc/line_horizontal_disabled@2x.png \
-		qdarkstyle/light/rc/window_minimize_disabled@2x.png \
-		qdarkstyle/light/rc/checkbox_indeterminate_disabled.png \
-		qdarkstyle/light/rc/window_minimize_focus@2x.png \
-		qdarkstyle/light/rc/window_undock@2x.png \
-		qdarkstyle/light/rc/checkbox_indeterminate_disabled@2x.png \
-		qdarkstyle/light/rc/branch_line_pressed@2x.png \
-		qdarkstyle/light/rc/branch_line_focus@2x.png \
-		qdarkstyle/light/rc/branch_line_pressed.png \
-		qdarkstyle/light/rc/window_minimize_pressed.png \
-		qdarkstyle/light/rc/radio_unchecked@2x.png \
-		qdarkstyle/light/rc/checkbox_indeterminate_focus.png \
-		qdarkstyle/light/rc/branch_closed_pressed@2x.png \
-		qdarkstyle/light/rc/arrow_left.png \
-		qdarkstyle/light/rc/toolbar_separator_vertical_pressed@2x.png \
-		qdarkstyle/light/rc/branch_more_focus@2x.png \
-		qdarkstyle/light/rc/line_horizontal_pressed@2x.png \
-		qdarkstyle/light/rc/branch_more_pressed.png \
-		qdarkstyle/light/rc/arrow_right_pressed.png \
-		qdarkstyle/light/rc/arrow_down_pressed@2x.png \
-		qdarkstyle/light/rc/toolbar_separator_horizontal_pressed.png \
-		qdarkstyle/light/rc/branch_closed@2x.png \
-		qdarkstyle/light/rc/branch_end@2x.png \
-		qdarkstyle/light/rc/arrow_left_disabled.png \
-		qdarkstyle/light/rc/transparent_disabled.png \
-		qdarkstyle/light/rc/branch_open_disabled.png \
-		qdarkstyle/light/rc/branch_open_focus.png \
-		qdarkstyle/light/rc/arrow_down_disabled.png \
-		qdarkstyle/light/rc/radio_unchecked_pressed@2x.png \
-		qdarkstyle/light/rc/branch_end.png \
-		qdarkstyle/light/rc/checkbox_unchecked_disabled.png \
-		qdarkstyle/light/rc/checkbox_checked_focus@2x.png \
-		qdarkstyle/light/rc/arrow_left_pressed.png \
-		qdarkstyle/light/rc/arrow_down.png \
-		qdarkstyle/light/rc/toolbar_move_horizontal_pressed@2x.png \
-		qdarkstyle/light/rc/arrow_right_focus@2x.png
-	C:\Qt\Qt5.14.2\5.14.2\mingw73_64\bin\rcc.exe -name lstyle lstyle.qrc -o release\qrc_lstyle.cpp
 
 release/qrc_style.cpp: qdarkstyle/dark/style.qrc \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/bin/rcc.exe \
@@ -4644,9 +4422,6 @@ release/qmlcache_loader.o: release/qmlcache_loader.cpp
 
 release/qrc_img.o: release/qrc_img.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\qrc_img.o release\qrc_img.cpp
-
-release/qrc_lstyle.o: release/qrc_lstyle.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\qrc_lstyle.o release\qrc_lstyle.cpp
 
 release/qrc_style.o: release/qrc_style.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\qrc_style.o release\qrc_style.cpp
