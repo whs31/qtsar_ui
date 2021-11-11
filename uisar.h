@@ -24,9 +24,6 @@
 #include <QtMath>
 #include <QtEndian>
 
-#include <QSettings>
-#include "config/config.h"
-
 #include <QDirIterator>
 #include <QDir>
 #include <QFileSystemModel>
@@ -34,8 +31,14 @@
 #include "remote/remoteBase.h"
 #include "console/console.h"
 #include "filesystem/checkablemodel.h"
+#include "image-processing/imageprocessing.h"
+//#include "config/config.h"
+#include "config/confighandler.h"
 
 #define JPEG_HEADER_SIZE 20
+
+class ImageProcessing;
+class ConfigHandler;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class uiSAR; }
@@ -48,10 +51,10 @@ class uiSAR : public QMainWindow
 public:
     uiSAR(QWidget *parent = nullptr);
     ~uiSAR();
-    QSettings *settings;
-    Config *config;
-
     static uiSAR * getMainWinPtr();
+    friend class ImageProcessing;
+    friend class ConfigHandler;
+
     struct JPGFields {
         double latitude;
         double longitude;
@@ -72,40 +75,49 @@ public:
 
 
     JPGFields decode_jpgs(QString path);
-    JPGFields readField();
+    JPGFields readField();          //эту функцию надо убрать (в целом нужно переосмыслить хранение метаданных в программе)
 
 signals:
     //void toQMLpanButton(float latitude, float longitude, float dx, float dy, float x0, float y0, float angle, QString filename);
 public slots:
     void qmlDialogSlot(float markerLat, float markerLon);
 private slots:
-    //JPG slots
+    //image processing slots
     void on_panButton_clicked();
     void on_opacitySlider_sliderMoved(int position);
-    void on_showCoordsBox_stateChanged(int arg1);
-
-    //Network slots
-    void on_udpSendButton_clicked();
-    void onTimer();
-
-    void on_placeMarkerButton_clicked();
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
-    void on_udpStopButton_clicked();
-    void on_panGPS_clicked();
-    void on_nav_follow_stateChanged(int arg1);
     void on_jpg_gright_clicked();
     void on_jpg_gleft_clicked();
-    void on_selectFolderButton_clicked();
 
+    //map tools slots
+    void on_showCoordsBox_stateChanged(int arg1);
+    void on_placeMarkerButton_clicked();
     void on_nav_displayroute_stateChanged(int arg1);
     void on_clearTrack_clicked();
+    void on_panGPS_clicked();
+    void on_nav_follow_stateChanged(int arg1);
+
+    //legacy console slots
+    void on_udpSendButton_clicked();
+    void onTimer();
+    void on_pushButton_clicked();       //connect to default udp server
+    void on_pushButton_2_clicked();     //start data receiving
+    void on_udpStopButton_clicked();
+
+    //config slots
+    void on_selectFolderButton_clicked();
+    void on_saveSettings_clicked();
+    void on_discardSettings_clicked();
+
+    //main console slots
     void ReadTelemetry(QByteArray data);
     void ReadExec(QByteArray data);
 
+    //top toolpanel slots
     void on_changeMapMode_toggled(bool checked);
     void on_gpsPanClone_clicked();
+    void on_rulerButton_clicked();
 
+    //image transform slots
     void on_t_up_clicked();
     void on_t_down_clicked();
     void on_t_left_clicked();
@@ -114,16 +126,13 @@ private slots:
     void on_t_ySpin_valueChanged(double arg1);
     void on_t_sSpin_valueChanged(double arg1);
     void on_t_scale_valueChanged(int value);
-    void on_saveSettings_clicked();
-    void on_discardSettings_clicked();
     void on_t_rSpin_valueChanged(double arg1);
     void on_t_rotation_valueChanged(int value);
-    void on_rulerButton_clicked();
+
 
 private:
     static uiSAR * pMainWindow;
 
-    int totalJPGDetected;
     double spinxArg0 = 0;
     double spinyArg0 = 0;
     double spinrArg0 = 0;
@@ -133,21 +142,21 @@ private:
 
     Ui::uiSAR *ui; 
     QTimer *timer;
-
     Remote *Telemery;
     TelemetryData_t *TelemetryData;
+    //Config *config;
+    ConfigHandler *configHandler;
+    ImageProcessing *imageProcessing;
 
     QStringList imageList;
     int fileCounter = 0;
 
     void updateTelemetry();
     void initUI();
-    void loadSettings();
     void showAllImages();
 
     void update_jpgblocklabels_from_field(JPGFields _field);
     bool eventFilter(QObject *watched, QEvent *event);
-
 };
 
 #endif // UISAR_H

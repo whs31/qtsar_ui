@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2679,8 +2679,8 @@ QPushButton:selected {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="img.qrc"/>
   <include location="qdarkstyle/dark/style.qrc"/>
+  <include location="img.qrc"/>
  </resources>
  <connections/>
 </ui>

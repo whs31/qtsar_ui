@@ -1,3 +1,14 @@
+/*-----Текущие проблемы/то, что нужно доделать-----
+ *
+ * Линейка не удаляет после использования метки
+ * В линейке нужно добавить надпись, параллельную rulerLine, с отображением расстояния
+ * Все отображение РЛИ нужно переделать и перенести в отдельный класс
+ * Чекбоксы в дереве изображений не работают
+ * При изменении в конфиге провайдера карт нужно закрывать приложение, также нужно выводить предупреждение при попытке изменить конфиг при наличии коннекта с телеметрией (но не закрывать приложение)
+ *
+ * */
+
+
 #include "uisar.h"
 #include "ui_uisar.h"
 #include "qmlmarkerdialog.h"
@@ -23,10 +34,9 @@ uiSAR::uiSAR(QWidget *parent)
     , ui(new Ui::uiSAR)
 {
     pMainWindow = this;
-    config = new Config(QCoreApplication::applicationDirPath()+"/config2.ini");
-    //settings->setValue("header/version", "1106");
-
-
+    //config = new Config(QCoreApplication::applicationDirPath()+"/config.ini");
+    configHandler = new ConfigHandler();
+    imageProcessing = new ImageProcessing();
     /* Интерфейс для получения телеметрии */
     Telemery = RemoteAuto("UDP");
     connect(Telemery, SIGNAL(received(QByteArray)), this, SLOT(ReadTelemetry(QByteArray)));
@@ -35,10 +45,10 @@ uiSAR::uiSAR(QWidget *parent)
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 
     initUI();
-    loadSettings();
+    configHandler->loadSettings();
 
     // Console test
-
+/*
     QString execAddr = "127.0.0.1:2222";
     QString connectStatus = "connect to " + execAddr + " ";
     Remote *c = RemoteAuto("TCP");
@@ -54,7 +64,7 @@ uiSAR::uiSAR(QWidget *parent)
     ui->consoleMain->flush();
 
     connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
-
+*/
 }
 
 uiSAR::~uiSAR()
@@ -705,115 +715,15 @@ void uiSAR::on_t_scale_valueChanged(int value)
     ui->t_sSpin->setValue(temp/100);
 }
 
-void uiSAR::loadSettings()
-{
-    QString t = config->value("telemetry/address").toString();
-    double d;
-    ui->UDPIPxml->setText(t);
-    t = config->value("telemetry/port").toString();
-    ui->UDPPortxml->setText(t);
-    t = config->value("network/address").toString();
-    ui->TCPIPxml->setText(t);
-    t = config->value("network/port").toString();
-    ui->TCPPortxml->setText(t);
-    d = config->value("telemetry/updateTime").toDouble();
-    ui->refreshtelemetryxml->setValue(d);
-    d = config->value("map/predict_line_range").toDouble();
-    ui->predictRangexml->setValue(d);
-    d = config->value("map/capture_time").toDouble();
-    ui->diaTimexml->setValue(d);
-    d = config->value("map/diagram_length").toDouble();
-    ui->diaRangexml->setValue(d);
-    d = config->value("map/diagram_theta_azimuth").toDouble();
-    ui->diaThetaAzimuth->setValue(d);
-    d = config->value("map/diagram_drift_angle").toDouble();
-    ui->diaDriftAngle->setValue(d);
-    t = config->value("map/map_provider").toString();
-    if(t=="google")
-    {
-        ui->providerGoogle->setChecked(1);
-        ui->providerESRI->setChecked(0);
-        ui->providerOSM->setChecked(0);
-    } else if(t=="esri") {
-        ui->providerESRI->setChecked(1);
-        ui->providerOSM->setChecked(0);
-        ui->providerGoogle->setChecked(0);
-    } else if(t=="osm") {
-        ui->providerOSM->setChecked(1);
-        ui->providerESRI->setChecked(0);
-        ui->providerGoogle->setChecked(0);
-    }
-
-    t = config->value("utility/version").toString();
-
-    //to qml
-    auto qml = ui->osmMap->rootObject();
-    QMetaObject::invokeMethod(qml, "loadSettings",
-            Q_ARG(QVariant, config->value("map/map_provider").toString()),
-            Q_ARG(double, config->value("map/diagram_theta_azimuth").toDouble()),
-            Q_ARG(double, config->value("map/diagram_length").toDouble()),
-            Q_ARG(double, config->value("map/diagram_drift_angle").toDouble()),
-            Q_ARG(double, config->value("map/capture_time").toDouble()),
-            Q_ARG(double, config->value("map/predict_line_range").toDouble()));
-
-    qInfo()<<"Config loaded. Version "<<t;
-
-}
-
 void uiSAR::on_saveSettings_clicked()
 {
-    config->setValue("telemetry/address", ui->UDPIPxml->text());
-    config->setValue("telemetry/port", ui->UDPPortxml->text());
-    config->setValue("network/address", ui->TCPIPxml->text());
-    config->setValue("network/port", ui->TCPPortxml->text());
-    config->setValue("telemetry/updateTime", ui->refreshtelemetryxml->value());
-    config->setValue("map/predict_line_range", ui->predictRangexml->value());
-    config->setValue("map/capture_time", ui->diaTimexml->value());
-    config->setValue("map/diagram_length", ui->diaRangexml->value());
-    config->setValue("map/diagram_theta_azimuth", ui->diaThetaAzimuth->value());
-    config->setValue("map/diagram_drift_angle", ui->diaDriftAngle->value());
-    //
-    if(ui->providerGoogle->isChecked()) { config->setValue("map/map_provider", "google"); } else if (ui->providerESRI->isChecked()) { config->setValue("map/map_provider", "esri"); }
-    else if (ui->providerOSM->isChecked()) { config->setValue("map/map_provider", "osm"); }
-
-    //to qml
-    auto qml = ui->osmMap->rootObject();
-    //провайдера карты можно менять только при перезапуске
-    QMetaObject::invokeMethod(qml, "loadSettings",
-            Q_ARG(QVariant, config->value("map/map_provider").toString()),
-            Q_ARG(double, config->value("map/diagram_theta_azimuth").toDouble()),
-            Q_ARG(double, config->value("map/diagram_length").toDouble()),
-            Q_ARG(double, config->value("map/diagram_drift_angle").toDouble()),
-            Q_ARG(double, config->value("map/capture_time").toDouble()),
-            Q_ARG(double, config->value("map/predict_line_range").toDouble()));
-    qInfo()<<"Config saved.";
-    QMessageBox notifyAboutRestart;
-    notifyAboutRestart.setWindowTitle("Сохранение настроек");
-    notifyAboutRestart.setIcon(QMessageBox::Information);
-    notifyAboutRestart.setText("Провайдер карт изменится при перезапуске программы.");
-    notifyAboutRestart.setStandardButtons(QMessageBox::Yes);
-    notifyAboutRestart.setDefaultButton(QMessageBox::Yes);
-    notifyAboutRestart.exec();
+    configHandler->saveSettings();
 }
 
 void uiSAR::on_discardSettings_clicked()
 {
 
-    QMessageBox askForDiscardSettings;
-    askForDiscardSettings.setWindowTitle("Отмена изменений");
-    askForDiscardSettings.setIcon(QMessageBox::Question);
-    askForDiscardSettings.setText("Вы уверены, что хотите отменить изменения настроек?");
-    askForDiscardSettings.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-    askForDiscardSettings.setDefaultButton(QMessageBox::Cancel);
-    int ret = askForDiscardSettings.exec();
-    switch (ret) {
-      case QMessageBox::Yes: loadSettings();
-          break;
-      case QMessageBox::Cancel:
-          break;
-      default:
-          break;
-    }
+    configHandler->discardSettings();
 }
 
 void uiSAR::on_t_rSpin_valueChanged(double arg1)

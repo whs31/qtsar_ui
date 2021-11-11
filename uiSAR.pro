@@ -19,9 +19,11 @@ INCLUDEPATH += "C:\Program Files\OpenSSL-Win64\include"
 #LIBS += -L"C:\Program Files\OpenSSL-Win64\lib" -llibcrypto -llibssl
 SOURCES += \
     config/config.cpp \
+    config/confighandler.cpp \
     console/console.cpp \
     console/fvemu.c \
     filesystem/checkablemodel.cpp \
+    image-processing/imageprocessing.cpp \
     main.cpp \
     qmlinvoker.cpp \
     qmlmarkerdialog.cpp \
@@ -32,10 +34,12 @@ SOURCES += \
 
 HEADERS += \
     config/config.h \
+    config/confighandler.h \
     console/DefaultColors.h \
     console/console.h \
     console/fvemu.h \
     filesystem/checkablemodel.h \
+    image-processing/imageprocessing.h \
     qmlinvoker.h \
     qmlmarkerdialog.h \
     remote/remote.h \
