@@ -81,7 +81,6 @@ public slots:
 private slots:
     //JPG slots
     void on_panButton_clicked();
-    void on_showButton_clicked();
     void on_opacitySlider_sliderMoved(int position);
     void on_showCoordsBox_stateChanged(int arg1);
 
@@ -120,8 +119,6 @@ private slots:
     void on_t_rSpin_valueChanged(double arg1);
     void on_t_rotation_valueChanged(int value);
     void on_rulerButton_clicked();
-    void on_pushButton_3_clicked();
-    void on_displayAll_clicked();
 
 private:
     static uiSAR * pMainWindow;

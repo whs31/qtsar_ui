@@ -836,4 +836,3 @@ void uiSAR::on_rulerButton_clicked()
     auto qml = ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "rulerHandler");
 }
-

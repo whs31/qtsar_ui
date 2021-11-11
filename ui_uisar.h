@@ -119,7 +119,7 @@ public:
     QLabel *jpgtls_filenamelabel;
     QLabel *jpgtls_filenamedisp;
     QToolButton *jpg_gright;
-    QPushButton *pushButton_3;
+    QPushButton *displayAll;
     QSpacerItem *verticalSpacer_5;
     QLabel *label_7;
     QGroupBox *transformJPGbox;
@@ -742,6 +742,8 @@ public:
         icon13.addFile(QString::fromUtf8(":/Desktop/Portable Python/sar_ctrl/img/jpgtls_toggledispico_A.png"), QSize(), QIcon::Selected, QIcon::Off);
         showButton->setIcon(icon13);
         showButton->setIconSize(QSize(16, 16));
+        showButton->setCheckable(true);
+        showButton->setChecked(false);
 
         jpgButtonsLayout->addWidget(showButton, 0, 0, 1, 1);
 
@@ -847,14 +849,15 @@ public:
 
         gridLayout_7->addLayout(horizontalLayout, 6, 0, 1, 1);
 
-        pushButton_3 = new QPushButton(img_tab);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setEnabled(false);
+        displayAll = new QPushButton(img_tab);
+        displayAll->setObjectName(QString::fromUtf8("displayAll"));
+        displayAll->setEnabled(true);
         QIcon icon16;
         icon16.addFile(QString::fromUtf8(":/img/toggle_overlay.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_3->setIcon(icon16);
+        displayAll->setIcon(icon16);
+        displayAll->setCheckable(true);
 
-        gridLayout_7->addWidget(pushButton_3, 5, 0, 1, 1);
+        gridLayout_7->addWidget(displayAll, 5, 0, 1, 1);
 
         verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -1733,7 +1736,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
         DecodeJPG->setDefault(false);
 
 
@@ -1793,7 +1796,7 @@ public:
         jpgtls_filenamelabel->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p>\320\242\320\265\320\272\321\203\321\211\320\270\320\271 \321\204\320\260\320\271\320\273:</p></body></html>", nullptr));
         jpgtls_filenamedisp->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p align=\"right\"><span style=\" font-weight:600;\">-----------</span></p></body></html>", nullptr));
         jpg_gright->setText(QString());
-        pushButton_3->setText(QCoreApplication::translate("uiSAR", "\320\236\321\202\320\276\320\261\321\200\320\260\320\267\320\270\321\202\321\214 \320\262\321\201\320\265", nullptr));
+        displayAll->setText(QCoreApplication::translate("uiSAR", "\320\236\321\202\320\276\320\261\321\200\320\260\320\267\320\270\321\202\321\214 \320\262\321\201\320\265", nullptr));
         label_7->setText(QCoreApplication::translate("uiSAR", "<html><head/><body><p><span style=\" font-weight:600;\">\320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\270\320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\321\217\320\274\320\270</span></p></body></html>", nullptr));
         transformJPGbox->setTitle(QCoreApplication::translate("uiSAR", "\320\240\320\265\320\264\320\260\320\272\321\202\320\270\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\263\320\265\320\276\320\274\320\265\321\202\321\200\320\270\320\270 \320\240\320\233\320\230", nullptr));
         t_ySpin->setSuffix(QCoreApplication::translate("uiSAR", " \320\274", nullptr));
