@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1024,6 +1024,12 @@ QPushButton:pressed {
               <height>16</height>
              </size>
             </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item row="0" column="1">
@@ -1241,9 +1247,9 @@ QPushButton:pressed {
          </layout>
         </item>
         <item row="5" column="0">
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="displayAll">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Отобразить все</string>
@@ -1251,6 +1257,9 @@ QPushButton:pressed {
           <property name="icon">
            <iconset resource="img.qrc">
             <normaloff>:/img/toggle_overlay.png</normaloff>:/img/toggle_overlay.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

@@ -176,7 +176,7 @@ void uiSAR::on_panButton_clicked()
 
 }
 
-void uiSAR::on_showButton_clicked()
+void uiSAR::showAllImages()
 {
     JPGFields _field = readField();
     if(_field.latitude != 0)
@@ -451,6 +451,8 @@ void uiSAR::on_selectFolderButton_clicked()
         decode_jpgs(imageList[0]);
         ui->transformJPGbox->setEnabled(1);
         ui->groupBox->setEnabled(1);
+
+        showAllImages();
     }else{
         statusBar()->showMessage(tr("Каталог с изображениями не распознан, повторите ввод через панель инструментов"), 15000);
         QMessageBox warningDialogue;
@@ -834,3 +836,4 @@ void uiSAR::on_rulerButton_clicked()
     auto qml = ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "rulerHandler");
 }
+

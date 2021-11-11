@@ -115,15 +115,13 @@ private slots:
     void on_t_ySpin_valueChanged(double arg1);
     void on_t_sSpin_valueChanged(double arg1);
     void on_t_scale_valueChanged(int value);
-
     void on_saveSettings_clicked();
     void on_discardSettings_clicked();
-
     void on_t_rSpin_valueChanged(double arg1);
-
     void on_t_rotation_valueChanged(int value);
-
     void on_rulerButton_clicked();
+    void on_pushButton_3_clicked();
+    void on_displayAll_clicked();
 
 private:
     static uiSAR * pMainWindow;
@@ -148,6 +146,7 @@ private:
     void updateTelemetry();
     void initUI();
     void loadSettings();
+    void showAllImages();
 
     void update_jpgblocklabels_from_field(JPGFields _field);
     bool eventFilter(QObject *watched, QEvent *event);
