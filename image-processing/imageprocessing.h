@@ -6,6 +6,8 @@
 
 #include "uisar.h"
 #include "ui_uisar.h"
+
+#define JPEG_HEADER_SIZE 20
 class uiSAR;
 
 class ImageProcessing : public QObject

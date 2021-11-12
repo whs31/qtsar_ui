@@ -186,7 +186,7 @@ void uiSAR::on_panButton_clicked()
 
 void uiSAR::showAllImages()
 {
-    JPGFields _field = readField();
+    /*JPGFields _field = readField();
     if(_field.latitude != 0)
     {
         statusBar()->showMessage(tr("Изображение отображено на карте"), 15000);
@@ -205,7 +205,7 @@ void uiSAR::showAllImages()
     }
     else {
         statusBar()->showMessage(tr("Широта и долгота изображения не распознаны"), 15000);
-    }
+    }*/
 }
 
 void uiSAR::on_opacitySlider_sliderMoved(int position)

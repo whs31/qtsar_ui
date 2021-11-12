@@ -35,8 +35,6 @@
 //#include "config/config.h"
 #include "config/confighandler.h"
 
-#define JPEG_HEADER_SIZE 20
-
 class ImageProcessing;
 class ConfigHandler;
 
@@ -73,6 +71,7 @@ public:
         float ele;
     };
 
+    int fileCounter;
 
     JPGFields decode_jpgs(QString path);
     JPGFields readField();          //эту функцию надо убрать (в целом нужно переосмыслить хранение метаданных в программе)
