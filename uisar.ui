@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1147,6 +1147,11 @@ QPushButton:pressed {
             <property name="text">
              <string/>
             </property>
+            <property name="icon">
+             <iconset resource="qdarkstyle/dark/style.qrc">
+              <normaloff>:/qss_icons/dark/rc/arrow_left.png</normaloff>
+              <disabledoff>:/qss_icons/dark/rc/arrow_left_disabled.png</disabledoff>:/qss_icons/dark/rc/arrow_left.png</iconset>
+            </property>
             <property name="iconSize">
              <size>
               <width>10</width>
@@ -1163,7 +1168,7 @@ QPushButton:pressed {
              <bool>true</bool>
             </property>
             <property name="arrowType">
-             <enum>Qt::LeftArrow</enum>
+             <enum>Qt::NoArrow</enum>
             </property>
            </widget>
           </item>
@@ -1189,7 +1194,7 @@ QPushButton:pressed {
           <item>
            <widget class="QLabel" name="jpgtls_filenamedisp">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -1240,7 +1245,7 @@ QPushButton:pressed {
              <bool>true</bool>
             </property>
             <property name="arrowType">
-             <enum>Qt::RightArrow</enum>
+             <enum>Qt::NoArrow</enum>
             </property>
            </widget>
           </item>
@@ -2679,8 +2684,8 @@ QPushButton:selected {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="qdarkstyle/dark/style.qrc"/>
   <include location="img.qrc"/>
+  <include location="qdarkstyle/dark/style.qrc"/>
  </resources>
  <connections/>
 </ui>

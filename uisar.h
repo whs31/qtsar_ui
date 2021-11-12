@@ -73,9 +73,6 @@ public:
 
     int fileCounter;
 
-    JPGFields decode_jpgs(QString path);
-    JPGFields readField();          //эту функцию надо убрать (в целом нужно переосмыслить хранение метаданных в программе)
-
 signals:
     //void toQMLpanButton(float latitude, float longitude, float dx, float dy, float x0, float y0, float angle, QString filename);
 public slots:

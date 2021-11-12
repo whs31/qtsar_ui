@@ -803,11 +803,15 @@ public:
         sizePolicy6.setHeightForWidth(jpg_gleft->sizePolicy().hasHeightForWidth());
         jpg_gleft->setSizePolicy(sizePolicy6);
         jpg_gleft->setCursor(QCursor(Qt::PointingHandCursor));
+        QIcon icon15;
+        icon15.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon15.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_left_disabled.png"), QSize(), QIcon::Disabled, QIcon::Off);
+        jpg_gleft->setIcon(icon15);
         jpg_gleft->setIconSize(QSize(10, 10));
         jpg_gleft->setCheckable(false);
         jpg_gleft->setChecked(false);
         jpg_gleft->setAutoRaise(true);
-        jpg_gleft->setArrowType(Qt::LeftArrow);
+        jpg_gleft->setArrowType(Qt::NoArrow);
 
         horizontalLayout->addWidget(jpg_gleft);
 
@@ -822,8 +826,8 @@ public:
 
         jpgtls_filenamedisp = new QLabel(img_tab);
         jpgtls_filenamedisp->setObjectName(QString::fromUtf8("jpgtls_filenamedisp"));
-        sizePolicy7.setHeightForWidth(jpgtls_filenamedisp->sizePolicy().hasHeightForWidth());
-        jpgtls_filenamedisp->setSizePolicy(sizePolicy7);
+        sizePolicy6.setHeightForWidth(jpgtls_filenamedisp->sizePolicy().hasHeightForWidth());
+        jpgtls_filenamedisp->setSizePolicy(sizePolicy6);
         jpgtls_filenamedisp->setCursor(QCursor(Qt::IBeamCursor));
 
         horizontalLayout->addWidget(jpgtls_filenamedisp);
@@ -834,15 +838,15 @@ public:
         sizePolicy6.setHeightForWidth(jpg_gright->sizePolicy().hasHeightForWidth());
         jpg_gright->setSizePolicy(sizePolicy6);
         jpg_gright->setCursor(QCursor(Qt::PointingHandCursor));
-        QIcon icon15;
-        icon15.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
-        icon15.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right_disabled.png"), QSize(), QIcon::Disabled, QIcon::Off);
-        jpg_gright->setIcon(icon15);
+        QIcon icon16;
+        icon16.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon16.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right_disabled.png"), QSize(), QIcon::Disabled, QIcon::Off);
+        jpg_gright->setIcon(icon16);
         jpg_gright->setIconSize(QSize(10, 10));
         jpg_gright->setCheckable(false);
         jpg_gright->setChecked(false);
         jpg_gright->setAutoRaise(true);
-        jpg_gright->setArrowType(Qt::RightArrow);
+        jpg_gright->setArrowType(Qt::NoArrow);
 
         horizontalLayout->addWidget(jpg_gright);
 
@@ -852,9 +856,9 @@ public:
         displayAll = new QPushButton(img_tab);
         displayAll->setObjectName(QString::fromUtf8("displayAll"));
         displayAll->setEnabled(true);
-        QIcon icon16;
-        icon16.addFile(QString::fromUtf8(":/img/toggle_overlay.png"), QSize(), QIcon::Normal, QIcon::Off);
-        displayAll->setIcon(icon16);
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/img/toggle_overlay.png"), QSize(), QIcon::Normal, QIcon::Off);
+        displayAll->setIcon(icon17);
         displayAll->setCheckable(true);
 
         gridLayout_7->addWidget(displayAll, 5, 0, 1, 1);
@@ -918,9 +922,9 @@ public:
         t_right->setObjectName(QString::fromUtf8("t_right"));
         sizePolicy6.setHeightForWidth(t_right->sizePolicy().hasHeightForWidth());
         t_right->setSizePolicy(sizePolicy6);
-        QIcon icon17;
-        icon17.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
-        t_right->setIcon(icon17);
+        QIcon icon18;
+        icon18.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_right->setIcon(icon18);
 
         gridLayout_10->addWidget(t_right, 1, 2, 1, 1);
 
@@ -928,9 +932,9 @@ public:
         t_left->setObjectName(QString::fromUtf8("t_left"));
         sizePolicy6.setHeightForWidth(t_left->sizePolicy().hasHeightForWidth());
         t_left->setSizePolicy(sizePolicy6);
-        QIcon icon18;
-        icon18.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_left.png"), QSize(), QIcon::Normal, QIcon::Off);
-        t_left->setIcon(icon18);
+        QIcon icon19;
+        icon19.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_left->setIcon(icon19);
 
         gridLayout_10->addWidget(t_left, 1, 0, 1, 1);
 
@@ -938,9 +942,9 @@ public:
         t_up->setObjectName(QString::fromUtf8("t_up"));
         sizePolicy6.setHeightForWidth(t_up->sizePolicy().hasHeightForWidth());
         t_up->setSizePolicy(sizePolicy6);
-        QIcon icon19;
-        icon19.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_up.png"), QSize(), QIcon::Normal, QIcon::Off);
-        t_up->setIcon(icon19);
+        QIcon icon20;
+        icon20.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_up.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_up->setIcon(icon20);
 
         gridLayout_10->addWidget(t_up, 0, 1, 1, 1);
 
@@ -948,9 +952,9 @@ public:
         t_down->setObjectName(QString::fromUtf8("t_down"));
         sizePolicy6.setHeightForWidth(t_down->sizePolicy().hasHeightForWidth());
         t_down->setSizePolicy(sizePolicy6);
-        QIcon icon20;
-        icon20.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_down.png"), QSize(), QIcon::Normal, QIcon::Off);
-        t_down->setIcon(icon20);
+        QIcon icon21;
+        icon21.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_down.png"), QSize(), QIcon::Normal, QIcon::Off);
+        t_down->setIcon(icon21);
 
         gridLayout_10->addWidget(t_down, 2, 1, 1, 1);
 
@@ -1008,9 +1012,9 @@ public:
 
         gridLayout_7->addWidget(transformJPGbox, 13, 0, 1, 1);
 
-        QIcon icon21;
-        icon21.addFile(QString::fromUtf8(":/tabIcons/jpg.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(img_tab, icon21, QString());
+        QIcon icon22;
+        icon22.addFile(QString::fromUtf8(":/tabIcons/jpg.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(img_tab, icon22, QString());
         tcp_tab = new QWidget();
         tcp_tab->setObjectName(QString::fromUtf8("tcp_tab"));
         gridLayout_11 = new QGridLayout(tcp_tab);
@@ -1044,9 +1048,9 @@ public:
 
         gridLayout_11->addItem(verticalSpacer_10, 3, 0, 1, 1);
 
-        QIcon icon22;
-        icon22.addFile(QString::fromUtf8(":/tabIcons/connectTcp.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(tcp_tab, icon22, QString());
+        QIcon icon23;
+        icon23.addFile(QString::fromUtf8(":/tabIcons/connectTcp.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(tcp_tab, icon23, QString());
         cfg_tab = new QWidget();
         cfg_tab->setObjectName(QString::fromUtf8("cfg_tab"));
         gridLayout_6 = new QGridLayout(cfg_tab);
@@ -1432,9 +1436,9 @@ public:
                         " bottom right;\n"
 "  bottom: 4px;\n"
 "}"));
-        QIcon icon23;
-        icon23.addFile(QString::fromUtf8(":/img/save_white.png"), QSize(), QIcon::Normal, QIcon::Off);
-        saveSettings->setIcon(icon23);
+        QIcon icon24;
+        icon24.addFile(QString::fromUtf8(":/img/save_white.png"), QSize(), QIcon::Normal, QIcon::Off);
+        saveSettings->setIcon(icon24);
 
         horizontalLayout_4->addWidget(saveSettings);
 
@@ -1495,18 +1499,18 @@ public:
                         " bottom right;\n"
 "  bottom: 4px;\n"
 "}"));
-        QIcon icon24;
-        icon24.addFile(QString::fromUtf8(":/img/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
-        discardSettings->setIcon(icon24);
+        QIcon icon25;
+        icon25.addFile(QString::fromUtf8(":/img/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
+        discardSettings->setIcon(icon25);
 
         horizontalLayout_4->addWidget(discardSettings);
 
 
         gridLayout_6->addLayout(horizontalLayout_4, 9, 0, 1, 4);
 
-        QIcon icon25;
-        icon25.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(cfg_tab, icon25, QString());
+        QIcon icon26;
+        icon26.addFile(QString::fromUtf8(":/tabIcons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(cfg_tab, icon26, QString());
         link_tab = new QWidget();
         link_tab->setObjectName(QString::fromUtf8("link_tab"));
         verticalLayout_2 = new QVBoxLayout(link_tab);
@@ -1563,9 +1567,9 @@ public:
         sizePolicy9.setVerticalStretch(0);
         sizePolicy9.setHeightForWidth(udpStopButton->sizePolicy().hasHeightForWidth());
         udpStopButton->setSizePolicy(sizePolicy9);
-        QIcon icon26;
-        icon26.addFile(QString::fromUtf8(":/img/close.png"), QSize(), QIcon::Normal, QIcon::Off);
-        udpStopButton->setIcon(icon26);
+        QIcon icon27;
+        icon27.addFile(QString::fromUtf8(":/img/close.png"), QSize(), QIcon::Normal, QIcon::Off);
+        udpStopButton->setIcon(icon27);
         udpStopButton->setIconSize(QSize(12, 12));
 
         gridLayout_4->addWidget(udpStopButton, 1, 2, 1, 1);
@@ -1594,9 +1598,9 @@ public:
         udpSendButton->setSizeIncrement(QSize(0, 0));
         udpSendButton->setStyleSheet(QString::fromUtf8("\n"
 "border-radius: 1px;"));
-        QIcon icon27;
-        icon27.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right@2x.png"), QSize(), QIcon::Normal, QIcon::Off);
-        udpSendButton->setIcon(icon27);
+        QIcon icon28;
+        icon28.addFile(QString::fromUtf8(":/qss_icons/dark/rc/arrow_right@2x.png"), QSize(), QIcon::Normal, QIcon::Off);
+        udpSendButton->setIcon(icon28);
         udpSendButton->setIconSize(QSize(10, 10));
 
         gridLayout_3->addWidget(udpSendButton, 1, 1, 1, 1);
@@ -1615,9 +1619,9 @@ public:
 
         verticalLayout_2->addWidget(UDPConsole);
 
-        QIcon icon28;
-        icon28.addFile(QString::fromUtf8(":/tabIcons/connectUdp.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(link_tab, icon28, QString());
+        QIcon icon29;
+        icon29.addFile(QString::fromUtf8(":/tabIcons/connectUdp.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(link_tab, icon29, QString());
         info_tab = new QWidget();
         info_tab->setObjectName(QString::fromUtf8("info_tab"));
         gridLayout_8 = new QGridLayout(info_tab);
@@ -1642,9 +1646,9 @@ public:
 
         gridLayout_8->addItem(verticalSpacer, 2, 0, 1, 1);
 
-        QIcon icon29;
-        icon29.addFile(QString::fromUtf8(":/tabIcons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
-        tabWidget->addTab(info_tab, icon29, QString());
+        QIcon icon30;
+        icon30.addFile(QString::fromUtf8(":/tabIcons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
+        tabWidget->addTab(info_tab, icon30, QString());
 
         gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -1681,9 +1685,9 @@ public:
         rulerButton->setEnabled(true);
         sizePolicy6.setHeightForWidth(rulerButton->sizePolicy().hasHeightForWidth());
         rulerButton->setSizePolicy(sizePolicy6);
-        QIcon icon30;
-        icon30.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
-        rulerButton->setIcon(icon30);
+        QIcon icon31;
+        icon31.addFile(QString::fromUtf8(":/img/ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
+        rulerButton->setIcon(icon31);
 
         horizontalLayout_2->addWidget(rulerButton);
 
@@ -1723,9 +1727,9 @@ public:
 "  background: #60798B;\n"
 "  color: #E0E1E3;\n"
 "}"));
-        QIcon icon31;
-        icon31.addFile(QString::fromUtf8(":/img/swapMode.png"), QSize(), QIcon::Normal, QIcon::Off);
-        changeMapMode->setIcon(icon31);
+        QIcon icon32;
+        icon32.addFile(QString::fromUtf8(":/img/swapMode.png"), QSize(), QIcon::Normal, QIcon::Off);
+        changeMapMode->setIcon(icon32);
         changeMapMode->setCheckable(true);
         changeMapMode->setChecked(true);
 
@@ -1736,7 +1740,7 @@ public:
 
         retranslateUi(uiSAR);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(2);
         DecodeJPG->setDefault(false);
 
 

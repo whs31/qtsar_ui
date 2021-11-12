@@ -77,93 +77,10 @@ uiSAR *uiSAR::getMainWinPtr()
     return pMainWindow;
 }
 
-void uiSAR::update_jpgblocklabels_from_field(JPGFields _field)
-{
-    //bold+size for all future 7px bold labels
-    QFont bold7pxfont = ui->jpgtls_latdisp->font();
-    bold7pxfont.setPointSize(7);
-    bold7pxfont.setBold(true);
-    //just use ui->labelname->setFont(bold7pxfont);
-    ui->jpgtls_latdisp->setText(QString::number(_field.latitude));
-    ui->jpgtls_latdisp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_latdisp->setFont(bold7pxfont);
-    ui->jpgtls_londisp->setText(QString::number(_field.longitude));
-    ui->jpgtls_londisp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_londisp->setFont(bold7pxfont);
-    ui->jpgtls_dxdisp->setText(QString::number(_field.dx));
-    ui->jpgtls_dxdisp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_dxdisp->setFont(bold7pxfont);
-    ui->jpgtls_dydisp->setText(QString::number(_field.dy));
-    ui->jpgtls_dydisp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_dydisp->setFont(bold7pxfont);
-    ui->jpgtls_x0disp->setText(QString::number(_field.x0));
-    ui->jpgtls_x0disp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_x0disp->setFont(bold7pxfont);
-    ui->jpgtls_y0disp->setText(QString::number(_field.y0));
-    ui->jpgtls_y0disp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_y0disp->setFont(bold7pxfont);
-    ui->jpgtls_angdisp->setText(QString::number(_field.angle));
-    ui->jpgtls_angdisp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_angdisp->setFont(bold7pxfont);
-    ui->jpgtls_filenamedisp->setText(_field.filename);
-    ui->jpgtls_filenamedisp->setAlignment(Qt::AlignRight);
-    ui->jpgtls_filenamedisp->setFont(bold7pxfont);
-}
-
-uiSAR::JPGFields uiSAR::readField()
-{
-    JPGFields _field;
-    QString reader = ui->jpgtls_latdisp->text();
-    _field.latitude = reader.toDouble();
-    reader = ui->jpgtls_londisp->text();
-    _field.longitude = reader.toDouble();
-    reader = ui->jpgtls_dydisp->text();
-    _field.dx = reader.toFloat();
-    reader = ui->jpgtls_dxdisp->text();
-    _field.dy = reader.toFloat();
-    reader = ui->jpgtls_x0disp->text();
-    _field.x0 = reader.toFloat();
-    reader = ui->jpgtls_y0disp->text();
-    _field.y0 = reader.toFloat();
-    reader = ui->jpgtls_angdisp->text();
-    _field.angle = reader.toFloat();
-    reader = ui->jpgtls_filenamedisp->text();
-    _field.filename = reader;
-    return _field;
-}
-
-uiSAR::JPGFields uiSAR::decode_jpgs(QString path)
-{
-    JPGFields _field = { 0,0,0,0,0,0,0, "empty filename" };
-    QFile f(path);
-
-
-    if(f.open(QIODevice::ReadOnly)){
-        QByteArray rawData = f.readAll();
-        char *data = rawData.data();
-        uint16_t *metaMarker = reinterpret_cast<uint16_t *>(data + JPEG_HEADER_SIZE);
-
-        if(*metaMarker == 0xE1FF){
-
-            uint16_t *metaSize = reinterpret_cast<uint16_t *>(data + JPEG_HEADER_SIZE + 2);
-            *metaSize = qToBigEndian(*metaSize) - 2;
-
-            memcpy(&_field, (data + JPEG_HEADER_SIZE + 4), *metaSize);
-        }
-        _field.filename = path;
-
-        statusBar()->showMessage(tr("Декодирование метаданных успешно произведено"), 15000);
-        update_jpgblocklabels_from_field(_field);
-    }
-
-    return _field;
-
-
-}
-
 void uiSAR::on_panButton_clicked()
 {
-    JPGFields _field = readField();
+    //JPGFields _field = {readField()};
+    JPGFields _field;
     if(_field.latitude != 0)
     {
         statusBar()->showMessage(tr("Карта отцентрирована по широте и долготе радиолокационного изображения"), 15000);
@@ -400,22 +317,12 @@ void uiSAR::on_nav_follow_stateChanged(int arg1)
 
 void uiSAR::on_jpg_gright_clicked()
 {
-    /*if(fileCounter < imageList.size()-1){
-        fileCounter++;
-        decode_jpgs(imageList[fileCounter]);
-    }*/
-    //вызвать функцию из класса image-processing
+    imageProcessing->goRight();
 }
 
 void uiSAR::on_jpg_gleft_clicked()
 {
-    /*if(fileCounter){
-        fileCounter--;
-        if(!imageList.empty()){
-            decode_jpgs(imageList[fileCounter]);
-        }
-    }*/
-    //вызвать функцию из класса image-processing
+    imageProcessing->goLeft();
 }
 
 void uiSAR::on_selectFolderButton_clicked()
@@ -646,7 +553,7 @@ void uiSAR::on_t_ySpin_valueChanged(double arg1)
     double dy = arg1 - spinyArg0;
     spinyArg0 = arg1;
         QMetaObject::invokeMethod(qml, "transformY",
-                Q_ARG(int, fileCounter),
+                Q_ARG(int, imageProcessing->getFileCounter()),
                 Q_ARG(double, dy)                  );
 }
 
@@ -656,7 +563,7 @@ void uiSAR::on_t_sSpin_valueChanged(double arg1)
     double d = arg1-spinsArg0;
     spinsArg0 = arg1;
     QMetaObject::invokeMethod(qml, "transformScale",
-            Q_ARG(int, fileCounter),
+            Q_ARG(int, imageProcessing->getFileCounter()),
             Q_ARG(double, d));
 }
 
@@ -683,7 +590,7 @@ void uiSAR::on_t_rSpin_valueChanged(double arg1)
     double d = arg1-spinrArg0;
     spinrArg0 = arg1;
     QMetaObject::invokeMethod(qml, "transformRotate",
-            Q_ARG(int, fileCounter),
+            Q_ARG(int, imageProcessing->getFileCounter()),
             Q_ARG(double, d));
 }
 

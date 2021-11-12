@@ -26,11 +26,14 @@ public:
         QString filename;
     };
     int fileCounter = 0;
+    int getFileCounter();
 
     void processPath(QString path);
     image_metadata decode_metadata(QStringList fileList);
     void showAllImages();
-    void updateLabels(image_metadata _meta);
+    void updateLabels(int structureIndex);
+    void goLeft();
+    void goRight();
 
 signals:
 

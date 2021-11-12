@@ -79,11 +79,12 @@ void ImageProcessing::processPath(QString path)
         warningDialogue.exec();
     }
         mainWindow->ui->jpg_gright->setEnabled(true);
-        mainWindow->ui->jpg_gleft->setEnabled(true);
+        //mainWindow->ui->jpg_gleft->setEnabled(true);  //так как по дефолту filecounter уже в крайнем левом положении на старте
         mainWindow->ui->transformJPGbox->setEnabled(1);
         mainWindow->ui->groupBox->setEnabled(1);
 
         decode_metadata(imageList);
+        updateLabels(0);
         //showAllImages();
 }
 
@@ -119,8 +120,77 @@ void ImageProcessing::showAllImages()
 
 }
 
-void ImageProcessing::updateLabels(image_metadata _meta)
+void ImageProcessing::updateLabels(int structureIndex)
 {
+    //bold+size for all future 7px bold labels
+    QFont labelFont = mainWindow->ui->jpgtls_latdisp->font();
+    labelFont.setPointSize(7);
+    labelFont.setBold(true);
+    //just use ui->labelname->setFont(labelFont);
+    mainWindow->ui->jpgtls_latdisp->setText(QString::number(metadataList[structureIndex].latitude));
+    mainWindow->ui->jpgtls_latdisp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_latdisp->setFont(labelFont);
+    mainWindow->ui->jpgtls_londisp->setText(QString::number(metadataList[structureIndex].longitude));
+    mainWindow->ui->jpgtls_londisp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_londisp->setFont(labelFont);
+    mainWindow->ui->jpgtls_dxdisp->setText(QString::number(metadataList[structureIndex].dx));
+    mainWindow->ui->jpgtls_dxdisp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_dxdisp->setFont(labelFont);
+    mainWindow->ui->jpgtls_dydisp->setText(QString::number(metadataList[structureIndex].dy));
+    mainWindow->ui->jpgtls_dydisp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_dydisp->setFont(labelFont);
+    mainWindow->ui->jpgtls_x0disp->setText(QString::number(metadataList[structureIndex].x0));
+    mainWindow->ui->jpgtls_x0disp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_x0disp->setFont(labelFont);
+    mainWindow->ui->jpgtls_y0disp->setText(QString::number(metadataList[structureIndex].y0));
+    mainWindow->ui->jpgtls_y0disp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_y0disp->setFont(labelFont);
+    mainWindow->ui->jpgtls_angdisp->setText(QString::number(metadataList[structureIndex].angle));
+    mainWindow->ui->jpgtls_angdisp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_angdisp->setFont(labelFont);
+    mainWindow->ui->jpgtls_filenamedisp->setText(metadataList[structureIndex].filename);
+    mainWindow->ui->jpgtls_filenamedisp->setAlignment(Qt::AlignRight);
+    mainWindow->ui->jpgtls_filenamedisp->setFont(labelFont);
+}
 
+int ImageProcessing::getFileCounter()
+{
+    return fileCounter;
+}
+
+void ImageProcessing::goLeft()
+{
+    int totalFiles = imageList.count(); //вылетает
+    if(fileCounter == totalFiles)
+    {
+        mainWindow->ui->jpg_gright->setEnabled(true);
+    }
+    if(fileCounter>1)
+    {
+        fileCounter--;
+        updateLabels(fileCounter);
+    } else if (fileCounter == 1) {
+        fileCounter--;
+        mainWindow->ui->jpg_gleft->setEnabled(false);
+        updateLabels(fileCounter);
+    }
+}
+
+void ImageProcessing::goRight()
+{
+    int totalFiles = imageList.count(); //вылетает
+    if(fileCounter == 0)
+    {
+        mainWindow->ui->jpg_gleft->setEnabled(true);
+    }
+    if(fileCounter<totalFiles-1)
+    {
+        fileCounter++;
+        updateLabels(fileCounter);
+    } else if (fileCounter == totalFiles-1) {
+        fileCounter++;
+        mainWindow->ui->jpg_gright->setEnabled(false);
+        updateLabels(fileCounter);
+    }
 }
 
