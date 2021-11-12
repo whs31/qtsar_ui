@@ -148,9 +148,6 @@ private:
     ConfigHandler *configHandler;
     ImageProcessing *imageProcessing;
 
-    QStringList imageList;
-    int fileCounter = 0;
-
     void updateTelemetry();
     void initUI();
     void showAllImages();

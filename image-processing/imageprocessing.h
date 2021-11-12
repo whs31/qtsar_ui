@@ -2,6 +2,7 @@
 #define IMAGEPROCESSING_H
 
 #include <QObject>
+#include <QVector>
 
 #include "uisar.h"
 #include "ui_uisar.h"
@@ -24,13 +25,17 @@ public:
     };
     int fileCounter = 0;
 
-    image_metadata decode_metadata(QString path);
+    void processPath(QString path);
+    image_metadata decode_metadata(QStringList fileList);
     void showAllImages();
     void updateLabels(image_metadata _meta);
 
 signals:
 
 private:
+    //image_metadata *meta_array;
+    QStringList imageList;
+    QVector<image_metadata> metadataList;
     uiSAR *mainWindow;
 };
 

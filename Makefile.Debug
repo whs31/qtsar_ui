@@ -1020,6 +1020,7 @@ debug/moc_imageprocessing.cpp: image-processing/imageprocessing.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qvarlengtharray.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qcontainerfwd.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVector \
 		uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qmainwindow.h \
@@ -1893,6 +1894,7 @@ debug/moc_uisar.cpp: uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		image-processing/imageprocessing.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVector \
 		uisar.h \
 		config/confighandler.h \
 		ui_uisar.h \
@@ -2434,6 +2436,7 @@ debug/confighandler.o: config/confighandler.cpp config/confighandler.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		image-processing/imageprocessing.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVector \
 		ui_uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVariant \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QIcon \
@@ -2819,6 +2822,7 @@ debug/imageprocessing.o: image-processing/imageprocessing.cpp image-processing/i
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qvarlengtharray.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qcontainerfwd.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVector \
 		uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/qmainwindow.h \
@@ -3300,6 +3304,7 @@ debug/main.o: main.cpp uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		image-processing/imageprocessing.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVector \
 		ui_uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVariant \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QIcon \
@@ -3623,6 +3628,7 @@ debug/qmlinvoker.o: qmlinvoker.cpp qmlinvoker.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		image-processing/imageprocessing.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVector \
 		ui_uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVariant \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QIcon \
@@ -4314,6 +4320,7 @@ debug/uisar.o: uisar.cpp uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		image-processing/imageprocessing.h \
+		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVector \
 		ui_uisar.h \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QVariant \
 		../../../../Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtGui/QIcon \

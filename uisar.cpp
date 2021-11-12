@@ -166,8 +166,6 @@ void uiSAR::on_panButton_clicked()
     JPGFields _field = readField();
     if(_field.latitude != 0)
     {
-        //QGeoCoordinate newcenter((float)_field.latitude, (float)_field.longitude);
-        //emit toQMLpanButton(newcenter, _field.dx, _field.dy, _field.x0, _field.y0, _field.angle, _field.filename);
         statusBar()->showMessage(tr("Карта отцентрирована по широте и долготе радиолокационного изображения"), 15000);
         auto qml = ui->osmMap->rootObject();
         QMetaObject::invokeMethod(qml, "pan",
@@ -192,7 +190,7 @@ void uiSAR::showAllImages()
     if(_field.latitude != 0)
     {
         statusBar()->showMessage(tr("Изображение отображено на карте"), 15000);
-        auto qml = ui->osmMap->rootObject();
+        auto qml = ui->osmMap->rootObject(); //QQuickItem* = auto
         QString filename = imageList[fileCounter];
         QMetaObject::invokeMethod(qml, "addImage",
                 Q_ARG(QVariant, (float)_field.latitude),
@@ -402,75 +400,28 @@ void uiSAR::on_nav_follow_stateChanged(int arg1)
 
 void uiSAR::on_jpg_gright_clicked()
 {
-    if(fileCounter < imageList.size()-1){
+    /*if(fileCounter < imageList.size()-1){
         fileCounter++;
         decode_jpgs(imageList[fileCounter]);
-    }
+    }*/
+    //вызвать функцию из класса image-processing
 }
 
 void uiSAR::on_jpg_gleft_clicked()
 {
-    if(fileCounter){
+    /*if(fileCounter){
         fileCounter--;
         if(!imageList.empty()){
             decode_jpgs(imageList[fileCounter]);
         }
-    }
+    }*/
+    //вызвать функцию из класса image-processing
 }
 
 void uiSAR::on_selectFolderButton_clicked()
 {
-    QString path = QFileDialog::getExistingDirectory(this, tr("Выберите папку с выходными изображениями РЛС"),
-                                                     QStandardPaths::displayName(QStandardPaths::DesktopLocation));
-    QStringList childDirectoryList;
-
-    QDir parentDirectory(path);
-    QDirIterator iterator(parentDirectory.path(), QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
-    while(iterator.hasNext()){
-           iterator.next();
-           childDirectoryList << iterator.filePath();
-    }
-    /*
-     * 1. ☑ Нужно вместо qfilesystemmodel использовать класс, унаследованный от нее, с переопределенными методами data(), setData()
-     * 2. Нужно реворкнуть кнопку <показать изображение>: она должна быть checkable, и менять свое состояние в зависимости от текущего выбранного изображения
-     * 3. Изображения должны отображаться только однажды
-     * 4. Кнопка показа изображения должна быть связанна с деревом
-     * 5. При чеке\анчеке директории в дереве должны чекаться\анчекаться все изображения в этой директории
-     */
-    //QFileSystemModel *model = new QFileSystemModel;
-    CheckableModel *model = new CheckableModel;
-    model->setRootPath(parentDirectory.path());
-    ui->treeView->setModel(model);
-    ui->treeView->setRootIndex(model->index(parentDirectory.path()));
-
-    QDir childDirectory(path);
-    childDirectory.setFilter(QDir::Files | QDir::NoSymLinks | QDir::NoDot | QDir::NoDotDot);
-    childDirectory.setNameFilters(QStringList("*.jpg"));
-
-    QStringList fileList = childDirectory.entryList();
-
-    if(!fileList.empty()){
-        imageList.clear();
-        for ( QString f : fileList  ){
-            imageList.append(f.prepend(path+"/"));
-        }
-
-        ui->jpg_gright->setEnabled(true);
-        ui->jpg_gleft->setEnabled(true);
-
-        decode_jpgs(imageList[0]);
-        ui->transformJPGbox->setEnabled(1);
-        ui->groupBox->setEnabled(1);
-
-        showAllImages();
-    }else{
-        statusBar()->showMessage(tr("Каталог с изображениями не распознан, повторите ввод через панель инструментов"), 15000);
-        QMessageBox warningDialogue;
-        warningDialogue.setWindowTitle("Неверный каталог!");
-        warningDialogue.setIcon(QMessageBox::Warning);
-        warningDialogue.setText("Изображения не найдены!");
-        warningDialogue.exec();
-    }
+    imageProcessing->processPath(QFileDialog::getExistingDirectory(this, tr("Выберите папку с выходными изображениями РЛС"),
+                                                                   QStandardPaths::displayName(QStandardPaths::DesktopLocation)));
 }
 
 void uiSAR::on_nav_displayroute_stateChanged(int arg1)
