@@ -2,9 +2,10 @@
  *
  * Линейка не удаляет после использования метки
  * В линейке нужно добавить надпись, параллельную rulerLine, с отображением расстояния
- * Все отображение РЛИ нужно переделать и перенести в отдельный класс
+ * ☑Все отображение РЛИ нужно переделать и перенести в отдельный класс
  * Чекбоксы в дереве изображений не работают
  * При изменении в конфиге провайдера карт нужно закрывать приложение, также нужно выводить предупреждение при попытке изменить конфиг при наличии коннекта с телеметрией (но не закрывать приложение)
+ * При клике на изображение оно должно возвращать в мейн класс fileCounter
  *
  * */
 
@@ -46,6 +47,7 @@ uiSAR::uiSAR(QWidget *parent)
 
     initUI();
     configHandler->loadSettings();
+    qml = ui->osmMap->rootObject();
 
     // Console test
 /*
@@ -79,62 +81,37 @@ uiSAR *uiSAR::getMainWinPtr()
 
 void uiSAR::on_panButton_clicked()
 {
-    //JPGFields _field = {readField()};
-    JPGFields _field;
-    if(_field.latitude != 0)
+    if(imageProcessing->getReadyStatus())
     {
-        statusBar()->showMessage(tr("Карта отцентрирована по широте и долготе радиолокационного изображения"), 15000);
-        auto qml = ui->osmMap->rootObject();
-        QMetaObject::invokeMethod(qml, "pan",
-                Q_ARG(QVariant, (float)_field.latitude),
-                Q_ARG(QVariant, (float)_field.longitude),
-                Q_ARG(QVariant, _field.dx),
-                Q_ARG(QVariant, _field.dy),
-                Q_ARG(QVariant, _field.x0),
-                Q_ARG(QVariant, _field.y0),
-                Q_ARG(QVariant, _field.angle),
-                Q_ARG(QVariant, _field.filename));
+        ImageProcessing::image_metadata meta = imageProcessing->getMetaList();
+        if(meta.latitude != 0)
+        {
+            statusBar()->showMessage(tr("Карта отцентрирована по широте и долготе радиолокационного изображения"), 15000);
+            QMetaObject::invokeMethod(qml, "pan",
+                Q_ARG(QVariant, (float)meta.latitude),
+                Q_ARG(QVariant, (float)meta.longitude),
+                Q_ARG(QVariant, meta.dx),
+                Q_ARG(QVariant, meta.dy),
+                Q_ARG(QVariant, meta.x0),
+                Q_ARG(QVariant, meta.y0),
+                Q_ARG(QVariant, meta.angle),
+                Q_ARG(QVariant, meta.filename));
+        } else {
+            statusBar()->showMessage(tr("Широта и долгота изображения не распознаны"), 15000);
+        }
+    } else {
+        statusBar()->showMessage(tr("Радиолокационное изображение не найдено"), 15000);
     }
-    else {
-        statusBar()->showMessage(tr("Широта и долгота изображения не распознаны"), 15000);
-    }
-
-}
-
-void uiSAR::showAllImages()
-{
-    /*JPGFields _field = readField();
-    if(_field.latitude != 0)
-    {
-        statusBar()->showMessage(tr("Изображение отображено на карте"), 15000);
-        auto qml = ui->osmMap->rootObject(); //QQuickItem* = auto
-        QString filename = imageList[fileCounter];
-        QMetaObject::invokeMethod(qml, "addImage",
-                Q_ARG(QVariant, (float)_field.latitude),
-                Q_ARG(QVariant, (float)_field.longitude),
-                Q_ARG(QVariant, _field.dx),
-                Q_ARG(QVariant, _field.dy),
-                Q_ARG(QVariant, _field.x0),
-                Q_ARG(QVariant, _field.y0),
-                Q_ARG(QVariant, _field.angle),
-                Q_ARG(QVariant, filename)
-                );
-    }
-    else {
-        statusBar()->showMessage(tr("Широта и долгота изображения не распознаны"), 15000);
-    }*/
 }
 
 void uiSAR::on_opacitySlider_sliderMoved(int position)
 {
-    auto qml = ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "changeOpacityOfCurrentImage",
             Q_ARG(int, position));
 }
 
 void uiSAR::on_showCoordsBox_stateChanged(int arg1)
 {
-    auto qml = ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "changeTooltipCheckBox",
             Q_ARG(QVariant, arg1));
 }
@@ -302,7 +279,6 @@ void uiSAR::on_udpStopButton_clicked()
 
 void uiSAR::on_panGPS_clicked()
 {
-    auto qml = ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "panGPS");
 }
 
@@ -333,9 +309,7 @@ void uiSAR::on_selectFolderButton_clicked()
 
 void uiSAR::on_nav_displayroute_stateChanged(int arg1)
 {
-    auto qml = ui->osmMap->rootObject();
-        QMetaObject::invokeMethod(qml, "changeDrawRoute",
-                Q_ARG(int, arg1));
+    QMetaObject::invokeMethod(qml, "changeDrawRoute", Q_ARG(int, arg1));
 }
 
 void uiSAR::on_clearTrack_clicked()
@@ -431,7 +405,6 @@ void uiSAR::updateTelemetry(){
     ui->udpDisp->insertPlainText("ELE: "+tmp+"\r\n");
 
     if(TelemetryData->lat != 0.0 && TelemetryData->lon != 0){
-        auto qml = ui->osmMap->rootObject();
             QMetaObject::invokeMethod(qml, "drawRoute",
                     Q_ARG(QVariant, TelemetryData->lat),
                     Q_ARG(QVariant, TelemetryData->lon));
@@ -452,7 +425,6 @@ void uiSAR::qmlDialogSlot(float markerLat, float markerLon)
             markerName = md.lineEdit1Text();
             markerColor = md.color();
             qDebug()<<"Marker placed at " << markerLat << ";  " << markerLon << ", NAME: " << markerName;
-            auto qml = ui->osmMap->rootObject();
             QMetaObject::invokeMethod(qml, "addMarker",
                     Q_ARG(QVariant, markerLat),
                     Q_ARG(QVariant, markerLon),
@@ -464,7 +436,6 @@ void uiSAR::qmlDialogSlot(float markerLat, float markerLon)
 void uiSAR::on_changeMapMode_toggled(bool checked)
 {
     bool satellite = false;
-    auto qml = ui->osmMap->rootObject();
     if(checked == true)
     {
        ui->changeMapMode->setText("Спутник");
@@ -510,7 +481,6 @@ void uiSAR::on_t_right_clicked()
 
 void uiSAR::on_t_xSpin_valueChanged(double arg1)
 {
-    auto qml = ui->osmMap->rootObject();
     if(arg1>=10000) {
         ui->t_right->setEnabled(false);
     }
@@ -535,7 +505,6 @@ void uiSAR::on_t_xSpin_valueChanged(double arg1)
 
 void uiSAR::on_t_ySpin_valueChanged(double arg1)
 {
-    auto qml = ui->osmMap->rootObject();
     if(arg1>=10000) {
         ui->t_up->setEnabled(false);
     }
@@ -559,7 +528,6 @@ void uiSAR::on_t_ySpin_valueChanged(double arg1)
 
 void uiSAR::on_t_sSpin_valueChanged(double arg1)
 {
-    auto qml = ui->osmMap->rootObject();
     double d = arg1-spinsArg0;
     spinsArg0 = arg1;
     QMetaObject::invokeMethod(qml, "transformScale",
@@ -586,7 +554,6 @@ void uiSAR::on_discardSettings_clicked()
 
 void uiSAR::on_t_rSpin_valueChanged(double arg1)
 {
-    auto qml = ui->osmMap->rootObject();
     double d = arg1-spinrArg0;
     spinrArg0 = arg1;
     QMetaObject::invokeMethod(qml, "transformRotate",
@@ -601,6 +568,5 @@ void uiSAR::on_t_rotation_valueChanged(int value)
 
 void uiSAR::on_rulerButton_clicked()
 {
-    auto qml = ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "rulerHandler");
 }

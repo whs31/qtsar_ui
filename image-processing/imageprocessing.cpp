@@ -85,7 +85,7 @@ void ImageProcessing::processPath(QString path)
 
         decode_metadata(imageList);
         updateLabels(0);
-        //showAllImages();
+        showAllImages();
 }
 
 ImageProcessing::image_metadata ImageProcessing::decode_metadata(QStringList fileList)
@@ -117,7 +117,24 @@ ImageProcessing::image_metadata ImageProcessing::decode_metadata(QStringList fil
 
 void ImageProcessing::showAllImages()
 {
-
+    for (image_metadata meta : metadataList)
+    {
+        if(meta.latitude!=0)
+        {
+            QQuickItem*  qml = mainWindow->ui->osmMap->rootObject();
+            QMetaObject::invokeMethod(qml, "addImage",
+                    Q_ARG(QVariant, (float)meta.latitude),
+                    Q_ARG(QVariant, (float)meta.longitude),
+                    Q_ARG(QVariant, meta.dx),
+                    Q_ARG(QVariant, meta.dy),
+                    Q_ARG(QVariant, meta.x0),
+                    Q_ARG(QVariant, meta.y0),
+                    Q_ARG(QVariant, meta.angle),
+                    Q_ARG(QVariant, meta.filename)
+                    );
+        }
+    }
+    mainWindow->statusBar()->showMessage(tr("Изображения отображены на карте"), 15000);
 }
 
 void ImageProcessing::updateLabels(int structureIndex)
@@ -158,39 +175,55 @@ int ImageProcessing::getFileCounter()
     return fileCounter;
 }
 
+ImageProcessing::image_metadata ImageProcessing::getMetaList()
+{
+    return metadataList[fileCounter];
+}
+
+bool ImageProcessing::getReadyStatus()
+{
+    if(!imageList.empty())
+    {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 void ImageProcessing::goLeft()
 {
-    int totalFiles = imageList.count(); //вылетает
-    if(fileCounter == totalFiles)
+    int totalFiles = imageList.size()-1;
+
+    if(fileCounter>0)
+    {
+        fileCounter--;
+        updateLabels(fileCounter);
+    }
+    if (fileCounter == 0) {
+        mainWindow->ui->jpg_gleft->setEnabled(false);
+    }
+    if(fileCounter < totalFiles)
     {
         mainWindow->ui->jpg_gright->setEnabled(true);
     }
-    if(fileCounter>1)
-    {
-        fileCounter--;
-        updateLabels(fileCounter);
-    } else if (fileCounter == 1) {
-        fileCounter--;
-        mainWindow->ui->jpg_gleft->setEnabled(false);
-        updateLabels(fileCounter);
-    }
+    //qDebug()<<fileCounter<<totalFiles;
 }
 
 void ImageProcessing::goRight()
 {
-    int totalFiles = imageList.count(); //вылетает
-    if(fileCounter == 0)
+    int totalFiles = imageList.size()-1;
+    if(fileCounter < totalFiles)
+    {
+        fileCounter++;
+        updateLabels(fileCounter);
+    }
+    if(fileCounter > 0)
     {
         mainWindow->ui->jpg_gleft->setEnabled(true);
     }
-    if(fileCounter<totalFiles-1)
-    {
-        fileCounter++;
-        updateLabels(fileCounter);
-    } else if (fileCounter == totalFiles-1) {
-        fileCounter++;
+    if (fileCounter == totalFiles) {
         mainWindow->ui->jpg_gright->setEnabled(false);
-        updateLabels(fileCounter);
     }
+    //qDebug()<<fileCounter<<totalFiles;
 }
 

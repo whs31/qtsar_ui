@@ -1115,8 +1115,11 @@ QPushButton:pressed {
             <property name="cursor">
              <cursorShape>SizeHorCursor</cursorShape>
             </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
             <property name="value">
-             <number>99</number>
+             <number>100</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -2684,8 +2687,8 @@ QPushButton:selected {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="img.qrc"/>
   <include location="qdarkstyle/dark/style.qrc"/>
+  <include location="img.qrc"/>
  </resources>
  <connections/>
 </ui>

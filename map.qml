@@ -356,14 +356,27 @@ Item {
         item.coordinate = QtPositioning.coordinate(centerlat, centerlon);
         item.sourceItem = Qt.createQmlObject('
 import QtQuick 2.0;
+import QtGraphicalEffects 1.12;
 Rectangle {
-    opacity: 0.99;
+    opacity: 1;
     transformOrigin: Item.TopLeft;
     rotation: 0
     Image {
         id: imageSource;
         opacity: 50;
         source: "file:///'+ filename +'"
+        visible: false
+    }
+    Image {
+        id: mask
+        source: "qrc:/img/jpeg_opacityMask.png"
+        sourceSize: Qt.size(imageSource.width, imageSource.height)
+        visible: false
+    }
+    OpacityMask {
+        anchors.fill: imageSource
+        source: imageSource
+        maskSource: mask
     }
 }', mapView, "dynamic");
         item.zoomLevel = 17.2; //https://developer.here.com/documentation/data-layers/dev_guide/topics/zoom-levels.html

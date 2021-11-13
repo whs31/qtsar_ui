@@ -34,5 +34,6 @@
         <file>img/planeTest.png</file>
         <file>img/mapRulerPoint.png</file>
         <file>img/tree.png</file>
+        <file>img/jpeg_opacityMask.png</file>
     </qresource>
 </RCC>

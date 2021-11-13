@@ -27,6 +27,8 @@ public:
     };
     int fileCounter = 0;
     int getFileCounter();
+    image_metadata getMetaList();
+    bool getReadyStatus();
 
     void processPath(QString path);
     image_metadata decode_metadata(QStringList fileList);

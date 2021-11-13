@@ -53,7 +53,9 @@ public:
     friend class ImageProcessing;
     friend class ConfigHandler;
 
-    struct JPGFields {
+    QQuickItem* qml;
+
+    struct ImageMeta {
         double latitude;
         double longitude;
         float dx;
@@ -74,7 +76,6 @@ public:
     int fileCounter;
 
 signals:
-    //void toQMLpanButton(float latitude, float longitude, float dx, float dy, float x0, float y0, float angle, QString filename);
 public slots:
     void qmlDialogSlot(float markerLat, float markerLon);
 private slots:
@@ -146,9 +147,7 @@ private:
 
     void updateTelemetry();
     void initUI();
-    void showAllImages();
 
-    void update_jpgblocklabels_from_field(JPGFields _field);
     bool eventFilter(QObject *watched, QEvent *event);
 };
 

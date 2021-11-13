@@ -436,6 +436,7 @@ debug/qrc_img.cpp: img.qrc \
 		img/mapMarker.png \
 		img/planeIco.png \
 		img/cancel.png \
+		img/jpeg_opacityMask.png \
 		img/jpg_pan.png
 	C:\Qt\Qt5.14.2\5.14.2\mingw73_64\bin\rcc.exe -name img img.qrc -o debug\qrc_img.cpp
 
