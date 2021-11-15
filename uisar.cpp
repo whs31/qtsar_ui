@@ -393,16 +393,16 @@ void uiSAR::updateTelemetry(){
     ui->udpDisp->setTextColor(Qt::darkYellow);
 
     QString tmp;
-    tmp.sprintf("%0.6f", TelemetryData->lat);
+    tmp.asprintf("%0.6f", TelemetryData->lat);
     ui->nav_latdisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LAT: "+tmp+"  ");
-    tmp.sprintf("%0.6f", TelemetryData->lon);
+    tmp.asprintf("%0.6f", TelemetryData->lon);
     ui->nav_londisp->setText(markupHtml+tmp+endHtml);
     ui->udpDisp->insertPlainText("LON: "+tmp+"  ");
-    tmp.sprintf("%0.1f", TelemetryData->speed);
+    tmp.asprintf("%0.1f", TelemetryData->speed);
     ui->nav_accdisp->setText(markup2Html+tmp+infoHtml+" км/ч"+endHtml);
     ui->udpDisp->insertPlainText("SPD: "+tmp+"  ");
-    tmp.sprintf("%0.1f", TelemetryData->ele);
+    tmp.asprintf("%0.1f", TelemetryData->ele);
     ui->nav_altdisp->setText(markup2Html+tmp+infoHtml+" м"+endHtml);
     ui->udpDisp->insertPlainText("ELE: "+tmp+"\r\n");
 

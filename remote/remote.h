@@ -10,9 +10,9 @@ class Remote : public QObject
 public:
 
     Remote(){};
-    virtual int Connect(QString addr) {return -1;};
+    virtual int Connect(__attribute__((unused)) QString addr) {return -1;};
     virtual int Disconnect() {return  -1;};
-    virtual int Send(QByteArray data) {return -1;};
+    virtual int Send(__attribute__((unused)) QByteArray data) {return -1;};
 
 signals:
     void received(QByteArray data);
