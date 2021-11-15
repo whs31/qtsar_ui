@@ -152,9 +152,23 @@ void Console::resizeEvent(QResizeEvent *event){
 
         free(rawbuf);
         rawbuf = (char*)malloc(consoleWidth*consoleHeight*2);
+
+
+        if(Execd){
+            // Тут пока шляпа. Если пакеты следуют друг за другом быстро, то формируется "слипшаяся команда"
+            // В методе Send добавить ожидание отправки
+            QString resizeStr = "setWH " + QString::number(consoleHeight) + " " + QString::number(consoleWidth);
+            qDebug() << resizeStr;
+            Execd->Send(resizeStr.toUtf8());
+        }
+
     }
 
     QTextEdit::resizeEvent(event);
+}
+
+void Console::setExecd(Remote *execd){
+    Execd = execd;
 }
 
 void Console::reset(){

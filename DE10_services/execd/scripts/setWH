@@ -1,0 +1,4 @@
+#!/bin/bash
+stty rows $1 cols $2
+
+echo "stty rows" $1 "cols" $2

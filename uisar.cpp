@@ -24,7 +24,7 @@ void uiSAR::ReadTelemetry(QByteArray data){
 }
 
 void uiSAR::ReadExec(QByteArray data){
-    qDebug() << data;
+    //qDebug() << data;
     ui->consoleMain->write(data);
     ui->consoleMain->flush();
 }
@@ -45,17 +45,17 @@ uiSAR::uiSAR(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
 
-    initUI();
-    configHandler->loadSettings();
-    qml = ui->osmMap->rootObject();
-
-    // Console test
-
+    /* Интерфейс для запуска/чтения вывода процессов на РМ */
     QString execdIP = configHandler->config->value("execd/address").toString();
     QString execdPort = configHandler->config->value("execd/port").toString();
     QString execAddr = execdIP + ":" + execdPort;
     QString connectStatus = "connect to " + execAddr + " ";
     Execd = RemoteAuto(configHandler->config->value("execd/type").toString());
+
+    initUI();
+    configHandler->loadSettings();
+    qml = ui->osmMap->rootObject();
+
 
     if(Execd->Connect(execAddr) != -1){
         connectStatus.append("OK");
@@ -372,6 +372,7 @@ void uiSAR::initUI(){
     ui->udpIn->installEventFilter(this);
 
     /* Консоль для всех событий с поддержкой vt100 */
+    ui->consoleMain->setExecd(Execd);
 
     //Console *con = new Console(ui->consoleMain, 10, 5);
     //con->write("Тест");

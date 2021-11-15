@@ -7,6 +7,7 @@
 #include <QFont>
 #include <QFontDatabase>
 #include <QFontMetrics>
+#include "remote/remoteBase.h"
 
 extern "C"{
 #include "fvemu.h"
@@ -27,6 +28,7 @@ public:
     void flush();
     void reset();
     bool escClosed(QByteArray data);
+    void setExecd(Remote *execd);
 
 private:
 
@@ -35,6 +37,7 @@ private:
     struct emuState *s;
     char *rawbuf;
     bool waitForClose = false;
+    Remote *Execd = nullptr;
     //QByteArray tmp;
 
 private slots:
