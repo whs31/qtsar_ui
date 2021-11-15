@@ -5,16 +5,12 @@
 Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidth(w), consoleHeight(h)
 {
     s = emu_core_init(h, w);
-
     rawbuf = (char*)malloc(w*h*2);
-
 
     QFont fontConsole = setFont("qrc:/console/UbuntuMono.ttf", 13);
     this->QWidget::setFont(fontConsole);
     QFontMetrics metrics = this->fontMetrics();
 
-    //setFrameStyle (QFrame::Panel | QFrame::Sunken);
-    //setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("margin: 0px");
@@ -26,13 +22,8 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
     setTextInteractionFlags(textInteractionFlags() | Qt::TextSelectableByKeyboard);
 
 
-    fontWidth = metrics.width("0");
+    fontWidth = metrics.horizontalAdvance("0");
     fontHeight = metrics.height();
-
-
-    //this->resize(fontWidth *(w+1) + margin, h*fontHeight + margin); //что-то странное происходит с размерами виджета
-    //this->resize(431, 500);
-
 
 }
 
@@ -41,7 +32,7 @@ bool Console::escClosed(QByteArray data){
     int size =  data.size();
     int pos = -1;
     for(int i = size; i >= 0 ; i--){
-        if(data[i] == 0x1B){
+        if((char)data[i] == 0x1B){
             pos = i;
             break;
         }
