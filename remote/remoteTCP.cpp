@@ -27,7 +27,9 @@ int RemoteTCP::Disconnect(){
 }
 
 int RemoteTCP::Send(QByteArray data){
-    return socket->write(data);
+    int n = socket->write(data);
+    socket->waitForBytesWritten();
+    return n;
 }
 
 void RemoteTCP::readSlot(){

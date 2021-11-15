@@ -155,10 +155,7 @@ void Console::resizeEvent(QResizeEvent *event){
 
 
         if(Execd){
-            // Тут пока шляпа. Если пакеты следуют друг за другом быстро, то формируется "слипшаяся команда"
-            // В методе Send добавить ожидание отправки
             QString resizeStr = "setWH " + QString::number(consoleHeight) + " " + QString::number(consoleWidth);
-            qDebug() << resizeStr;
             Execd->Send(resizeStr.toUtf8());
         }
 
