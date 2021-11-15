@@ -24,7 +24,7 @@ void uiSAR::ReadTelemetry(QByteArray data){
 }
 
 void uiSAR::ReadExec(QByteArray data){
-    //qDebug() << data;
+    qDebug() << data;
     ui->consoleMain->write(data);
     ui->consoleMain->flush();
 }

@@ -551,6 +551,11 @@ static void do_NL(struct emuState *S)
     S->wrapnext = 0;
 }
 
+static void do_CRNL(struct emuState *S)
+{
+    do_NL(S);
+    do_CR(S);
+}
 
 static void do_OSC(struct emuState *S)
 {
@@ -1065,7 +1070,7 @@ static void emu_ops_do_ctrl(struct emuState *S, uint8_t ch)
             //CASE(0x07, do_BEL);
             CASE(0x08, do_BS);
             CASE(0x09, do_HT);
-            CASE(0x0A, do_NL);
+            CASE(0x0A, do_CRNL);
             CASE(0x0B, do_NL); // VT -> NL
             CASE(0x0C, do_NL); // NP -> NL
             CASE(0x0D, do_CR);
