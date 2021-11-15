@@ -14,8 +14,10 @@ Rectangle {
     id:rect
     objectName: "mapLoaded"
     //эти переменные должны импортироваться из .ini
-    property var mapProvider: "googlemaps";
-    property var mapModeSat: 3;
+    property var mapProvider: "osm";
+    property var cacheParam: "osm.mapping.cache.directory"; // Вероятнее всего, это не верный параметр для гугла
+    property var cacheDir: "osmCache/";
+    property var mapModeSat: 5;
     property var mapModeMap: 0;
 
     property var dAzimuth: 0.0;
@@ -57,12 +59,24 @@ Rectangle {
         console.log("QML settings loaded!");
         if(provider==="google")
         {
-            mapProvider = "googlemaps"; mapModeSat = 3; mapModeMap = 0;
-        } else if(provider==="esri") { mapModeSat = 9; mapModeMap = 5;
+            mapProvider = "googlemaps";
+            cacheParam = "googlemaps.mapping.cache.directory"; // Другое название
+            cacheDir = "googleCache/";
+            mapModeSat = 3;
+            mapModeMap = 0;
+        } else if(provider==="esri") {
+            mapModeSat = 9;
+            mapModeMap = 5;
             mapProvider = "mapboxgl";
-        } else if(provider==="osm") { mapModeSat = 5; mapModeMap = 0;
+            cacheParam = "mapboxgl.mapping.cache.directory"; // Другое название
+            cacheDir = "mapboxglCache/";
+
+        } else if(provider==="osm") {
+            mapModeSat = 5;
+            mapModeMap = 0;
             mapProvider = "osm";
-            console.log("OSM active");
+            cacheParam = "osm.mapping.cache.directory";
+            cacheDir = "osmCache/";
         }
         dAzimuth = d_azimuth;
         dLength = convertGeoKMeters(d_length);
@@ -451,8 +465,8 @@ Rectangle {
         plugin: Plugin {
             name: mapProvider;
             PluginParameter {
-                name: "osm.mapping.cache.directory"
-                value: "mapCache/"
+                name: cacheParam;
+                value: cacheDir;
             }
         }
         center: QtPositioning.coordinate(51.660784, 39.200268); //51.660784, 39.200268
