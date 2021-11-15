@@ -17,9 +17,11 @@ public:
     void saveSettings();
     void discardSettings();
 
+    Config *config;
+
 private:
     uiSAR *mainWindow;
-    Config *config;
+
 };
 
 #endif // CONFIGHANDLER_H

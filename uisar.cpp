@@ -39,7 +39,7 @@ uiSAR::uiSAR(QWidget *parent)
     configHandler = new ConfigHandler();
     imageProcessing = new ImageProcessing();
     /* Интерфейс для получения телеметрии */
-    Telemery = RemoteAuto("UDP");
+    Telemery = RemoteAuto( configHandler->config->value("telemetry/type").toString() );
     connect(Telemery, SIGNAL(received(QByteArray)), this, SLOT(ReadTelemetry(QByteArray)));
 
     timer = new QTimer(this);
