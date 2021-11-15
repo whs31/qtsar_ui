@@ -50,13 +50,14 @@ uiSAR::uiSAR(QWidget *parent)
     qml = ui->osmMap->rootObject();
 
     // Console test
-/*
-    QString execAddr = "127.0.0.1:2222";
-    QString connectStatus = "connect to " + execAddr + " ";
-    Remote *c = RemoteAuto("TCP");
 
-    if(c->Connect(execAddr) != -1){
-        c->Send("test"); // Запуск удаленной команды execd
+    QString execdIP = configHandler->config->value("execd/address").toString();
+    QString execdPort = configHandler->config->value("execd/port").toString();
+    QString execAddr = execdIP + ":" + execdPort;
+    QString connectStatus = "connect to " + execAddr + " ";
+    Execd = RemoteAuto(configHandler->config->value("execd/type").toString());
+
+    if(Execd->Connect(execAddr) != -1){
         connectStatus.append("OK");
     }else{
         connectStatus.append("Error");
@@ -65,8 +66,8 @@ uiSAR::uiSAR(QWidget *parent)
     ui->consoleMain->write(connectStatus.toUtf8());
     ui->consoleMain->flush();
 
-    connect(c, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
-*/
+    connect(Execd, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
+
 }
 
 uiSAR::~uiSAR()
@@ -569,4 +570,9 @@ void uiSAR::on_t_rotation_valueChanged(int value)
 void uiSAR::on_rulerButton_clicked()
 {
     QMetaObject::invokeMethod(qml, "rulerHandler");
+}
+
+void uiSAR::on_execd_in_returnPressed()
+{
+    Execd->Send(ui->execd_in->text().toUtf8()); // Запуск удаленной команды execd
 }

@@ -127,6 +127,8 @@ private slots:
     void on_t_rotation_valueChanged(int value);
 
 
+    void on_execd_in_returnPressed();
+
 private:
     static uiSAR * pMainWindow;
 
@@ -140,6 +142,7 @@ private:
     Ui::uiSAR *ui; 
     QTimer *timer;
     Remote *Telemery;
+    Remote *Execd;
     TelemetryData_t *TelemetryData;
     //Config *config;
     ConfigHandler *configHandler;

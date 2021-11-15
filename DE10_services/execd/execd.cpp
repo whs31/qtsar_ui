@@ -214,7 +214,7 @@ int main(int argc, char const *argv[]){
            
             if(valread> 0){
                 buffer[valread] = 0;
-                exec( script_path + std::string(buffer), new_socket);
+                exec( "bash " + script_path + std::string(buffer), new_socket);
             }
         }
         printTime();

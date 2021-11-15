@@ -23,6 +23,8 @@ Console::Console(QWidget *parent, int w, int h) : QTextEdit(parent), consoleWidt
     setLineWrapMode(QTextEdit::FixedColumnWidth);
     setLineWrapColumnOrWidth(consoleWidth);
 
+    setTextInteractionFlags(textInteractionFlags() | Qt::TextSelectableByKeyboard);
+
 
     fontWidth = metrics.width("0");
     fontHeight = metrics.height();

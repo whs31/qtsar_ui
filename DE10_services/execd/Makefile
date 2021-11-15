@@ -8,5 +8,5 @@ execd: execd.cpp config_file.h
 	$(CXX) execd.cpp -o execd $(CXXFLAGS)
 
 clean:
-	rm -f test
+	rm -f execd
  

@@ -30,6 +30,12 @@ Config::Config(QString fn) : QSettings(fn, QSettings::IniFormat)
     network["port"] = "25565";
     checkValuesSimple(network);
 
+    group_t execd;
+    execd["type"] = "TCP";
+    execd["address"] = "192.168.33.12";
+    execd["port"] = "2222";
+    checkValuesSimple(execd);
+
     group_t map;
     map["predict_line_range"] = "4";
     map["capture_time"] = "15";
