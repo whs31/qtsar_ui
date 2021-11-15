@@ -45,14 +45,14 @@ Rectangle {
 
     onMapProviderChanged: {
         console.log("Map mode changed.");
-        googlemaps.name = mapProvider;
+        //googlemaps.name = mapProvider;
     }
 
     Invoker {
         id: markerDialog
     }
 
-    function loadSettings(provider: QString, d_azimuth: double, d_length: double, drift_angle: double, capture_time: double, predict_range: double)
+    function loadSettings(provider, d_azimuth, d_length, drift_angle, capture_time, predict_range)
     {
         console.log("QML settings loaded!");
         if(provider==="google")
@@ -62,6 +62,7 @@ Rectangle {
             mapProvider = "mapboxgl";
         } else if(provider==="osm") { mapModeSat = 5; mapModeMap = 0;
             mapProvider = "osm";
+            console.log("OSM active");
         }
         dAzimuth = d_azimuth;
         dLength = convertGeoKMeters(d_length);
@@ -98,34 +99,34 @@ Rectangle {
         return output; //шрифт у линейки должен быть жирный и больше, передвинуть текст надо к зумслайдеру
     }
 
-    function convertGeoKMeters (metric: double)
+    function convertGeoKMeters (metric)
     {
         //1 градус = 111.12 км
         return metric*0.00899928;
     }
 
-    function transformRotate(fileCounter: int, arg: double)
+    function transformRotate(fileCounter, arg)
     {
         console.log(fileCounter);
         imageArray[fileCounter].sourceItem.rotation += arg;
     }
 
-    function transformScale(fileCounter: int, arg: double)
+    function transformScale(fileCounter, arg)
     {
         console.log(fileCounter);
         imageArray[fileCounter].zoomLevel += arg;
     }
 
     //С ФУНКЦИЙ СПИНБОКСОВ ПОСТУПАЮТ ЗНАЧЕНИЯ В МЕТРАХ, НУЖНО ДЕЛИТЬ ИХ НА 111120
-    function transformX(fileCounter: int, arg1: double)
+    function transformX(fileCounter, arg1)
     {
         imageArray[fileCounter].coordinate.longitude += (arg1/111120);
     }
-    function transformY(fileCounter: int, arg1: double)
+    function transformY(fileCounter, arg1)
     {
         imageArray[fileCounter].coordinate.latitude += (arg1/111120);
     }
-    function swapMapModes(satellite: bool)
+    function swapMapModes(satellite)
     {
         if(satellite) {
             mapView.activeMapType = mapView.supportedMapTypes[mapModeSat]//sat
@@ -153,7 +154,7 @@ Rectangle {
         mapPredictLine.path = [];
     }
 
-    function changeDrawRoute(arg: int)
+    function changeDrawRoute(arg)
     {
         if(arg===0)
         {
@@ -176,7 +177,7 @@ Rectangle {
         predictPoly.path = [];
     }
 
-    function drawRoute(lat: float, lon: float)
+    function drawRoute(lat, lon)
     {
         if(enableRoute) {
             var angle = 0.0;
@@ -241,7 +242,7 @@ Rectangle {
     {
         enableMarkerPlacement = true;
     }
-    function addMarker(lat: float, lon: float, name: QString, mcolor: QColor)
+    function addMarker(lat, lon, name, mcolor)
     {
         //console.log(lat, lon, markerName);
         var marker = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; import QtGraphicalEffects 1.0; MapQuickItem{ }', mapView, "dynamic");
@@ -313,7 +314,7 @@ Item {
     }
 
 
-    function addRulerPoint(lat: float, lon: float)
+    function addRulerPoint(lat, lon)
     {
         var rulerPoint = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; import QtGraphicalEffects 1.0; MapQuickItem{ }', mapView, "dynamic");
         rulerPoint.anchorPoint.x = 128;
@@ -340,13 +341,13 @@ Item {
         mapView.addMapItem(rulerPoint);
     }
 
-    function pan(centerlat: float, centerlon: float, dx: float, dy: float, x0: float, y0: float, angle: float, filename: Qstring)
+    function pan(centerlat, centerlon, dx, dy, x0, y0, angle, filename)
     {
         console.log("panned");
         mapView.center = QtPositioning.coordinate(centerlat, centerlon);
         mapView.zoomLevel = 14
     }
-    function addImage(centerlat: float, centerlon: float, dx: float, dy: float, x0: float, y0: float, angle: float, filename: Qstring)
+    function addImage(centerlat, centerlon, dx, dy, x0, y0, angle, filename)
     {
         console.log("Displaying image from " + filename);
         var item = Qt.createQmlObject('import QtQuick 2.0; import QtLocation 5.12; MapQuickItem {  }', mapView, "dynamic");
@@ -386,7 +387,7 @@ Rectangle {
         //change opacity of newly created jpg
         changeOpacityOfCurrentImage(gOpacity);
     }
-    function changeOpacityOfCurrentImage(opacity: int)
+    function changeOpacityOfCurrentImage(opacity)
     {
         gOpacity = opacity;
         var realOpacity = gOpacity/100;
@@ -437,17 +438,23 @@ Rectangle {
     }
 
 
-
+/*
     Plugin {
         id: googlemaps
         name: mapProvider
     }
-
+*/
     Map {
         id: mapView
         anchors.fill: parent
         activeMapType: mapView.supportedMapTypes[mapModeSat]//3
-        plugin: googlemaps
+        plugin: Plugin {
+            name: mapProvider;
+            PluginParameter {
+                name: "osm.mapping.cache.directory"
+                value: "mapCache/"
+            }
+        }
         center: QtPositioning.coordinate(51.660784, 39.200268); //51.660784, 39.200268
         zoomLevel: 15
         copyrightsVisible: false

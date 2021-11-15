@@ -52,11 +52,11 @@ void ConfigHandler::loadSettings()
     auto qml = mainWindow->ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "loadSettings",
             Q_ARG(QVariant, config->value("map/map_provider").toString()),
-            Q_ARG(double, config->value("map/diagram_theta_azimuth").toDouble()),
-            Q_ARG(double, config->value("map/diagram_length").toDouble()),
-            Q_ARG(double, config->value("map/diagram_drift_angle").toDouble()),
-            Q_ARG(double, config->value("map/capture_time").toDouble()),
-            Q_ARG(double, config->value("map/predict_line_range").toDouble()));
+            Q_ARG(QVariant, config->value("map/diagram_theta_azimuth").toDouble()),
+            Q_ARG(QVariant, config->value("map/diagram_length").toDouble()),
+            Q_ARG(QVariant, config->value("map/diagram_drift_angle").toDouble()),
+            Q_ARG(QVariant, config->value("map/capture_time").toDouble()),
+            Q_ARG(QVariant, config->value("map/predict_line_range").toDouble()));
 
     qInfo()<<"Config loaded. Version "<<t;
 
