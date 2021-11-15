@@ -87,6 +87,7 @@ static void doDaemonize()
 std::string exec(std::string cmd, int fd) {
     char buffer[16];
     std::string result = "";
+	int resp = 1;
     
     cmd += " 2>&1";
     
@@ -95,11 +96,8 @@ std::string exec(std::string cmd, int fd) {
     FILE* pipe = popen(cmd.c_str(), "r");
     if (!pipe) throw std::runtime_error("popen() failed!");
     try {
-        while (fgets(buffer, sizeof buffer, pipe) != NULL) {
-            //result += buffer;
-            //std::cout << buffer;
-            
-            write(fd, buffer, strlen(buffer));
+        while (fgets(buffer, sizeof buffer, pipe) != NULL && resp != -1) {	
+			resp = send ( fd, buffer, strlen(buffer), MSG_NOSIGNAL );
             printf(buffer);
         }
     } catch (...) {
