@@ -27,6 +27,7 @@
 #include <QDirIterator>
 #include <QDir>
 #include <QFileSystemModel>
+#include <QVector>
 
 #include "remote/remoteBase.h"
 #include "console/console.h"
@@ -84,6 +85,9 @@ private slots:
     void on_opacitySlider_sliderMoved(int position);
     void on_jpg_gright_clicked();
     void on_jpg_gleft_clicked();
+    void on_displayAll_clicked();
+    void on_showButton_clicked();
+
 
     //map tools slots
     void on_showCoordsBox_stateChanged(int arg1);
@@ -108,6 +112,7 @@ private slots:
     //main console slots
     void ReadTelemetry(QByteArray data);
     void ReadExec(QByteArray data);
+    void on_execd_in_returnPressed();
 
     //top toolpanel slots
     void on_changeMapMode_toggled(bool checked);
@@ -126,9 +131,6 @@ private slots:
     void on_t_rSpin_valueChanged(double arg1);
     void on_t_rotation_valueChanged(int value);
 
-
-    void on_execd_in_returnPressed();
-
 private:
     static uiSAR * pMainWindow;
 
@@ -139,12 +141,14 @@ private:
 
     bool followPlane = false;
 
+    QVector<bool> imageCheckList;
+    void ImageCheckListLoop();
+
     Ui::uiSAR *ui; 
     QTimer *timer;
     Remote *Telemery;
     Remote *Execd;
     TelemetryData_t *TelemetryData;
-    //Config *config;
     ConfigHandler *configHandler;
     ImageProcessing *imageProcessing;
 

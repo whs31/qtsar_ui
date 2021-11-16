@@ -85,7 +85,7 @@ void ImageProcessing::processPath(QString path)
 
         decode_metadata(imageList);
         updateLabels(0);
-        showAllImages();
+        //showAllImages();
 }
 
 ImageProcessing::image_metadata ImageProcessing::decode_metadata(QStringList fileList)
@@ -175,6 +175,11 @@ int ImageProcessing::getFileCounter()
     return fileCounter;
 }
 
+int ImageProcessing::getVectorSize()
+{
+    return imageList.length();
+}
+
 ImageProcessing::image_metadata ImageProcessing::getMetaList()
 {
     return metadataList[fileCounter];
@@ -206,6 +211,7 @@ void ImageProcessing::goLeft()
     {
         mainWindow->ui->jpg_gright->setEnabled(true);
     }
+
     //qDebug()<<fileCounter<<totalFiles;
 }
 

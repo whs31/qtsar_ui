@@ -11,6 +11,9 @@ void ConfigHandler::loadSettings()
 {
     QString t = config->value("telemetry/address").toString();
     double d;
+    bool b;
+    b = config->value("image/show_all_images_on_init").toBool();
+    if(b) { mainWindow->ui->showAllImagesOnInit->setCheckState(Qt::Checked); mainWindow->ui->displayAll->setChecked(true); } else { mainWindow->ui->showAllImagesOnInit->setCheckState(Qt::Unchecked); mainWindow->ui->displayAll->setChecked(false);}
     mainWindow->ui->UDPIPxml->setText(t);
     t = config->value("telemetry/port").toString();
     mainWindow->ui->UDPPortxml->setText(t);
@@ -51,7 +54,7 @@ void ConfigHandler::loadSettings()
     //to qml
     auto qml = mainWindow->ui->osmMap->rootObject();
     QMetaObject::invokeMethod(qml, "loadSettings",
-            Q_ARG(QVariant, config->value("map/map_provider").toString()),
+            //Q_ARG(QVariant, config->value("map/map_provider").toString()),
             Q_ARG(QVariant, config->value("map/diagram_theta_azimuth").toDouble()),
             Q_ARG(QVariant, config->value("map/diagram_length").toDouble()),
             Q_ARG(QVariant, config->value("map/diagram_drift_angle").toDouble()),
@@ -74,7 +77,7 @@ void ConfigHandler::saveSettings()
     config->setValue("map/diagram_length", mainWindow->ui->diaRangexml->value());
     config->setValue("map/diagram_theta_azimuth", mainWindow->ui->diaThetaAzimuth->value());
     config->setValue("map/diagram_drift_angle", mainWindow->ui->diaDriftAngle->value());
-    //
+    if(mainWindow->ui->showAllImagesOnInit->checkState()==Qt::Checked) { config->setValue("image/show_all_images_on_init", true); mainWindow->ui->displayAll->setChecked(true); } else { config->setValue("image/show_all_images_on_init", false); mainWindow->ui->displayAll->setChecked(false); }
     if(mainWindow->ui->providerGoogle->isChecked()) { config->setValue("map/map_provider", "google"); } else if (mainWindow->ui->providerESRI->isChecked()) { config->setValue("map/map_provider", "esri"); }
     else if (mainWindow->ui->providerOSM->isChecked()) { config->setValue("map/map_provider", "osm"); }
 
@@ -82,12 +85,12 @@ void ConfigHandler::saveSettings()
     auto qml = mainWindow->ui->osmMap->rootObject();
     //провайдера карты можно менять только при перезапуске
     QMetaObject::invokeMethod(qml, "loadSettings",
-            Q_ARG(QVariant, config->value("map/map_provider").toString()),
-            Q_ARG(double, config->value("map/diagram_theta_azimuth").toDouble()),
-            Q_ARG(double, config->value("map/diagram_length").toDouble()),
-            Q_ARG(double, config->value("map/diagram_drift_angle").toDouble()),
-            Q_ARG(double, config->value("map/capture_time").toDouble()),
-            Q_ARG(double, config->value("map/predict_line_range").toDouble()));
+            //Q_ARG(QVariant, config->value("map/map_provider").toString()),
+            Q_ARG(QVariant, config->value("map/diagram_theta_azimuth").toDouble()),
+            Q_ARG(QVariant, config->value("map/diagram_length").toDouble()),
+            Q_ARG(QVariant, config->value("map/diagram_drift_angle").toDouble()),
+            Q_ARG(QVariant, config->value("map/capture_time").toDouble()),
+            Q_ARG(QVariant, config->value("map/predict_line_range").toDouble()));
     qInfo()<<"Config saved.";
     QMessageBox notifyAboutRestart;
     notifyAboutRestart.setWindowTitle("Сохранение настроек");

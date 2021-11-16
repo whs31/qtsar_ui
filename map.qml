@@ -14,10 +14,10 @@ Rectangle {
     id:rect
     objectName: "mapLoaded"
     //эти переменные должны импортироваться из .ini
-    property var mapProvider: "osm";
-    property var cacheParam: "osm.mapping.cache.directory"; // Вероятнее всего, это не верный параметр для гугла
-    property var cacheDir: "osmCache/";
-    property var mapModeSat: 5;
+    property var mapProvider: "googlemaps";
+    property var cacheParam: "googlemaps.mapping.cache.directory"; // Вероятнее всего, это не верный параметр для гугла
+    property var cacheDir: "googlemapsCache/";
+    property var mapModeSat: 3;
     property var mapModeMap: 0;
 
     property var dAzimuth: 0.0;
@@ -48,20 +48,37 @@ Rectangle {
     onMapProviderChanged: {
         console.log("Map mode changed.");
         //googlemaps.name = mapProvider;
+        mapPluginID.name = mapProvider;
+        mapPluginAgrsID.name = cacheParam;
+        mapPluginAgrsID.value = cacheDir;
     }
 
     Invoker {
         id: markerDialog
     }
 
-    function loadSettings(provider, d_azimuth, d_length, drift_angle, capture_time, predict_range)
+    function hideImage(filecounter)
+    {
+        imageArray[filecounter].visible = false;
+        imageArray[filecounter].enabled = false;
+         console.log("Image hidden", filecounter);
+    }
+
+    function showImage(filecounter)
+    {
+        imageArray[filecounter].visible = true;
+        imageArray[filecounter].enabled = true;
+         console.log("Image shown", filecounter);
+    }
+
+    function loadSettings(/*provider, */d_azimuth, d_length, drift_angle, capture_time, predict_range) //provider
     {
         console.log("QML settings loaded!");
-        if(provider==="google")
+        /*if(provider==="google")
         {
             mapProvider = "googlemaps";
             cacheParam = "googlemaps.mapping.cache.directory"; // Другое название
-            cacheDir = "googleCache/";
+            cacheDir = "googlemapsCache/";
             mapModeSat = 3;
             mapModeMap = 0;
         } else if(provider==="esri") {
@@ -77,7 +94,7 @@ Rectangle {
             mapProvider = "osm";
             cacheParam = "osm.mapping.cache.directory";
             cacheDir = "osmCache/";
-        }
+        }*/
         dAzimuth = d_azimuth;
         dLength = convertGeoKMeters(d_length);
         dAngle = drift_angle;
@@ -463,8 +480,10 @@ Rectangle {
         anchors.fill: parent
         activeMapType: mapView.supportedMapTypes[mapModeSat]//3
         plugin: Plugin {
+            id: mapPluginID;
             name: mapProvider;
             PluginParameter {
+                id: mapPluginAgrsID;
                 name: cacheParam;
                 value: cacheDir;
             }

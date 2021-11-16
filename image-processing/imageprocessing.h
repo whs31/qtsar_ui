@@ -27,6 +27,7 @@ public:
     };
     int fileCounter = 0;
     int getFileCounter();
+    int getVectorSize();
     image_metadata getMetaList();
     bool getReadyStatus();
 

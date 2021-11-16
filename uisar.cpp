@@ -2,10 +2,9 @@
  *
  * Линейка не удаляет после использования метки
  * В линейке нужно добавить надпись, параллельную rulerLine, с отображением расстояния
- * ☑Все отображение РЛИ нужно переделать и перенести в отдельный класс
  * Чекбоксы в дереве изображений не работают
  * При изменении в конфиге провайдера карт нужно закрывать приложение, также нужно выводить предупреждение при попытке изменить конфиг при наличии коннекта с телеметрией (но не закрывать приложение)
- * При клике на изображение оно должно возвращать в мейн класс fileCounter
+ * При клике на изображение оно должно возвращать в мейн класс fileCounter (и выделяться как-либо)
  *
  * */
 
@@ -108,7 +107,7 @@ void uiSAR::on_panButton_clicked()
 void uiSAR::on_opacitySlider_sliderMoved(int position)
 {
     QMetaObject::invokeMethod(qml, "changeOpacityOfCurrentImage",
-            Q_ARG(int, position));
+            Q_ARG(QVariant, position));
 }
 
 void uiSAR::on_showCoordsBox_stateChanged(int arg1)
@@ -295,17 +294,41 @@ void uiSAR::on_nav_follow_stateChanged(int arg1)
 void uiSAR::on_jpg_gright_clicked()
 {
     imageProcessing->goRight();
+    ui->showButton->setChecked(imageCheckList[imageCheckList[imageProcessing->getFileCounter()]+1]);
 }
 
 void uiSAR::on_jpg_gleft_clicked()
 {
     imageProcessing->goLeft();
+    ui->showButton->setChecked(imageCheckList[imageCheckList[imageProcessing->getFileCounter()]-1]);
 }
 
 void uiSAR::on_selectFolderButton_clicked()
 {
-    imageProcessing->processPath(QFileDialog::getExistingDirectory(this, tr("Выберите папку с выходными изображениями РЛС"),
-                                                                   QStandardPaths::displayName(QStandardPaths::DesktopLocation)));
+    QString pathNotNullCheck = QFileDialog::getExistingDirectory(this, tr("Выберите папку с выходными изображениями РЛС"),
+                                                                 QStandardPaths::displayName(QStandardPaths::DesktopLocation));
+    if(pathNotNullCheck!=NULL)
+    {
+        imageProcessing->processPath(pathNotNullCheck);
+    } else { qWarning() << "FileDialog returned NULL!"; }
+    if(imageProcessing->getReadyStatus()==true)
+    {
+        int localArraySize = imageProcessing->getVectorSize();
+        for(int i = 0; i<=localArraySize; i++)
+        {
+            if(ui->showAllImagesOnInit->checkState()==Qt::Checked)
+            {
+                imageCheckList.append(true);
+            } else {
+                imageCheckList.append(false);
+            }
+        }
+        if(ui->showAllImagesOnInit->checkState()==Qt::Checked)
+        {
+            imageProcessing->showAllImages();
+            ui->showButton->setChecked(true);
+        }
+    }
 }
 
 void uiSAR::on_nav_displayroute_stateChanged(int arg1)
@@ -443,12 +466,12 @@ void uiSAR::on_changeMapMode_toggled(bool checked)
        ui->changeMapMode->setText("Спутник");
        satellite = true;
        QMetaObject::invokeMethod(qml, "swapMapModes",
-               Q_ARG(bool, satellite)
+               Q_ARG(QVariant, satellite)
               );
     }
     else { ui->changeMapMode->setText("Схема");  satellite = false;
         QMetaObject::invokeMethod(qml, "swapMapModes",
-                Q_ARG(bool, satellite)
+                Q_ARG(QVariant, satellite)
                );}
 }
 
@@ -501,8 +524,8 @@ void uiSAR::on_t_xSpin_valueChanged(double arg1)
     //qDebug()<<arg1<<spinxArg0<<dx;
     spinxArg0 = arg1;
         QMetaObject::invokeMethod(qml, "transformX",
-                Q_ARG(int, fileCounter),
-                Q_ARG(double, dx)                  );
+                Q_ARG(QVariant, imageProcessing->getFileCounter()),
+                Q_ARG(QVariant, dx)                  );
 }
 
 void uiSAR::on_t_ySpin_valueChanged(double arg1)
@@ -524,8 +547,8 @@ void uiSAR::on_t_ySpin_valueChanged(double arg1)
     double dy = arg1 - spinyArg0;
     spinyArg0 = arg1;
         QMetaObject::invokeMethod(qml, "transformY",
-                Q_ARG(int, imageProcessing->getFileCounter()),
-                Q_ARG(double, dy)                  );
+                Q_ARG(QVariant, imageProcessing->getFileCounter()),
+                Q_ARG(QVariant, dy)                  );
 }
 
 void uiSAR::on_t_sSpin_valueChanged(double arg1)
@@ -533,8 +556,8 @@ void uiSAR::on_t_sSpin_valueChanged(double arg1)
     double d = arg1-spinsArg0;
     spinsArg0 = arg1;
     QMetaObject::invokeMethod(qml, "transformScale",
-            Q_ARG(int, imageProcessing->getFileCounter()),
-            Q_ARG(double, d));
+            Q_ARG(QVariant, imageProcessing->getFileCounter()),
+            Q_ARG(QVariant, d));
 }
 
 void uiSAR::on_t_scale_valueChanged(int value)
@@ -559,8 +582,8 @@ void uiSAR::on_t_rSpin_valueChanged(double arg1)
     double d = arg1-spinrArg0;
     spinrArg0 = arg1;
     QMetaObject::invokeMethod(qml, "transformRotate",
-            Q_ARG(int, imageProcessing->getFileCounter()),
-            Q_ARG(double, d));
+            Q_ARG(QVariant, imageProcessing->getFileCounter()),
+            Q_ARG(QVariant, d));
 }
 
 void uiSAR::on_t_rotation_valueChanged(int value)
@@ -576,4 +599,53 @@ void uiSAR::on_rulerButton_clicked()
 void uiSAR::on_execd_in_returnPressed()
 {
     Execd->Send(ui->execd_in->text().toUtf8()); // Запуск удаленной команды execd
+}
+
+void uiSAR::on_displayAll_clicked()
+{
+    if(imageProcessing->getReadyStatus()==true)
+    {
+        int localArraySize = imageProcessing->getVectorSize();
+        if(ui->displayAll->isChecked())
+        {
+            for(int i = 0; i<=localArraySize; i++)
+            {
+                imageCheckList[i] = true;
+            }
+        } else {
+            for(int i = 0; i<=localArraySize; i++)
+            {
+                imageCheckList[i] = false;
+            }
+        }
+        ImageCheckListLoop();
+    }
+}
+
+void uiSAR::on_showButton_clicked()
+{
+    if(imageProcessing->getReadyStatus()==true)
+    {
+        imageCheckList[imageProcessing->getFileCounter()] = !imageCheckList[imageProcessing->getFileCounter()];
+        ImageCheckListLoop();
+    }
+}
+
+void uiSAR::ImageCheckListLoop()
+{
+    if(imageProcessing->getReadyStatus()==true)
+    {
+        int localArraySize = imageProcessing->getVectorSize();
+        for(int i = 0; i<localArraySize; i++)
+        {
+            if(imageCheckList[i]==true)
+            {
+                QMetaObject::invokeMethod(qml, "showImage",
+                        Q_ARG(QVariant, i));
+            } else {
+                QMetaObject::invokeMethod(qml, "hideImage",
+                        Q_ARG(QVariant, i));
+            }
+        }
+    }
 }

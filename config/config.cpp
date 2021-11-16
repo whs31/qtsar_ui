@@ -45,6 +45,9 @@ Config::Config(QString fn) : QSettings(fn, QSettings::IniFormat)
     map["map_provider"] = "google";
     checkValuesSimple(map);
 
+    group_t image;
+    image["show_all_images_on_init"] = "false";
+    checkValuesSimple(image);
 }
 
 
