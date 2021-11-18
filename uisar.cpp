@@ -19,7 +19,6 @@ void uiSAR::ReadTelemetry(QByteArray data){
     TelemetryData = reinterpret_cast<TelemetryData_t*>(data.data());
     //qDebug() << data;
     updateTelemetry();
-
 }
 
 void uiSAR::ReadExec(QByteArray data){
@@ -77,6 +76,34 @@ uiSAR::~uiSAR()
 uiSAR *uiSAR::getMainWinPtr()
 {
     return pMainWindow;
+}
+
+void uiSAR::debugStreamUpdate(QString _text, int msgtype)
+{
+    if(uiReady)
+    {
+        if(msgtype == 0)
+        {
+            ui->debugConsole->setTextColor(Qt::gray);
+        } else if (msgtype == 1)
+        {
+            ui->debugConsole->setTextColor(Qt::white);
+        } else if (msgtype == 2)
+        {
+            ui->debugConsole->setTextColor(Qt::yellow);
+        } else if (msgtype == 3)
+        {
+            ui->debugConsole->setTextColor(Qt::red);
+        } else if (msgtype == 4)
+        {
+            ui->debugConsole->setTextColor(Qt::darkRed);
+        }
+        ui->debugConsole->insertPlainText(_text);
+        ui->debugConsole->setTextColor(Qt::white);
+        QTextCursor c = ui->debugConsole->textCursor();
+        c.movePosition(QTextCursor::End);
+        ui->debugConsole->setTextCursor(c);
+    }
 }
 
 void uiSAR::on_panButton_clicked()
@@ -360,10 +387,11 @@ void uiSAR::on_clearTrack_clicked()
 void uiSAR::initUI(){
 
     ui->setupUi(this);
+        uiReady = true;
     QDateTime UTC(QDateTime::currentDateTimeUtc());
     QDateTime local(UTC.toLocalTime());
-    qInfo() << "                                        log start>>";
-    qInfo() << "------------Session time: " << local << "--------------------------";
+    qInfo() << "Debug logging started.";
+    qInfo() << "Session time: " << local << "(I)";
     if (QSslSocket::supportsSsl())
     {
         qInfo() << "OpenSSL detected: " << QSslSocket::supportsSsl() << ", OpenSSL build version: " << QSslSocket::sslLibraryBuildVersionString() << ", OpenSSL ver.: " << QSslSocket::sslLibraryVersionString();
@@ -396,12 +424,14 @@ void uiSAR::initUI(){
 
     /* Консоль для всех событий с поддержкой vt100 */
     ui->consoleMain->setExecd(Execd);
+    ui->debugConsoleWidget->setVisible(false);
 
     //Console *con = new Console(ui->consoleMain, 10, 5);
     //con->write("Тест");
     //con->flush();
     //con->resize(ui->consoleMain->width(), ui->consoleMain->height());
     //con->hide(); // Закомментировать чтобы показать
+
 }
 
 void uiSAR::updateTelemetry(){
@@ -647,5 +677,17 @@ void uiSAR::ImageCheckListLoop()
                         Q_ARG(QVariant, i));
             }
         }
+    }
+}
+
+void uiSAR::on_enableDebugConsole_stateChanged(int arg1)
+{
+    if(arg1!=0)
+    {
+        ui->debugConsoleWidget->setEnabled(true);
+        ui->debugConsoleWidget->setVisible(true);
+    } else {
+        ui->debugConsoleWidget->setEnabled(false);
+        ui->debugConsoleWidget->setVisible(false);
     }
 }

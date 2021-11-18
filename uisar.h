@@ -51,6 +51,7 @@ public:
     uiSAR(QWidget *parent = nullptr);
     ~uiSAR();
     static uiSAR * getMainWinPtr();
+    void debugStreamUpdate(QString _text, int msgtype);
     friend class ImageProcessing;
     friend class ConfigHandler;
 
@@ -76,6 +77,7 @@ public:
 
     int fileCounter;
 
+
 signals:
 public slots:
     void qmlDialogSlot(float markerLat, float markerLon);
@@ -87,7 +89,6 @@ private slots:
     void on_jpg_gleft_clicked();
     void on_displayAll_clicked();
     void on_showButton_clicked();
-
 
     //map tools slots
     void on_showCoordsBox_stateChanged(int arg1);
@@ -131,8 +132,14 @@ private slots:
     void on_t_rSpin_valueChanged(double arg1);
     void on_t_rotation_valueChanged(int value);
 
+    //utility slots
+    void on_enableDebugConsole_stateChanged(int arg1);
+
+
+
 private:
     static uiSAR * pMainWindow;
+    bool uiReady = false;
 
     double spinxArg0 = 0;
     double spinyArg0 = 0;

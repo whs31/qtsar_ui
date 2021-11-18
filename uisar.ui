@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1301</width>
-    <height>729</height>
+    <width>1305</width>
+    <height>819</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -155,7 +155,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1616,10 +1616,55 @@ QPushButton:pressed {
         <string/>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="3" column="2" colspan="2">
-         <widget class="QPushButton" name="selectFolderButton">
-          <property name="text">
-           <string>Указать</string>
+        <item row="13" column="0">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0" colspan="4">
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1" colspan="3">
+         <widget class="QDoubleSpinBox" name="predictRangexml">
+          <property name="suffix">
+           <string> км</string>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <double>20.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>5.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QLineEdit" name="TCPPortxml">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="maxLength">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -1761,22 +1806,6 @@ QPushButton::menu-indicator {
           </item>
          </layout>
         </item>
-        <item row="13" column="0">
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="5" column="3">
          <widget class="QLineEdit" name="UDPPortxml">
           <property name="sizePolicy">
@@ -1805,19 +1834,10 @@ QPushButton::menu-indicator {
           </property>
          </widget>
         </item>
-        <item row="8" column="1" colspan="3">
-         <widget class="QDoubleSpinBox" name="predictRangexml">
-          <property name="suffix">
-           <string> км</string>
-          </property>
-          <property name="decimals">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <double>20.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>5.000000000000000</double>
+        <item row="3" column="2" colspan="2">
+         <widget class="QPushButton" name="selectFolderButton">
+          <property name="text">
+           <string>Указать</string>
           </property>
          </widget>
         </item>
@@ -1834,17 +1854,10 @@ QPushButton::menu-indicator {
           </property>
          </widget>
         </item>
-        <item row="0" column="0" colspan="4">
-         <widget class="QLabel" name="label_20">
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_14">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Настройки программы&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>Частота обновления данных телеметрии:</string>
+           <string>Дальность отрисовки направления полета:</string>
           </property>
          </widget>
         </item>
@@ -1861,32 +1874,17 @@ QPushButton::menu-indicator {
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <spacer name="verticalSpacer_11">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Частота обновления данных телеметрии:</string>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
+         </widget>
         </item>
-        <item row="6" column="3">
-         <widget class="QLineEdit" name="TCPPortxml">
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="maxLength">
-           <number>5</number>
+        <item row="0" column="0" colspan="4">
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Настройки программы&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -1897,13 +1895,13 @@ QPushButton::menu-indicator {
           </property>
          </widget>
         </item>
-        <item row="6" column="1" colspan="2">
-         <widget class="QLineEdit" name="TCPIPxml">
-          <property name="inputMethodHints">
-           <set>Qt::ImhNone</set>
+        <item row="4" column="0">
+         <widget class="QCheckBox" name="showAllImagesOnInit">
+          <property name="text">
+           <string>Отображать все изображения при выборе каталога</string>
           </property>
-          <property name="maxLength">
-           <number>15</number>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -2185,13 +2183,6 @@ QRadioButton::indicator:checked:disabled {
           </item>
          </layout>
         </item>
-        <item row="1" column="0" colspan="4">
-         <widget class="Line" name="line_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
         <item row="7" column="1" colspan="3">
          <widget class="QDoubleSpinBox" name="refreshtelemetryxml">
           <property name="suffix">
@@ -2211,6 +2202,22 @@ QRadioButton::indicator:checked:disabled {
           </property>
          </widget>
         </item>
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_2">
           <property name="sizePolicy">
@@ -2224,20 +2231,23 @@ QRadioButton::indicator:checked:disabled {
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Дальность отрисовки направления полета:</string>
+        <item row="6" column="1" colspan="2">
+         <widget class="QLineEdit" name="TCPIPxml">
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
+          </property>
+          <property name="maxLength">
+           <number>15</number>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QCheckBox" name="showAllImagesOnInit">
+        <item row="14" column="0">
+         <widget class="QCheckBox" name="enableDebugConsole">
           <property name="text">
-           <string>Отображать все изображения при выборе каталога</string>
+           <string>Включить консоль отладки</string>
           </property>
           <property name="checked">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -2533,7 +2543,7 @@ p, li { white-space: pre-wrap; }
         <item row="1" column="0">
          <widget class="QLabel" name="infoLabel">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/img/ui.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;Версия программы: &lt;span style=&quot; font-weight:600; font-style:italic; color:#aa4444;&quot;&gt;alpha &lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic; color:#c77777;&quot;&gt;0.1.0&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Собрано &lt;span style=&quot; font-weight:600;&quot;&gt;06.11.2021&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/whs31/qtsar_ui&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#395f78;&quot;&gt;github.com/qtsar_ui&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/img/ui.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;Версия программы: &lt;span style=&quot; font-weight:600; font-style:italic; color:#aa4444;&quot;&gt;alpha &lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic; color:#c77777;&quot;&gt;0.1.2&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Собрано &lt;span style=&quot; font-weight:600;&quot;&gt;18.11.2021&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/whs31/qtsar_ui&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#395f78;&quot;&gt;github.com/qtsar_ui&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -2680,6 +2690,31 @@ QPushButton:selected {
        </property>
        <property name="checked">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="debugConsoleWidget">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="windowTitle">
+    <string>Консоль отладки</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QGridLayout" name="gridLayout_15">
+     <item row="0" column="0">
+      <widget class="QTextEdit" name="debugConsole">
+       <property name="textInteractionFlags">
+        <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
      </item>

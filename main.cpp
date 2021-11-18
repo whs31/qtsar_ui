@@ -1,4 +1,5 @@
 #include "uisar.h"
+#include "ui_uisar.h"
 #include <QApplication>
 #include <QtGlobal>
 #include <qqml.h>
@@ -34,27 +35,35 @@ gray gradient:
 void myMessageHandler(QtMsgType type, const QMessageLogContext &, const QString & msg)
 {
     QString txt;
+    int msgt = 0;
     switch (type) {
     case QtDebugMsg:
         txt = QString("Debug: %1").arg(msg+"\r\n");
+        msgt = 0;
         break;
     case QtWarningMsg:
         txt = QString("Warning: %1").arg(msg+"\r\n");
+        msgt = 2;
     break;
     case QtInfoMsg:
         txt = QString("Info: %1").arg(msg+"\r\n");
+        msgt = 1;
     break;
     case QtCriticalMsg:
         txt = QString("Critical: %1").arg(msg+"\r\n");
+        msgt = 3;
     break;
     case QtFatalMsg:
         txt = QString("Fatal: %1").arg(msg+"\r\n");
+        msgt = 4;
     break;
     }
     QFile outFile(QCoreApplication::applicationDirPath()+"/debug_log.txt");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream ts(&outFile);
     ts << txt << endl;
+    uiSAR* mainWindow = uiSAR::getMainWinPtr();
+    mainWindow->debugStreamUpdate(txt, msgt);
 }
 
 int main(int argc, char *argv[])
@@ -62,7 +71,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     //раскомментировать для лога отладки в файл
-    //qInstallMessageHandler(myMessageHandler);
+    qInstallMessageHandler(myMessageHandler);
+
 
     QFile DstyleSheetFile(":qdarkstyle/dark/style.qss");
     if (!DstyleSheetFile.exists())   {
