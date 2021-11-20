@@ -4,15 +4,20 @@
 #include <QObject>
 #include <QFileSystemModel>
 #include <QStandardItem>
+#include "uisar.h"
+
+class uiSAR;
 
 class CheckableModel : public QFileSystemModel
 {
     Q_OBJECT
 public:
     explicit CheckableModel(QObject *parent = nullptr);
+
     virtual bool setData( const QModelIndex& index, const QVariant& value, int role );
     virtual Qt::ItemFlags flags( const QModelIndex & index ) const;
     virtual QVariant data( const QModelIndex &index, int role )const;
+    friend class uiSAR;
 signals:
     void itemChecked(const QModelIndex&);
 protected slots:

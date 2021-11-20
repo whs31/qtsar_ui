@@ -341,13 +341,20 @@ void uiSAR::on_selectFolderButton_clicked()
     if(imageProcessing->getReadyStatus()==true)
     {
         int localArraySize = imageProcessing->getVectorSize();
-        for(int i = 0; i<=localArraySize; i++)
+        for(int i = 0; i<localArraySize; i++)
         {
             if(ui->showAllImagesOnInit->checkState()==Qt::Checked)
             {
                 imageCheckList.append(true);
+
+                const QModelIndex& idx = imageProcessing->model->createIndex(i, 0);
+                imageProcessing->model->setData(idx, Qt::Checked, Qt::CheckStateRole);
+                qDebug()<<"QINDEX: "<<idx.row();
             } else {
                 imageCheckList.append(false);
+                const QModelIndex& idx = imageProcessing->model->createIndex(i, 0);
+                imageProcessing->model->setData(idx, Qt::Unchecked, Qt::CheckStateRole);
+                qDebug()<<"QINDEX: "<<idx.row();
             }
         }
         if(ui->showAllImagesOnInit->checkState()==Qt::Checked)

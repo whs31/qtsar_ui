@@ -6,9 +6,11 @@
 
 #include "uisar.h"
 #include "ui_uisar.h"
+#include "filesystem/checkablemodel.h"
 
 #define JPEG_HEADER_SIZE 20
 class uiSAR;
+class CheckableModel;
 
 class ImageProcessing : public QObject
 {
@@ -25,6 +27,8 @@ public:
         float angle;
         QString filename;
     };
+    //CheckableModel *model;
+    CheckableModel * model;
     int fileCounter = 0;
     int getFileCounter();
     int getVectorSize();

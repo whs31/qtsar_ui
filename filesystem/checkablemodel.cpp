@@ -10,10 +10,9 @@ bool CheckableModel::setData( const QModelIndex& index, const QVariant& value, i
     if( role == Qt::CheckStateRole && index.column() == 0 ) {
 
         checkedItems[ index.internalId() ] = static_cast<Qt::CheckState>( value.toInt() );
-        emit itemChecked(index);
-        emit dataChanged(index, index.sibling(0,0));
+        //emit itemChecked(index);                               //вылет на эмите этого сигнала
+        //emit dataChanged(index, index.sibling(0,0));           //этот сигнал тоже приводит к вылету
         return true;
-
     }
 
     return QFileSystemModel::setData(index, value, role);
@@ -51,7 +50,7 @@ void CheckableModel::onItemChecked(const QModelIndex &index)
     if (parent.isValid()) {
         state = checkedItems [parent.child(0, 0).internalId()];
         if (state == Qt::PartiallyChecked)
-            checkedItems[parent.internalId()] = state;
+            checkedItems[parent.internalId()] = Qt::Checked;
         else {
             int i = 1;
             while (i < rowCount(parent) && checkedItems [parent.child(i, 0).internalId()] == state)
