@@ -27,6 +27,7 @@ void uiSAR::ReadExec(QByteArray data){
     ui->consoleMain->flush();
 }
 
+
 uiSAR * uiSAR::pMainWindow;
 uiSAR::uiSAR(QWidget *parent)
     : QMainWindow(parent)
@@ -65,6 +66,9 @@ uiSAR::uiSAR(QWidget *parent)
     ui->consoleMain->flush();
 
     connect(Execd, SIGNAL(received(QByteArray)), this, SLOT(ReadExec(QByteArray)));
+
+
+    fileDownloader *fd = new fileDownloader(configHandler->config);
 
 }
 

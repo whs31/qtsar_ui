@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     //раскомментировать для лога отладки в файл
-    qInstallMessageHandler(myMessageHandler);
+    //qInstallMessageHandler(myMessageHandler);
 
 
     QFile DstyleSheetFile(":qdarkstyle/dark/style.qss");

@@ -35,6 +35,7 @@
 #include "image-processing/imageprocessing.h"
 //#include "config/config.h"
 #include "config/confighandler.h"
+#include "fileDownloader/filedownloader.h"
 
 class ImageProcessing;
 class ConfigHandler;

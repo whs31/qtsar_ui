@@ -7,7 +7,7 @@ import socket
 
 FIFO = '/tmp/imgd.pipe'
 LOCKFILE = "/tmp/imgd.lock"
-CONFIG = '/home/root/Work/fatfs/cfg/imgd.cfg'
+CONFIG = 'imgd.cfg'
 
 class Daemon():
     
@@ -136,7 +136,7 @@ class Daemon():
                 return "file {} not found!".format(path)
             
             fileSize = os.stat(path).st_size 
-            self.client.send(fileSize.to_bytes(4, 'big'))
+            self.client.send(fileSize.to_bytes(4, 'little'))
             
             chunk = img.read(self.bufferSize)
             sended = 0;

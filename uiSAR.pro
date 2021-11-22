@@ -22,6 +22,7 @@ SOURCES += \
     config/confighandler.cpp \
     console/console.cpp \
     console/fvemu.c \
+    fileDownloader/filedownloader.cpp \
     filesystem/checkablemodel.cpp \
     image-processing/imageprocessing.cpp \
     main.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     console/DefaultColors.h \
     console/console.h \
     console/fvemu.h \
+    fileDownloader/filedownloader.h \
     filesystem/checkablemodel.h \
     image-processing/imageprocessing.h \
     qmlinvoker.h \
