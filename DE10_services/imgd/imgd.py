@@ -9,6 +9,10 @@ FIFO = '/tmp/imgd.pipe'
 LOCKFILE = "/tmp/imgd.lock"
 CONFIG = 'imgd.cfg'
 
+
+# Defines
+NOFILE = -1
+
 class Daemon():
     
     
@@ -50,7 +54,7 @@ class Daemon():
             
             while(1):
                 try:
-                    data = self.client.recv(1)
+                    data = self.client.recv(1024)
                 except:
                     data = ''
                 if(len(data) == 0):
@@ -58,6 +62,8 @@ class Daemon():
                     self.client = None
                     print('Client disconnected')
                     break
+                else:
+                    self.send(data.decode("utf-8"))
     
     def daemonize(self):
         try:
@@ -129,10 +135,11 @@ class Daemon():
     
         import time
         if(self.client):
-
+			
             try:
                 img = open(path, 'rb');
             except:
+                self.client.send( NOFILE.to_bytes( 4 , byteorder='little' , signed=True ) );
                 return "file {} not found!".format(path)
             
             fileSize = os.stat(path).st_size 

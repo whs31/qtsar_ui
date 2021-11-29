@@ -14,6 +14,7 @@ public:
     void setName(QString name);
     void setPrefix(QString _prefix);
     void abort();
+    void download(QString path);
 
     Remote *Imgd;
     Config *cfg;

@@ -28,15 +28,24 @@ void fileDownloader::received(QByteArray data){
 
     qDebug() << data;
 
-    if(!fileSize){
+    if(fileSize < 1){
         const char *d = data.data();
         fileSize = (d[3] << 24) | (d[2] << 16) | (d[1] << 8) | d[0];
 
         qDebug() << "filesize" << fileSize;
 
+        if(fileSize == -1){
+            qDebug() << "Have no file to download!";
+            return;
+        }
+
 
         if( file.open(QIODevice::WriteOnly) ){
             qDebug()  << "File" << fn << "opened";
+        }
+
+        if(data.length() > 4){
+            received( QByteArray( data.data() + 4 ) );
         }
 
     }else{
@@ -91,4 +100,8 @@ void fileDownloader::setName(QString name){
 void fileDownloader::setPrefix(QString _prefix){
     prefix = _prefix;
     qDebug() << "Download directory is: " << prefix;
+}
+
+void fileDownloader::download(QString path){
+    Imgd->Send(path.toUtf8());
 }

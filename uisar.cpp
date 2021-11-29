@@ -69,6 +69,10 @@ uiSAR::uiSAR(QWidget *parent)
 
 
     fileDownloader *fd = new fileDownloader(configHandler->config);
+    fd->setName("tmp1.txt");
+    fd->download("/media/sf_D_DRIVE/SAR/GUI2/qtsar_ui/DE10_services/imgd/testFile");
+    fd->setName("tmp2.txt");
+    fd->download("/media/sf_D_DRIVE/SAR/GUI2/qtsar_ui/DE10_services/imgd/testFile");
 
 }
 
