@@ -139,6 +139,7 @@ class Daemon():
             try:
                 img = open(path, 'rb');
             except:
+                #print("NO FILE", path)
                 self.client.send( NOFILE.to_bytes( 4 , byteorder='little' , signed=True ) );
                 return "file {} not found!".format(path)
             
@@ -158,7 +159,7 @@ class Daemon():
                 chunk = img.read(self.bufferSize)
                 
                 #TEST
-                time.sleep(1.1)
+                time.sleep(3.1)
             
             #self.sock.shutdown(socket.SHUT_WR)
             return "{} bytes sended".format(sended)

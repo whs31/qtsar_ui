@@ -3,6 +3,7 @@
 fileDownloader::fileDownloader(Config* _cfg) : cfg(_cfg)
 {
     QString connectStatus;
+    state = IDLE;
 
     /* Интерфейс для получения РЛИ */
     Imgd = RemoteAuto(cfg->value("imgd/type").toString());
@@ -26,9 +27,9 @@ fileDownloader::fileDownloader(Config* _cfg) : cfg(_cfg)
 
 void fileDownloader::received(QByteArray data){
 
-    qDebug() << data;
-
     if(fileSize < 1){
+
+        state = BUSY;
         const char *d = data.data();
         fileSize = (d[3] << 24) | (d[2] << 16) | (d[1] << 8) | d[0];
 
@@ -58,6 +59,12 @@ void fileDownloader::received(QByteArray data){
             size = 0;
             qDebug() << "Downloading done!";
             file.close();
+            state = IDLE;
+            if(!queue.isEmpty()){
+                download(queue[0]);
+                queue.pop_front();
+            }
+
         }
 
     }
@@ -71,6 +78,7 @@ void fileDownloader::abort(){
 
     fileSize = 0;
     size = 0;
+    state = IDLE;
 
 
     QString imgdIP = cfg->value("imgd/address").toString();
@@ -88,6 +96,8 @@ void fileDownloader::abort(){
     if(file.isOpen()){
         file.close();
     }
+
+
 }
 
 
@@ -103,5 +113,15 @@ void fileDownloader::setPrefix(QString _prefix){
 }
 
 void fileDownloader::download(QString path){
-    Imgd->Send(path.toUtf8());
+
+    if(state == IDLE){
+        state = BUSY;
+        QFileInfo fi(path);
+        fn = fi.fileName();
+        Imgd->Send(path.toUtf8());
+    }else if(state == BUSY){
+        // add to queue
+        qDebug() << "add to queue" << path;
+        queue.append(path);
+    }
 }
