@@ -13,12 +13,21 @@ CONFIG = 'imgd.cfg'
 # Defines
 NOFILE = -1
 
+
+def except_hook(exctype, value, traceback):
+    sys.__excepthook__(exctype, value, traceback)
+    print("Error in daemon...")
+    os.kill(os.getpid(), 9)
+
+
+
 class Daemon():
     
     
     def __init__(self):
         from threading import Thread
         
+        sys.excepthook = except_hook
         print("startDaemon", os.getpid())
         #self.daemonize()
         
@@ -142,6 +151,7 @@ class Daemon():
                 #print("NO FILE", path)
                 self.client.send( NOFILE.to_bytes( 4 , byteorder='little' , signed=True ) );
                 return "file {} not found!".format(path)
+            
             
             fileSize = os.stat(path).st_size 
             self.client.send(fileSize.to_bytes(4, 'little'))
