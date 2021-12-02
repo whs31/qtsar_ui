@@ -70,8 +70,10 @@ uiSAR::uiSAR(QWidget *parent)
 
     fileDownloader *fd = new fileDownloader(configHandler->config);
     fd->download("/media/sf_D_DRIVE/SAR/GUI2/qtsar_ui/DE10_services/imgd/testFile.txt");
+    qDebug() << "In progress" << fd->currentFile();
     fd->download("/media/sf_D_DRIVE/SAR/GUI2/qtsar_ui/DE10_services/imgd/testFile1.txt");
     fd->download("/media/sf_D_DRIVE/SAR/GUI2/qtsar_ui/DE10_services/imgd/testFile2.txt");
+
 
 }
 

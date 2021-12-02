@@ -40,6 +40,7 @@ Config::Config(QString fn) : QSettings(fn, QSettings::IniFormat)
     imgd["type"] = "TCP";
     imgd["address"] = "192.168.33.12";
     imgd["port"] = "2233";
+    imgd["downloadPath"] = "./img";
     checkValuesSimple(imgd);
 
     group_t map;
