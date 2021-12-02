@@ -31,10 +31,10 @@ void fileDownloader::received(QByteArray data){
     if(fileSize < 1){
         // Тут принимается размер файла
         state = BUSY;
-        const char *d = data.data();
+        const quint8 *d = (const quint8*)data.data();
         fileSize = (d[3] << 24) | (d[2] << 16) | (d[1] << 8) | d[0];
 
-        qDebug() << "filesize" << fileSize;
+        qDebug() << "filesize" << fileSize << QString::number(fileSize, 16);
 
         if(fileSize == -1){
             qDebug() << "Have no file to download!";
@@ -119,13 +119,13 @@ QString fileDownloader::currentFile(){
 }
 
 void fileDownloader::setName(QString name){
-
-
-    fn = name;
-    qDebug() << "SET" << prefix+fn;
-    file.setFileName(prefix+fn);
+    file.setFileName(prefix+name);
 }
 
+
+float fileDownloader::progress(){
+    return (float)size/fileSize;
+}
 
 void fileDownloader::setPrefix(QString _prefix){
     prefix = _prefix;

@@ -23,13 +23,13 @@ public:
     bool flush();
     void download(QString path);
     QString currentFile();
+    float progress();
 
 private:
     Remote *Imgd;
     Config *cfg;
     int size = 0;
-    int fileSize = 0;
-    QString fn = "tmp";
+    qint32 fileSize = 0;
     QString prefix;
     QFile file;
     QStringList queue;
