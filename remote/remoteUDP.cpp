@@ -18,10 +18,18 @@ int RemoteUDP::Connect(QString addr){
     host.setAddress(l[0]);
     port = l[1].toInt();
     qDebug() << "Binding:" << host << port;
-    return socket->bind(host,port);
+
+    if(socket->bind(host,port)){
+        Status = CONNECTED;
+        return 0;
+    }else{
+        Status = DISCONNECTED;
+        return -1;
+    }
 }
 
 int RemoteUDP::Disconnect(){
+    Status = DISCONNECTED;
     socket->close();
     host.clear();
     return 0;

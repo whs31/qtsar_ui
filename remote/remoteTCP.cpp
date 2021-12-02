@@ -14,13 +14,16 @@ int RemoteTCP::Connect(QString addr){
     socket->connectToHost(l[0], l[1].toInt());
 
     if( socket->waitForConnected(3000) ) {
+        Status = CONNECTED;
         return 0;
     }
+    Status = DISCONNECTED;
     qDebug() << "Connection timeout";
     return -1;
 }
 
 int RemoteTCP::Disconnect(){
+    Status = DISCONNECTED;
     socket->close();
     emit this->disconnected();
     return 0;
@@ -37,5 +40,6 @@ void RemoteTCP::readSlot(){
 }
 
 void RemoteTCP::disconnectSlot(){
+    Status = DISCONNECTED;
     emit this->disconnected();
 }
